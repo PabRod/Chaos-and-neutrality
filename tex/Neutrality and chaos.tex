@@ -1,4 +1,4 @@
-\documentclass[a4paper, twocolumn, 10pt]{article}
+\documentclass[a4paper, onecolumn, 10pt]{article}
 
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
@@ -21,7 +21,7 @@
 
 \usepackage{authblk}
 
-\title{Neutral competition promotes chaos \\ {\color{red} Draft}}
+\title{Neutral competition among prey promotes chaos in two-level food webs\\ {\color{red} Draft}}
 \author[1]{Pablo Rodríguez-Sánchez \thanks{pablo.rodriguezsanchez@wur.nl}}
 \author[1]{Egbert van Nes \thanks{egbert.vannes@wur.nl}}
 \author[1]{Marten Scheffer \thanks{marten.scheffer@wur.nl}}
@@ -30,6 +30,10 @@
 
 \usepackage{graphicx}
 \graphicspath{ {../img/} }
+
+\usepackage[switch]{lineno}
+% TODO: add line numbers and double spacing in the final version
+%\linenumbers
 
 \begin{document}
 
@@ -46,17 +50,31 @@
 %\end{center}
 
 \begin{abstract}
-An increase in the neutrality of the competition at the prey's trophic level in a two-level food web rises the chances of chaotic behaviour in the long term.
+Neutral competition can be interpreted as a limit case of weak inter or intraspecific competition. DEVELOP THIS. An increase in the neutrality of the competition at the prey's trophic level in a two-level food web increases the chances of chaotic behaviour in the long term.
 
 \paragraph{}
-\textit{Keywords}: population dynamics, competition models, chaos.
+\textit{Keywords}: population dynamics, competition models, neutral competition, chaos.
 \end{abstract}
 
+% TODO: remove/comment for final version
 \tableofcontents
 
 \section{Introduction}
-\label{sec:Introduction}
-The biodiversity paradox, that can be carelessly rephrased as \textit{Why are there so many species?}, is one of the main problems in theoretical ecology. The paradox consists in the contradiction between the competitive exclusion principle and the observed biodiversity. In the current state of the art, there are several alternative hypotheses for dealing with this problem. Two of these hypotheses are: \textit{a. Hubbell's neutral competition theory} \cite{Hubbell2001} and \textit{b. Ecosystems as non-equilibrium systems}. {\color{red} More references about the controversy are probably advisable here}. 
+\label{sec:Introduction} % Introductory paragraph
+The fascination by biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to this wonder. Scientific knowledge can increase this sense of wonder even more. Like in a good mystery book, there is a big unknown behind biodiversity: we don't know how it is possible.
+
+\paragraph{} % Introduction of the biodiversity paradox
+The mystery comes into scene together with the competitive exclusion principle, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin, is one of the classical touchstones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under carefully controlled conditions. On the other hand, most of the field observations seem to contradict the competitive exclusion principle, being the huge biodiversity in Earth its most noticeable counterexample. This contradiction is known as the biodiversity paradox. The paradox can be carelessly (but poetically) rephrased as \textit{Why are there so many species?}
+
+%% Brief discussion about the alternative hypotheses
+\paragraph{} % Introduction and hypotheses based in non-autonomous systems
+There are several alternative hypotheses for escaping this paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. More recently, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic long term dynamics instead of equilibrium. 
+
+\paragraph{} % Hypotheses based in spatial heterogeneity
+All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.
+
+\paragraph{}
+There are several alternative hypotheses for dealing with this paradox. Two of these hypotheses are: \textit{a. Hubbell's neutral competition theory} \cite{Hubbell2001} and \textit{b. Ecosystems as non-equilibrium systems}. {\color{red} More references about the controversy are probably advisable here}. 
 
 \paragraph{}
 Hubbell's neutral competition theory, despite its counter-intuitive foundations, has been successfully applied to populations of rainforest trees. {\color{red} I don't see the relationship of Hubbell's theory with the biodiversity paradox}.
@@ -67,23 +85,19 @@ If ecosystems are proven to be non-equilibrium systems, the biodiversity paradox
 \paragraph{}
 Our simulations show that the likelihood of chaos in a competition model increases with neutrality at the competitors' trophic level, so both hypotheses are not completely independent. {\color{red} This should be at the end of the introduction?, or just a the conclusions section?}
 
-\paragraph{}
-
-{\color{red} A more detailed overview of the competing hypotheses and/or of another natural phenomena explained by chaos can be an interesting introduction.}
-
 \section{Model description}
 \label{sec:Model}
-We will use a generalized Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963, Scheffer2004} with two trophic levels. It will be composed of $ n $ preys and $ N $ predators.
+We will use a generalized Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963, Scheffer2004} with two trophic levels. It will be composed of $ n $ prey and $ N $ consumers.
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.9\columnwidth]{net.png}
 	\end{center}
-	\caption{Example with $2$ predators and $3$ preys. Each one of the red links represents a palatability coefficient (coded in the matrix $ S $). Each green link represents a competition coefficient (coded in matrix $ A $). The closed green loops are related with carrying capacity (diagonal elements of $ A $) interpreted here as intra-species competition.}
+	\caption{Example with $2$ consumers and $3$ prey. Each one of the red links represents a palatability coefficient (coded in the matrix $ S $). Each green link represents a competition coefficient (coded in matrix $ A $). The closed green loops are related with carrying capacity (diagonal elements of $ A $) interpreted here as intra-species competition.}
 	\label{fig:Network}
 \end{figure}
 
-We will use $ p_i $ for accounting the size of the population of prey $ i $, and $ P_j $ for the population of predator $ j $. When it is not explicitly stated, $ i $ will run from $ 1 $ to $ n $, and $ j $ from $ 1 $ to $ N $. The preys compete among themselves, and the predators don't. The preys competition doesn't need to be necessarily symmetrical. The predators eat all kind of preys (see figure \ref{fig:Network}), but find some of them preferable than others.
+We will use $ P_i $ for accounting the size of the population of prey $ i $, and $ C_j $ for the population of consumer $ j $. When it is not explicitly stated, $ i $ will run from $ 1 $ to $ n $, and $ j $ from $ 1 $ to $ N $. The prey compete directly among themselves, and the consumers don't. The prey competition doesn't need to be necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them preferable than others.
 
 \paragraph{} 
 The dynamics can be described as a $ n + N $ dimensional system of ordinary, autonomous differential equations. The overall structure looks like:
@@ -91,8 +105,8 @@ The dynamics can be described as a $ n + N $ dimensional system of ordinary, aut
 \begin{displaymath}
 \label{eq:EquationInPseudocode}
 	\begin{cases}
-	\frac{d}{dt} \left( prey \right) = Growth  - Predation + Immigration \\
-	\frac{d}{dt} \left( Pred \right) = Feeding - Death \\
+	\frac{d}{dt} \left( Prey \right) = Growth  - Predation + Immigration \\
+	\frac{d}{dt} \left( Cons \right) = Feeding - Death \\
 	\end{cases}
 \end{displaymath}
 
@@ -102,36 +116,36 @@ The growth term is modelled as a multispecies logistic growth. The strength of t
 \label{eq:Growth-Competition}
 \resizebox{.8 \columnwidth}{!}
 {
-$ Growth_i  = r p_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot p_k \right) $
+$ Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot P_k \right) $
 }
 \end{equation}
 
-The palatability of each prey species is given by $ S_{ij} $. Those coefficients can be arranged as a $ N \times n $ matrix. Being a multispecies model, we can define the auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the palatability coefficients. Biologically, this represents the overall composition of the "menu" of predator $ j $:
+The palatability of each prey species is given by $ S_{ij} $. Those coefficients can be arranged as a $ N \times n $ matrix. Being a multispecies model, we can define the auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the palatability coefficients. Biologically, this represents the overall composition of the "menu" of consumer $ j $:
 
 \begin{eqnarray}
 \label{eq:AuxiliaryVectors}
-	V_j \equiv \sum_{k=1}^n S_{jk} \cdot p_k
+	V_j \equiv \sum_{k=1}^n S_{jk} \cdot P_k
 \end{eqnarray}
 
-We hypothesize that the feeding term will be linear in $ P_j $, and have a Holling type II functional response on $ V_j $ in order to account for predator satiation:
+We hypothesize that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation:
 
 \begin{equation}
 \label{eq:Feeding}
-	Feeding_j =  e g P_j F_{2}(V_j; H) = e g P_j \frac{V_j}{V_j + H}
+	Feeding_j =  e g C_j F_{2}(V_j; H) = e g C_j \frac{V_j}{V_j + H}
 \end{equation}
 
-$ e $ represents the assimilation efficiency of the predation, that is, it regulates the biomass exchange between predator and prey. Thus, the effect of predator $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all predators in the species $ i $ as follows:
+$ e $ represents the assimilation efficiency of the predation, that is, it regulates the biomass exchange between consumer and prey. Thus, the effect of consumer $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all consumers in the species $ i $ as follows:
 
 \begin{equation}
 \label{eq:Predation}
-Predation_i = g p_i \sum_{k=1}^N S_{ki} \cdot \frac{P_k}{V_k+H} \equiv gp_iR_i
+Predation_i = g P_i \sum_{k=1}^N S_{ki} \cdot \frac{C_k}{V_k+H} \equiv gP_iR_i
 \end{equation}
 
-Where for convenience, we have defined the auxiliary function $ R_i $ as a summary of this effect of all predators on prey $ i $:
+Where for convenience, we have defined the auxiliary function $ R_i $ as a summary of this effect of all consumers on prey $ i $:
 
 \begin{equation}
 \label{eq:PredationAux}
-R_i(P_1, ..., P_N, V_k; S) \equiv \sum_{k=1}^N S_{ki} \cdot \frac{P_k}{V_k+H}
+R_i(C_1, ..., C_N, V_k; S) \equiv \sum_{k=1}^N S_{ki} \cdot \frac{C_k}{V_k+H}
 \end{equation}
 
 Putting all together, the dynamical system reads:
@@ -139,9 +153,9 @@ Putting all together, the dynamical system reads:
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
 	\begin{cases}
-	\dot{p_i} = r p_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot p_k \right) - g p_i R_i + f
+	\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot P_k \right) - g P_i R_i + f
 	\\ 
-	\dot{P_j} = e g P_j \frac{V_j}{V_j + H} - l P_j
+	\dot{C_j} = e g C_j \frac{V_j}{V_j + H} - l C_j
 	\end{cases}
 \end{eqnarray}
 
@@ -268,7 +282,7 @@ For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illu
 The outcome of the numerical experiment described above is a list of $ R $ maximum Lyapunov exponents per value of $ \epsilon $. This list can be used to estimate the probability of chaos for each value of $ \epsilon $ (see section \ref{subsec:DetectionOfChaos}).
 
 \paragraph*{}
-This numerical experiment can be repeated for different number of preys and predators ($n$ and $N$). {\color{red} Choose a fixed predator-prey ratio, keep it, and mention it here}
+This numerical experiment can be repeated for different number of prey and consumers ($n$ and $N$). {\color{red} Choose a fixed predator-prey ratio, keep it, and mention it here}
 
 \subsection{Detection of chaos}
 \label{subsec:DetectionOfChaos}
@@ -311,7 +325,7 @@ Plotting the probability of chaos against the competition parameter (see figures
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{contour.png}
 	\end{center}
-	\caption{Contour map showing the probability of chaos for various competition parameters (horizontal axis) and prey populations (vertical axis). The predators' population is fixed as $ 2/3 $ of the prey's population, in order to control the overall size of the system with a single parameter. Notice that chaotic attractors appear more easily (i.e., for smaller systems) if the competition is neutral (i.e., $ \epsilon = 0 $)}
+	\caption{Contour map showing the probability of chaos for various competition parameters (horizontal axis) and prey populations (vertical axis). The consumers' population is fixed as $ 2/3 $ of the prey's population, in order to control the overall size of the system with a single parameter. Notice that chaotic attractors appear more easily (i.e., for smaller systems) if the competition is neutral (i.e., $ \epsilon = 0 $)}
 	\label{fig:Contour}
 \end{figure}
 
@@ -338,14 +352,14 @@ If we drop everything but the competition part of our dynamics (see equation \re
 
 \begin{eqnarray}
 \label{eq:OnlyCompetition}
-\dot{p_i} = p_i \left( 1 - \sum_{k=1}^n A_{ik} \cdot p_k \right)
+\dot{P_i} = P_i \left( 1 - \sum_{k=1}^n A_{ik} \cdot P_k \right)
 \end{eqnarray}
 
 In order to model a neutral competition, we should use the same competition coefficient for each species. That is, take $ A_{ik} = A $ for all $ i $ and $ k $, so:
 
 \begin{eqnarray}
 \label{eq:OnlyNeutralCompetition}
-\dot{p_i} = p_i \left( 1 - A \sum_{k=1}^n p_k \right)
+\dot{P_i} = P_i \left( 1 - A \sum_{k=1}^n P_k \right)
 \end{eqnarray}
 
 From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium manifolds.
@@ -362,14 +376,14 @@ This problem can be solved more easily noticing that, from the sole point of vie
 
 \begin{eqnarray}
 \label{eq:TotalPopulation}
-	T(t) = \sum_{i=1}^n p_i(t)
+	T(t) = \sum_{i=1}^n P_i(t)
 \end{eqnarray}
 
 It can be easily shown using equation \ref{eq:OnlyNeutralCompetition} that, as expected from the biological intuition, the dynamics of this new variable will follow the same differential equation as the individual species abundances:
 
 \begin{eqnarray}
 \label{eq:TotalPopulationDynamics}
-	\dot T(t) = \sum_{i=1}^n \dot p_i(t) = T (1 - A T)
+	\dot T(t) = \sum_{i=1}^n \dot P_i(t) = T (1 - A T)
 \end{eqnarray}
 
 In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of system degeneration.
@@ -390,9 +404,9 @@ So, finally we have:
 \begin{eqnarray}
 \label{eq:SystemUnderStudySimplified}
 	\begin{cases}
-		\dot{p_i} = p_i \left( 1 - \sum_{k=1}^n A_{ik} \cdot p_k \right) - g p_i R_i + f
+		\dot{P_i} = P_i \left( 1 - \sum_{k=1}^n A_{ik} \cdot P_k \right) - g P_i R_i + f
 		\\
-		\dot{P_j} = e g P_j \frac{V_j}{V_j + 1} - l P_j
+		\dot{C_j} = e g C_j \frac{V_j}{V_j + 1} - l C_j
 	\end{cases}
 \end{eqnarray}
 
@@ -405,11 +419,11 @@ with the $ n^2 + n \cdot N + 4 $ external parameters, namely:
 	    \hline
 	    \textbf{Parameter} & \textbf{Cardinal} & \textbf{Interpretation} \\ \hline
 	    $ A_{ij} $ & $ n^2 $ & Competition between species $ i $ and $ j $\footnote{Also includes carrying capacity as "self" competition} \\ \hline
-	    $ S_{ij} $ & $ n \cdot N $ & Palatability of the prey $ i $ for predator $ j $ \\ \hline
+	    $ S_{ij} $ & $ n \cdot N $ & Palatability of the prey $ i $ for consumer $ j $ \\ \hline
 	    $ g $ & $ 1 $ & Effect of predation on prey \\ \hline
-	    $ e $ & $ 1 $ & Predators' efficiency \\ \hline
+	    $ e $ & $ 1 $ & Consumers' efficiency \\ \hline
 	    $ f $ & $ 1 $ & Prey's immigration flow \\ \hline
-	    $ l $ & $ 1 $ & Predators' death rate \\ \hline
+	    $ l $ & $ 1 $ & Consumers' death rate \\ \hline
 	    \end{tabular}}
 	\end{center}
 	\caption{Parameters left after reduction}
@@ -434,11 +448,11 @@ The following pseudocode algorithm describes the whole procedure:
 		\\
 		\BState \emph{biological parameters}:
 		\State $\textit{n} \gets \text{Prey's population}$
-		\State $\textit{N} \gets \text{Predator's population}$
+		\State $\textit{N} \gets \text{Consumer's population}$
 		\State $\textit{g} \gets \text{Effect of predation on prey}$
-		\State $\textit{e} \gets \text{Predator's efficiency}$
+		\State $\textit{e} \gets \text{Consumer's efficiency}$
 		\State $\textit{f} \gets \text{Prey's immigration flow}$
-		\State $\textit{l} \gets \text{Predator's death rate}$
+		\State $\textit{l} \gets \text{Consumer's death rate}$
 		\\
 		\BState \emph{loop}:
 		\For{$\epsilon$ \textbf{in} $[-1,2]$}
@@ -482,8 +496,11 @@ Further ideas, for this or future papers:
 
 \color{black}
 \clearpage
+
+% TODO: format citations
 \bibliography{library}
 \bibliographystyle{ieeetr}
+%\bibliographystyle{vancouver}
 %\bibliographystyle{apalike}
 
 %\listoftables
