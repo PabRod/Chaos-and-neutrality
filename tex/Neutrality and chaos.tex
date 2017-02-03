@@ -5,7 +5,7 @@
 \usepackage[T1]{fontenc}
 
 \usepackage{float} % For controlling figure positions
-
+\usepackage{etoolbox} % For using conditionals
 \usepackage{amsthm} % For using \begin{proof}...
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -15,25 +15,36 @@
 \usepackage{cite}
 \usepackage{url}
 
-\usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
-\usepackage{program}
+%\usepackage{algorithm}
+%\usepackage[noend]{algpseudocode}
+%\usepackage{program}
 
 \usepackage{authblk}
 
-\title{Neutral competition among prey promotes chaos in two-level food webs\\ {\color{red} Draft}}
+%% Control draft / final version
+\newtoggle{personalDraft}
+\toggletrue{personalDraft}
+
+\newtoggle{journalDraft}
+\togglefalse{journalDraft}
+
+\title{Neutral competition among prey promotes chaos in two-level food webs\\ \iftoggle{personalDraft}{{\color{red} Draft}}}
 \author[1]{Pablo Rodríguez-Sánchez \thanks{pablo.rodriguezsanchez@wur.nl}}
 \author[1]{Egbert van Nes \thanks{egbert.vannes@wur.nl}}
 \author[1]{Marten Scheffer \thanks{marten.scheffer@wur.nl}}
 
 \affil[1]{Department of Aquatic Ecology, Wageningen University, The Netherlands}
 
+%% Control graphics
 \usepackage{graphicx}
 \graphicspath{ {../img/} }
 
 \usepackage[switch]{lineno}
-% TODO: add line numbers and double spacing in the final version
-%\linenumbers
+
+\iftoggle{journalDraft}
+{
+	\linenumbers
+}
 
 \begin{document}
 
@@ -58,8 +69,10 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 \textit{Keywords}: population dynamics, competition models, neutral competition, biodiversity paradox, chaos.
 \end{abstract}
 
-% TODO: remove/comment in final version
-\tableofcontents
+\iftoggle{personalDraft}
+{
+	\tableofcontents
+}
 
 \section{Background}
 \label{sec:Background} % Introductory paragraph
@@ -403,11 +416,14 @@ Further ideas, for this or future papers:
 
 % TODO: format citations
 \bibliography{library}
-\bibliographystyle{ieeetr}
-%\bibliographystyle{apalike}
+%\bibliographystyle{ieeetr}
+\bibliographystyle{apalike}
 
-%\listoftables
-\listoffigures
+\iftoggle{journalDraft}
+{
+	\listoftables
+	\listoffigures
+}
 
 \end{document}
 
