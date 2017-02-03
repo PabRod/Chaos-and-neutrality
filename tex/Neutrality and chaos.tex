@@ -208,9 +208,6 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 	\label{tab:Parameters}
 \end{figure}
 
-% TODO: use or remove
-As explained in section \ref{subsec:ParameterReduction}, this system allows parameter reduction.
-
 \subsection{Competition parameter}
 \label{subsec:CompetitionParameter}
 
@@ -337,7 +334,7 @@ The overall likelihood of chaos increases with the size of the food web. This ef
 
 \subsection{Neutral competition}
 \label{subsec:NeutralCompetition}
-If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudySimplified}), we will find a system of equations $ n $ like the following:
+If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of equations $ n $ like the following:
 
 \begin{eqnarray}
 \label{eq:OnlyCompetition}
@@ -377,49 +374,6 @@ It can be shown using equation \ref{eq:OnlyNeutralCompetition} that, as expected
 
 In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of system degeneration.
 
-% TODO: use, or remove
-\subsection{Parameter reduction}
-\label{subsec:ParameterReduction}
-
-The dynamical system \ref{eq:SystemUnderStudy} has $ n^2 + n \cdot N + 7 $ parameters. Choosing appropriate units and parameter combinations, this number can be reduced by $ 3 $:
-
-\begin{itemize}
-	\item By choosing an appropriate time scale $ \left( \tau = r t \right)$ we can get rid of $ r $
-	\item $ K $ can be absorbed into $ A_{ij} $ $ \left( \frac{A_{ij}}{K} \rightarrow A_{ij}  \right) $ 
-	\item $ H $ can be absorbed into $ S_{ij} $ $ \left( \frac{S_{ij}}{H} \rightarrow S_{ij}  \right) $
-\end{itemize}
-
-So, finally we have:
-
-\begin{eqnarray}
-\label{eq:SystemUnderStudySimplified}
-	\begin{cases}
-		\dot{P_i} = P_i \left( 1 - \sum_{k=1}^n A_{ik} \cdot P_k \right) - g P_i R_i + f
-		\\
-		\dot{C_j} = e g C_j \frac{V_j}{V_j + 1} - l C_j
-	\end{cases}
-\end{eqnarray}
-
-with the $ n^2 + n \cdot N + 4 $ external parameters, namely:
-
-\begin{figure}[H]
-	\begin{center}
-		\resizebox{\columnwidth}{!}{%
-	    \begin{tabular}{ | c | c | c |}
-	    \hline
-	    \textbf{Parameter} & \textbf{Cardinal} & \textbf{Interpretation} \\ \hline
-	    $ A_{ij} $ & $ n^2 $ & Competition between species $ i $ and $ j $\footnote{Also includes carrying capacity as "self" competition} \\ \hline
-	    $ S_{ij} $ & $ n \cdot N $ & Palatability of the prey $ i $ for consumer $ j $ \\ \hline
-	    $ g $ & $ 1 $ & Effect of predation on prey \\ \hline
-	    $ e $ & $ 1 $ & Consumers' efficiency \\ \hline
-	    $ f $ & $ 1 $ & Prey's immigration flow \\ \hline
-	    $ l $ & $ 1 $ & Consumers' death rate \\ \hline
-	    \end{tabular}}
-	\end{center}
-	\caption{Parameters left after reduction}
-	\label{tab:ParametersReduction}
-\end{figure}
-
 
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
@@ -450,7 +404,6 @@ Further ideas, for this or future papers:
 % TODO: format citations
 \bibliography{library}
 \bibliographystyle{ieeetr}
-%\bibliographystyle{vancouver}
 %\bibliographystyle{apalike}
 
 %\listoftables
