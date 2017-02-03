@@ -420,47 +420,6 @@ with the $ n^2 + n \cdot N + 4 $ external parameters, namely:
 	\label{tab:ParametersReduction}
 \end{figure}
 
-% TODO: remove
-\subsection{Algorithm used}
-\label{subsec:Algorithm}
-
-The following pseudocode algorithm describes the whole procedure:
-
-\makeatletter
-\def\BState{\State\hskip-\ALG@thistlm}
-\makeatother
-\begin{algorithm}[H]
-\caption{Pseudocode for the algorithm used}\label{Pseudocode}
-	\begin{algorithmic}[1]
-		\Procedure{Numerical experiment in pseudocode}{}
-		\\
-		\BState \emph{experiment design parameters}:
-		\State $\textit{R} \gets \text{Number of repetitions}$
-		\\
-		\BState \emph{biological parameters}:
-		\State $\textit{n} \gets \text{Prey's population}$
-		\State $\textit{N} \gets \text{Consumer's population}$
-		\State $\textit{g} \gets \text{Effect of predation on prey}$
-		\State $\textit{e} \gets \text{Consumer's efficiency}$
-		\State $\textit{f} \gets \text{Prey's immigration flow}$
-		\State $\textit{l} \gets \text{Consumer's death rate}$
-		\\
-		\BState \emph{loop}:
-		\For{$\epsilon$ \textbf{in} $[-1,2]$}
-		\State Draw a competition matrix $A$
-		\State Draw a predation matrix $S$
-		\State Draw random initial conditions
-			\For{$i$ \textbf{in} $R$} 
-			\State Compute dynamics
-			\State Store maximum Lyapunov exponent $\lambda$
-			\EndFor	
-		\EndFor
-		\\
-		\BState \emph{results}:
-		\State Return the lists $(\epsilon_i, \lambda_{i1}, ..., \lambda_{iR})$
-		\EndProcedure
-	\end{algorithmic}
-\end{algorithm}
 
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
