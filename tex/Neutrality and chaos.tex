@@ -28,7 +28,7 @@
 \newtoggle{journalDraft}
 \togglefalse{journalDraft}
 
-\title{Neutral competition among prey promotes chaos in two-level food webs\\ \iftoggle{personalDraft}{{\color{red} Draft}}}
+\title{Neutral competition among prey promotes chaos in two-level food webs \iftoggle{personalDraft}{\\ {\color{red} Draft}}}
 \author[1]{Pablo Rodríguez-Sánchez \thanks{pablo.rodriguezsanchez@wur.nl}}
 \author[1]{Egbert van Nes \thanks{egbert.vannes@wur.nl}}
 \author[1]{Marten Scheffer \thanks{marten.scheffer@wur.nl}}
@@ -48,21 +48,11 @@
 
 \begin{document}
 
-%\title{}
-%\author{Pablo Rodríguez-Sánchez \\ \\ Wageningen University}
-%\author{Pablo Rodríguez-Sánchez \\ \\ pablo.rodriguez.sanchez@gmail.com \\ \\ https://sites.google.com/site/pablorodriguezsanchez/}
-%\date{\today}
-
 \maketitle
-
-%\begin{center}
-%	\label{fig:QR}
-%	\includegraphics[scale=0.4]{QR_main.png}
-%\end{center}
 
 \begin{abstract}
 \label{sec:Abstract}
-Neutral competition can be interpreted as a limit case between dominant intraspecific competition and dominant interspecific competition. Focusing on a numerical model of a two trophic levels ecosystem, the present paper explores the surroundings of this limit case, that is, weak non-neutral competition interactions. It is shown that, the closer the competition is to be neutral, the higher are the chances of the system to develop chaotic behaviour.
+Neutral competition can be interpreted as a limit case between dominant intraspecific competition and dominant interspecific competition. Using a numerical model of a two trophic levels ecosystem, the present paper explores the surroundings of this limit case, that is, weak non-neutral competition interactions. It is shown that, the closer the competition is to be neutral, the higher are the chances of the system to develop chaotic behaviour.
 
 % TODO: use more keywords on the abstract and title
 \paragraph{}
@@ -71,7 +61,9 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 
 \iftoggle{personalDraft}
 {
+	\clearpage
 	\tableofcontents
+	\clearpage
 }
 
 \section{Background}
@@ -86,7 +78,7 @@ The mystery comes into scene together with the competitive exclusion principle\c
 There are several alternative hypotheses for escaping the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. 
 
 \paragraph{} % Introduction of chaotic dynamics
-After the discovery of chaos\cite{Lorenz1963a}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in non-constant environments \cite{Dakos2009b}.
+After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in non-constant environments \cite{Dakos2009b}.
 
 \paragraph{} % Hypotheses based in spatial heterogeneity TODO: enlarge or remove?
 All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.
@@ -103,7 +95,10 @@ In the present paper we show that there is a link between neutral competition an
 
 \subsection{Model description}
 \label{subsec:Model}
-We focused our attention in food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common resource. These webs are the simplest realization of a system where neutrality doesn't lead to mathematical degeneration (see \ref{sec:Appendix}). Degeneration is prevented by the non-neutral predation rates breaking the excess of symmetry provided by neutrality. % TODO: maybe not needed in an ecology journal
+We focused our attention in food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common resource. 
+
+\paragraph{}
+This choice was made because these webs are the simplest realization of a system where neutrality doesn't lead to mathematical degeneration (see \ref{sec:Appendix}). Degeneration is prevented by the non-neutral predation rates breaking the excess of symmetry provided by neutrality. % TODO: maybe not needed in an ecology journal
 
 \begin{figure}[h]
 	\begin{center}
@@ -114,7 +109,7 @@ We focused our attention in food webs with two trophic levels, one of consumers 
 \end{figure}
 
 \paragraph{} % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used a generalized Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963, Scheffer2004}, composed of $ n $ prey and $ N $ consumers. $ P_i $ was used for accounting the size of the population of prey $ i $, and $ C_j $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n $, and $ j $ from $ 1 $ to $ N $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition doesn't need to be necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them preferable than others. All these interactions are summarized in \ref{fig:Network}. The overall structure looks like:
+The dynamics were modelled as a system of ordinary differential equations. We used a generalized Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963, Scheffer2004}, composed of $ n $ prey and $ N $ consumers. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n $, and $ j $ from $ 1 $ to $ N $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition doesn't need to be necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them preferable than others. All these interactions are summarized in \ref{fig:Network}. The overall structure looks like:
 
 \begin{displaymath}
 \label{eq:EquationInPseudocode}
@@ -125,24 +120,24 @@ The dynamics were modelled as a system of ordinary differential equations. We us
 \end{displaymath}
 
 %% Step-by-step description of each term
-The growth term is modelled as a multispecies logistic growth. The strength of the competition is given by $ A_{ik} $. Those coefficients can be arranged as a $ n \times n $ matrix. So, for prey $ i $, we have:
+The growth term is modelled as a multispecies logistic growth. The strength of the competition between species $ i $ and $ k $ is given by $ A_{ik} $. Those coefficients can be arranged as an $ n \times n $ matrix. So, for prey $ i $, we have:
 
 \begin{equation}
 \label{eq:Growth-Competition}
-\resizebox{.8 \columnwidth}{!}
-{
-$ Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot P_k \right) $
-}
+%\resizebox{.8 \columnwidth}{!}
+%{
+Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot P_k \right)
+%}
 \end{equation}
 
-The palatability of each prey species is given by $ S_{ij} $. Those coefficients can be arranged as a $ N \times n $ matrix. Being a multispecies model, we can define the auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the palatability coefficients. Biologically, this represents the composition of the \textit{menu} of consumer $ j $:
+The palatability of each prey species is given by $ S_{ij} $. Those coefficients can be arranged as an $ N \times n $ matrix. Being a multispecies model, we can define the auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the palatability coefficients. Biologically, this represents the composition of the \textit{menu} of consumer $ j $:
 
 \begin{eqnarray}
 \label{eq:AuxiliaryVectors}
 	V_j \equiv \sum_{k=1}^n S_{jk} \cdot P_k
 \end{eqnarray}
 
-We hypothesize that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation:
+We hypothesized that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation:
 
 \begin{equation}
 \label{eq:Feeding}
@@ -156,7 +151,7 @@ $ e $ represents the assimilation efficiency of the predation, that is, it regul
 Predation_i = g P_i \sum_{k=1}^N S_{ki} \cdot \frac{C_k}{V_k+H} \equiv gP_iR_i
 \end{equation}
 
-Where for convenience, we have defined the auxiliary function $ R_i $ as a summary of this effect of all consumers on prey $ i $:
+where for convenience, we have defined the auxiliary function $ R_i $ as a summary of this effect of all consumers on prey $ i $:
 
 \begin{equation}
 \label{eq:PredationAux}
@@ -175,12 +170,12 @@ Putting all together, the dynamical system reads:
 \end{eqnarray}
 %% ------
 
-Depending on the parameters and the initial conditions, this system can give rise to three types of behaviour on the long term, each of them corresponding with a different type of attractor (see figure \ref{fig:TimeSeries}). The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilising nor giving rise to periodicity.
+Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding with a different type of attractor (see figure \ref{fig:TimeSeries}). The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilising nor giving rise to periodicity.
 
 % TODO: remove "complex" cyclic attractor
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=.8\columnwidth]{time_series.png}
+		\includegraphics[width=.7\columnwidth]{time_series.png}
 	\end{center}
 	\caption{Time series of the species composition. First figure shows an stable attractor. The second one, a simple cyclic attractor. The third corresponds to a complex cyclic attractor. The last one shows a chaotic attractor}
 	\label{fig:TimeSeries}
@@ -197,19 +192,19 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 			\hline
 			\textbf{Symbol} & \textbf{Interpretation} & \textbf{Value} & \textbf{Units} \\
 			\hline
-			$r$ & Growth rate & $0.5$ & $d^{-1}$ \\
+			$r$ & Growth rate & $0.50$ & $d^{-1}$ \\
 			\hline
-			$g$ & Predation rate & $0.4$ & $d^{-1}$\\
+			$g$ & Predation rate & $0.40$ & $d^{-1}$\\
 			\hline
 			$l$ & Loss rate & $0.15$ & $d^{-1}$\\
 			\hline
-			$K$ & Carrying capacity & $1$ & $ mg \ l^{-1} $ \\
+			$K$ & Carrying capacity & $1.00$ & $ mg \ l^{-1} $ \\
 			\hline
-			$H$ & Half-saturation constant & $2$ & $ mg \ l^{-1} $\\
+			$H$ & Half-saturation constant & $2.00$ & $ mg \ l^{-1} $\\
 			\hline
 			$f$ & Immigration rate & $10^{-5}$ & $mg \ l^{-1} \ d^{-1}$\\
 		    \hline
-			$e$ & Assimilation efficiency & $0.6$ & $1$\\
+			$e$ & Assimilation efficiency & $0.60$ & $1$\\
 		    \hline
 		    $S$ & $ N \times n $ palatability matrix & $S_{ij} \sim (0,1)$ & $1$\\
 		    \hline
@@ -224,7 +219,7 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \subsection{Competition parameter}
 \label{subsec:CompetitionParameter}
 
-Our aim is to analyse the behaviour of the system described in equation \ref{eq:SystemUnderStudy} for increasingly more neutral competition interactions. But, how can an interaction be more or less neutral? In order to quantify neutrality and controlling the \textit{flavour} of the competition, we introduce the competition parameter $ \epsilon $. This dimensionless parameter will allow us to vary continuously from interactions where intraspecific competition is stronger that interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where none of the intra non interspecific competition is dominant, represents neutral competition (see figure \ref{tab:CompetitionParameter}). The higher the absolute value of $\epsilon$, the less neutral our model is. 
+Our aim is to analyse the behaviour of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. But, how can an interaction be more or less neutral? In order to quantify neutrality and controlling the \textit{flavour} of the competition, we introduce the competition parameter $ \epsilon $. This dimensionless parameter will allow us to vary continuously from interactions where intraspecific competition is stronger that interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where none of the intra non interspecific competition is dominant, represents neutral competition (see figure \ref{tab:CompetitionParameter}). The higher the absolute value of $\epsilon$, the less neutral our model is.
 
 \paragraph{}
 The numerical implementation of these ideas can be easily achieved by building a competition matrix like this:
@@ -243,7 +238,7 @@ Where $ A_0 $ is a purely neutral competition matrix (i.e., all its elements equ
 			\hline 
 			\textbf{Parameter value} & \textbf{Dominant competition} & \textbf{Example of competition matrix} \\
 			\hline 
-			$\epsilon < 0$ & Intraspecific & $ A = \begin{bmatrix} 1&.2&.3\\ .3&1&.4 \\ .5&.4&1\end{bmatrix} $ \\ 
+			$-1 < \epsilon < 0$ & Intraspecific & $ A = \begin{bmatrix} 1&.2&.3\\ .3&1&.4 \\ .5&.4&1\end{bmatrix} $ \\ 
 			\hline 
 			$\epsilon = 0$ & None (neutral) & $A = \begin{bmatrix} 1&1&1\\ 1&1&1 \\ 1&1&1\end{bmatrix}$ \\ 
 			\hline 
@@ -255,38 +250,39 @@ Where $ A_0 $ is a purely neutral competition matrix (i.e., all its elements equ
 	\label{tab:CompetitionParameter}
 \end{figure}
 
-% TODO: maybe to appendix?
+By choosing $ -1 $ as a lower limit for $ \epsilon $ we exclude the possibility of negative numbers in the competition matrix. This coefficients of \textit{negative competition} can be understood as a simple approach to mutualism, and we wanted to focus only in classical competition.
+
 \subsection{Detection of chaos}
 \label{subsec:DetectionOfChaos}
-Dynamical systems with chaotic attractors are extremelly sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
+Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
 
 \paragraph{}
 Our procedure for classifying the attractors as chaotic or non-chaotic was based in the analysis of Lyapunov exponents. More specifically, this is the procedure we've followed:
 
 \begin{enumerate}
-	\item \label{GoToAttractor} Run the simulation for time enough, in order to guarantee that an attractor has been reached
-	\item \label{RunInAttractor} Use the run in step \ref{GoToAttractor} as a starting point for a second, shorter run inside the attractor
-	\item Use the run in step \ref{RunInAttractor} to compute numerically the principal Lyapunov exponent	
+	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory is on an attractor
+	\item \label{RunInAttractor} Use the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor
+	\item Use the run in step \ref{RunInAttractor} to compute numerically the principal Lyapunov exponent
 	\begin{itemize}
 		\item If it's positive, classify the attractor as chaotic
 		\item If it's negative, classify the attractor as non-chaotic
 	\end{itemize}
 \end{enumerate}
 
-{\color{red} Big warning here: our method for detecting chaos sometimes gives false positives for complex cycles}
+%TODO: Big warning here: our method for detecting chaos sometimes gives false positives for complex cycles
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
-Our main target is to estimate the probability of a chaotic attractor under different intensities of neutrality. Due to the complexity of the system, we face the problem as a numerical simulation\footnote{The present analysis were performed using GRIND for MATLAB. It's freely available at \\ \url{http://www.sparcs-center.org/grind.html}}. As well, and for the sake of reproducibility, we provide a \textit{GitHub} link to the scripts used. {\color{red}Discuss with Egbert and Marten about which code repository use}
+Our main target is to estimate the probability of finding a chaotic attractor under different intensities of neutrality. Due to the complexity of the system, we face the problem as a numerical simulation\footnote{The present analysis were performed using GRIND for MATLAB. It's freely available at \\ \url{http://www.sparcs-center.org/grind.html}}. As well, and for the sake of reproducibility, we provide a \textit{GitHub} link to the scripts used. {\color{red}Discuss with Egbert and Marten about which code repository use}
 
 \paragraph{}
 Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
 
 \begin{enumerate}
-	\item Use the competition parameter $\epsilon$ to draw a competition matrix $A$ (as described in section \ref{subsec:CompetitionParameter}). Notice that this matrix will change in every run
-	\item \label{StartOfAnExperiment} Draw the rest of parameters and initial conditions from the ranges described in \cite{Dakos2009b}, taken as uniform PDFs. Notice that those parameters taken from a PDF will change in every run
+	\item Use the competition parameter $ \epsilon $ to draw a competition matrix $ A $ (as described in section \ref{subsec:CompetitionParameter}). Notice that this matrix is being drawn from a probability distribution function (PDF), so it will change in every run
+	\item \label{StartOfAnExperiment} Draw the rest of parameters and initial conditions from the values described in \cite{Dakos2009b}. Those which are defined as ranges will be taken as uniform PDFs. Notice that those parameters taken from a PDF will change in every run
 	\item Determine numerically if the attractor generated by this conditions is chaotic or not (see section \ref{subsec:DetectionOfChaos})
-	\item Go back to step (\ref{StartOfAnExperiment}) $R$ times
+	\item Go back to step (\ref{StartOfAnExperiment}) $ R $ times
 \end{enumerate}
 
 For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illuminating.
@@ -324,7 +320,7 @@ The overall likelihood of chaos increases with the size of the food web. This ef
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.9\columnwidth]{results.png}
+		\includegraphics[width=0.65\columnwidth]{results.png}
 	\end{center}
 	\caption{Results for a low, medium and high dimensional system. The upper row represents the measured Lyapunov exponents, coloured in red if larger than zero, and in blue if lower. The lower row represents the estimated probability of chaotic behaviour}
 	\label{fig:Results}
@@ -390,28 +386,32 @@ In our model, the predation interaction breaks this excess of symmetry, so we ca
 
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
-We thank Jelle Lever, for his useful comments and suggestions.
+We thank Jelle Lever, for his useful comments and suggestions, and Sebastian Bathiany for the proofreading and suggestions.
 
-\color{red}
-\section{To do}
-\label{sec:ToDo}
+\iftoggle{personalDraft}
+{
+	\color{red}
+	\section{To do}
+	\label{sec:ToDo}
+	
+	\begin{itemize}
+	\item Send more details to the appendix?
+	\item Remove or improve the pseudocode algorithm
+	\item Clean and publish analysis code in \textit{GitHub}
+	\end{itemize}
+	
+	Further ideas, for this or future papers:
+	
+	\begin{itemize}
+	\item Neutrality in predation
+	\item Study symmetric competition with a parameter that controls symmetry
+	\item Neutrality increases symmetry as well. May this be related with the fact that, as said in \cite{Scheffer2004}, \textit{"symmetry in competition strongly promotes multiplicity of attractors"}
+	\end{itemize}
+	
+	
+	\color{black}
+}
 
-\begin{itemize}
-\item Send more details to the appendix?
-\item Remove or improve the pseudocode algorithm
-\item Clean and publish analysis code in \textit{GitHub}
-\end{itemize}
-
-Further ideas, for this or future papers:
-
-\begin{itemize}
-\item Neutrality in predation
-\item Study symmetric competition with a parameter that controls symmetry
-\item Neutrality increases symmetry as well. May this be related with the fact that, as said in \cite{Scheffer2004}, \textit{"symmetry in competition strongly promotes multiplicity of attractors"}
-\end{itemize}
-
-
-\color{black}
 \clearpage
 
 % TODO: format citations
@@ -426,9 +426,3 @@ Further ideas, for this or future papers:
 }
 
 \end{document}
-
-%% Notes
-%
-% Are there better names for "dominant interspecific competition"?
-% Focus on two hypotheses
-% Describe every term in the equations?
