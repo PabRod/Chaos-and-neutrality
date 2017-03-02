@@ -109,7 +109,7 @@ This choice was made because these webs are the simplest realization of a system
 \end{figure}
 
 \paragraph{} % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used a generalized Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963, Scheffer2004}, composed of $ n $ prey and $ N $ consumers. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n $, and $ j $ from $ 1 $ to $ N $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition doesn't need to be necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them preferable than others. All these interactions are summarized in \ref{fig:Network}. The overall structure looks like:
+The dynamics were modelled as a system of ordinary differential equations. We used a generalized Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963, Scheffer2004}, composed of $ n_P $ prey species and $ n_C $ consumers species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition doesn't need to be necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them preferable than others. All these interactions are summarized in \ref{fig:Network}. The overall structure looks like:
 
 \begin{displaymath}
 \label{eq:EquationInPseudocode}
@@ -120,21 +120,21 @@ The dynamics were modelled as a system of ordinary differential equations. We us
 \end{displaymath}
 
 %% Step-by-step description of each term
-The growth term is modelled as a multispecies logistic growth. The strength of the competition between species $ i $ and $ k $ is given by $ A_{ik} $. Those coefficients can be arranged as an $ n \times n $ matrix. So, for prey $ i $, we have:
+The growth term is modelled as a multispecies logistic growth. The strength of the competition between species $ i $ and $ k $ is given by $ A_{ik} $. Those coefficients can be arranged as an $ n_P \times n_P $ matrix. So, for prey $ i $, we have:
 
 \begin{equation}
 \label{eq:Growth-Competition}
 %\resizebox{.8 \columnwidth}{!}
 %{
-Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot P_k \right)
+Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right)
 %}
 \end{equation}
 
-The palatability of each prey species is given by $ S_{ij} $. Those coefficients can be arranged as an $ N \times n $ matrix. Being a multispecies model, we can define the auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the palatability coefficients. Biologically, this represents the composition of the \textit{menu} of consumer $ j $:
+The palatability of each prey species is given by $ S_{ij} $. That is, $ S_{ij} $ represents the weight that consumer $ j $ gives to prey $ i $ in his \textit{menu}. Those coefficients can be arranged as an $ n_C \times n_P $ matrix. Being a multispecies model, we can define the auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the palatability coefficients. Biologically, this represents the composition of the \textit{menu} of consumer $ j $:
 
 \begin{eqnarray}
 \label{eq:AuxiliaryVectors}
-	V_j \equiv \sum_{k=1}^n S_{jk} \cdot P_k
+	V_j(P_1, ..., P_{n_P}) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
 \end{eqnarray}
 
 We hypothesized that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation:
@@ -148,14 +148,14 @@ $ e $ represents the assimilation efficiency of the predation, that is, it regul
 
 \begin{equation}
 \label{eq:Predation}
-Predation_i = g P_i \sum_{k=1}^N S_{ki} \cdot \frac{C_k}{V_k+H} \equiv gP_iR_i
+Predation_i = g P_i \sum_{k=1}^{n_C} S_{ki} \cdot \frac{C_k}{V_k+H} \equiv gP_iR_i
 \end{equation}
 
-where for convenience, we have defined the auxiliary function $ R_i $ as a summary of this effect of all consumers on prey $ i $:
+where for convenience, we have defined the auxiliary function $ R_i $ as a summary of the effect of all consumers on prey $ i $:
 
 \begin{equation}
 \label{eq:PredationAux}
-R_i(C_1, ..., C_N, V_k; S) \equiv \sum_{k=1}^N S_{ki} \cdot \frac{C_k}{V_k+H}
+R_i(C_1, ..., C_{n_P}, V_1, ..., V_{n_C}) \equiv \sum_{k=1}^{n_C} S_{ki} \cdot \frac{C_k}{V_k+H}
 \end{equation}
 
 Putting all together, the dynamical system reads:
@@ -163,7 +163,7 @@ Putting all together, the dynamical system reads:
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
 	\begin{cases}
-	\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^n A_{ik} \cdot P_k \right) - g P_i R_i + f
+	\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) - g P_i R_i + f
 	\\ 
 	\dot{C_j} = e g C_j \frac{V_j}{V_j + H} - l C_j
 	\end{cases}
@@ -206,9 +206,9 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 		    \hline
 			$e$ & Assimilation efficiency & $0.60$ & $1$\\
 		    \hline
-		    $S$ & $ N \times n $ palatability matrix & $S_{ij} \sim (0,1)$ & $1$\\
+		    $S$ & $ n_C \times n_P $ palatability matrix & $S_{ij} \sim (0,1)$ & $1$\\
 		    \hline
-   		    $A$ & $ n \times n $ competition matrix & See section \ref{subsec:CompetitionParameter} & $1$\\
+   		    $A$ & $ n_P \times n_P $ competition matrix & See section \ref{subsec:CompetitionParameter} & $1$\\
 		    \hline
 		\end{tabular}}
 	\end{center}
@@ -343,18 +343,18 @@ The overall likelihood of chaos increases with the size of the food web. This ef
 
 \subsection{Neutral competition}
 \label{subsec:NeutralCompetition}
-If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of equations $ n $ like the following:
+If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of equations $ n_P $ like the following:
 
 \begin{eqnarray}
 \label{eq:OnlyCompetition}
-\dot{P_i} = P_i \left( 1 - \sum_{k=1}^n A_{ik} \cdot P_k \right)
+\dot{P_i} = P_i \left( 1 - \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right)
 \end{eqnarray}
 
 In order to model a neutral competition, we should use the same competition coefficient for each species. That is, take $ A_{ik} = A $ for all $ i $ and $ k $, so:
 
 \begin{eqnarray}
 \label{eq:OnlyNeutralCompetition}
-\dot{P_i} = P_i \left( 1 - A \sum_{k=1}^n P_k \right)
+\dot{P_i} = P_i \left( 1 - A \sum_{k=1}^{n_P} P_k \right)
 \end{eqnarray}
 
 From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium manifolds.
@@ -371,14 +371,14 @@ This problem can be solved more easily noticing that, from the sole point of vie
 
 \begin{eqnarray}
 \label{eq:TotalPopulation}
-	T(t) = \sum_{i=1}^n P_i(t)
+	T(t) = \sum_{i=1}^{n_P} P_i(t)
 \end{eqnarray}
 
-It can be shown using equation \ref{eq:OnlyNeutralCompetition} that, as expected from the biological intuition, the dynamics of this new variable will follow the same differential equation as the individual species abundances. This collapses the $ n $ dimensions of our original problem to a single one.
+It can be shown using equation \ref{eq:OnlyNeutralCompetition} that, as expected from the biological intuition, the dynamics of this new variable will follow the same differential equation as the individual species abundances. This collapses the $ n_P $ dimensions of our original problem to a single one.
 
 \begin{eqnarray}
 \label{eq:TotalPopulationDynamics}
-	\dot T(t) = \sum_{i=1}^n \dot P_i(t) = T (1 - A T)
+	\dot T(t) = \sum_{i=1}^{n_P} \dot P_i(t) = T (1 - A T)
 \end{eqnarray}
 
 In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of system degeneration.
