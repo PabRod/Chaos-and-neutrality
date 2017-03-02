@@ -7,3 +7,6 @@
 tex/Neutrality and chaos.pdf
 img/
 notes/
+*.lnk
+*.dvi
+*.gz

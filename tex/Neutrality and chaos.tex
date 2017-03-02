@@ -98,7 +98,7 @@ In the present paper we explore the links between neutral competition and the ty
 We focused our attention in food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common resource. 
 
 \paragraph{}
-This choice was made because these webs are the simplest realization of a system where neutrality doesn't lead to mathematical degeneration (see \ref{sec:Appendix}). Degeneration is prevented by the non-neutral predation rates breaking the excess of symmetry provided by neutrality. % TODO: maybe not needed in an ecology journal
+This choice was made because these webs are the simplest realization of a system where neutrality doesn't lead to mathematical degeneration (see \ref{sec:Appendix}). Degeneration is prevented by the non-neutral predation rates breaking the excess of symmetry provided by neutrality at the prey's level. % TODO: maybe not needed in an ecology journal
 
 \begin{figure}[h]
 	\begin{center}
@@ -254,15 +254,16 @@ By choosing $ -1 $ as a lower limit for $ \epsilon $ we exclude the possibility 
 
 \subsection{Detection of chaos}
 \label{subsec:DetectionOfChaos}
-Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
+Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The initial rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
 
 \paragraph{}
 Our procedure for classifying the attractors as chaotic or non-chaotic was based in the analysis of Lyapunov exponents. More specifically, this is the procedure we've followed:
 
 \begin{enumerate}
-	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory is on an attractor
-	\item \label{RunInAttractor} Use the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor
-	\item Use the run in step \ref{RunInAttractor} to compute numerically the principal Lyapunov exponent
+	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory reached an attractor and the dynamics are asymptotic
+	\item \label{RunInAttractor} Use the last point of the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor
+	\item \label{PerturbedTrajectory} Use again the last point of the run in step \ref{GoToAttractor} but, this time, adding a small disturbance to it
+	\item Compare the runs in steps \ref{RunInAttractor} and \ref{PerturbedTrajectory} to compute numerically the principal Lyapunov exponent
 	\begin{itemize}
 		\item If it's positive, classify the attractor as chaotic
 		\item If it's negative, classify the attractor as non-chaotic
@@ -273,7 +274,7 @@ Our procedure for classifying the attractors as chaotic or non-chaotic was based
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
-Our main target is to estimate the probability of finding a chaotic attractor under different intensities of neutrality. Due to the complexity of the system, we face the problem as a numerical simulation\footnote{The present analysis were performed using GRIND for MATLAB. It's freely available at \\ \url{http://www.sparcs-center.org/grind.html}}. As well, and for the sake of reproducibility, we provide a \textit{GitHub} link to the scripts used. {\color{red}Discuss with Egbert and Marten about which code repository use}
+Our main target is to estimate the probability of finding a chaotic attractor under different intensities of neutrality. Due to the complexity of the system, we face the problem as a numerical simulation\footnote{The present analysis were performed using GRIND for MATLAB. It's freely available at \\ \url{http://www.sparcs-center.org/grind.html}}. As well, and for the sake of reproducibility, we provide a \textit{GitHub} link to the scripts used.
 
 \paragraph{}
 Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
@@ -297,13 +298,7 @@ For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illu
 
 The outcome of the numerical experiment described above is a list of $ R $ maximum Lyapunov exponents per value of $ \epsilon $. This list can be used to estimate the probability of chaos for each value of $ \epsilon $ via the classical frequentist interpretation of probability, that is, as the ratio of attractors found to be chaotic.
 
-% TODO: maybe remove?
-\begin{equation}
-\label{eq:Probability}
-	P(Chaos) \approx \frac{\#_{chaos}}{\#_{total}}
-\end{equation}
-
-\paragraph*{}
+\paragraph{}
 This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
 \section{Results}
@@ -312,11 +307,13 @@ This numerical experiment can be repeated for food webs of different sizes. In o
 Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition. From the biological point of view, we show that neutrality and non-equilibrium dynamics are not completely independent. Maybe this can be a first step to reconcile both views.
 
 \paragraph{} % Weak and strong interspecific competition
-The probability of chaos when intraspecific competition is dominant has a valley between $ \epsilon = -1 $ and $ \epsilon = 0 $. We interpret this result as the overlap of two effects. On the one hand, as we have shown, weak dominant interspecific competition is less prone to chaos than neutral competition. On the other, strong interspecific competition increases the likelihood of chaos again. Assuming continuity, there has to be necessarily at least one minimum between both cases by virtue of Rolle's theorem \cite{Simmons1996}.
-% TODO: increase even more the range of the parameter?
+There's another local maximum for $ \epsilon = -1 $. This means that strong intraspecific interactions also promote chaos.
+
+\paragraph{} % Valley
+The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one minimum between two maxima\footnote{More intuitively: there should be at least one valley between two mountains}.
 
 \paragraph{} % Chaos and dimensionality
-The overall likelihood of chaos increases with the size of the food web. This effect should not be surprising: the more dimensions the phase space has, the easier is to develop the complex geometry of a chaotic attractor. Intuitively, we can understand this as increasing the available room for the formation of the attractor. Even in those higher dimensional cases, a maximum is still happening at the neutral competition case.
+The overall likelihood of chaos, which can be interpreted as the area behind the curve, increases with the size of the food web. This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfil the requirements of the complex geometry of a chaotic attractor\footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point}. Even in those higher dimensional cases, a maximum is still happening at the neutral competition case.
 
 \begin{figure}
 	\begin{center}
