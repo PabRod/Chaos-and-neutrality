@@ -52,9 +52,8 @@
 
 \begin{abstract}
 \label{sec:Abstract}
-Neutral competition can be interpreted as a limit case between dominant intraspecific competition and dominant interspecific competition. Using a numerical model of a two trophic levels ecosystem, the present paper explores the surroundings of this limit case, that is, weak non-neutral competition interactions. It is shown that, the closer the competition is to be neutral, the higher are the chances of the system to develop chaotic behaviour.
+Neutral competition can be interpreted as a limit case between dominant intraspecific competition and dominant interspecific competition. Using a numerical model of a two trophic levels ecosystem, the present paper explores the surroundings of this limit case, that is, weak non-neutral competition interactions. It is shown that, the closer the competition is to be neutral, the higher are the chances of the system to develop chaotic behaviour. This may shed some light on the biodiversity paradox, one of the open problems of population dynamics.
 
-% TODO: use more keywords on the abstract and title
 \paragraph{}
 \textit{Keywords}: population dynamics, competition models, neutral competition, biodiversity paradox, chaos.
 \end{abstract}
@@ -68,14 +67,14 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 
 \section{Background}
 \label{sec:Background} % Introductory paragraph
-The fascination by biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of species. Scientific knowledge increases this sense of wonder even more. Like in a good mystery book, there is a big unknown behind biodiversity: we don't know how it is possible.
+The fascination by biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more. Like in a good mystery book, there is a big unknown behind biodiversity: we don't know how it is possible.
 
 \paragraph{} % Introduction of the biodiversity paradox TODO: citations
 The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical touchstones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, most of the field observations seem to contradict the competitive exclusion principle, being the huge biodiversity in Earth its most noticeable counterexample. This contradiction is known as the biodiversity paradox. The paradox can be carelessly (but poetically) rephrased as \textit{Why are there so many species?}
 
 %% Brief discussion about the alternative hypotheses
 \paragraph{} % Introduction and hypotheses based in non-autonomous systems
-There are several alternative hypotheses for escaping the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. 
+There are several alternative hypotheses for escaping the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. This means that time, and not only space, need to be taken into account in the definition of ecological niche. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. 
 
 \paragraph{} % Introduction of chaotic dynamics
 After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in non-constant environments \cite{Dakos2009b}.
@@ -88,7 +87,7 @@ Another hypotheses deserving attention are that of neutral competition, whose be
 %% -----
 
 \paragraph{} % Introduction to our contribution
-In the present paper we explore the links between neutral competition and the type of long term dynamics exhibited. Using weakly non-neutral models, our simulations show that the likelihood of chaos increases with neutrality at the competitors' trophic level.
+In the present paper we explore the links between neutral competition and the type of long term dynamics exhibited. Using weakly non-neutral models, our simulations show that the likelihood of chaos increases with neutrality at the competitors' trophic level. That is, that neutrality promotes chaos.
 
 \section{Methods}
 \label{sec:Methods}
@@ -250,27 +249,7 @@ Where $ A_0 $ is a purely neutral competition matrix (i.e., all its elements equ
 	\label{tab:CompetitionParameter}
 \end{figure}
 
-By choosing $ -1 $ as a lower limit for $ \epsilon $ we exclude the possibility of negative numbers in the competition matrix. This coefficients of \textit{negative competition} can be understood as a simple approach to mutualism, and we wanted to focus only in classical competition.
-
-\subsection{Detection of chaos}
-\label{subsec:DetectionOfChaos}
-Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The initial rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
-
-\paragraph{}
-Our procedure for classifying the attractors as chaotic or non-chaotic was based in the analysis of Lyapunov exponents. More specifically, this is the procedure we've followed:
-
-\begin{enumerate}
-	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory reached an attractor and the dynamics are asymptotic
-	\item \label{RunInAttractor} Use the last point of the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor
-	\item \label{PerturbedTrajectory} Use again the last point of the run in step \ref{GoToAttractor} but, this time, adding a small disturbance to it
-	\item Compare the runs in steps \ref{RunInAttractor} and \ref{PerturbedTrajectory} to compute numerically the principal Lyapunov exponent
-	\begin{itemize}
-		\item If it's positive, classify the attractor as chaotic
-		\item If it's negative, classify the attractor as non-chaotic
-	\end{itemize}
-\end{enumerate}
-
-%TODO: Big warning here: our method for detecting chaos sometimes gives false positives for complex cycles
+By choosing $ -1 $ as a lower limit for $ \epsilon $ we exclude the possibility of negative numbers in the competition matrix. This coefficients of \textit{negative competition} can be understood as a \textit{naive} approach to mutualism, and we wanted to focus only in classical competition.
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
@@ -303,8 +282,7 @@ This numerical experiment can be repeated for food webs of different sizes. In o
 
 \section{Results}
 \label{sec:Results}
-
-Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition. From the biological point of view, we show that neutrality and non-equilibrium dynamics are not completely independent. Maybe this can be a first step to reconcile both views.
+Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition. From the biological point of view, we show that neutrality and non-equilibrium asymptotic dynamics are not completely independent.
 
 \paragraph{} % Weak and strong interspecific competition
 There's another local maximum for $ \epsilon = -1 $. This means that strong intraspecific interactions also promote chaos.
@@ -313,7 +291,7 @@ There's another local maximum for $ \epsilon = -1 $. This means that strong intr
 The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one minimum between two maxima\footnote{More intuitively: there should be at least one valley between two mountains}.
 
 \paragraph{} % Chaos and dimensionality
-The overall likelihood of chaos, which can be interpreted as the area behind the curve, increases with the size of the food web. This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfil the requirements of the complex geometry of a chaotic attractor\footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point}. Even in those higher dimensional cases, a maximum is still happening at the neutral competition case.
+The overall likelihood of chaos, which can be interpreted as the area behind the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfil the requirements of the complex geometry of a chaotic attractor\footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point}. Even in those higher dimensional cases, a maximum is still happening at the neutral competition case.
 
 \begin{figure}
 	\begin{center}
@@ -331,12 +309,51 @@ The overall likelihood of chaos, which can be interpreted as the area behind the
 	\label{fig:Contour}
 \end{figure}
 
-% TODO: use conclusions and discussion. What's the difference?
-\section{Conclusions}
-\label{sec:Conclusions}
+\section{Discussion}
+\label{sec:Discussion} % Our claims
+Our model shows that the asymptotic dynamics of our model can be affected by the strength of neutrality on the competition. Particularly, the more neutral our system is, the higher are the chances of developing chaotic behaviour. Going back to the hypotheses on biodiversity mentioned in section \ref{sec:Background}, we claim this observation to be a link between the hypotheses of non-equilibrium and Hubbell's hypotheses of neutrality. Maybe this can be a first step to reconcile both views. 
+
+\paragraph{} % Limitations
+Our model is deliberately oversimplified. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to be the simplest possible realization of the expected behaviors. The need of a second trophic level (that of predators) may seem in contradiction with this pursue of simplicity, but actually this is a requirement for the effect to take place: in the absence of non-uniform predation, chaos will never develop\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labelling each species meaningless, and thus the system can be reduced just to two differential equations, the one for the total population of prey and the one for the total population of consumers. It can be proven that chaos cannot be developed in autonomous two-dimensional systems. For details, see Poincaré-Bendixson theorem}. We used the simplest predation network, that is, one with random predation coefficients. Thus, our predators can be considered generalists. A straightforward continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral), controlling with a single parameter the \textit{flavour} of the predation matrix $ S $.
+
+\paragraph{} % Chaos detection
+Regarding chaos detection, we followed as well a very simple approach: that of Lyapunov exponents analysis plus visual inspection. Numerical detection of chaos is a sub-field by itself, and we are sure there are more robust methods available. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
+
+% TODO: check that it really collapses to two dimensions
+
+\paragraph{} % The parameter epsilon
+Interestingly enough, the probability of chaos has a remarkably clear maximum for neutral competition. The position of this maximum is independent of the number of interacting species. This suggests that the parameter $ \epsilon $, originally motivated by numerical convenience, may have a biological interpretation. It will be interesting to reverse-engineer this parameter given set of community matrices validated by experimental or field observations, and check how close to zero are them.
+
+\paragraph{} % Role of symmetry
+It may be worth noting that the position of both the maxima we've found (i.e.: $ \epsilon = -1 $ and $ \epsilon = 0 $) have something in common: the community matrix $ A $ at those values of the parameter is very symmetric in both cases. It will be interesting to develop a similar method that, instead of varying neutrality, varies symmetry (a less restrictive property).
+
+\paragraph{} % Is chaos more resilient?
+Additionaly, we are implicitly assuming without a proof that chaotic ecosystems are fitter than non-chaotic ones. A possible continuation of this research may be the setting of two indepedent ecosystems, one of them chaotic and the other one non-chaotic, and allow them to interact at some point of time (simulating an invasion), in order to assess how much of each of the original ecosystems survives to this traumatic event.
+
+% TODO: count species above threshold
 
 \section{Appendix}
 \label{sec:Appendix}
+
+\subsection{Detection of chaos}
+\label{subsec:DetectionOfChaos}
+Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The initial rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
+
+\paragraph{}
+Our procedure for classifying the attractors as chaotic or non-chaotic was based in the analysis of Lyapunov exponents. More specifically, this is the procedure we've followed:
+
+\begin{enumerate}
+	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory reached an attractor and the dynamics are asymptotic
+	\item \label{RunInAttractor} Use the last point of the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor
+	\item \label{PerturbedTrajectory} Use again the last point of the run in step \ref{GoToAttractor} but, this time, adding a small disturbance to it
+	\item Compare the runs in steps \ref{RunInAttractor} and \ref{PerturbedTrajectory} to compute numerically the principal Lyapunov exponent
+	\begin{itemize}
+		\item If it's positive, classify the attractor as chaotic
+		\item If it's negative, classify the attractor as non-chaotic
+	\end{itemize}
+\end{enumerate}
+
+%TODO: Big warning here: our method for detecting chaos sometimes gives false positives for complex cycles
 
 \subsection{Neutral competition}
 \label{subsec:NeutralCompetition}
@@ -384,30 +401,6 @@ In our model, the predation interaction breaks this excess of symmetry, so we ca
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
 We thank Jelle Lever, for his useful comments and suggestions, and Sebastian Bathiany for the proofreading and suggestions.
-
-\iftoggle{personalDraft}
-{
-	\color{red}
-	\section{To do}
-	\label{sec:ToDo}
-	
-	\begin{itemize}
-	\item Send more details to the appendix?
-	\item Remove or improve the pseudocode algorithm
-	\item Clean and publish analysis code in \textit{GitHub}
-	\end{itemize}
-	
-	Further ideas, for this or future papers:
-	
-	\begin{itemize}
-	\item Neutrality in predation
-	\item Study symmetric competition with a parameter that controls symmetry
-	\item Neutrality increases symmetry as well. May this be related with the fact that, as said in \cite{Scheffer2004}, \textit{"symmetry in competition strongly promotes multiplicity of attractors"}
-	\end{itemize}
-	
-	
-	\color{black}
-}
 
 \clearpage
 
