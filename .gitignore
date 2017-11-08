@@ -10,3 +10,4 @@ notes/
 *.lnk
 *.dvi
 *.gz
+tex/build/
