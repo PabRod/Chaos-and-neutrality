@@ -8,7 +8,7 @@ for i = 1:numel(files)
     clear resultsArray;
     resultsArray = loadResults(resultsArrayLocation); 
     nSpecies(i) = sum(resultsArray{1,1}.dims);
-    [~, ~, ~, ~, summary, ~] = computeProbabilities(resultsArray);
+    [~, ~, ~, summary, ~] = computeProbabilities(resultsArray);
     summaries(i, :) = summary;
 end
 

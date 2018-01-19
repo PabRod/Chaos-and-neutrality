@@ -90,7 +90,7 @@ switch prompt
         
     case 'comparer'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
-        [~, ~, ~, ~, ~, binaryComparer] = computeProbabilities(resultsArrayLocation);
+        [~, ~, ~, ~, binaryComparer] = computeProbabilities(resultsArrayLocation);
         
         binaryResult = NaN(1,4);
         for i = 0:3
@@ -106,10 +106,9 @@ switch prompt
         ylabel('Repetition');
         colorbar;
         
-    case 'summary'
-        
+    case 'summary'        
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
-        [~, ~, ~, ~, summary, ~] = computeProbabilities(resultsArrayLocation);
+        [~, ~, ~, summary, ~] = computeProbabilities(resultsArrayLocation);
         
         area(competition_pars, summary, 'FaceColor', [254 127 127]./255);
         ylim([0,1]);

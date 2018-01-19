@@ -1,4 +1,4 @@
-function [probChaos_using_Lyaps, probChaos_using_z1, probChaos_using_z1_2, probChaos_using_visual, summary, binaryComparer] = computeProbabilities(resultsArrayLocation)
+function [probChaos_using_Lyaps, probChaos_using_z1, probChaos_using_z1_2, summary, binaryComparer] = computeProbabilities(resultsArrayLocation)
 %COMPUTEPROBABILITIES Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -12,13 +12,11 @@ resultsArray = loadResults(resultsArrayLocation);
 isChaos_Lyap = resultsAsMatrix(resultsArray, 'lyapunov');
 isChaos_z1 = resultsAsMatrix(resultsArray, 'z1');
 isChaos_z1_2 = resultsAsMatrix(resultsArray, 'z12');
-isChaos_visual = resultsAsMatrix(resultsArray, 'visual');
 
 %% Compute probabilities
 probChaos_using_Lyaps = sum(isChaos_Lyap, 1)./nreps;
 probChaos_using_z1  = sum(isChaos_z1, 1)./nreps;
 probChaos_using_z1_2  = sum(isChaos_z1_2, 1)./nreps;
-probChaos_using_visual = sum(isChaos_visual, 1)./nreps;
 
 %% Compare the results of all tests
 % Cases:
