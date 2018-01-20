@@ -80,9 +80,9 @@ for row = 1:nExperiments
                 results.compMatrix = A;
                 
                 %% Reach the attractor
-                opts = odeset('RelTol', 1e-4, 'AbsTol', 1e-8);
+                opts = odeset('RelTol', 1e-4, 'AbsTol', 1e-5);
                 y0 = rand(1, nPreds+nPreys) + 1;
-                [t_out, y_out] = ode45(@(t,y) RosMac(t, y, params), [0 stabilTime], y0, opts);
+                [~, y_out] = ode45(@(t,y) RosMac(t, y, params), [0 stabilTime], y0, opts);
                 
                 %% Find a solution inside the attractor
                 tSpan = linspace(0, runTime, timeSteps);
@@ -93,7 +93,7 @@ for row = 1:nExperiments
                 results.timeseries.ts = t_out;
                 
                 %% Perform tests for chaos
-                results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, params), linspace(0, lyapTime, timeSteps), y0, lyapPert.*ones(1, nPreys+nPreds), true);
+                results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, params), linspace(0, lyapTime, 150), y0, lyapPert.*ones(1, nPreys+nPreds), true);
                 
                 %% Store in array
                 resultsArray{rep, compStep} = results;
@@ -131,20 +131,20 @@ for row = 1:nExperiments
         
         
         % Clean temporary results
-        filename = char(strcat(output_folder, id, '_temp', '.mat'));
-        recycle('on');
-        delete(filename);
+%         filename = char(strcat(output_folder, id, '_temp', '.mat'));
+%         recycle('on');
+%         delete(filename);
         
         %% Plot results
         fprintf('\n Creating figures.');
         
-        figure;
-        subplot(3, 1, 1);
-        createFigures(resultsArray, 'maxLyaps');
-        subplot(3, 1, 2);
-        createFigures(resultsArray, 'maxLyapsFiltered');
-        subplot(3, 1, 3);
-        createFigures(resultsArray, 'probabilities');
+%         figure;
+%         subplot(3, 1, 1);
+%         createFigures(resultsArray, 'maxLyaps');
+%         subplot(3, 1, 2);
+%         createFigures(resultsArray, 'maxLyapsFiltered');
+%         subplot(3, 1, 3);
+%         createFigures(resultsArray, 'probabilities');
         
         figure;
         subplot(2, 1, 1);
