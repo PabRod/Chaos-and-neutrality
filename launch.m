@@ -8,16 +8,17 @@ experiments_table_location = 'io/input_personal.csv';
 tab = loadExperimentsTable(experiments_table_location);
 
 % Some parameters are fixed
-params.e = 0.6;
-params.g = 0.4;
-params.H = 2;
-params.f = 1e-5;
-params.K = 10;
-params.l = 0.15;
 params.r = 0.5;
+params.K = 10;
+params.g = 0.4;
+params.f = 1e-5;
+params.e = 0.6;
+params.H = 2;
+params.l = 0.15;
+
 
 %% Perform each experiment
-[nExperiments, ~] = size(tab);
+[nExperiments, ~] = size(tab); % One experiment per row
 
 for row = 1:nExperiments
     
@@ -30,15 +31,33 @@ for row = 1:nExperiments
         % structure. In case of error, it moves to the next case instead
         % of interrupting the execution of the rest of the script
         
-        %% Parse experiment data
-        [id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars, results_folder, timeseries_folder] = parseExperimentParameters(tab, row);
+        %% Parse experiment data (see details below)
+        pars = parseExperimentParameters(tab, row);
+        
+        % ---- Practical info ----
+        id = pars.id; % Experiment id
+        active = pars.active; % Is an active experiment?
+        results_folder = pars.results_folder; % Output folder for storing results
+        timeseries_folder = pars.timeseries_folder; % Output folder for storing time series
+        
+        % ---- Numerical info ----
+        nPreys = pars.nPreys; % Number of prey species
+        nPreds = pars.nPreds; % Number of predator species
+        runTime = pars.runTime; % Time length of the time series
+        stabilTime = pars.stabilTime; % Stabilization time (time to reach the attractor)
+        timeSteps = pars.timeSteps; % Time steps in the time series
+        lyapTime = pars.lyapTime; % Time used to estimate the maximum Lyapunov exponent
+        lyapPert = pars.lyapPert; % Initial perturbation used to estimate the maximum Lyapunov exponent
+        reps = pars.reps; % Number of repetitions of this experiment
+        compPars = pars.compPars; % Competition parameters to generate competition matrix (see paper)
+        
         
         %% If the experiment is inactive, ignore it and execute the next in table
         if ~active
             continue;
         end
         
-        %% Print current work
+        %% Print information about current experiment
         fprintf('\n \n Job: %s. \n Simulating.', id);
         
         %% Fix experiment parameters
@@ -60,9 +79,7 @@ for row = 1:nExperiments
                 Prey = rand(nPreys, 1) + 1;
                 Pred = rand(nPreds, 1) + 1;
                 
-                %% Set variable parameters
-                S = rand(nPreds, nPreys);
-                
+                %% Set variable parameters                
                 params.A = competitionMatrix(nPreys, compPars(compStep), 'moving_window', 0.2);
                 params.S = rand(nPreds, nPreys);
                 

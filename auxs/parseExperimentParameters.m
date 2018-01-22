@@ -1,4 +1,4 @@
-function [id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars, output_folder, timeseries_folder] = parseExperimentParameters(table, row)
+function pars = parseExperimentParameters(table, row)
 %PARSEEXPERIMENT Generates all the required parameters for running a given
 %experiment using a table as an input
 %
@@ -12,18 +12,18 @@ function [id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, 
 
 %% Read the straightforward information
 % That is, everything but compPars
-id = string(table.id(row));
-active = table.active(row);
-nPreys = table.nPreys(row);
-nPreds = table.nPreds(row);
-runTime = table.simTime(row);
-stabilTime = table.stabilTime(row);
-timeSteps = table.steps(row);
-lyapTime = table.lyapTime(row);
-lyapPert = table.lyapPert(row);
-reps = table.reps(row);
-output_folder = char(table.results_folder(row));
-timeseries_folder = char(table.timeseries_folder(row));
+pars.id = string(table.id(row));
+pars.active = table.active(row);
+pars.nPreys = table.nPreys(row);
+pars.nPreds = table.nPreds(row);
+pars.runTime = table.simTime(row);
+pars.stabilTime = table.stabilTime(row);
+pars.timeSteps = table.steps(row);
+pars.lyapTime = table.lyapTime(row);
+pars.lyapPert = table.lyapPert(row);
+pars.reps = table.reps(row);
+pars.results_folder = char(table.results_folder(row));
+pars.timeseries_folder = char(table.timeseries_folder(row));
 
 %% Read compPars and generate competition parameters
 % The table entry for compPars is a string used for generating the
@@ -38,6 +38,6 @@ pStep1 = compParsGenerator(2);
 pMid = compParsGenerator(3);
 pStep2 = compParsGenerator(4);
 pEnd = compParsGenerator(5);
-compPars = cat(2, pStart:pStep1:pMid, pMid+pStep2:pStep2:pEnd);
+pars.compPars = cat(2, pStart:pStep1:pMid, pMid+pStep2:pStep2:pEnd);
 
 end
