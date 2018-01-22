@@ -1,6 +1,7 @@
 function dydt = RosMac(t, y, params)
 %ROSMAC Represents a generalized Rosenzweig-MacArthur predator-prey model
-%   Detailed explanation goes here
+%   Returns a vector function handle @dydt ready to be integrated in 
+%   solvers like ode45
 
 %% Read parameters
 A = params.A; % Competition matrix
@@ -24,10 +25,10 @@ V = @(y) S*Prey(y);
 C = @(y) g.*diag(Pred(y))*V(y)./(V(y) + H);
 
 %% Dynamics
-% The first elements of the vector represent the prey
+% The first elements of the vector represent the prey populations
 dydt(1:nPreys, 1) = (r.*diag(Prey(y)))*(K - A*Prey(y))./K - diag(Prey(y))*S'*(C(y)./V(y)) + f;
 
-% The last elements of the vector represent the predator
+% The last elements of the vector represent the predator populations
 dydt(nPreys+1:nPreys+nPreds, 1) = e.*C(y) - l.*Pred(y);
 
 end

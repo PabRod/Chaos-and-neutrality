@@ -4,9 +4,7 @@ clear;
 clc;
 
 %% Configuration
-input_folder = 'io\';
-output_folder = 'io\';
-experiments_table = 'input.csv';
+load('config.mat', 'experiments_table', 'input_folder', 'results_folder', 'timeseries_folder');
 
 %% Import the table containing the parameters of all experiments
 tab = loadExperimentsTable(strcat(input_folder, experiments_table));
@@ -125,7 +123,7 @@ for row = 1:nExperiments
         %% Save results
         % This file contains the time series and the results of the
         % analysis
-        filename = char(strcat(output_folder, id, '.mat'));
+        filename = char(strcat(results_folder, id, '.mat'));
         fprintf('\n Saving results.');
         save(filename, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
         
@@ -164,7 +162,7 @@ for row = 1:nExperiments
         
         fprintf('\n Error: %s', me.message);
         
-        filename = char(strcat(output_folder, id, '_error', '.mat'));
+        filename = char(strcat(results_folder, id, '_error', '.mat'));
         resultsArray = me.identifier;
         save(filename, 'resultsArray');
         
