@@ -4,7 +4,7 @@ clear;
 clc;
 
 %% Load experiments table
-experiments_table_location = 'io/input.csv';
+experiments_table_location = 'io/input_personal.csv';
 tab = loadExperimentsTable(experiments_table_location);
 
 % Some parameters are fixed
@@ -62,17 +62,12 @@ for row = 1:nExperiments
                 
                 %% Set variable parameters
                 S = rand(nPreds, nPreys);
-                %                 A = ones(nPreys) + compPars(compStep).*RandCustom([nPreys, nPreys], [0 1], 'uniform');
-                A = ones(nPreys) + RandCustom([nPreys, nPreys], [compPars(compStep) - 0.1, compPars(compStep) + 0.1], 'uniform');
-                A(A >= 2) = 2;
-                A(A <=0) = 0;
-                A(logical(eye(nPreys))) = 1; % Keep ones in the diagonal
                 
-                params.A = A;
-                params.S = S;
+                params.A = competitionMatrix(nPreys, compPars(compStep), 'moving_window', 0.2);
+                params.S = rand(nPreds, nPreys);
                 
-                results.predMatrix = S;
-                results.compMatrix = A;
+                results.predMatrix = params.S;
+                results.compMatrix = params.A;
                 
                 %% Reach the attractor
                 opts = odeset('RelTol', 1e-4, 'AbsTol', 1e-5);
