@@ -7,10 +7,8 @@ clc;
 experiments_table_location = 'io/input_personal.csv';
 tab = loadExperimentsTable(experiments_table_location);
 
-
 %% Perform each experiment
 [nExperiments, ~] = size(tab); % One experiment per row
-
 for row = 1:nExperiments
     
     % Set random seed for the sake of reproducibility
@@ -44,7 +42,7 @@ for row = 1:nExperiments
         l = pars.l; % Loss rate
         compPars = pars.compPars; % Competition parameters to generate competition matrix (see paper)
         
-        % ---- Numerical info ----
+        % ---- Simulation info ----
         runTime = pars.runTime; % Time length of the time series
         stabilTime = pars.stabilTime; % Stabilization time (time to reach the attractor)
         timeSteps = pars.timeSteps; % Time steps in the time series
@@ -61,8 +59,9 @@ for row = 1:nExperiments
         %% Print information about current experiment
         fprintf('\n \n Job: %s. \n Simulating.', id);
         
-        %% Fix experiment parameters
-        % Create the results object
+        %% Create the results object
+        % The results object stores all the information about the results
+        % of the current run
         results.id = id;
         results.dims = [nPreys, nPreds];
         results.stabiltime = stabilTime;
@@ -74,14 +73,14 @@ for row = 1:nExperiments
         for compStep = 1:compSteps % Iterate for different neutrality strengths
             results.competition_par = compPars(compStep);
             for rep = 1:reps
-                % Some of the parameters are randomly drawn. Run repeteadly in order to apply some statistics
+                % Some of the parameters are randomly drawn. This allows us
+                % to run several times the "same" experiment, in order to
+                % perform statistical analysis afterwards.
                 
-                %% Set random initial conditions
-                Prey = rand(nPreys, 1) + 1;
-                Pred = rand(nPreds, 1) + 1;
-                
-                %% Set variable parameters                
-                pars.A = competitionMatrix(nPreys, compPars(compStep), 'moving_window', 0.2);
+                %% Set variable parameters
+                mode = 'moving_window';
+                window_width = 0.2;
+                pars.A = competitionMatrix(nPreys, compPars(compStep), mode, window_width);
                 pars.S = rand(nPreds, nPreys);
                 
                 results.predMatrix = pars.S;
