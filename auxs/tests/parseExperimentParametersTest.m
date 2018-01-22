@@ -3,7 +3,7 @@ absTol = 1e-12;
 
 %% Read table, first row
 tab = loadExperimentsTable('mockInput.csv');
-[id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars] = parseExperimentParameters(tab, 1);
+[id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars, results_folder, timeseries_folder] = parseExperimentParameters(tab, 1);
 
 assert(strcmp('first', id));
 assert(active);
@@ -15,6 +15,8 @@ assert(timeSteps == 3000);
 assert(lyapTime == 100);
 assert(abs(lyapPert - 1e-8) < absTol);
 assert(reps == 50);
+assert(strcmp('io/', results_folder));
+assert(strcmp('io/', timeseries_folder));
 
 expectedCompPars = cat(2, -1:0.1:0, 0.25:0.25:1);
 for i = 1:numel(expectedCompPars)
@@ -23,7 +25,7 @@ end
 
 %% Read table, second row
 tab = loadExperimentsTable('mockInput.csv');
-[id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars] = parseExperimentParameters(tab, 2);
+[id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars, results_folder, timeseries_folder] = parseExperimentParameters(tab, 2);
 
 assert(strcmp('second', id));
 assert(~active);
@@ -35,6 +37,8 @@ assert(timeSteps == 2000);
 assert(lyapTime == 150);
 assert(abs(lyapPert - 0.01) < absTol);
 assert(reps == 3);
+assert(strcmp('io/', results_folder));
+assert(strcmp('io/ts/', timeseries_folder));
 
 expectedCompPars = cat(2, -1:0.1:0, 0.2:0.2:1);
 for i = 1:numel(expectedCompPars)

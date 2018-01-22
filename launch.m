@@ -3,16 +3,21 @@ close all;
 clear;
 clc;
 
-%% Configuration
-load('config.mat', 'experiments_table', 'input_folder', 'results_folder', 'timeseries_folder');
+%% Load experiments table
+experiments_table_location = 'io/input.csv';
+tab = loadExperimentsTable(experiments_table_location);
 
-%% Import the table containing the parameters of all experiments
-tab = loadExperimentsTable(strcat(input_folder, experiments_table));
+% Some parameters are fixed
+params.e = 0.6;
+params.g = 0.4;
+params.H = 2;
+params.f = 1e-5;
+params.K = 10;
+params.l = 0.15;
+params.r = 0.5;
 
 %% Perform each experiment
 [nExperiments, ~] = size(tab);
-% use('io/experiment.ini'); % TODO: don't use GRIND
-clc;
 
 for row = 1:nExperiments
     
@@ -22,19 +27,11 @@ for row = 1:nExperiments
     
     try
         % The numerical experiment is kept inside a try - catch - end
-        % structure. So, in case of error, it moves to the next case instead
+        % structure. In case of error, it moves to the next case instead
         % of interrupting the execution of the rest of the script
         
         %% Parse experiment data
-        [id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars] = parseExperimentParameters(tab, row);
-        
-        params.e = 0.6;
-        params.g = 0.4;
-        params.H = 2;
-        params.f = 1e-5;
-        params.K = 10;
-        params.l = 0.15;
-        params.r = 0.5;
+        [id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars, results_folder, timeseries_folder] = parseExperimentParameters(tab, row);
         
         %% If the experiment is inactive, ignore it and execute the next in table
         if ~active
@@ -59,7 +56,7 @@ for row = 1:nExperiments
             for rep = 1:reps
                 % Some of the parameters are randomly drawn. Run repeteadly in order to apply some statistics
                 
-                %% Set initial conditions
+                %% Set random initial conditions
                 Prey = rand(nPreys, 1) + 1;
                 Pred = rand(nPreds, 1) + 1;
                 
@@ -84,14 +81,14 @@ for row = 1:nExperiments
                 
                 %% Find a solution inside the attractor
                 tSpan = linspace(0, runTime, timeSteps);
-                y0 = y_out(end, :);
-                [t_out, y_out] = ode45(@(t,y) RosMac(t, y, params), tSpan, y0, opts);
+                y_attr = y_out(end, :);
+                [t_out, y_out] = ode45(@(t,y) RosMac(t, y, params), tSpan, y_attr, opts);
                 
                 results.timeseries.ys = y_out;
                 results.timeseries.ts = t_out;
                 
                 %% Perform tests for chaos
-                results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, params), linspace(0, lyapTime, 150), y0, lyapPert.*ones(1, nPreys+nPreds), true);
+                results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, params), linspace(0, lyapTime, 150), y_attr, lyapPert.*ones(1, nPreys+nPreds), true);
                 
                 %% Store in array
                 resultsArray{rep, compStep} = results;

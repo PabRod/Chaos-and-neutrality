@@ -27,6 +27,7 @@ opts.Delimiter = ';';
 opts.Encoding = 'UTF-8';
 opts = setvartype(opts, {'nPreys', 'nPreds', 'simTime', 'stabilTime', 'steps', 'lyapTime', 'reps'}, 'double');
 opts = setvartype(opts, {'id', 'compPars'}, 'string');
+opts = setvartype(opts, {'results_folder', 'timeseries_folder'}, 'char');
 opts = setvartype(opts, {'active'}, 'logical');
 
 %% Import

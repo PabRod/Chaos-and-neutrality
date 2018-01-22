@@ -1,4 +1,4 @@
-function [id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars] = parseExperimentParameters(table, row)
+function [id, active, nPreys, nPreds, runTime, stabilTime, timeSteps, lyapTime, lyapPert, reps, compPars, output_folder, timeseries_folder] = parseExperimentParameters(table, row)
 %PARSEEXPERIMENT Generates all the required parameters for running a given
 %experiment using a table as an input
 %
@@ -22,6 +22,8 @@ timeSteps = table.steps(row);
 lyapTime = table.lyapTime(row);
 lyapPert = table.lyapPert(row);
 reps = table.reps(row);
+output_folder = char(table.results_folder(row));
+timeseries_folder = char(table.timeseries_folder(row));
 
 %% Read compPars and generate competition parameters
 % The table entry for compPars is a string used for generating the

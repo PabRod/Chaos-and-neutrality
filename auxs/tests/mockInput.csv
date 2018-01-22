@@ -1,4 +1,4 @@
 sep=;
-id;active;nPreys;nPreds;simTime;stabilTime;steps;lyapTime;lyapPert;reps;compPars
-first;true;6;4;1000;1000;3000;100;1e-8;50;-1 0.1 0 0.25 1
-second;false;5;3;2000;2500;2000;150;0.01;3;-1 0.1 0 0.2 1
+id;active;nPreys;nPreds;simTime;stabilTime;steps;lyapTime;lyapPert;reps;compPars;results_folder;timeseries_folder
+first;true;6;4;1000;1000;3000;100;1e-8;50;-1 0.1 0 0.25 1;io/;io/
+second;false;5;3;2000;2500;2000;150;0.01;3;-1 0.1 0 0.2 1;io/;io/ts/
