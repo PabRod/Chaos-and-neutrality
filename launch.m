@@ -7,15 +7,6 @@ clc;
 experiments_table_location = 'io/input_personal.csv';
 tab = loadExperimentsTable(experiments_table_location);
 
-% Some parameters are fixed
-params.r = 0.5;
-params.K = 10;
-params.g = 0.4;
-params.f = 1e-5;
-params.e = 0.6;
-params.H = 2;
-params.l = 0.15;
-
 
 %% Perform each experiment
 [nExperiments, ~] = size(tab); % One experiment per row
@@ -40,16 +31,26 @@ for row = 1:nExperiments
         results_folder = pars.results_folder; % Output folder for storing results
         timeseries_folder = pars.timeseries_folder; % Output folder for storing time series
         
-        % ---- Numerical info ----
+        % ---- Model info ----
         nPreys = pars.nPreys; % Number of prey species
         nPreds = pars.nPreds; % Number of predator species
+        
+        r = pars.r; % Prey growth ratio
+        K = pars.K; % Prey carrying capacity
+        g = pars.g; % Predation rate
+        f = pars.f; % Immigration rate
+        e = pars.e; % Assimilation efficiency
+        H = pars.H; % Half-saturation constant
+        l = pars.l; % Loss rate
+        compPars = pars.compPars; % Competition parameters to generate competition matrix (see paper)
+        
+        % ---- Numerical info ----
         runTime = pars.runTime; % Time length of the time series
         stabilTime = pars.stabilTime; % Stabilization time (time to reach the attractor)
         timeSteps = pars.timeSteps; % Time steps in the time series
         lyapTime = pars.lyapTime; % Time used to estimate the maximum Lyapunov exponent
         lyapPert = pars.lyapPert; % Initial perturbation used to estimate the maximum Lyapunov exponent
         reps = pars.reps; % Number of repetitions of this experiment
-        compPars = pars.compPars; % Competition parameters to generate competition matrix (see paper)
         
         
         %% If the experiment is inactive, ignore it and execute the next in table
@@ -80,27 +81,27 @@ for row = 1:nExperiments
                 Pred = rand(nPreds, 1) + 1;
                 
                 %% Set variable parameters                
-                params.A = competitionMatrix(nPreys, compPars(compStep), 'moving_window', 0.2);
-                params.S = rand(nPreds, nPreys);
+                pars.A = competitionMatrix(nPreys, compPars(compStep), 'moving_window', 0.2);
+                pars.S = rand(nPreds, nPreys);
                 
-                results.predMatrix = params.S;
-                results.compMatrix = params.A;
+                results.predMatrix = pars.S;
+                results.compMatrix = pars.A;
                 
                 %% Reach the attractor
                 opts = odeset('RelTol', 1e-4, 'AbsTol', 1e-5);
                 y0 = rand(1, nPreds+nPreys) + 1;
-                [~, y_out] = ode45(@(t,y) RosMac(t, y, params), [0 stabilTime], y0, opts);
+                [~, y_out] = ode45(@(t,y) RosMac(t, y, pars), [0 stabilTime], y0, opts);
                 
                 %% Find a solution inside the attractor
                 tSpan = linspace(0, runTime, timeSteps);
                 y_attr = y_out(end, :);
-                [t_out, y_out] = ode45(@(t,y) RosMac(t, y, params), tSpan, y_attr, opts);
+                [t_out, y_out] = ode45(@(t,y) RosMac(t, y, pars), tSpan, y_attr, opts);
                 
                 results.timeseries.ys = y_out;
                 results.timeseries.ts = t_out;
                 
                 %% Perform tests for chaos
-                results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, params), linspace(0, lyapTime, 150), y_attr, lyapPert.*ones(1, nPreys+nPreds), true);
+                results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, lyapPert.*ones(1, nPreys+nPreds), true);
                 
                 %% Store in array
                 resultsArray{rep, compStep} = results;
