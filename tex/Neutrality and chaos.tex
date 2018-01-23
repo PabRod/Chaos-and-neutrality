@@ -83,7 +83,7 @@ After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equili
 All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.
 
 \paragraph{} % Introduction of the neutral theory TODO: citations
-Another hypotheses deserving attention are that of neutral competition, whose better known exponent is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. In neutral models, similar species inside an ecological community are assumed to have identical \textit{per capita} rates of birth, rate, reproduction, etc. In those models, the long term differences between species are a result of random events. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees.
+Another hypotheses deserving attention are that of neutral competition, whose better known exponent is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. In neutral models, similar species inside an ecological community are assumed to have identical \textit{per capita} rates of birth, death, reproduction, etc. In those models, the long term differences between species are a result of random events. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees.
 %% -----
 
 \paragraph{} % Introduction to our contribution
@@ -192,19 +192,19 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 			\textbf{Symbol} & \textbf{Interpretation} & \textbf{Value} & \textbf{Units} \\
 			\hline
 			$r$ & Growth rate & $0.50$ & $d^{-1}$ \\
+		    \hline
+			$K$ & Carrying capacity & $1.00$ & $ mg \ l^{-1} $ \\
 			\hline
 			$g$ & Predation rate & $0.40$ & $d^{-1}$\\
 			\hline
-			$l$ & Loss rate & $0.15$ & $d^{-1}$\\
+			$f$ & Immigration rate & $10^{-5}$ & $mg \ l^{-1} \ d^{-1}$\\
 			\hline
-			$K$ & Carrying capacity & $1.00$ & $ mg \ l^{-1} $ \\
+			$e$ & Assimilation efficiency & $0.60$ & $1$\\
 			\hline
 			$H$ & Half-saturation constant & $2.00$ & $ mg \ l^{-1} $\\
+		    \hline
+			$l$ & Loss rate & $0.15$ & $d^{-1}$\\
 			\hline
-			$f$ & Immigration rate & $10^{-5}$ & $mg \ l^{-1} \ d^{-1}$\\
-		    \hline
-			$e$ & Assimilation efficiency & $0.60$ & $1$\\
-		    \hline
 		    $S$ & $ n_C \times n_P $ palatability matrix & $S_{ij} \sim (0,1)$ & $1$\\
 		    \hline
    		    $A$ & $ n_P \times n_P $ competition matrix & See section \ref{subsec:CompetitionParameter} & $1$\\
