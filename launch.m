@@ -101,6 +101,7 @@ for row = 1:nExperiments
                 
                 %% Perform tests for chaos
                 results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, lyapPert.*ones(1, nPreys+nPreds), true);
+                % TODO: try results.maxLyapunov = calclyap();
                 
                 %% Store in array
                 resultsArray{rep, compStep} = results;
@@ -108,24 +109,16 @@ for row = 1:nExperiments
             end
         end
         
-        %% Save preliminary results
-        % This file contains the timeseries
-        %         filename = char(strcat(output_folder, id, '_temp', '.mat'));
-        %         fprintf('\n Saving time series.');
-        %         save(filename, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
-        
         %% Analyze results
         fprintf('\n Analyzing.');
         resultsArray = performChaosTests(resultsArray);
         
         %% Remove the heavy parts
+        % The time series are very heavy. Here we remove them
         for i = 1:size(resultsArray, 1)
             for j = 1:size(resultsArray, 2)
-                resultsArray{i,j}.timeseries = NaN;
-                resultsArray{i,j}.predMatrix = NaN;
-                resultsArray{i,j}.compMatrix = NaN;
-                
-                % TODO: use rmfield
+                resultsArray{i,j} = rmfield(resultsArray{i,j}, {'timeseries', 'predMatrix', 'compMatrix'});
+                % TODO: keep matrices
             end
         end
         
@@ -136,22 +129,8 @@ for row = 1:nExperiments
         fprintf('\n Saving results.');
         save(filename, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
         
-        
-        % Clean temporary results
-%         filename = char(strcat(output_folder, id, '_temp', '.mat'));
-%         recycle('on');
-%         delete(filename);
-        
         %% Plot results
         fprintf('\n Creating figures.');
-        
-%         figure;
-%         subplot(3, 1, 1);
-%         createFigures(resultsArray, 'maxLyaps');
-%         subplot(3, 1, 2);
-%         createFigures(resultsArray, 'maxLyapsFiltered');
-%         subplot(3, 1, 3);
-%         createFigures(resultsArray, 'probabilities');
         
         figure;
         subplot(2, 1, 1);
