@@ -1,5 +1,29 @@
-function contourFig(files)
+function contourFig(varargin)
 
+%% Input control
+switch nargin
+    
+    case 0 % Take all .mat files in folder
+        filesInfo = dir('*.mat');
+        
+        % Sort by date
+        [~, idx] = sort([filesInfo.datenum]);
+        filesInfo = filesInfo(idx);
+        
+        % Create the files list in the expected format
+        files = cell(1, numel(filesInfo));
+        for i = 1:numel(filesInfo)
+            files{i} = filesInfo(i).name;
+        end
+        
+    case 1 % Take specified files
+        files = varargin{1};
+        
+    otherwise
+        error('Wrong number of inputs');
+end
+
+%% Extract information
 competition_pars = resultsAsMatrix(files{1}, 'competition_par');
 summaries = NaN(numel(files), numel(competition_pars));
 nSpecies = NaN(1, numel(files));
