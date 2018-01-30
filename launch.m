@@ -87,9 +87,9 @@ for row = 1:nExperiments
                 results.compMatrix = pars.A;
                 
                 %% Reach the attractor
-                opts = odeset('RelTol', 1e-4, 'AbsTol', 1e-5);
+                opts = odeset('RelTol', 5e-5, 'AbsTol', 1e-7);
                 y0 = rand(1, nPreds+nPreys) + 1;
-                [~, y_out] = ode45(@(t,y) RosMac(t, y, pars), [0 stabilTime], y0, opts);
+                [~, y_out] = ode45(@(t,y) RosMac(t, y, pars), [0, stabilTime/2, stabilTime], y0, opts);
                 
                 %% Find a solution inside the attractor
                 tSpan = linspace(0, runTime, timeSteps);
@@ -100,8 +100,12 @@ for row = 1:nExperiments
                 results.timeseries.ts = t_out;
                 
                 %% Perform tests for chaos
-                results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, lyapPert.*ones(1, nPreys+nPreds), true);
-                % TODO: try results.maxLyapunov = calclyap();
+                % results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, lyapPert.*ones(1, nPreys+nPreds), true);
+                                
+                [ts_lyap, ys_lyap_1] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, opts); %TODO: re-use previous run
+                [~, ys_lyap_2] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr + lyapPert.*ones(1, nPreys+nPreds), opts);
+
+                [results.maxLyapunov, b, dist, nhorizon] = calclyap(ts_lyap, ys_lyap_1, ys_lyap_2);
                 
                 %% Store in array
                 resultsArray{rep, compStep} = results;
