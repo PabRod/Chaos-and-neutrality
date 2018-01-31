@@ -1,13 +1,25 @@
+## Latex build files
 *.aux
 *.bbl
 *.blg
 *.lof
 *.lot
 *.toc
-tex/Neutrality and chaos.pdf
-img/
+tex/build/
+
+## Figures
+*.png
+*.svg
+*.fig
+
+## Exclude notes
 notes/
+
+## Python temporary files
+img/code/__pycache__/
+img/code/.ipynb_checkpoints/
+
+## Other undesired extensions
 *.lnk
 *.dvi
 *.gz
-tex/build/
