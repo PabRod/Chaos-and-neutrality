@@ -18,3 +18,19 @@ def competition_matrix(N, p, mode='stretching_window', w=0.1):
         return A
     else:
         error()
+
+def import_timeseries(filename):
+    import scipy.io as sio
+
+    dict = sio.loadmat(filename)
+    y_out = dict['y_out']
+    t_out = dict['t_out']
+
+    return (y_out, t_out)
+
+def plot_imported_timeseries(filename):
+    import matplotlib as plt
+    
+    (y_out, t_out) = import_timeseries(filename)
+
+    plt.plot(t_out, y_out)

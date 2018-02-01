@@ -12,6 +12,9 @@ tex/build/
 *.svg
 *.fig
 
+## Matlab files
+*.asv
+
 ## Exclude notes
 notes/
 
