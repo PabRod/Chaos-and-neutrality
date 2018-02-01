@@ -32,10 +32,13 @@ params = struct('A', A, 'S', S, 'e', e, ...
                 'g', g, 'H', H, 'f', f, ...
                 'K', K, 'l', l, 'r', r);
 
-%% Solve differential equation
-simTime = 5000;
-opts = odeset('RelTol', 1e-5, 'AbsTol', 1e-9);
+%% Solving parameters
+simTime = 10000;
 y0 = 0.3*rand(1, dims);
+            
+%% Solve differential equation
+opts = odeset('RelTol', 1e-5, 'AbsTol', 1e-9);
+
 [t_out, y_out] = ode45(@(t,y) RosMac(t, y, params), [0 simTime], y0, opts);
 
 %% Plot
