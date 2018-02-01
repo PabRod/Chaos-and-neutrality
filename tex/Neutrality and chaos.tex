@@ -171,12 +171,11 @@ Putting all together, the dynamical system reads:
 
 Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding with a different type of attractor (see figure \ref{fig:TimeSeries}). The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilising nor giving rise to periodicity.
 
-% TODO: remove "complex" cyclic attractor
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=.7\columnwidth]{time_series.png}
+		\includegraphics[width=1\columnwidth]{ts.png}
 	\end{center}
-	\caption{Time series of the species composition. First figure shows a stable attractor. The second one, a cyclic attractor. The third corresponds to a chaotic attractor.}
+	\caption{Our model generates time series of the population of each species. This time series can be classified in 3 types depending on their asymptotic behavior: \textit{stable}, \textit{periodic} and \textit{chaotic}. In \textbf{figure A}, the system reaches a stable attractor after an initial transient. In \textbf{figure B}, a periodic attractor, with an approximate period of 1000 days, is reached after the transient vanishes. The system in \textbf{figure C} never reaches a stable nor a cyclic attractor, but a chaotic one.}
 	\label{fig:TimeSeries}
 \end{figure}
 
@@ -207,7 +206,7 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 			\hline
 		    $S$ & $ n_C \times n_P $ palatability matrix & $S_{ij} \sim (0,1)$ & $1$\\
 		    \hline
-   		    $A$ & $ n_P \times n_P $ competition matrix & See section \ref{subsec:CompetitionParameter} & $1$\\
+   		    $A$ & $ n_P \times n_P $ competition matrix & See section \ref{subsubsec:CompetitionParameter} & $1$\\
 		    \hline
 		\end{tabular}}
 	\end{center}
@@ -215,10 +214,10 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 	\label{tab:Parameters}
 \end{figure}
 
-\subsection{Competition parameter}
-\label{subsec:CompetitionParameter}
+\subsubsection{Competition parameter}
+\label{subsubsec:CompetitionParameter}
 
-Our aim is to analyse the behaviour of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. In order to quantify neutrality and controlling the \textit{flavour} of the competition, we introduce the competition parameter $ \epsilon $. This dimensionless parameter will allow us to vary continuously from interactions where intraspecific competition is stronger that interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where none of the intra non interspecific competition is dominant, represents neutral competition (see figure \ref{tab:CompetitionParameter}). The higher the absolute value of $\epsilon$, the less neutral our model is.
+Our aim is to analyse the behaviour of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. In order to quantify neutrality and controlling the \textit{flavour} of the competition, we introduce the competition parameter $ \epsilon $. This dimensionless parameter will allow us to vary continuously from interactions where intraspecific competition is stronger that interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where none of the intra non interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}). The higher the absolute value of $\epsilon$, the less neutral our model is.
 
 \paragraph{}
 The numerical implementation of these ideas can be easily achieved by building a competition matrix like this:
@@ -228,25 +227,33 @@ The numerical implementation of these ideas can be easily achieved by building a
 	A(\epsilon) = A_0 + \epsilon \cdot W
 \end{eqnarray}
 
-Where $ A_0 $ is a purely neutral competition matrix (i.e., all its elements equal $ 1 $) and $ W $ is a random matrix whose non-diagonal elements have been drawn from a uniform distribution bounded to the interval $ [0, 1] $, and whose diagonal elements are zero. This way, we make sure that the diagonal elements of $ A $ are $ 1 $ in all cases (see figure \ref{tab:CompetitionParameter}).
+Where $ A_0 $ is a purely neutral competition matrix (i.e., all its elements equal $ 1 $) and $ W $ is a random matrix whose non-diagonal elements have been drawn from a uniform distribution bounded to the interval $ [0, 1] $, and whose diagonal elements are zero. This way, we make sure that the diagonal elements of $ A $ are $ 1 $ in all cases (see figure \ref{fig:CompetitionParameter}).
+
+%\begin{figure}[H]
+%	\begin{center}
+%		\resizebox{\columnwidth}{!}{%
+%		\begin{tabular}{|c|c|c|}
+%			\hline 
+%			\textbf{Parameter value} & \textbf{Dominant competition} & \textbf{Example of competition matrix} \\
+%			\hline 
+%			$-1 < \epsilon < 0$ & Intraspecific & $ A = \begin{bmatrix} 1&.2&.3\\ .3&1&.4 \\ .5&.4&1\end{bmatrix} $ \\ 
+%			\hline 
+%			$\epsilon = 0$ & None (neutral) & $A = \begin{bmatrix} 1&1&1\\ 1&1&1 \\ 1&1&1\end{bmatrix}$ \\ 
+%			\hline 
+%			$\epsilon > 0$ & Interspecific & $A = \begin{bmatrix} 1&1.7&1.6\\ 1.9&1&1.5 \\ 1.8&1.6&1\end{bmatrix}$ \\ 
+%			\hline 
+%		\end{tabular}}
+%	\end{center}
+%	\caption{Effect of the competition parameter on the competition matrix}	
+%	\label{tab:CompetitionParameter}
+%\end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\resizebox{\columnwidth}{!}{%
-		\begin{tabular}{|c|c|c|}
-			\hline 
-			\textbf{Parameter value} & \textbf{Dominant competition} & \textbf{Example of competition matrix} \\
-			\hline 
-			$-1 < \epsilon < 0$ & Intraspecific & $ A = \begin{bmatrix} 1&.2&.3\\ .3&1&.4 \\ .5&.4&1\end{bmatrix} $ \\ 
-			\hline 
-			$\epsilon = 0$ & None (neutral) & $A = \begin{bmatrix} 1&1&1\\ 1&1&1 \\ 1&1&1\end{bmatrix}$ \\ 
-			\hline 
-			$\epsilon > 0$ & Interspecific & $A = \begin{bmatrix} 1&1.7&1.6\\ 1.9&1&1.5 \\ 1.8&1.6&1\end{bmatrix}$ \\ 
-			\hline 
-		\end{tabular}}
+		\includegraphics[width=1\columnwidth]{epsilon_all.png}
 	\end{center}
-	\caption{Effect of the competition parameter on the competition matrix}	
-	\label{tab:CompetitionParameter}
+	\caption{The competition parameter $\epsilon$ controls the relative size of he non-diagonal elements of the competition matrix.}	
+	\label{fig:CompetitionParameter}
 \end{figure}
 
 By choosing $ -1 $ as a lower limit for $ \epsilon $ we exclude the possibility of negative numbers in the competition matrix. This coefficients of \textit{negative competition} can be understood as a \textit{naive} approach to mutualism, and we wanted to focus only in classical competition.
@@ -259,7 +266,7 @@ Our main target is to estimate the probability of finding a chaotic attractor un
 Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
 
 \begin{enumerate}
-	\item Use the competition parameter $ \epsilon $ to draw a competition matrix $ A $ (as described in section \ref{subsec:CompetitionParameter}). Notice that this matrix is being drawn from a probability distribution function (PDF), so it will change in every run.
+	\item Use the competition parameter $ \epsilon $ to draw a competition matrix $ A $ (as described in section \ref{subsubsec:CompetitionParameter}). Notice that this matrix is being drawn from a probability distribution function (PDF), so it will change in every run.
 	\item \label{StartOfAnExperiment} Draw the rest of parameters and initial conditions from the values described in \cite{Dakos2009b}. Those which are defined as ranges will be taken as uniform PDFs. Notice that those parameters taken from a PDF will change in every run.
 	\item Determine numerically if the attractor generated by this conditions is chaotic or not (see section \ref{subsec:DetectionOfChaos}).
 	\item Go back to step (\ref{StartOfAnExperiment}) $ R $ times.
