@@ -94,10 +94,10 @@ In the present paper we explore the links between neutral competition and the ty
 
 \subsection{Model description}
 \label{subsec:Model}
-We focused our attention in food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common resource. 
+We focused our attention in food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common source of resources. 
 
 \paragraph{}
-This choice was made because these webs are the simplest realization of a system where neutrality doesn't lead to mathematical degeneration. The need of a second trophic level (that of predators) may seem in contradiction with this pursue of simplicity, but actually this is a requirement for the effect to take place: in the absence of non-uniform predation, chaos will never develop\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labelling each species meaningless, and thus the system can be reduced just to two differential equations, the one for the total population of prey and the one for the total population of consumers. It can be proven that chaos cannot be developed in autonomous two-dimensional systems. For details, see Poincaré-Bendixson theorem.}. Degeneration is prevented by the non-neutral predation rates breaking the excess of symmetry provided by neutrality at the prey's level. % TODO: maybe not needed in an ecology journal
+This choice was made because two-level webs are the simplest realization of a system where neutrality doesn't lead to mathematical degeneration. The need of a second trophic level (that of predators) may seem in contradiction with this pursue of simplicity, but actually this is a requirement for the effect to take place. In the absence of non-uniform predation, chaos will never develop\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the system can be reduced just to two differential equations, the one for the total population of prey and the one for the total population of consumers. It can be proven that chaos cannot be developed in autonomous two-dimensional systems. For details, see Poincaré-Bendixson theorem.}. Degeneration is prevented by the non-neutral predation rates breaking the excess of symmetry provided by neutrality at the prey's level. % TODO: maybe not needed in an ecology journal
 
 \begin{figure}[h]
 	\begin{center}
@@ -108,7 +108,7 @@ This choice was made because these webs are the simplest realization of a system
 \end{figure}
 
 \paragraph{} % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used a generalized Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963, Scheffer2004}, composed of $ n_P $ prey species and $ n_C $ consumers species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition is not necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them more preferable than others. All these interactions are summarized in \ref{fig:Network}. The overall structure looks like:
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition is not necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them more preferable than others. All these interactions are summarized in \ref{fig:Network}. The overall structure looks like:
 
 \begin{displaymath}
 \label{eq:EquationInPseudocode}
@@ -132,29 +132,36 @@ Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \righ
 The palatability of each prey species is given by $ S_{ij} $. That is, $ S_{ij} $ represents the weight that consumer $ j $ gives to prey $ i $ in his \textit{menu}. Those coefficients can be arranged as an $ n_C \times n_P $ matrix. Being a multispecies model, we can define the auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the palatability coefficients. Biologically, this represents the composition of the \textit{menu} of consumer $ j $:
 
 \begin{eqnarray}
-\label{eq:AuxiliaryVectors}
-	V_j(P_1, ..., P_{n_P}) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
+\label{eq:MenuFunction}
+	V_j(P) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
 \end{eqnarray}
 
-We hypothesized that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation:
+We hypothesized that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation: % TODO cite Edelstein Keshet
 
 \begin{equation}
 \label{eq:Feeding}
-	Feeding_j =  e g C_j F_{2}(V_j; H) = e g C_j \frac{V_j}{V_j + H}
+	Feeding_j =  e g C_j F_{2}(V_j; H)
 \end{equation}
 
-$ e $ represents the assimilation efficiency of the predation, that is, it regulates the biomass exchange between consumer and prey. Thus, the effect of consumer $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all consumers in the species $ i $ as follows:
+$ e $ represents the assimilation efficiency of the predation, that is, it regulates the biomass exchange between consumer and prey. Thus, the effect of consumer $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all consumers in the prey species $ i $ as follows:
 
 \begin{equation}
 \label{eq:Predation}
-Predation_i = g P_i \sum_{k=1}^{n_C} S_{ki} \cdot \frac{C_k}{V_k+H} \equiv gP_iR_i
+Predation_i = g \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k}\right) C_k F_{2}(V_j; H)
 \end{equation}
 
-where for convenience, we have defined the auxiliary function $ R_i $ as a summary of the effect of all consumers on prey $ i $:
+Where the term inside the parentheses represents the relative weight of prey species $ i $ inside "the menu" of predator $ k $. It is interesting to note that the way the predation and feeding terms are defined satisfies the following property:
+
+\begin{equation}
+\label{eq:Balance}
+\sum_{j=1}^{n_C} Feeding_j = e \sum_{i=1}^{n_P} Predation_i
+\end{equation}
+
+that is, all the deaths caused by predation at the prey level are invested in growth of consumers. For future clarity, it is a good idea to define the auxiliary function $ R_i $ as a summary of the effect of all consumers on prey $ i $:
 
 \begin{equation}
 \label{eq:PredationAux}
-R_i(C_1, ..., C_{n_P}, V_1, ..., V_{n_C}) \equiv \sum_{k=1}^{n_C} S_{ki} \cdot \frac{C_k}{V_k+H}
+R_i(P,C) \equiv \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k(P)}\right) C_k F_{2}(V_k(P); H) 
 \end{equation}
 
 Putting all together, the dynamical system reads:
@@ -162,9 +169,9 @@ Putting all together, the dynamical system reads:
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
 	\begin{cases}
-	\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) - g P_i R_i + f
+	\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) - g R_i(P,C) + f
 	\\ 
-	\dot{C_j} = e g C_j \frac{V_j}{V_j + H} - l C_j
+	\dot{C_j} = e g C_j F_{2}(V_j(P); H) - l C_j
 	\end{cases}
 \end{eqnarray}
 %% ------
