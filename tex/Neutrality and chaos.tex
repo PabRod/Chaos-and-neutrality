@@ -176,13 +176,13 @@ Putting all together, the dynamical system reads:
 \end{eqnarray}
 %% ------
 
-Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding with a different type of attractor (see figure \ref{fig:TimeSeries}). The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilising nor giving rise to periodicity.
+Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding with a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilising nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
 
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{ts.png}
 	\end{center}
-	\caption{Our model generates time series of the population of each species. This time series can be classified in 3 types depending on their asymptotic behavior: \textit{stable}, \textit{periodic} and \textit{chaotic}. In \textbf{figure A}, the system reaches a stable attractor after an initial transient. In \textbf{figure B}, a periodic attractor, with an approximate period of 1000 days, is reached after the transient vanishes. The system in \textbf{figure C} never reaches a stable nor a cyclic attractor, but a chaotic one.}
+	\caption{Our model generates time series of the population of each species. The time series can be classified in $3$ types depending on their asymptotic behavior: \textit{stable}, \textit{periodic} and \textit{chaotic}. In \textbf{figure A}, the system reaches a stable attractor after a transient time. In \textbf{figure B}, a periodic attractor, with an approximate period of 1000 days, is reached after the transient time. The system in \textbf{figure C} never reaches a stable nor a cyclic attractor, but a chaotic one.}
 	\label{fig:TimeSeries}
 \end{figure}
 
@@ -224,46 +224,28 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \subsubsection{Competition parameter}
 \label{subsubsec:CompetitionParameter}
 
-Our aim is to analyse the behaviour of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. In order to quantify neutrality and controlling the \textit{flavour} of the competition, we introduce the competition parameter $ \epsilon $. This dimensionless parameter will allow us to vary continuously from interactions where intraspecific competition is stronger that interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where none of the intra non interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}). The higher the absolute value of $\epsilon$, the less neutral our model is.
+Our aim is to analyze the behavior of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. In order to quantify neutrality and controlling how neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger that interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
 
 \paragraph{}
-The numerical implementation of these ideas can be easily achieved by building a competition matrix like this:
+The numerical implementation of these ideas can be easily achieved by building a competition matrix whose non diagonal terms are perturbed by an additive random number $W$, whose size is controlled by $\epsilon$ (see figure \ref{fig:CompetitionParameter} and equation \ref{eq:NeutralityParameter}).
 
 \begin{eqnarray}
 \label{eq:NeutralityParameter}
-	A(\epsilon) = A_0 + \epsilon \cdot W
+	A_{ij}(\epsilon) = 	\begin{cases}
+		1 & \text{ : } i=j \\ 
+		1 + W(\epsilon) & \text{ : } i \neq j
+	\end{cases}
 \end{eqnarray}
 
-Where $ A_0 $ is a purely neutral competition matrix (i.e., all its elements equal $ 1 $) and $ W $ is a random matrix whose non-diagonal elements have been drawn from a uniform distribution bounded to the interval $ [0, 1] $, and whose diagonal elements are zero. This way, we make sure that the diagonal elements of $ A $ are $ 1 $ in all cases (see figure \ref{fig:CompetitionParameter}).
-
-%\begin{figure}[H]
-%	\begin{center}
-%		\resizebox{\columnwidth}{!}{%
-%		\begin{tabular}{|c|c|c|}
-%			\hline 
-%			\textbf{Parameter value} & \textbf{Dominant competition} & \textbf{Example of competition matrix} \\
-%			\hline 
-%			$-1 < \epsilon < 0$ & Intraspecific & $ A = \begin{bmatrix} 1&.2&.3\\ .3&1&.4 \\ .5&.4&1\end{bmatrix} $ \\ 
-%			\hline 
-%			$\epsilon = 0$ & None (neutral) & $A = \begin{bmatrix} 1&1&1\\ 1&1&1 \\ 1&1&1\end{bmatrix}$ \\ 
-%			\hline 
-%			$\epsilon > 0$ & Interspecific & $A = \begin{bmatrix} 1&1.7&1.6\\ 1.9&1&1.5 \\ 1.8&1.6&1\end{bmatrix}$ \\ 
-%			\hline 
-%		\end{tabular}}
-%	\end{center}
-%	\caption{Effect of the competition parameter on the competition matrix}	
-%	\label{tab:CompetitionParameter}
-%\end{figure}
+The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$, and forced to never be lower than $0$ nor higher than $2$.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{epsilon_all.png}
 	\end{center}
-	\caption{The competition parameter $\epsilon$ controls the relative size of he non-diagonal elements of the competition matrix.}	
+	\caption{The competition parameter $\epsilon$ controls the relative size of the non-diagonal elements of the competition matrix.}	
 	\label{fig:CompetitionParameter}
 \end{figure}
-
-By choosing $ -1 $ as a lower limit for $ \epsilon $ we exclude the possibility of negative numbers in the competition matrix. This coefficients of \textit{negative competition} can be understood as a \textit{naive} approach to mutualism, and we wanted to focus only in classical competition.
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
