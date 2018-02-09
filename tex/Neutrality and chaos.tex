@@ -224,7 +224,7 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \subsubsection{Competition parameter}
 \label{subsubsec:CompetitionParameter}
 
-Our aim is to analyze the behavior of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. In order to quantify neutrality and controlling how neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger that interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
+Our aim is to analyze the behavior of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. In order to quantify neutrality and controlling how neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
 
 \paragraph{}
 The numerical implementation of these ideas can be easily achieved by building a competition matrix whose non diagonal terms are perturbed by an additive random number $W$, whose size is controlled by $\epsilon$ (see figure \ref{fig:CompetitionParameter} and equation \ref{eq:NeutralityParameter}).
@@ -237,19 +237,19 @@ The numerical implementation of these ideas can be easily achieved by building a
 	\end{cases}
 \end{eqnarray}
 
-The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$, and forced to never be lower than $0$ nor higher than $2$.
+The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$ (i.e: $[\epsilon - 0.1, \epsilon+0.1]$), and forced to never be lower than $0$ nor higher than $2$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{epsilon_all.png}
 	\end{center}
-	\caption{The competition parameter $\epsilon$ controls the relative size of the non-diagonal elements of the competition matrix.}	
+	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative properties of the competition matrices is controlled by the parameter $\epsilon$.}	
 	\label{fig:CompetitionParameter}
 \end{figure}
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
-Our main target is to estimate the probability of finding a chaotic attractor under different intensities of neutrality. Due to the complexity of the system, we face the problem as a numerical simulation\footnote{The present analysis were performed using GRIND for MATLAB. It's freely available at \\ \url{http://www.sparcs-center.org/grind.html}}. As well, and for the sake of reproducibility, we provide a \textit{GitHub} link to the scripts used.
+Our main target is to estimate the probability of reaching a chaotic attractor under different intensities of neutrality. In order to achieve this, we'll simulate several ecosystems sharing the same competition parameter , but varying the initial conditions and the predation parameters. Due to the complexity of the system, we face the problem as a numerical simulation. For the sake of reproducibility, we provide a \textit{GitHub} link to the scripts used.
 
 \paragraph{}
 Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
@@ -257,7 +257,8 @@ Sweeping for different values of $ \epsilon $, we use the following procedure to
 \begin{enumerate}
 	\item Use the competition parameter $ \epsilon $ to draw a competition matrix $ A $ (as described in section \ref{subsubsec:CompetitionParameter}). Notice that this matrix is being drawn from a probability distribution function (PDF), so it will change in every run.
 	\item \label{StartOfAnExperiment} Draw the rest of parameters and initial conditions from the values described in \cite{Dakos2009b}. Those which are defined as ranges will be taken as uniform PDFs. Notice that those parameters taken from a PDF will change in every run.
-	\item Determine numerically if the attractor generated by this conditions is chaotic or not (see section \ref{subsec:DetectionOfChaos}).
+	\item Simulate the dynamics numerically.
+	\item Perform two different tests of chaoticity on the simulation (see section \ref{subsec:DetectionOfChaos}).
 	\item Go back to step (\ref{StartOfAnExperiment}) $ R $ times.
 \end{enumerate}
 
@@ -271,7 +272,7 @@ For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illu
 	\label{fig:FlowChart}
 \end{figure}
 
-The outcome of the numerical experiment described above is a list of $ R $ maximum Lyapunov exponents per value of $ \epsilon $. This list can be used to estimate the probability of chaos for each value of $ \epsilon $ via the classical frequentist interpretation of probability, that is, as the ratio of attractors found to be chaotic.
+The outcome of the numerical experiment described above are two lists of \textit{votes} for chaos per value of $ \epsilon $, one list corresponding to the maximum Lyapunov test, and the other to the z1 Gottwald-Melbourne test [CITATION NEEDED]. This list can be used to estimate the probability of chaos for each value of $ \epsilon $ via the classical frequentist interpretation of probability, that is, as the ratio of attractors found to be chaotic.
 
 \paragraph{}
 This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
@@ -281,7 +282,7 @@ This numerical experiment can be repeated for food webs of different sizes. In o
 Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition. From the biological point of view, we show that neutrality and non-equilibrium asymptotic dynamics are not completely independent.
 
 \paragraph{} % Weak and strong interspecific competition
-There's another local maximum for $ \epsilon = -1 $. This means that strong intraspecific interactions also promote chaos.
+There's another local maximum for $ \epsilon = -1 $. This means that strong intraspecific interactions also promote chaos [CITATION?].
 
 \paragraph{} % Valley
 The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one minimum between two maxima\footnote{This is a direct consequence of applying Bolzano's theorem to the first derivative. Intuitively: there should be at least one valley between two mountains}.
