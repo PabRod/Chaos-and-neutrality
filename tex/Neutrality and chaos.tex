@@ -87,7 +87,7 @@ Another hypotheses deserving attention are that of neutral competition, whose be
 %% -----
 
 % Introduction to our contribution
-In the present paper we explore the links between neutral competition and the type of long term dynamics exhibited. Using weakly non-neutral models, our simulations show that the likelihood of ending up inside a chaotic attractor increases with neutrality at the competitors' trophic level. That is, that neutrality promotes chaos.
+In the present paper we explore the links between neutral competition and the type of long term dynamics exhibited. Using competition models with different degrees of heterogeneity, our simulations show that the likelihood of ending up inside a chaotic attractor increases when heterogeneity at the competitors' trophic level is minimal. That is, that neutrality promotes chaos.
 
 \section{Methods}
 \label{sec:Methods}
@@ -221,7 +221,7 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \subsubsection{Competition parameter}
 \label{subsubsec:CompetitionParameter}
 
-Our aim is to analyze the behavior of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in neutrality. In order to quantify neutrality and controlling how neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
+Our aim is to analyze the behavior of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in heterogeneity. In order to quantify heterogeneity and controlling how far from neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
 
 The numerical implementation of these ideas can be easily achieved by building a competition matrix whose non diagonal terms are perturbed by an additive random number $W$, whose size is controlled by $\epsilon$ (see figure \ref{fig:CompetitionParameter} and equation \ref{eq:NeutralityParameter}).
 
@@ -233,7 +233,7 @@ The numerical implementation of these ideas can be easily achieved by building a
 	\end{cases}
 \end{eqnarray}
 
-The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$, and forced to never be lower than $0$ nor higher than $2$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
+The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
 
 \begin{figure}[H]
 	\begin{center}
@@ -245,13 +245,13 @@ The random numbers $W$ have been drawn from a uniform distribution\footnote{Othe
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
-Our target is to estimate the probability of reaching a chaotic attractor under different intensities of neutrality. In order to achieve this, we'll simulate several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter. We consider thus that those ecosystems share a qualitative property: the same degree of neutrality. 
+Our target is to estimate the probability of reaching a chaotic attractor under different degrees of heterogeneity. In order to achieve this, we'll simulate several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter. We consider thus that those ecosystems share a qualitative property: the same degree of heterogeneity. 
 
-Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne [CITE] test\footnote{We also applied the maximum Lyapunov exponent test, together with visual inspection, finding the same qualitative results.}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of neutrality developing chaotic asymptotic behavior.
+Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne [CITE] test\footnote{We also applied the maximum Lyapunov exponent test, together with visual inspection, finding the same qualitative results.}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
 This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
-For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used.
+For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used [DON'T FORGET TO ACTUALLY PROVIDE IT].
 
 %Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
 %
@@ -278,13 +278,13 @@ For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illu
 Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition.
 
 % Weak and strong interspecific competition
-There's another local maximum for $ \epsilon = -1 $. This means that strong intraspecific interactions also promote chaos [CITATION?].
+There's another local maximum for $ \epsilon = -1 $. This means that strong intraspecific interactions also promote chaos [EGBERT MENTIONED THAT THIS IS REASONABLE, BUT A CITATION WILL BE NEEDED HERE].
 
 % Valley
 The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one minimum between two maxima\footnote{This is a direct consequence of applying Bolzano's theorem to the first derivative. Intuitively: there should be at least one valley between two mountains}.
 
 % Chaos and dimensionality
-The overall likelihood of chaos, which can be interpreted as the area under the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor\footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point}. Even in those higher dimensional cases, a maximum is still happening at the neutral competition case.
+The overall likelihood of chaos, which can be interpreted as the area under the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor\footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point.}. Even in those higher dimensional cases, a maximum is still happening at the neutral competition case.
 
 \begin{figure}
 	\begin{center}
@@ -298,13 +298,13 @@ The overall likelihood of chaos, which can be interpreted as the area under the 
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{contour.png}
 	\end{center}
-	\caption{Contour map showing the probability of chaos for various competition parameters (horizontal axis) and prey populations (vertical axis). The consumers' population is fixed as $ 2/3 $ of the prey's population, in order to control the overall size of the system with a single parameter. Notice that chaotic attractors appear more easily (i.e., for smaller systems) if the competition is close to neutral (i.e., $ \epsilon = 0 $)}
+	\caption{Contour map showing the probability of chaos for various competition parameters (horizontal axis) and prey populations (vertical axis). The consumers' population is fixed as $ 2/3 $ of the prey's population, in order to control the overall size of the system with a single parameter. Notice that chaotic attractors appear more easily (i.e., for smaller systems) the closer is the competition to neutral (i.e., $ \epsilon = 0 $).}
 	\label{fig:Contour}
 \end{figure}
 
 \section{Discussion}
 \label{sec:Discussion} % Our claims
-The asymptotic dynamics of our model are affected by the strength of neutrality on the competition. Particularly, the more neutral our system is, the higher are the chances of developing chaotic behaviour. From the biological point of view, and going back to the hypotheses about biodiversity mentioned in section \ref{sec:Background}, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. Maybe this can be a first step to reconcile both views. 
+The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our system is, the higher are the chances of developing chaotic behaviour. From the biological point of view, and going back to the hypotheses about biodiversity mentioned in section \ref{sec:Background}, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. Maybe this can be a first step to reconcile both views. 
 
 % Limitations
 In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation in the simplest possible way. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of predation, chaos will never develop\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total population. It can be proven that chaos cannot be developed in autonomous systems with less than $3$ dimensions. For details, see Poincaré-Bendixson theorem.}.
@@ -312,7 +312,7 @@ In the spirit of mathematical modelling, we chose the simplest realization requi
 We used the simplest predation network, that is, one with random predation coefficients. Thus, our predators can be considered generalists. A straightforward continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral), controlling with a single parameter the \textit{flavour} of the predation matrix $ S $.
 
 % Chaos detection
-Numerical detection of chaos has fundamental limitations. Can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long, complicated transients and genuine chaos. In the present paper three parallel approaches were followed: Lyapunov exponents estimation, Gottwald-Melbourne \textit{z1} test and visual inspection. Despite differences in the exact probabilities, the three of them leaded us to the same qualitative conclusions. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
+Numerical detection of chaos has fundamental limitations. Can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long transients and genuine chaos. In the present paper three parallel approaches were followed: Lyapunov exponents estimation, Gottwald-Melbourne \textit{z1} test and visual inspection. Despite differences in the exact probabilities, the three of them leaded us to the same qualitative conclusions. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
 
 % The parameter epsilon
 Interestingly enough, a relatively small number of iterations suffices to generate a remarkably clear maximum in the probability of chaos for neutral competition. The position of this maximum is independent of the number of interacting species. This suggests that the parameter $ \epsilon $, originally motivated by numerical convenience, may have a biological interpretation by itself. It will be interesting to reverse-engineer this parameter given a set of community matrices validated by experimental or field observations.
