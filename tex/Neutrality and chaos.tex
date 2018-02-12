@@ -249,18 +249,22 @@ The random numbers $W$ have been drawn from a uniform distribution\footnote{Othe
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
-Our main target is to estimate the probability of reaching a chaotic attractor under different intensities of neutrality. In order to achieve this, we'll simulate several ecosystems sharing the same competition parameter , but varying the initial conditions and the predation parameters. Due to the complexity of the system, we face the problem as a numerical simulation. For the sake of reproducibility, we provide a \textit{GitHub} link to the scripts used.
+Our main target is to estimate the probability of reaching a chaotic attractor under different intensities of neutrality. In order to achieve this, we'll simulate several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter. We consider thus that those ecosystems share a qualitative property: neutrality. 
 
-\paragraph{}
-Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
+We use numerical methods to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne [CITE] test\footnote{We also applied the maximum Lyapunov exponent test, finding the same qualitative results.}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems in the given parameter range developing chaotic asymptotic behavior.
 
-\begin{enumerate}
-	\item Use the competition parameter $ \epsilon $ to draw a competition matrix $ A $ (as described in section \ref{subsubsec:CompetitionParameter}). Notice that this matrix is being drawn from a probability distribution function (PDF), so it will change in every run.
-	\item \label{StartOfAnExperiment} Draw the rest of parameters and initial conditions from the values described in \cite{Dakos2009b}. Those which are defined as ranges will be taken as uniform PDFs. Notice that those parameters taken from a PDF will change in every run.
-	\item Simulate the dynamics numerically.
-	\item Perform two different tests of chaoticity on the simulation (see section \ref{subsec:DetectionOfChaos}).
-	\item Go back to step (\ref{StartOfAnExperiment}) $ R $ times.
-\end{enumerate}
+For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used.
+
+%\paragraph{}
+%Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
+%
+%\begin{enumerate}
+%	\item Use the competition parameter $ \epsilon $ to draw a competition matrix $ A $ (as described in section \ref{subsubsec:CompetitionParameter}). Notice that this matrix is being drawn from a probability distribution function (PDF), so it will change in every run.
+%	\item \label{StartOfAnExperiment} Draw the rest of parameters and initial conditions from the values described in \cite{Dakos2009b}. Those which are defined as ranges will be taken as uniform PDFs. Notice that those parameters taken from a PDF will change in every run.
+%	\item Simulate the dynamics numerically.
+%	\item Perform two different tests of chaoticity on the simulation (see section \ref{subsec:DetectionOfChaos}).
+%	\item Go back to step (\ref{StartOfAnExperiment}) $ R $ times.
+%\end{enumerate}
 
 For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illuminating.
 
@@ -271,8 +275,6 @@ For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illu
 	\caption{Flow chart describing the numerical experiment}
 	\label{fig:FlowChart}
 \end{figure}
-
-The outcome of the numerical experiment described above are two lists of \textit{votes} for chaos per value of $ \epsilon $, one list corresponding to the maximum Lyapunov test, and the other to the z1 Gottwald-Melbourne test [CITATION NEEDED]. This list can be used to estimate the probability of chaos for each value of $ \epsilon $ via the classical frequentist interpretation of probability, that is, as the ratio of attractors found to be chaotic.
 
 \paragraph{}
 This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
