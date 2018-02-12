@@ -1,4 +1,4 @@
-\documentclass[a4paper, onecolumn, 10pt]{article}
+\documentclass[a4paper, twocolumn, 10pt]{article}
 
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
@@ -60,9 +60,9 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 
 \iftoggle{personalDraft}
 {
-	\clearpage
+	%\clearpage
 	\tableofcontents
-	\clearpage
+	%\clearpage
 }
 
 \section{Background}
@@ -294,7 +294,7 @@ The overall likelihood of chaos, which can be interpreted as the area under the 
 
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.65\columnwidth]{results.png}
+		\includegraphics[width=1\columnwidth]{results.png}
 	\end{center}
 	\caption{Results for a low, medium and high dimensional system. The upper row represents the measured Lyapunov exponents, coloured in red if larger than zero, and in blue if lower. The lower row represents the estimated probability of chaotic behaviour}
 	\label{fig:Results}
