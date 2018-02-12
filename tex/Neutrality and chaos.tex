@@ -329,69 +329,69 @@ Additionaly, we are implicitly assuming without a proof that chaotic ecosystems 
 \label{sec:Acknowledgements}
 The preliminary analysis of this model were performed using GRIND for Matlab (http://www.sparcs-center.org/grind). Additionally, we thank Jelle Lever, Moussa N'Dour and Sebastian Bathiany for their useful comments and suggestions.
 
-\clearpage
+%\clearpage
 
-\section{Appendix}
-\label{sec:Appendix}
-
-\subsection{Detection of chaos}
-\label{subsec:DetectionOfChaos}
-Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The initial rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
-
-Our procedure for classifying the attractors as chaotic or non-chaotic was based in the analysis of Lyapunov exponents. More specifically, this is the procedure we've followed:
-
-\begin{enumerate}
-	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory reached an attractor and the dynamics are asymptotic.
-	\item \label{RunInAttractor} Use the last point of the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor.
-	\item \label{PerturbedTrajectory} Use again the last point of the run in step \ref{GoToAttractor} but, this time, adding a small disturbance to it.
-	\item Compare the runs in steps \ref{RunInAttractor} and \ref{PerturbedTrajectory} to compute numerically the principal Lyapunov exponent.
-	\begin{itemize}
-		\item If it's positive, classify the attractor as chaotic.
-		\item If it's negative, classify the attractor as non-chaotic.
-	\end{itemize}
-\end{enumerate}
-
-\subsection{Neutral competition}
-\label{subsec:NeutralCompetition}
-If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of equations $ n_P $ like the following:
-
-\begin{eqnarray}
-\label{eq:OnlyCompetition}
-\dot{P_i} = P_i \left( 1 - \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right)
-\end{eqnarray}
-
-In order to model a neutral competition, we should use the same competition coefficient for each species. That is, take $ A_{ik} = A $ for all $ i $ and $ k $, so:
-
-\begin{eqnarray}
-\label{eq:OnlyNeutralCompetition}
-\dot{P_i} = P_i \left( 1 - A \sum_{k=1}^{n_P} P_k \right)
-\end{eqnarray}
-
-From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium manifolds.
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=0.9\columnwidth]{degenerate.png}
-	\end{center}
-	\caption{Example with $2$ prey under neutral competition. Both nullclines coincide point to point, giving rise to a higher dimensional equilibirium manifold (in this case, a straight line)}
-	\label{fig:Neutral}
-\end{figure}
-
-This problem can be solved more easily noticing that, from the sole point of view of competition, the effect of neutrality is to fade out the differences between species. Being this the case, the labels $ i $ distinguishing them become pointless. It is a good idea to sum up all the competing species into a new variable, that of total population of (now indistinguishable) species, defined by:
-
-\begin{eqnarray}
-\label{eq:TotalPopulation}
-	T(t) = \sum_{i=1}^{n_P} P_i(t)
-\end{eqnarray}
-
-It can be shown using equation \ref{eq:OnlyNeutralCompetition} that, as expected from the biological intuition, the dynamics of this new variable will follow the same differential equation as the individual species abundances. This collapses the $ n_P $ dimensions of our original problem to a single one.
-
-\begin{eqnarray}
-\label{eq:TotalPopulationDynamics}
-	\dot T(t) = \sum_{i=1}^{n_P} \dot P_i(t) = T (1 - A T)
-\end{eqnarray}
-
-In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of system degeneration.
+%\section{Appendix}
+%\label{sec:Appendix}
+%
+%\subsection{Detection of chaos}
+%\label{subsec:DetectionOfChaos}
+%Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The initial rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
+%
+%Our procedure for classifying the attractors as chaotic or non-chaotic was based in the analysis of Lyapunov exponents. More specifically, this is the procedure we've followed:
+%
+%\begin{enumerate}
+%	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory reached an attractor and the dynamics are asymptotic.
+%	\item \label{RunInAttractor} Use the last point of the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor.
+%	\item \label{PerturbedTrajectory} Use again the last point of the run in step \ref{GoToAttractor} but, this time, adding a small disturbance to it.
+%	\item Compare the runs in steps \ref{RunInAttractor} and \ref{PerturbedTrajectory} to compute numerically the principal Lyapunov exponent.
+%	\begin{itemize}
+%		\item If it's positive, classify the attractor as chaotic.
+%		\item If it's negative, classify the attractor as non-chaotic.
+%	\end{itemize}
+%\end{enumerate}
+%
+%\subsection{Neutral competition}
+%\label{subsec:NeutralCompetition}
+%If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of equations $ n_P $ like the following:
+%
+%\begin{eqnarray}
+%\label{eq:OnlyCompetition}
+%\dot{P_i} = P_i \left( 1 - \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right)
+%\end{eqnarray}
+%
+%In order to model a neutral competition, we should use the same competition coefficient for each species. That is, take $ A_{ik} = A $ for all $ i $ and $ k $, so:
+%
+%\begin{eqnarray}
+%\label{eq:OnlyNeutralCompetition}
+%\dot{P_i} = P_i \left( 1 - A \sum_{k=1}^{n_P} P_k \right)
+%\end{eqnarray}
+%
+%From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium manifolds.
+%
+%\begin{figure}[h]
+%	\begin{center}
+%		\includegraphics[width=0.9\columnwidth]{degenerate.png}
+%	\end{center}
+%	\caption{Example with $2$ prey under neutral competition. Both nullclines coincide point to point, giving rise to a higher dimensional equilibirium manifold (in this case, a straight line)}
+%	\label{fig:Neutral}
+%\end{figure}
+%
+%This problem can be solved more easily noticing that, from the sole point of view of competition, the effect of neutrality is to fade out the differences between species. Being this the case, the labels $ i $ distinguishing them become pointless. It is a good idea to sum up all the competing species into a new variable, that of total population of (now indistinguishable) species, defined by:
+%
+%\begin{eqnarray}
+%\label{eq:TotalPopulation}
+%	T(t) = \sum_{i=1}^{n_P} P_i(t)
+%\end{eqnarray}
+%
+%It can be shown using equation \ref{eq:OnlyNeutralCompetition} that, as expected from the biological intuition, the dynamics of this new variable will follow the same differential equation as the individual species abundances. This collapses the $ n_P $ dimensions of our original problem to a single one.
+%
+%\begin{eqnarray}
+%\label{eq:TotalPopulationDynamics}
+%	\dot T(t) = \sum_{i=1}^{n_P} \dot P_i(t) = T (1 - A T)
+%\end{eqnarray}
+%
+%In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of system degeneration.
 
 \clearpage
 
