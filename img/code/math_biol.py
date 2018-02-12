@@ -28,6 +28,18 @@ def import_timeseries(filename):
 
     return (y_out, t_out)
 
+def import_contour(filename):
+    import scipy.io as sio
+
+    dict = sio.loadmat(filename)
+    competition_pars = dict['competition_pars']
+    nSpecies = dict['nSpecies']
+    summaries = dict['summaries']
+    levels = dict['levels']
+
+    return (competition_pars, nSpecies, summaries, levels)
+
+
 def plot_imported_timeseries(filename):
     import matplotlib as plt
     
