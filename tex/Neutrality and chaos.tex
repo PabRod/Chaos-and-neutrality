@@ -157,7 +157,7 @@ Where the term inside the parentheses represents the relative weight of prey spe
 \sum_{j=1}^{n_C} Feeding_j = e \sum_{i=1}^{n_P} Predation_i
 \end{equation}
 
-that is, all the deaths caused by predation at the prey level are invested in growth of consumers. For future clarity, it is a good idea to define the auxiliary function $ R_i $ as a summary of the effect of all consumers on prey $ i $:
+that is, all the deaths at the prey level are invested in the growth of consumers. For future clarity, it is a good idea to define the auxiliary function $ R_i $ as a summary of the effect of all consumers on prey $ i $:
 
 \begin{equation}
 \label{eq:PredationAux}
@@ -237,7 +237,7 @@ The numerical implementation of these ideas can be easily achieved by building a
 	\end{cases}
 \end{eqnarray}
 
-The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$ (i.e: $[\epsilon - 0.1, \epsilon+0.1]$), and forced to never be lower than $0$ nor higher than $2$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
+The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$, and forced to never be lower than $0$ nor higher than $2$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
 
 \begin{figure}[H]
 	\begin{center}
