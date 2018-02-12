@@ -96,8 +96,6 @@ In the present paper we explore the links between neutral competition and the ty
 \label{subsec:Model}
 We focused our attention in food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common source of resources. 
 
-This choice was made because two-level webs are the simplest realization of a system where neutrality doesn't lead to mathematical degeneration. The need of a second trophic level (that of predators) may seem in contradiction with this pursue of simplicity, but actually this is a requirement for the effect to take place. In the absence of non-uniform predation, chaos will never develop\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the system can be reduced just to two differential equations, the one for the total population of prey and the one for the total population of consumers. It can be proven that chaos cannot be developed in autonomous two-dimensional systems. For details, see Poincaré-Bendixson theorem.}. Degeneration is prevented by the non-neutral predation rates breaking the excess of symmetry provided by neutrality at the prey's level. % TODO: maybe not needed in an ecology journal
-
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.7\columnwidth]{net.png}
@@ -107,7 +105,7 @@ This choice was made because two-level webs are the simplest realization of a sy
 \end{figure}
 
 % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition is not necessarily symmetrical. The consumers eat all kind of prey (see figure \ref{fig:Network}), but find some of them more preferable than others. All these interactions are summarized in \ref{fig:Network}. The overall structure looks like:
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers don't interact directly. The prey competition is not necessarily symmetrical. The consumers eat all kind of prey (i.e.: they are generalists), but find some of them more preferable than others. All these interactions are summarized in figure \ref{fig:Network}. The overall structure looks like:
 
 \begin{displaymath}
 \label{eq:EquationInPseudocode}
@@ -175,7 +173,7 @@ Putting all together, the dynamical system reads:
 \end{eqnarray}
 %% ------
 
-Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding with a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilising nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
+Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilizing nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
 
 \begin{figure}
 	\begin{center}
@@ -247,9 +245,11 @@ The random numbers $W$ have been drawn from a uniform distribution\footnote{Othe
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
-Our main target is to estimate the probability of reaching a chaotic attractor under different intensities of neutrality. In order to achieve this, we'll simulate several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter. We consider thus that those ecosystems share a qualitative property: neutrality. 
+Our target is to estimate the probability of reaching a chaotic attractor under different intensities of neutrality. In order to achieve this, we'll simulate several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter. We consider thus that those ecosystems share a qualitative property: the same degree of neutrality. 
 
-We use numerical methods to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne [CITE] test\footnote{We also applied the maximum Lyapunov exponent test, finding the same qualitative results.}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems in the given parameter range developing chaotic asymptotic behavior.
+Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne [CITE] test\footnote{We also applied the maximum Lyapunov exponent test, together with visual inspection, finding the same qualitative results.}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of neutrality developing chaotic asymptotic behavior.
+
+This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
 For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used.
 
@@ -273,11 +273,9 @@ For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illu
 	\label{fig:FlowChart}
 \end{figure}
 
-This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
-
 \section{Results}
 \label{sec:Results}
-Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition. From the biological point of view, we show that neutrality and non-equilibrium asymptotic dynamics are not completely independent.
+Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition.
 
 % Weak and strong interspecific competition
 There's another local maximum for $ \epsilon = -1 $. This means that strong intraspecific interactions also promote chaos [CITATION?].
@@ -306,13 +304,15 @@ The overall likelihood of chaos, which can be interpreted as the area under the 
 
 \section{Discussion}
 \label{sec:Discussion} % Our claims
-The asymptotic dynamics of our model can be affected by the strength of neutrality on the competition. Particularly, the more neutral our system is, the higher are the chances of developing chaotic behaviour. Going back to the hypotheses about biodiversity mentioned in section \ref{sec:Background}, we claim this observation to be a link between the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality. Maybe this can be a first step to reconcile both views. 
+The asymptotic dynamics of our model are affected by the strength of neutrality on the competition. Particularly, the more neutral our system is, the higher are the chances of developing chaotic behaviour. From the biological point of view, and going back to the hypotheses about biodiversity mentioned in section \ref{sec:Background}, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. Maybe this can be a first step to reconcile both views. 
 
 % Limitations
-Our model is deliberately oversimplified. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to be the simplest possible realization allowing the expected behaviors. We used the simplest predation network, that is, one with random predation coefficients. Thus, our predators can be considered generalists. A straightforward continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral), controlling with a single parameter the \textit{flavour} of the predation matrix $ S $.
+In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation in the simplest possible way. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of predation, chaos will never develop\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total population. It can be proven that chaos cannot be developed in autonomous systems with less than $3$ dimensions. For details, see Poincaré-Bendixson theorem.}.
+
+We used the simplest predation network, that is, one with random predation coefficients. Thus, our predators can be considered generalists. A straightforward continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral), controlling with a single parameter the \textit{flavour} of the predation matrix $ S $.
 
 % Chaos detection
-Regarding chaos detection, we followed three parallel approaches: that of Lyapunov exponents analysis, Gottwald-Melbourne \textit{z1} test and visual inspection. Numerical detection of chaos has fundamental limitations. Can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long, complicated transients and genuine chaos. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
+Numerical detection of chaos has fundamental limitations. Can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long, complicated transients and genuine chaos. In the present paper three parallel approaches were followed: Lyapunov exponents estimation, Gottwald-Melbourne \textit{z1} test and visual inspection. Despite differences in the exact probabilities, the three of them leaded us to the same qualitative conclusions. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
 
 % The parameter epsilon
 Interestingly enough, a relatively small number of iterations suffices to generate a remarkably clear maximum in the probability of chaos for neutral competition. The position of this maximum is independent of the number of interacting species. This suggests that the parameter $ \epsilon $, originally motivated by numerical convenience, may have a biological interpretation by itself. It will be interesting to reverse-engineer this parameter given a set of community matrices validated by experimental or field observations.
@@ -350,8 +350,6 @@ Our procedure for classifying the attractors as chaotic or non-chaotic was based
 		\item If it's negative, classify the attractor as non-chaotic.
 	\end{itemize}
 \end{enumerate}
-
-%TODO: Big warning here: our method for detecting chaos sometimes gives false positives for complex cycles
 
 \subsection{Neutral competition}
 \label{subsec:NeutralCompetition}
