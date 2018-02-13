@@ -20,9 +20,13 @@ for row = 1:nExperiments
         %% Parse experiment data (see details below)
         pars = parseExperimentParameters(tab, row);
         
+        active = pars.active; % Is an active experiment?
+        if ~active % If the experiment is inactive...
+            continue; % ... ignore it and execute the next in table
+        end
+        
         % ---- Practical info ----
         id = pars.id; % Experiment id
-        active = pars.active; % Is an active experiment?
         results_folder = pars.results_folder; % Output folder for storing results
         timeseries_folder = pars.timeseries_folder; % Output folder for storing time series
         
@@ -47,11 +51,6 @@ for row = 1:nExperiments
         lyapTime = pars.lyapTime; % Time used to estimate the maximum Lyapunov exponent
         lyapPert = pars.lyapPert; % Initial perturbation used to estimate the maximum Lyapunov exponent
         reps = pars.reps; % Number of repetitions of this experiment
-
-        %% If the experiment is inactive, ignore it and execute the next in table
-        if ~active
-            continue;
-        end
         
         %% Set the random seed for the sake of reproducibility
         rng(seed);
