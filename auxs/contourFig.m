@@ -25,6 +25,8 @@ end
 
 %% Extract information
 competition_pars = resultsAsMatrix(files{1}, 'competition_par');
+usingLyaps = NaN(numel(files), numel(competition_pars));
+usingz12 = NaN(numel(files), numel(competition_pars));
 summaries = NaN(numel(files), numel(competition_pars));
 nSpecies = NaN(1, numel(files));
 for i = 1:numel(files)
@@ -32,14 +34,31 @@ for i = 1:numel(files)
     clear resultsArray;
     resultsArray = loadResults(resultsArrayLocation); 
     nSpecies(i) = sum(resultsArray{1,1}.dims);
-    [~, ~, ~, summary, ~] = computeProbabilities(resultsArray);
+    [probChaos_using_Lyaps, ~, probChaos_using_z1_2, summary, ~] = computeProbabilities(resultsArray);
+    usingLyaps(i, :) = probChaos_using_Lyaps;
+    usingz12(i, :) = probChaos_using_z1_2;
     summaries(i, :) = summary;
 end
 
 %% Plot
 levels = [.0, .1, .2, .3, .4, .5, .6, .7, .8, .9, .95, .975, 0.99, 1];
+
+subplot(1, 3, 1);
+[c, h] = contourf(competition_pars, nSpecies, usingLyaps, levels);
+title('Using max Lyapunov');
+xlim([-.8 .8]);
+clabel(c, h);
+
+subplot(1, 3, 2);
+[c, h] = contourf(competition_pars, nSpecies, usingz12, levels);
+title('Using z1');
+xlim([-.8 .8]);
+clabel(c, h);
+
+subplot(1, 3, 3);
 [c, h] = contourf(competition_pars, nSpecies, summaries, levels);
-xlim([-1 1]);
+title('Using weighted summary');
+xlim([-.8 .8]);
 clabel(c, h);
 
 end
