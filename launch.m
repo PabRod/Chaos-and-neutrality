@@ -3,17 +3,14 @@ close all;
 clear;
 clc;
 
-%% Load experiments table
-experiments_table_location = 'io/input_personal.csv';
-tab = loadExperimentsTable(experiments_table_location);
+%% Experiment parameters
+% Experiments table location
+experiments_table_location = 'io/input_personal_fast.csv';
 
 %% Perform each experiment
+tab = loadExperimentsTable(experiments_table_location);
 [nExperiments, ~] = size(tab); % One experiment per row
 for row = 1:nExperiments
-    
-    % Set random seed for the sake of reproducibility
-    seed = 1;
-    rng(seed);
     
     try
         % The numerical experiment is kept inside a try - catch - end
@@ -43,18 +40,21 @@ for row = 1:nExperiments
         compPars = pars.compPars; % Competition parameters to generate competition matrix (see paper)
         
         % ---- Simulation info ----
+        seed = pars.seed; % Random seed
         runTime = pars.runTime; % Time length of the time series
         stabilTime = pars.stabilTime; % Stabilization time (time to reach the attractor)
         timeSteps = pars.timeSteps; % Time steps in the time series
         lyapTime = pars.lyapTime; % Time used to estimate the maximum Lyapunov exponent
         lyapPert = pars.lyapPert; % Initial perturbation used to estimate the maximum Lyapunov exponent
         reps = pars.reps; % Number of repetitions of this experiment
-        
-        
+
         %% If the experiment is inactive, ignore it and execute the next in table
         if ~active
             continue;
         end
+        
+        %% Set the random seed for the sake of reproducibility
+        rng(seed);
         
         %% Print information about current experiment
         fprintf('\n \n Job: %s. \n Simulating.', id);
@@ -65,7 +65,6 @@ for row = 1:nExperiments
         results.id = id;
         results.dims = [nPreys, nPreds];
         results.stabiltime = stabilTime;
-        
         
         %% Iterate for different neutrality strengths
         compSteps = numel(compPars);

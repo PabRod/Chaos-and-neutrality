@@ -12,25 +12,26 @@ function pars = parseExperimentParameters(table, row)
 
 %% Read the straightforward information
 % That is, everything but compPars
-pars.id = string(table.id(row));
-pars.active = table.active(row);
-pars.nPreys = table.nPreys(row);
-pars.nPreds = table.nPreds(row);
-pars.r = table.r(row);
-pars.K = table.K(row);
-pars.g = table.g(row);
-pars.f = table.f(row);
-pars.e = table.e(row);
-pars.H = table.H(row);
-pars.l = table.l(row);
-pars.runTime = table.simTime(row);
-pars.stabilTime = table.stabilTime(row);
-pars.timeSteps = table.steps(row);
-pars.lyapTime = table.lyapTime(row);
-pars.lyapPert = table.lyapPert(row);
-pars.reps = table.reps(row);
-pars.results_folder = char(table.results_folder(row));
-pars.timeseries_folder = char(table.timeseries_folder(row));
+pars.id = string(table.id(row)); % Experiment id
+pars.active = table.active(row); % Is an active experiment?
+pars.nPreys = table.nPreys(row); % Number of prey species
+pars.nPreds = table.nPreds(row); % Number of predator species
+pars.r = table.r(row); % Prey growth ratio
+pars.K = table.K(row); % Prey carrying capacity
+pars.g = table.g(row); % Predation rate
+pars.f = table.f(row); % Immigration rate
+pars.e = table.e(row); % Assimilation efficiency
+pars.H = table.H(row); % Half-saturation constant
+pars.l = table.l(row); % Loss rate
+pars.runTime = table.simTime(row); % Time length of the time series
+pars.stabilTime = table.stabilTime(row); % Stabilization time (time to reach the attractor)
+pars.timeSteps = table.steps(row); % Time steps in the time series
+pars.lyapTime = table.lyapTime(row); % Time used to estimate the maximum Lyapunov exponent
+pars.lyapPert = table.lyapPert(row); % Initial perturbation used to estimate the maximum Lyapunov exponent
+pars.reps = table.reps(row); % Number of repetitions of this experiment
+pars.seed = table.seed(row); % Random seed
+pars.results_folder = char(table.results_folder(row));  % Output folder for storing results
+pars.timeseries_folder = char(table.timeseries_folder(row)); % Output folder for storing time series
 
 %% Read compPars and generate competition parameters
 % The table entry for compPars is a string used for generating the

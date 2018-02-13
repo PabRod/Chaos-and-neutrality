@@ -22,6 +22,7 @@ assert(pars.timeSteps == 3000);
 assert(pars.lyapTime == 100);
 assert(abs(pars.lyapPert - 1e-8) < absTol);
 assert(pars.reps == 50);
+assert(pars.seed == 1);
 assert(strcmp('io/', pars.results_folder));
 assert(strcmp('io/', pars.timeseries_folder));
 
@@ -51,6 +52,7 @@ assert(pars.timeSteps == 2000);
 assert(pars.lyapTime == 150);
 assert(abs(pars.lyapPert - 0.01) < absTol);
 assert(pars.reps == 3);
+assert(pars.seed == 1);
 assert(strcmp('io/', pars.results_folder));
 assert(strcmp('io/ts/', pars.timeseries_folder));
 
