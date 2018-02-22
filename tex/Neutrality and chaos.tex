@@ -71,7 +71,8 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 % Introductory paragraph
 The fascination by biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more. Like in a good mystery book, there is a big unknown behind biodiversity: we don't know how it is possible.
 
-% Introduction of the biodiversity paradox TODO: citations
+% Introduction of the biodiversity paradox 
+%TODO citations
 The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical touchstones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, most of the field observations seem to contradict the competitive exclusion principle, being the huge biodiversity in Earth its most noticeable counterexample. This contradiction is known as the biodiversity paradox. The paradox can be carelessly (but poetically) rephrased as \textit{Why are there so many species?}
 
 %% Brief discussion about the alternative hypotheses
@@ -79,17 +80,19 @@ The mystery comes into scene together with the competitive exclusion principle\c
 There are several alternative hypotheses for escaping the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. This means that time, and not only space, needs to be taken into account in the definition of ecological niche. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. 
 
 % Introduction of chaotic dynamics
-% TODO: writing fixed points is more precise than equilibrium
+%TODO writing fixed points is more precise than equilibrium
 After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in non-constant environments \cite{Dakos2009b}.
 
-% Hypotheses based in spatial heterogeneity TODO: enlarge or remove?
+% Hypotheses based in spatial heterogeneity 
+%TODO enlarge or remove?
 All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.
 
-% TODO: according to Tobias, the flow is broken here. High risk of the reviewer stopping reading! 
+%TODO according to Tobias, the flow is broken here. High risk of the reviewer stopping reading! 
 % Why are all the previous explanations not sufficient?
 % Why does neutrality deserve attention?
 
-% Introduction of the neutral theory TODO: citations
+% Introduction of the neutral theory 
+%TODO citations
 Another hypotheses deserving attention are that of neutral competition, whose better known exponent is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. In neutral models, similar species inside an ecological community are assumed to have identical \textit{per capita} rates of birth, death, reproduction, etc. In those models, the long term differences between species are a result of random events. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees.
 %% -----
 
@@ -140,7 +143,8 @@ The palatability of each prey species is given by $ S_{ij} $. That is, $ S_{ij} 
 	V_j(P) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
 \end{eqnarray}
 
-We hypothesized that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation: % TODO cite Edelstein Keshet
+We hypothesized that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation: 
+%TODO cite Edelstein Keshet
 
 \begin{equation}
 \label{eq:Feeding}
@@ -168,7 +172,7 @@ that is, all the deaths at the prey level are invested in the growth of consumer
 R_i(P,C) \equiv \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k(P)}\right) C_k F_{2}(V_k(P); H) 
 \end{equation}
 
-% TODO: explain the immigration term
+%TODO explain the immigration term
 
 Putting all together, the dynamical system reads:
 
@@ -181,7 +185,7 @@ Putting all together, the dynamical system reads:
 	\end{cases}
 \end{eqnarray}
 
-% TODO: there are more than three possible regimes, like quasiperiodic and strange non-chaotic attractors. Suggestion: 
+%TODO there are more than three possible regimes, like quasiperiodic and strange non-chaotic attractors. Suggestion: 
 % Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviours. As a simplification, I'll refer to all them as chaotic.
 
 Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilizing nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
@@ -244,7 +248,7 @@ The numerical implementation of these ideas can be easily achieved by building a
 	\end{cases}
 \end{eqnarray}
 
-% TODO: better notations can be used. 
+%TODO better notations can be used. 
 % W is used in brownian motion, and this can be misleading. Tobias suggests X.
 % epsilon is not a good name. It invites to think of small perturbations. Tobias suggests nu.
 % 1 + nu + X_{ij} where X is a uiid on [-1, 1] 
@@ -336,10 +340,10 @@ Interestingly enough, a relatively small number of iterations suffices to genera
 It may be worth noting that the position of both the maxima we've found (i.e.: $ \epsilon = -1 $ and $ \epsilon = 0 $) have something in common: the community matrix $ A $ at those values of the parameter is very symmetric in both cases. It will be interesting to develop a similar method that, instead of varying neutrality, varies the less restrictive property of symmetry.
 
 % Is chaos more resilient?
-% TODO: there are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnond's cat map
+%TODO there are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnond's cat map
 Additionally, we are implicitly assuming without a proof that chaotic ecosystems are fitter than non-chaotic ones. A possible continuation of this research may be the setting of two indepedent ecosystems, one of them chaotic and the other one non-chaotic, and allow them to interact at some point of time (simulating an invasion), in order to assess how much of each of the original ecosystems survives to this traumatic event.
 
-% TODO: count species above threshold
+%TODO count species above threshold
 
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
@@ -411,7 +415,7 @@ The preliminary analysis of this model were performed using GRIND for Matlab (ht
 
 \clearpage
 
-% TODO: format citations
+%TODO format citations
 \bibliography{library}
 %\bibliographystyle{ieeetr}
 \bibliographystyle{apalike}
