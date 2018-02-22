@@ -66,7 +66,9 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 }
 
 \section{Background}
-\label{sec:Background} % Introductory paragraph
+\label{sec:Background} 
+
+% Introductory paragraph
 The fascination by biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more. Like in a good mystery book, there is a big unknown behind biodiversity: we don't know how it is possible.
 
 % Introduction of the biodiversity paradox TODO: citations
@@ -77,10 +79,15 @@ The mystery comes into scene together with the competitive exclusion principle\c
 There are several alternative hypotheses for escaping the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. This means that time, and not only space, needs to be taken into account in the definition of ecological niche. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. 
 
 % Introduction of chaotic dynamics
+% TODO: writing fixed points is more precise than equilibrium
 After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in non-constant environments \cite{Dakos2009b}.
 
 % Hypotheses based in spatial heterogeneity TODO: enlarge or remove?
 All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.
+
+% TODO: according to Tobias, the flow is broken here. High risk of the reviewer stopping reading! 
+% Why are all the previous explanations not sufficient?
+% Why does neutrality deserve attention?
 
 % Introduction of the neutral theory TODO: citations
 Another hypotheses deserving attention are that of neutral competition, whose better known exponent is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. In neutral models, similar species inside an ecological community are assumed to have identical \textit{per capita} rates of birth, death, reproduction, etc. In those models, the long term differences between species are a result of random events. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees.
@@ -161,6 +168,8 @@ that is, all the deaths at the prey level are invested in the growth of consumer
 R_i(P,C) \equiv \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k(P)}\right) C_k F_{2}(V_k(P); H) 
 \end{equation}
 
+% TODO: explain the immigration term
+
 Putting all together, the dynamical system reads:
 
 \begin{eqnarray}
@@ -171,7 +180,9 @@ Putting all together, the dynamical system reads:
 	\dot{C_j} = e g C_j F_{2}(V_j(P); H) - l C_j
 	\end{cases}
 \end{eqnarray}
-%% ------
+
+% TODO: there are more than three possible regimes, like quasiperiodic and strange non-chaotic attractors. Suggestion: 
+% Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviours. As a simplification, I'll refer to all them as chaotic.
 
 Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodic behaviour in the species composition. Finally, chaotic attractors, make the species composition keep changing without stabilizing nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
 
@@ -229,17 +240,21 @@ The numerical implementation of these ideas can be easily achieved by building a
 \label{eq:NeutralityParameter}
 	A_{ij}(\epsilon) = 	\begin{cases}
 		1 & \text{ : } i=j \\ 
-		1 + W(\epsilon) & \text{ : } i \neq j
+		1 + W_{ij}(\epsilon) & \text{ : } i \neq j
 	\end{cases}
 \end{eqnarray}
 
-The random numbers $W$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
+% TODO: better notations can be used. 
+% W is used in brownian motion, and this can be misleading. Tobias suggests X.
+% epsilon is not a good name. It invites to think of small perturbations. Tobias suggests nu.
+% 1 + nu + X_{ij} where X is a uiid on [-1, 1] 
+The random numbers $W_{ij}$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{epsilon_all.png}
 	\end{center}
-	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative properties of the competition matrices is controlled by the parameter $\epsilon$.}	
+	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the parameter $\epsilon$.}	
 	\label{fig:CompetitionParameter}
 \end{figure}
 
@@ -312,7 +327,7 @@ In the spirit of mathematical modelling, we chose the simplest realization requi
 We used the simplest predation network, that is, one with random predation coefficients. Thus, our predators can be considered generalists. A straightforward continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral), controlling with a single parameter the \textit{flavour} of the predation matrix $ S $.
 
 % Chaos detection
-Numerical detection of chaos has fundamental limitations. Can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long transients and genuine chaos. In the present paper three parallel approaches were followed: Lyapunov exponents estimation, Gottwald-Melbourne \textit{z1} test and visual inspection. Despite differences in the exact probabilities, the three of them leaded us to the same qualitative conclusions. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
+Numerical detection of chaos has fundamental limitations. There can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long transients and genuine chaos. In the present paper three parallel approaches were followed: Lyapunov exponents estimation, Gottwald-Melbourne \textit{z1} test and visual inspection. Despite differences in the exact probabilities, the three of them leaded us to the same qualitative conclusions. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
 
 % The parameter epsilon
 Interestingly enough, a relatively small number of iterations suffices to generate a remarkably clear maximum in the probability of chaos for neutral competition. The position of this maximum is independent of the number of interacting species. This suggests that the parameter $ \epsilon $, originally motivated by numerical convenience, may have a biological interpretation by itself. It will be interesting to reverse-engineer this parameter given a set of community matrices validated by experimental or field observations.
@@ -321,7 +336,8 @@ Interestingly enough, a relatively small number of iterations suffices to genera
 It may be worth noting that the position of both the maxima we've found (i.e.: $ \epsilon = -1 $ and $ \epsilon = 0 $) have something in common: the community matrix $ A $ at those values of the parameter is very symmetric in both cases. It will be interesting to develop a similar method that, instead of varying neutrality, varies the less restrictive property of symmetry.
 
 % Is chaos more resilient?
-Additionaly, we are implicitly assuming without a proof that chaotic ecosystems are fitter than non-chaotic ones. A possible continuation of this research may be the setting of two indepedent ecosystems, one of them chaotic and the other one non-chaotic, and allow them to interact at some point of time (simulating an invasion), in order to assess how much of each of the original ecosystems survives to this traumatic event.
+% TODO: there are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnond's cat map
+Additionally, we are implicitly assuming without a proof that chaotic ecosystems are fitter than non-chaotic ones. A possible continuation of this research may be the setting of two indepedent ecosystems, one of them chaotic and the other one non-chaotic, and allow them to interact at some point of time (simulating an invasion), in order to assess how much of each of the original ecosystems survives to this traumatic event.
 
 % TODO: count species above threshold
 
