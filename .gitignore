@@ -1,11 +1,10 @@
 ## Latex build files
+*.log
 *.aux
 *.bbl
 *.blg
-*.lof
-*.lot
 *.toc
-tex/build/
+*.pdf
 
 ## Figures
 *.png
@@ -14,6 +13,7 @@ tex/build/
 
 ## Matlab files
 *.asv
+*.mat
 
 ## Exclude notes
 notes/
