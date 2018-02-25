@@ -45,6 +45,8 @@
 \begin{document}
 
 \maketitle
+%TODO remove all footnotes
+%TODO double check the format requirements of target journal
 
 \begin{abstract}
 \label{sec:Abstract}
@@ -76,12 +78,12 @@ Fascination for biodiversity is one of the main motivations for studying ecology
 The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, most of the field observations seem to contradict the competitive exclusion principle, being the huge biodiversity in Earth its most noticeable counterexample. This contradiction is known as the biodiversity paradox. The paradox can be carelessly (but poetically) rephrased as \textit{Why are there so many species if there are so few niches?}
 %% Brief discussion about the alternative hypotheses
 % Introduction and hypotheses based in non-autonomous systems
-There are several hypotheses to explain the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. This means that both time and space need to be taken into account in the definition of ecological niche. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium.
+There are several hypotheses to explain the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. This means that both time and space need to be taken into account in the definition of ecological niche. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent seasonal environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium.
 %TODO logical ordering of mentions to time and space domains
 
 % Introduction of chaotic dynamics
 %TODO writing fixed points is more precise than equilibrium
-After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in seasonally changing environments in a food web \cite{Dakos2009b}.
+After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
 
 % Hypotheses based in spatial heterogeneity 
 %TODO enlarge or remove?
@@ -115,7 +117,7 @@ We focused our attention in food webs with two trophic levels, one of consumers 
 \end{figure}
 
 % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers compete indirectly by sharing the same food. The prey competition is not necessarily symmetrical. The consumers eat all kind of prey (i.e.: they are generalists), but find some of them more preferable than others. All these interactions are summarized in figure \ref{fig:Network}. The overall structure looks like:
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers compete indirectly by sharing the same food. The consumers eat all kind of prey (i.e.: they are generalists), but find some of them more preferable than others. All these interactions are summarized in figure \ref{fig:Network}. The overall structure looks like:
 
 \begin{displaymath}
 \label{eq:EquationInPseudocode}
@@ -188,7 +190,7 @@ Putting all together, the dynamical system reads:
 %TODO there are more than three possible regimes, like quasiperiodic and strange non-chaotic attractors. Suggestion: 
 % Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviours. As a simplification, I'll refer to all them as chaotic.
 
-Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodically changing species composition. Finally, chaotic attractors, make the species composition keep changing without stabilizing nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
+Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodically changing species composition. Finally, chaotic attractors, make the species composition keep changing without reaching a fixed point nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
 
 \begin{figure}
 	\begin{center}
@@ -304,7 +306,7 @@ There's another local maximum for $ \epsilon = -1 $. This means that very weak i
 The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one local minimum between two local maxima\footnote{This is a direct consequence of applying Bolzano's theorem to the first derivative. Intuitively: there should be at least one valley between two mountains}.
 
 % Chaos and dimensionality
-The overall likelihood of chaos, which can be interpreted as the area under the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor\footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point.}. Even in those higher dimensional cases, there is still a maximum at neutral competition.
+The overall likelihood of chaos, which can be interpreted as the area under the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor \cite{Strogatz1994} \footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point.}. Even in those higher dimensional cases, there is still a maximum at neutral competition.
 
 \begin{figure}
 	\begin{center}
