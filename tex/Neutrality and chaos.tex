@@ -72,18 +72,22 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 
 % Introductory paragraph
 Fascination for biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more as there is a big mystery: why are there so many species?
+%TODO why are there so many species is for me not the complete translation of the paradox
 
 % Introduction of the biodiversity paradox 
 %TODO citations
 The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, most of the field observations seem to contradict the competitive exclusion principle, being the huge biodiversity in Earth its most noticeable counterexample. This contradiction is known as the biodiversity paradox. The paradox can be carelessly (but poetically) rephrased as \textit{Why are there so many species if there are so few niches?}
 %% Brief discussion about the alternative hypotheses
 % Introduction and hypotheses based in non-autonomous systems
-There are several hypotheses to explain the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. This means that both time and space need to be taken into account in the definition of ecological niche. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent seasonal environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium.
+There are several hypotheses to explain the paradox. For instance, Hutchinson\cite{Hutchinson} reports his observations on two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility of ecosystems to be driven by external, time-dependent seasonal environmental changes. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium.
+%TODO see also Huston, M. A. 1994. Biological Diversity: The Coexistence of Species on Changing Landscape. Cambridge University Press, Cambridge. Book.
+
 %TODO logical ordering of mentions to time and space domains
 
 % Introduction of chaotic dynamics
 %TODO writing fixed points is more precise than equilibrium
 After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of equilibrium. Of course, chaotic dynamics can arise as well in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
+%TODO Cite May
 
 % Hypotheses based in spatial heterogeneity 
 %TODO enlarge or remove?
@@ -96,17 +100,25 @@ All the previous hypotheses refer to the time domain. Regarding the spatial dime
 % Introduction of the neutral theory 
 %TODO citations
 Another hypothesis deserving attention are that of neutral competition, whose better known exponent is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. In neutral models, similar species inside an ecological community are assumed to have identical \textit{per capita} rates of birth, death, reproduction, etc. In those models, the long term differences between species are a result of random events. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees.
-%% -----
+%TODO About reconciling (near) neutral and niche theroy, cite {Scheffer2006}
+%TODO In neutral models the species can coexist because they are identical. But this is rather unrealistic, as species will for instance react differently to perturbations (response diversity Loreau Maybe introduced in this publcation (please check): Yachi, S. and M. Loreau. 1999. Biodiversity and ecosystem productivity in a fluctuating environment: The insurance hypothesis. Proceedings of the National Academy of Sciences of the United States of America 96:1463-1468 {Yachi1999}
 
+%TODO We need to make this motivation stronger, something like this?:
+%- Most of these theories include competition only
+%- Predation is important in many ecosystems and involves often many species (for instance phytoplankton/zooplankton)
+%- Multi-species predation may strongly increase the probablity of chaos (Dakos), and may thus contribute to the number of coexisting species.
+%- Here we study if neutrally competing species in combination with multispecies predation may increase or decrease the probabiluty of chaos.
 % Introduction to our contribution
 In the present paper we explore the links between neutral competition and the type of long term dynamics exhibited. Using competition models with different degrees of heterogeneity, our simulations show that the likelihood of chaotic dynamics increases when heterogeneity at the competitors' trophic level is minimal. That is, that neutrality in combination with multiple predators may promote chaos.
+%TODO not clear why I want to study: the links between neutral competition and the type of long term dynamics exhibited. Mention predation
 
 \section{Methods}
 \label{sec:Methods}
+%TODO Create an online appendix with extra figures, different chaos tests, different random distributions
 
 \subsection{Model description}
 \label{subsec:Model}
-We focused our attention in food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common source of resources. 
+We focused our attention on food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common source of resources. 
 
 \begin{figure}[h]
 	\begin{center}
@@ -117,7 +129,7 @@ We focused our attention in food webs with two trophic levels, one of consumers 
 \end{figure}
 
 % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers compete indirectly by sharing the same food. The consumers eat all kind of prey (i.e.: they are generalists), but find some of them more preferable than others. All these interactions are summarized in figure \ref{fig:Network}. The overall structure looks like:
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers compete indirectly by sharing the same food. The consumers eat all kind of prey, but find some of them more preferable than others. All these interactions are summarized in figure \ref{fig:Network}. The overall structure looks like:
 
 \begin{displaymath}
 \label{eq:EquationInPseudocode}
@@ -145,12 +157,12 @@ The predator preference for each prey species is given by $ S_{ij} $. That is, t
 	V_j(P) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
 \end{eqnarray}
 
-We hypothesized that the feeding term will be linear in $ C_j $, and have a Holling type II functional response on $ V_j $ in order to account for consumer satiation: 
+We hypothesized that the feeding term will be linear in $ C_j $. The dependency on $V_j$ happens through a Holling type II functional response with half saturation constant $ H $ in order to account for consumer satiation: 
 %TODO cite Edelstein Keshet
 
 \begin{equation}
 \label{eq:Feeding}
-	Feeding_j =  e g C_j F_{2}(V_j; H)
+	Feeding_j = e g C_j \frac{V_j}{V_j+H} = e g C_j F_{2}(V_j; H)
 \end{equation}
 
 $ e $ represents the assimilation efficiency of the predation. Thus, the effect of consumer $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all consumers in the prey species $ i $ as follows:
@@ -238,6 +250,7 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \subsubsection{Competition parameter}
 \label{subsubsec:CompetitionParameter}
 
+%TODO this can be rewritten in an equation-less way
 Our aim is to analyze the dynamics of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in heterogeneity. In order to quantify heterogeneity and controlling how far from neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
 
 The numerical implementation of these ideas can be easily achieved by building a competition matrix whose non diagonal terms are perturbed by an additive random number $W$, whose size is controlled by $\epsilon$ (see figure \ref{fig:CompetitionParameter} and equation \ref{eq:NeutralityParameter}).
@@ -271,6 +284,7 @@ Our target is to estimate the probability of reaching a chaotic attractor under 
 Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne test\cite{Gottwald2009} \footnote{We also applied the maximum Lyapunov exponent test, together with visual inspection, finding the same qualitative results.}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
 This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
+%TODO Mention simulation time, step, time series length for the 0-1 test, ...
 
 For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used [DON'T FORGET TO ACTUALLY PROVIDE IT].
 
@@ -299,13 +313,13 @@ For those more familiar with flow charts, figure \ref{fig:FlowChart} can be illu
 Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results} and \ref{fig:Contour}), we observe a clear maximum around $ \epsilon = 0 $. That is, for neutral competition at the prey's trophic level, the likelihood of chaotic behaviour is higher than for dominant inter or intraspecific competition.
 
 % Weak and strong interspecific competition
-There's another local maximum for $ \epsilon = -1 $. This means that very weak interspecific interactions also promote chaos [EGBERT MENTIONED THAT THIS IS REASONABLE, BUT A CITATION WILL BE NEEDED HERE].
+There's another local maximum for $ \epsilon = -1 $. This means that ecosystems with weak competition coupling also promote chaos. We consider this a reasonable result, as predation is the driver of chaos.
 
 % Valley
 The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one local minimum between two local maxima\footnote{This is a direct consequence of applying Bolzano's theorem to the first derivative. Intuitively: there should be at least one valley between two mountains}.
 
 % Chaos and dimensionality
-The overall likelihood of chaos, which can be interpreted as the area under the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor \cite{Strogatz1994} \footnote{We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point.}. Even in those higher dimensional cases, there is still a maximum at neutral competition.
+The overall likelihood of chaos, which can be interpreted as the area under the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor \cite{Strogatz1994}. We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point. Even in those higher dimensional cases, there is still a maximum at neutral competition.
 
 \begin{figure}
 	\begin{center}
@@ -326,6 +340,7 @@ The overall likelihood of chaos, which can be interpreted as the area under the 
 \section{Discussion}
 \label{sec:Discussion} % Our claims
 The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our food web is, the higher are the chances of developing chaotic behaviour. From the biological point of view this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. This suggests that in a system with predation, near-neutrality may increase the probability of non-equilibrium dynamics, increasing the possible number of species.
+%TODO explain a bit more
 
 % Limitations
 In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation in the simplest possible way. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of predation, chaos will never develop in a model with neutral competition\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total population. It can be proven that chaos cannot be developed in autonomous systems with less than $3$ dimensions. For details, see Poincaré-Bendixson theorem.}.
@@ -343,7 +358,10 @@ It may be worth noting that the position of both the maxima we've found (i.e.: $
 
 % Is chaos more resilient?
 %TODO there are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnond's cat map
-Additionally, we are implicitly assuming without a proof that chaotic ecosystems can have more species than non-chaotic ones. A possible continuation of this research may be the setting of two indepedent ecosystems, one of them chaotic and the other one non-chaotic, and allow them to interact at some point of time (simulating an invasion), in order to assess how much of each of the original ecosystems survives to this traumatic event.
+Additionally, we are implicitly assuming without a proof that chaotic ecosystems can have more species than non-chaotic ones.
+%TODO stronger concluding remark
+
+%TODO A possible continuation of this research may be the setting of two indepedent ecosystems, one of them chaotic and the other one non-chaotic, and allow them to interact at some point of time (simulating an invasion), in order to assess how much of each of the original ecosystems survives to this traumatic event. This is a good idea, but I think testing for resilience is too far from this study to put it here. You could instead refer to the discussions about  Huismans paper (Schippers, P., A. M. Verschoor, M. Vos, and W. M. Mooij. 2001. Does "supersaturated coexistence" resolve the "paradox of the plankton"? Ecology letters 4:404-407. and Huismans reply) {Schippers2001}
 
 %TODO count species above threshold
 
