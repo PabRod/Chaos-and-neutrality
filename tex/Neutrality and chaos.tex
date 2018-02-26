@@ -45,7 +45,6 @@
 \begin{document}
 
 \maketitle
-%TODO remove all footnotes
 %TODO double check the format requirements of target journal
 
 \begin{abstract}
@@ -152,38 +151,38 @@ Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \righ
 
 The predator preference for each prey species is given by $ S_{ij} $. That is, the matrix element $ S_{ij} $ represents the relative proportion of prey $ i $ in consumer's $ j $ \textit{menu}. Being a multispecies model, we can define an auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the predator preference coefficients. Biologically, this represents the composition of the \textit{menu} of consumer $ j $:
 
-\begin{eqnarray}
+\begin{equation}
 \label{eq:MenuFunction}
 	V_j(P) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
-\end{eqnarray}
+\end{equation}
 
-We hypothesized that the feeding term will be linear in $ C_j $. The dependency on $V_j$ happens through a Holling type II functional response with half saturation constant $ H $ in order to account for consumer satiation: 
+We hypothesized that the feeding term will be linear in $ C_j $. The dependency on $V_j$ happens through a Holling type II functional response with half saturation constant $ H $ in order to account for consumer satiation.
 %TODO cite Edelstein Keshet
 
 \begin{equation}
 \label{eq:Feeding}
-	Feeding_j = e g C_j \frac{V_j}{V_j+H} = e g C_j F_{2}(V_j; H)
+	Feeding_j = e g C_j \frac{V_j}{V_j+H}
 \end{equation}
 
 $ e $ represents the assimilation efficiency of the predation. Thus, the effect of consumer $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all consumers in the prey species $ i $ as follows:
 
 \begin{equation}
 \label{eq:Predation}
-Predation_i = g \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k}\right) C_k F_{2}(V_j; H)
+	Predation_i = g \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k}\right) C_k F_{2}(V_j; H)
 \end{equation}
 
-Where the term inside the parentheses represents the relative proportion of prey species $ i $ inside "the menu" of predator $ k $. It is interesting to note that the way the predation and feeding terms are defined satisfies the following property:
+Where the term inside the parentheses represents the relative proportion of prey species $ i $ inside "the menu" of predator $ k $, and $F_{2}$ is a shorthand for the Holling type II functional form introduced before. It is interesting to note that the way the predation and feeding terms are defined satisfies the following property:
 
 \begin{equation}
 \label{eq:Balance}
-\sum_{j=1}^{n_C} Feeding_j = e \sum_{i=1}^{n_P} Predation_i
+	\sum_{j=1}^{n_C} Feeding_j = e \sum_{i=1}^{n_P} Predation_i
 \end{equation}
 
 that is, all the deaths at the prey level are invested in the growth of consumers. For future clarity, it is a good idea to define the auxiliary function $ R_i $ as a summary of the effect of all consumers on prey $ i $:
 
 \begin{equation}
 \label{eq:PredationAux}
-R_i(P,C) \equiv \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k(P)}\right) C_k F_{2}(V_k(P); H) 
+	R_i(P,C) \equiv \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k(P)}\right) C_k F_{2}(V_k(P); H) 
 \end{equation}
 
 %TODO explain the immigration term
@@ -267,7 +266,7 @@ The numerical implementation of these ideas can be easily achieved by building a
 % W is used in brownian motion, and this can be misleading. Tobias suggests X.
 % epsilon is not a good name. It invites to think of small perturbations. Tobias suggests nu.
 % 1 + nu + X_{ij} where X is a uiid on [-1, 1] 
-The random numbers $W_{ij}$ have been drawn from a uniform distribution\footnote{Other distributions have been tried, leading to the same qualitative results.} of width $0.2$ centered in $\epsilon$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
+The random numbers $W_{ij}$ have been drawn from a uniform distribution of width $0.2$ centered in $\epsilon$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
 
 \begin{figure}[H]
 	\begin{center}
@@ -281,12 +280,12 @@ The random numbers $W_{ij}$ have been drawn from a uniform distribution\footnote
 \label{subsec:NumericalExperiment}
 Our target is to estimate the probability of reaching a chaotic attractor under different degrees of heterogeneity. In order to achieve this, we'll simulate several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter. We consider thus that those ecosystems share a qualitative property: the same degree of heterogeneity. 
 
-Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne test\cite{Gottwald2009} \footnote{We also applied the maximum Lyapunov exponent test, together with visual inspection, finding the same qualitative results.}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
+Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne test\cite{Gottwald2009}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
 This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 %TODO Mention simulation time, step, time series length for the 0-1 test, ...
 
-For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used [DON'T FORGET TO ACTUALLY PROVIDE IT].
+For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used \footnote{https://github.com/PabRod/Chaos-and-neutrality}.
 
 %Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
 %
@@ -316,7 +315,7 @@ Plotting the probability of chaos against the competition parameter (see figures
 There's another local maximum for $ \epsilon = -1 $. This means that ecosystems with weak competition coupling also promote chaos. We consider this a reasonable result, as predation is the driver of chaos.
 
 % Valley
-The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one local minimum between two local maxima\footnote{This is a direct consequence of applying Bolzano's theorem to the first derivative. Intuitively: there should be at least one valley between two mountains}.
+The probability of chaos has a local minimum between $ \epsilon = -1 $ and $ \epsilon = 0 $, whose exact position differs between experiments. We interpret this result as a consequence of the two previous effects: assuming continuity, there should be necessarily at least one local minimum between two local maxima. This is a direct consequence of applying Bolzano's theorem to the first derivative. Intuitively: there should be at least one valley between two mountains.
 
 % Chaos and dimensionality
 The overall likelihood of chaos, which can be interpreted as the area under the curve, increases with the size of the food web (see figure \ref{fig:Results}). This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor \cite{Strogatz1994}. We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point. Even in those higher dimensional cases, there is still a maximum at neutral competition.
@@ -343,7 +342,7 @@ The asymptotic dynamics of our model are affected by the degree of heterogeneity
 %TODO explain a bit more
 
 % Limitations
-In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation in the simplest possible way. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of predation, chaos will never develop in a model with neutral competition\footnote{If all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total population. It can be proven that chaos cannot be developed in autonomous systems with less than $3$ dimensions. For details, see Poincaré-Bendixson theorem.}.
+In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation in the simplest possible way. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of predation, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total population. Using the Poincaré-Bendixson theorem, it can be proven that chaos cannot be developed in autonomous systems with less than $3$ dimensions\cite{Strogatz1994}.
 
 We used the simplest predation network, that is, one with random prey preference for the predators. A straightforward continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral) by choosing other network structures.
 
