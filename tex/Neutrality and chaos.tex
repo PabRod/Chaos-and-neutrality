@@ -1,4 +1,4 @@
-\documentclass[a4paper, twocolumn, 10pt]{article}
+\documentclass[a4paper, onecolumn, 10pt]{article}
 
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
@@ -17,14 +17,7 @@
 
 \usepackage{authblk}
 
-%% Control draft / final version
-\newtoggle{personalDraft}
-\toggletrue{personalDraft}
-
-\newtoggle{journalDraft}
-\togglefalse{journalDraft}
-
-\title{Neutral competition among prey promotes chaos in two-level food webs \iftoggle{personalDraft}{\\ {\color{red} }}}
+\title{Neutral competition among prey promotes chaos in two-level food webs}
 \author[1]{Pablo Rodríguez-Sánchez \thanks{pablo.rodriguezsanchez@wur.nl}}
 \author[1]{Egbert van Nes \thanks{egbert.vannes@wur.nl}}
 \author[1]{Marten Scheffer \thanks{marten.scheffer@wur.nl}}
@@ -37,10 +30,7 @@
 
 \usepackage[switch]{lineno}
 
-\iftoggle{journalDraft}
-{
-	\linenumbers
-}
+%\linenumbers
 
 \begin{document}
 
@@ -59,12 +49,9 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 \textit{Keywords}: population dynamics, competition models, neutral competition, biodiversity paradox, chaos.
 \end{abstract}
 
-\iftoggle{personalDraft}
-{
-	%\clearpage
-	\tableofcontents
-	%\clearpage
-}
+%\clearpage
+\tableofcontents
+%\clearpage
 
 \section{Background}
 \label{sec:Background} 
@@ -438,10 +425,8 @@ The preliminary analysis of this model were performed using GRIND for Matlab (ht
 \bibliography{library}
 \bibliographystyle{vancouver}
 
-\iftoggle{journalDraft}
-{
-	\listoftables
-	\listoffigures
-}
+%\listoftables
+%\listoffigures
+
 
 \end{document}
