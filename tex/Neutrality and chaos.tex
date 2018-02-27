@@ -20,7 +20,7 @@
 
 \usepackage{authblk}
 
-\usepackage[draft]{todonotes} % Use disable instead of draft to hide todo notes
+\usepackage[draft,colorinlistoftodos]{todonotes} % Use disable instead of draft to hide todo notes
 
 \title{Neutral competition among prey promotes chaos in two-level food webs}
 \author[1]{Pablo Rodríguez-Sánchez \thanks{pablo.rodriguezsanchez@wur.nl}}
@@ -50,7 +50,7 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 
 %\clearpage
 \tableofcontents
-\listoftodos
+\listoftodos[TODOs]
 %\clearpage
 
 \section{Background}
@@ -68,8 +68,7 @@ There are several hypotheses to explain the paradox. For instance, Hutchinson\ci
 %TODO see also Huston, M. A. 1994. Biological Diversity: The Coexistence of Species on Changing Landscape. Cambridge University Press, Cambridge. Book.
 
 % Introduction of chaotic dynamics
-After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise as well in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b})\todo{Cite May}.
-%TODO Cite May
+After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{May1974}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise as well in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
 
 % Hypotheses based in spatial heterogeneity 
 All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.\todo[caption={Broken flow}]{Flow broken here}
@@ -131,6 +130,8 @@ Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \righ
 %}
 \end{equation}
 
+A secondary source for prey's growth in our model will be a constant immigration term $ f $, representing immigration from neighboring areas. We introduce this term in order to avoid complete extinctions.
+
 The predator preference for each prey species is given by $ S_{ij} $. That is, the matrix element $ S_{ij} $ represents the relative proportion of prey $ i $ in consumer's $ j $ \textit{menu}. Being a multispecies model, we can define an auxiliary variable $ V_j $ as a sum of the prey's populations weighted by the predator preference coefficients. Biologically, this represents the composition of the \textit{menu} of consumer $ j $:
 
 \begin{equation}
@@ -138,8 +139,7 @@ The predator preference for each prey species is given by $ S_{ij} $. That is, t
 	V_j(P) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
 \end{equation}
 
-We hypothesized that the feeding term will be linear in $ C_j $. The dependency on $V_j$ happens through a Holling type II functional response with half saturation constant $ H $ in order to account for consumer satiation\todo{Cite Edelstein or Murray}.
-%TODO cite Edelstein Keshet
+We hypothesized that the feeding term will be linear in $ C_j $. The dependency on $V_j$ happens through a Holling type II functional response with half saturation constant $ H $ in order to account for consumer satiation\cite{Edelstein-Keshet}.
 
 \begin{equation}
 \label{eq:Feeding}
@@ -177,13 +177,11 @@ Putting all together, the dynamical system reads:
 	\dot{C_j} = e g C_j F_{2}(V_j(P); H) - l C_j
 	\end{cases}
 \end{eqnarray}
-\todo{Explain the immigration term}
-%TODO explain the immigration term
 
 %TODO there are more than three possible regimes, like quasiperiodic and strange non-chaotic attractors. Suggestion: 
 % Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviours. As a simplification, I'll refer to all them as chaotic.
 
-Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behaviour, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, gives rise to a constant species composition. Cyclic attractors give rise to periodically changing species composition. Finally, chaotic attractors\todo{Clarify your definition of chaos}, make the species composition keep changing without reaching a fixed point nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
+Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behavior, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, generates a constant species composition. Cyclic attractors give rise to periodically changing species composition. Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviors. As a simplification, we'll refer to all them as chaotic. Chaotic behavior makes the species composition keep changing without reaching a fixed point nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
 
 \begin{figure}
 	\begin{center}
@@ -231,21 +229,13 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \subsubsection{Competition parameter}
 \label{subsubsec:CompetitionParameter}
 
-%TODO this can be rewritten in an equation-less way
-\todo{Rewrite without equations}
+%TODO change parameter name
+\todo[backgroundcolor=blue!25]{Change parameter name}
 Our aim is to analyze the dynamics of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in heterogeneity. In order to quantify heterogeneity and controlling how far from neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
 
-The numerical implementation of these ideas can be easily achieved by building a competition matrix whose non diagonal terms are perturbed by an additive random number $W$, whose size is controlled by $\epsilon$ (see figure \ref{fig:CompetitionParameter} and equation \ref{eq:NeutralityParameter}).
+The numerical implementation of these ideas can be easily achieved by building a competition matrix whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ \epsilon $ and with a given width\todo[backgroundcolor=blue!25]{Mention width somewhere}.
 
-\begin{eqnarray}
-\label{eq:NeutralityParameter}
-	A_{ij}(\epsilon) = 	\begin{cases}
-		1 & \text{ : } i=j \\ 
-		1 + W_{ij}(\epsilon) & \text{ : } i \neq j
-	\end{cases}
-\end{eqnarray}
-
-The random numbers $W_{ij}$ have been drawn from a uniform distribution of width $0.2$ centered in $\epsilon$. This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
+This parameterization allows us to travel continuously from strong dominant intraspecific to strong interspecific competition, meeting neutral competition at the border in between.
 
 \begin{figure}[H]
 	\begin{center}
@@ -259,12 +249,11 @@ The random numbers $W_{ij}$ have been drawn from a uniform distribution of width
 \label{subsec:NumericalExperiment}
 Our target is to estimate the probability of reaching a chaotic attractor under different degrees of heterogeneity. In order to achieve this, we'll simulate several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter. We consider thus that those ecosystems share a qualitative property: the same degree of heterogeneity. 
 
-Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. As a result, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne test\cite{Gottwald2009}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
+Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ 2000 $ days is generated in order to get closer to the attractor. Simulating for $ 5000 $ more days, we obtain time series as the ones in figure \ref{fig:TimeSeries}. Using the Gottwald-Melbourne test\cite{Gottwald2009}, we classify each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times for each competition parameter. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
-This numerical experiment can be repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.\todo{Missing simulation details}
-%TODO Mention simulation time, step, time series length for the 0-1 test, ...
+Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
-For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used \footnote{https://github.com/PabRod/Chaos-and-neutrality}.
+For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used\footnote{https://github.com/PabRod/Chaos-and-neutrality}\todo[caption={Only footnote}]{Just one footnote. I think it looks nice, but can be integrated in the text if required}.
 
 %Sweeping for different values of $ \epsilon $, we use the following procedure to estimate the probability of a chaotic attractor:
 %
@@ -419,6 +408,8 @@ The preliminary analysis of this model were performed using GRIND for Matlab (ht
 %\listoftables
 %\listoffigures
 
+%TODO
+\todo[inline, backgroundcolor=blue!25, caption={Citation style}]{Do we want to keep the 'Available from + URL' structure in the bibliography?}
 %TODO Create an online appendix with extra figures, different chaos tests, different random distributions
 \todo[inline, caption={Online appendix}]{Create an online appendix with extra figures, different chaos tests, different random distributions}
 %TODO Double check figures
