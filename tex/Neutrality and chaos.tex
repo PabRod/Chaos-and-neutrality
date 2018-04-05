@@ -39,10 +39,7 @@
 
 \begin{abstract}
 \label{sec:Abstract}
-\todo{Enlarge abstract}
-%TODO Enlarge abstract.
-%A rather technical start of the introduction. I think for ecologists we can better start with a short introduction on the question why are there so many species. This is also the motivation of this study. More biological end. What does this mean for the biodiversity?
-Neutral competition can be interpreted as a limit case between dominant intraspecific competition and dominant interspecific competition. Using a numerical model of an ecosystem with two trophic levels, we explore the surroundings of this limit case, that is, weak non-neutral competition interactions. It is shown that, the closer the competition is to neutrality, the higher are the chances of the system to develop chaotic behaviour.
+Neutral competition can be interpreted as a limit case between dominant intraspecific competition and dominant interspecific competition. Using a numerical model of an ecosystem with two trophic levels, we explore the surroundings of this limit case, that is, weak non-neutral competition interactions. It is shown that, the closer the competition is to neutrality, the higher are the chances of the system to develop chaotic behaviour. The competitive exclusion principle, based in equilibrium assumptions, is thus less likely to be applicable to neutral ecosystems. As a result, these systems have more chances of holding a higher amount of coexisting species than non neutral ones.
 
 \paragraph{}
 \textit{Keywords}: population dynamics, competition models, neutral competition, biodiversity paradox, chaos.
@@ -89,8 +86,8 @@ Another hypothesis deserving attention are that of neutral competition, whose be
 % Introduction to our contribution
 \todo{Stronger motivation required}
 In the present paper we explore the links between neutral competition and the type of long term dynamics exhibited. Using competition models with different degrees of heterogeneity, our simulations show that the likelihood of chaotic dynamics increases when heterogeneity at the competitors' trophic level is minimal. That is, that neutrality in combination with multiple predators may promote chaos.
-\todo{Mention predation}
-%TODO not clear why I want to study: the links between neutral competition and the type of long term dynamics exhibited. Mention predation
+\todo{Not clear motivation}
+%TODO not clear why I want to study: the links between neutral competition and the type of long term dynamics exhibited
 
 \section{Methods}
 \label{sec:Methods}
@@ -177,10 +174,7 @@ Putting all together, the dynamical system reads:
 	\end{cases}
 \end{eqnarray}
 
-%TODO there are more than three possible regimes, like quasiperiodic and strange non-chaotic attractors. Suggestion: 
-% Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviours. As a simplification, I'll refer to all them as chaotic.
-
-Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behavior, each of them corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, generates a constant species composition. Cyclic attractors give rise to periodically changing species composition. Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviors. As a simplification, we'll refer to all them as chaotic. Chaotic behavior makes the species composition keep changing without reaching a fixed point nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
+Depending on the parameters and the initial conditions, this system can give rise to three types of asymptotic behavior, each of them roughly corresponding to a different type of attractor. The easier one, corresponding to a stable point attractor, generates a constant species composition. Cyclic attractors give rise to periodically changing species composition. Beyond fixed points and cycle attractors, there is a wide variety of more complex possible behaviors. As a simplification, we'll refer to all them as chaotic. Chaotic behavior makes the species composition keep changing without reaching a fixed point nor giving rise to periodicity (see figure \ref{fig:TimeSeries}).
 
 \begin{figure}
 	\begin{center}
@@ -229,6 +223,7 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \label{subsubsec:CompetitionParameter}
 
 %TODO change parameter name
+%TODO check parameterization
 \todo[backgroundcolor=blue!25]{Change parameter name}
 Our aim is to analyze the dynamics of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in heterogeneity. In order to quantify heterogeneity and controlling how far from neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
 
@@ -305,7 +300,7 @@ The overall likelihood of chaos, which can be interpreted as the area under the 
 
 \section{Discussion}
 \label{sec:Discussion} % Our claims
-The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our food web is, the higher are the chances of developing chaotic behaviour. From the biological point of view this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. This suggests that in a system with predation, near-neutrality may increase the probability of non-equilibrium dynamics, increasing the possible number of species\todo{Explain a bit more}.
+The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our food web is, the higher are the chances of developing chaotic behaviour. From the biological point of view this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. This suggests that in a system with predation, near-neutrality may increase the probability of non-equilibrium dynamics, increasing the number of coexisting species\todo{Explain a bit more}.
 %TODO explain a bit more
 
 % Limitations
