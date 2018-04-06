@@ -20,7 +20,7 @@
 
 \usepackage{authblk}
 
-\usepackage[draft,colorinlistoftodos]{todonotes} % Use disable instead of draft to hide todo notes
+\usepackage[draft, colorinlistoftodos]{todonotes} % Use disable instead of draft to hide todo notes
 
 \title{Neutral competition among prey promotes chaos in two-level food webs}
 \author[1]{Pablo Rodríguez-Sánchez \thanks{pablo.rodriguezsanchez@wur.nl}}
@@ -76,7 +76,7 @@ All the previous hypotheses refer to the time domain. Regarding the spatial dime
 % Introduction of the neutral theory 
 Another hypothesis deserving attention is that of neutral competition, whose better known exponent is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. In neutral models, similar species inside an ecological community are assumed to have identical \textit{per capita} rates of birth, death, reproduction, etc. In those models, the long term differences between species are a result of random events. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees \cite{Hubbell2001}. Some evidence about the counter-intuitive fact that similarity can give rise to coexistence can be found in \cite{Scheffer2006}.
 
-\todo{Cite Yachi1999}
+\todo{Cite Yachi's insurance hypothesis}
 %TODO In neutral models the species can coexist because they are identical. But this is rather unrealistic, as species will for instance react differently to perturbations (response diversity). Maybe introduced in this publcation (please check): Yachi, S. and M. Loreau. 1999. Biodiversity and ecosystem productivity in a fluctuating environment: The insurance hypothesis. Proceedings of the National Academy of Sciences of the United States of America 96:1463-1468 {Yachi1999}
 
 %SolvedTODO We need to make this motivation stronger, something like this?:
@@ -194,7 +194,7 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 			\hline
 			\textbf{Symbol} & \textbf{Interpretation} & \textbf{Value} & \textbf{Units} \\
 			\hline
-			$r$ & Growth rate & $0.50$ & $d^{-1}$ \\
+			$r$ & Maximum growth rate & $0.50$ & $d^{-1}$ \\
 		    \hline
 			$K$ & Carrying capacity & $1.00$ & $ mg \ l^{-1} $ \\
 			\hline
@@ -313,10 +313,11 @@ Interestingly enough, a relatively small number of replicates suffices to genera
 % Role of symmetry
 It may be worth noting that the position of both the maxima we've found (i.e.: $ \epsilon = -1 $ and $ \epsilon = 0 $) have something in common: the community matrix $ A $ at those values of the parameter is very symmetric in both cases. It will be interesting to develop a similar method that, instead of varying neutrality, varies the less restrictive property of symmetry.
 
-% Is chaos more resilient?
-Additionally, we are implicitly assuming without a proof that chaotic ecosystems can have more species than non-chaotic ones\todo{Stronger concluding remark required}.
-\todo[inline, caption={This is well known in math}]{There are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnold's cat map.}
 %TODO stronger concluding remark
+
+% Is chaos more resilient?
+%Additionally, we are implicitly assuming without a proof that chaotic ecosystems can have more species %than non-chaotic ones\todo{Stronger concluding remark required}.
+%\todo[inline, caption={This is well known in math}]{There are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnold's cat map.}
 %TODO there are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnond's cat map
 
 \todo[inline, caption={Further reading}]{Refer to the discussions about  Huismans paper (Schippers, P., A. M. Verschoor, M. Vos, and W. M. Mooij. 2001. Does "supersaturated coexistence" resolve the "paradox of the plankton"? Ecology letters 4:404-407. and Huismans reply) {Schippers2001}}
