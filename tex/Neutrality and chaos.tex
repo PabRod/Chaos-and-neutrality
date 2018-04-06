@@ -54,7 +54,7 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 \label{sec:Background} 
 
 % Introductory paragraph
-Fascination for biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more as there is a big mystery: why are there so many species?\todo[caption={Clarify the paradox}]{Egbert: Why are there so many species is for me not the complete paradox. Me: Please, tell me more}
+Fascination for biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more as there is a big mystery: why are there so many species?\todo[inline, caption={Clarify the paradox}]{\textbf{Egbert}: Why are there so many species is for me not the complete paradox. \textbf{Me}: I like this "poetical" introduction. Maybe I can properly define the paradox in next paragraph, after Gause's law?}
 %TODO why are there so many species is for me not the complete translation of the paradox
 
 % Introduction of the biodiversity paradox 
@@ -68,7 +68,7 @@ There are several hypotheses to explain the paradox. For instance, Hutchinson\ci
 After the discovery of chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{May1974, Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise as well in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
 
 % Hypotheses based in spatial heterogeneity 
-All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.\todo[caption={Broken flow}]{Tobias: Flow broken here. High risk of the reviewer stopping reading! Why are all the previous explanations not sufficient? Why does neutrality deserve attention?}.
+All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994} \todo[caption={Broken flow}, backgroundcolor=green!25]{Tobias: Flow broken here. High risk of the reviewer stopping reading! Why are all the previous explanations not sufficient? Why does neutrality deserve attention?}.
 %TODO according to Tobias, the flow is broken here. High risk of the reviewer stopping reading! 
 % Why are all the previous explanations not sufficient?
 % Why does neutrality deserve attention?
@@ -76,7 +76,7 @@ All the previous hypotheses refer to the time domain. Regarding the spatial dime
 % Introduction of the neutral theory 
 Another hypothesis deserving attention is that of neutral competition, whose better known exponent is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. In neutral models, similar species inside an ecological community are assumed to have identical \textit{per capita} rates of birth, death, reproduction, etc. In those models, the long term differences between species are a result of random events. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees \cite{Hubbell2001}. Some evidence about the counter-intuitive fact that similarity can give rise to coexistence can be found in \cite{Scheffer2006}.
 
-\todo{Cite Yachi's insurance hypothesis}
+\todo[caption={Yachi's insurance hypothesis}]{I don't fully understand how to fit Yachi's insurance hypothesis here}
 %TODO In neutral models the species can coexist because they are identical. But this is rather unrealistic, as species will for instance react differently to perturbations (response diversity). Maybe introduced in this publcation (please check): Yachi, S. and M. Loreau. 1999. Biodiversity and ecosystem productivity in a fluctuating environment: The insurance hypothesis. Proceedings of the National Academy of Sciences of the United States of America 96:1463-1468 {Yachi1999}
 
 %SolvedTODO We need to make this motivation stronger, something like this?:
@@ -297,27 +297,28 @@ The overall likelihood of chaos, which can be interpreted as the area under the 
 
 \section{Discussion}
 \label{sec:Discussion} % Our claims
-The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our food web is, the higher are the chances of developing chaotic behaviour. From the biological point of view this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. This suggests that in a system with predation, near-neutrality may increase the probability of non-equilibrium dynamics. Provided the competitive exclusion principle rests on the assumption of equilibrium, near-neutrality reduces the chances of the principle to be applicable, improving the chances for a high number of coexisting species.
+The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our food web is, the higher are the chances of developing chaotic behaviour. This suggests that in a system with predation, near-neutrality may increase the probability of non-equilibrium dynamics. Provided the competitive exclusion principle rests on the assumption of equilibrium, near-neutrality reduces the chances of the principle to be applicable, improving the chances for a high number of coexisting species. Additionaly, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent.
 
 % Limitations
 In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation in the simplest possible way. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of predation, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total population. Using the Poincaré-Bendixson theorem, it can be proven that chaos cannot be developed in autonomous systems with less than $3$ dimensions\cite{Strogatz1994}.
 
-We used the simplest predation network, that is, one with random prey preference for the predators. A straightforward continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral) by choosing other network structures.
+% Predation parameters
+We used the simplest predation network, that is, one with random prey preference for the predators. A possible continuation of this paper could be studying the effect of the type of predation (generalist, specialist, neutral) by choosing other network structures. 
 
-% Chaos detection
-Numerical detection of chaos has fundamental limitations. There can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long transients and genuine chaos. In the present paper three parallel approaches were followed: Lyapunov exponents estimation, Gottwald-Melbourne \textit{0-1} test and visual inspection. Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
-
-% The parameter epsilon
-Interestingly enough, a relatively small number of replicates suffices to generate a remarkably clear maximum in the probability of chaos for neutral competition. The position of this maximum is independent of the number of interacting species. This suggests that the parameter $ \epsilon $, originally motivated by numerical convenience, may have a biological interpretation by itself. It will be interesting to reverse-engineer this parameter given a set of community matrices validated by experimental or field observations.
-
-% Random parameters
-It is known that the asymptotic behaviour of this kind of systems can be very sensitive to the parameters choice. In particular, introducing correlations between parameters can greatly modify the probabilities of chaotic attractors to be reached (see for instance \cite{Huisman2001}, in response to the letter \cite{Schippers2001}). In the present paper we didn't introduce any correlation, i.e., all our random parameters were drawn independently from the others. Studying the effect of different physiological scenarios (in the sense of \cite{Huisman2001}, that is, constrains between the parameters) on the probabilities of chaos could be a straightforward continuation to this paper.
+% Competition parameters
+The competition parameters were also drawn randomly. It is known that the asymptotic behaviour of this kind of systems can be very sensitive to the parameters choice. In particular, introducing correlations between parameters can greatly modify the probabilities of chaotic attractors to be reached (see for instance \cite{Huisman2001}, in response to the letter \cite{Schippers2001}). In the present paper we didn't introduce any correlation, i.e., all our random parameters were drawn independently from the others. Studying the effect of different physiological scenarios (in the sense of \cite{Huisman2001}, that is, constrains between the parameters) on the probabilities of chaos could be a straightforward continuation to this paper.
 
 % Role of symmetry
 It may be worth noting that the position of both the maxima we've found (i.e.: $ \epsilon = -1 $ and $ \epsilon = 0 $) have something in common: the community matrix $ A $ at those values of the parameter is very symmetric in both cases. It will be interesting to develop a similar method that, instead of varying neutrality, varies the less restrictive property of symmetry.
 
+% The parameter epsilon
+Interestingly enough, a relatively small number of replicates suffices to generate a remarkably clear maximum in the probability of chaos for neutral competition. The position of this maximum is independent of the number of interacting species. This suggests that the parameter $ \epsilon $, originally motivated by numerical convenience, may have a biological interpretation by itself. It will be interesting to reverse-engineer this parameter given a set of community matrices validated by experimental or field observations.
+
+% Chaos detection
+Numerical detection of chaos has fundamental limitations, that can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long transients and genuine chaos. In the present paper three parallel approaches were followed: Lyapunov exponents estimation, Gottwald-Melbourne \textit{0-1} test and visual inspection. Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger both the 0-1 test and the visual inspection tests. We think that this approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
+
 %TODO stronger concluding remark
-\todo{Stronger concluding remark}
+\todo{Stronger concluding remark required}
 
 % Is chaos more resilient?
 %Additionally, we are implicitly assuming without a proof that chaotic ecosystems can have more species %than non-chaotic ones\todo{Stronger concluding remark required}.
