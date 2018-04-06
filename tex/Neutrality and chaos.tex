@@ -222,7 +222,6 @@ For the parameterization of our model we used \cite{Dakos2009b} as a reference. 
 \label{subsubsec:CompetitionParameter}
 
 %TODO change parameter name
-%TODO check parameterization
 \todo[backgroundcolor=blue!25]{Change parameter name}
 Our aim is to analyze the dynamics of the system described in equation \ref{eq:SystemUnderStudy} for competition interactions differing in heterogeneity. In order to quantify heterogeneity and controlling how far from neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter}).
 
@@ -299,8 +298,7 @@ The overall likelihood of chaos, which can be interpreted as the area under the 
 
 \section{Discussion}
 \label{sec:Discussion} % Our claims
-The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our food web is, the higher are the chances of developing chaotic behaviour. From the biological point of view this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. This suggests that in a system with predation, near-neutrality may increase the probability of non-equilibrium dynamics, increasing the number of coexisting species\todo{Explain a bit more}.
-%TODO explain a bit more
+The asymptotic dynamics of our model are affected by the degree of heterogeneity of the competition. Particularly, the closer to neutrality our food web is, the higher are the chances of developing chaotic behaviour. From the biological point of view this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. This suggests that in a system with predation, near-neutrality may increase the probability of non-equilibrium dynamics. Provided the competitive exclusion principle rests on the assumption of equilibrium, near-neutrality reduces the chances of the principle to be applicable, improving the chances for a high number of coexisting species.
 
 % Limitations
 In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation in the simplest possible way. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of predation, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total population. Using the Poincaré-Bendixson theorem, it can be proven that chaos cannot be developed in autonomous systems with less than $3$ dimensions\cite{Strogatz1994}.
