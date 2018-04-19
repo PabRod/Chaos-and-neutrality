@@ -4,7 +4,9 @@
 *.bbl
 *.blg
 *.toc
-*.pdf
+*.fls
+*.fdb_latexmk
+*.rej
 
 ## Figures
 *.png
@@ -15,8 +17,12 @@
 *.asv
 *.mat
 
-## Exclude notes
-notes/
+## Untracked notes
+notes/other
+*Working*
+
+## Tagged versions
+tex/versions
 
 ## Python temporary files
 img/code/__pycache__/
