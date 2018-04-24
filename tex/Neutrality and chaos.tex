@@ -15,17 +15,17 @@
 \usepackage{cite}
 \usepackage{url}
 
-\usepackage{draftwatermark}
-\SetWatermarkText{Confidential}
-\SetWatermarkColor[gray]{0.9}
-\SetWatermarkScale{3}
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Confidential}
+%\SetWatermarkColor[gray]{0.9}
+%\SetWatermarkScale{3}
 
 \usepackage{graphicx}
 \graphicspath{ {../img/} }
 
 \usepackage{authblk}
 
-\usepackage[disable, colorinlistoftodos]{todonotes} % Use disable instead of draft to hide todo notes
+\usepackage[draft, colorinlistoftodos]{todonotes} % Use disable instead of draft to hide todo notes
 %\newcommand{\todoq}[1]{\todo[color = yellow!25]{#1}}
 
 \title{Neutral competition among prey promotes chaos in two-level food webs}
@@ -63,30 +63,26 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 Fascination for biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be a requirement for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more as there is a big mystery: why are there so many species?
 
 % Introduction of the biodiversity paradox 
-The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, complete exclusion rarely occurs in nature\cite{Huston1979}, and the huge biodiversity in rather homogeneous systems such as pelagic ecosystems is a noticeable counterexample\cite{Hutchinson1961}. This contradiction is known as the biodiversity paradox. The paradox can be rephrased as \textit{Why are there so many species if there are so few niches?}
+The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, complete exclusion rarely occurs in nature\cite{Huston1979}, being the huge biodiversity in rather homogeneous systems such as pelagic ecosystems a remarkable counterexample\cite{Hutchinson1961}. This contradiction is known as the biodiversity paradox. The paradox can be rephrased as \textit{Why are there so many species if there are so few niches?}
 
 %TODO Re-read both Hutchinson papers
 \todo[inline, color=blue!25]{Re-read both Hutchinson papers}
 
 %% Brief discussion about the alternative hypotheses
 % Introduction and hypotheses based in non-autonomous systems
-%TODO I expect directly some hypotheses
-There are several hypotheses to explain the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches of species can be higher due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons.\todo[caption={Directly hypotheses}, color = yellow!25]{\textbf{Egbert}: I expect directly some hypotheses. \textbf{Pablo}: do you mean less descriptions?} In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes, being seasonal factors an obvious example. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
+Several hypotheses have been proposed in order to explain the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches of species can be higher due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes, being seasonal factors an obvious example. If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
 
 % Introduction of chaotic dynamics
 After the discovery of deterministic chaos\cite{Lorenz1963}, it has been shown that non-equilibrium ecosystems can arise as well under constant environmental conditions\cite{May1974, Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise as well in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
 
 % Hypotheses based in spatial heterogeneity 
-All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}. \todo[inline, color=yellow!25, caption={Broken flow}, color=yellow!25]{\textbf{Tobias}: Flow broken here. High risk of the reviewer stopping reading! Why are all the previous explanations not sufficient? Why does neutrality deserve attention? \\ \textbf{Egbert}: I agree with Tobias that the flow is broken a bit. You just need to make the connection with the previous more explicit. (certainly not delete this as it is essential for our story). \\ \textbf{Pablo}: Maybe: \textit{"A rather radical other explanation difficult to fit in the two previous groups..."}}
-%TODO according to Tobias, the flow is broken here. High risk of the reviewer stopping reading! 
-% Why are all the previous explanations not sufficient?
-% Why does neutrality deserve attention?
+All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible explanation of the paradox \cite{Tilman1994}.
 
 % Introduction of the neutral theory 
 A rather radical other explanation for high diversity is \textit{Hubbell's neutral competition theory} \cite{Hubbell2001}. Here it is assumed that similar species inside an ecological community have identical \textit{per capita} rates of birth, death, reproduction, etc. In those models, the long term differences between species are a result of stochastic processes. Despite its counter-intuitive and controversial foundations, neutral models have been successfully applied to populations of rainforest trees \cite{Hubbell2001}. Even more interesting, neutrality has been found to arise as a self-organized effect allowing higher coexistence in evolutionary models \cite{Scheffer2006}.
 
 %TODO 
-\todo[inline, color=yellow!25, caption={Yachi's insurance hypothesis}]{\textbf{Egbert}: In neutral models the species can coexist because they are identical. But this is rather unrealistic, as species will for instance react differently to perturbations (response diversity). Maybe introduced in \textit{Yachi, S. and M. Loreau. 1999}. \\ \textbf{Pablo}: I don't fully understand how to fit Yachi's insurance hypothesis here. Can you please check if this is the paper you meant? \\ \textbf{Egbert}: Maybe it is not needed here. We could also move this to the discussion or so. But I think response diversity is essential for insurance: quote: "The strength of these insurance effects is determined by three factors: (i) the way ecosystem productivity is determined by individual species responses to environmental fluctuations, (ii) the degree of asynchronicity of these responses, and (iii) the detailed form of these responses." \\ \textbf{Pablo}: do we understand Yachi's idea as neutrality + response diversity?}
+\todo[inline, color=yellow!25, caption={Yachi's insurance hypothesis}]{\textbf{Egbert}: In neutral models the species can coexist because they are identical. But this is rather unrealistic, as species will for instance react differently to perturbations (response diversity). Maybe introduced in \textit{Yachi, S. and M. Loreau. 1999}. \\ \textbf{Pablo}: I don't fully understand how to fit Yachi's insurance hypothesis here. Can you please check if this is the paper you meant? \\ \textbf{Egbert}: Maybe it is not needed here. We could also move this to the discussion or so. But I think response diversity is essential for insurance: quote: "The strength of these insurance effects is determined by three factors: (i) the way ecosystem productivity is determined by individual species responses to environmental fluctuations, (ii) the degree of asynchronicity of these responses, and (iii) the detailed form of these responses." \\ \textbf{Pablo}: do we understand Yachi's idea as neutrality + response diversity? \\ Egbert: different response to predation can be justified by response diversity. This can fit in the introduction, or in methods or in discussion.}
 %In neutral models the species can coexist because they are identical. But this is rather unrealistic, as species will for instance react differently to perturbations (response diversity). Maybe introduced in this publcation (please check): Yachi, S. and M. Loreau. 1999. Biodiversity and ecosystem productivity in a fluctuating environment: The insurance hypothesis. Proceedings of the National Academy of Sciences of the United States of America 96:1463-1468 {Yachi1999}
 
 %%TODO We need to make this motivation stronger, something like this?:
@@ -120,7 +116,7 @@ The dynamics were modelled as a system of ordinary differential equations. We us
 \label{eq:EquationInPseudocode}
 	\begin{cases}
 	\frac{d}{dt} \left( Prey \right) = Growth  - Predation + Immigration \\
-	\frac{d}{dt} \left( Cons \right) = Feeding - Death \\
+	\frac{d}{dt} \left( Cons \right) = Feeding - Loss \\
 	\end{cases}
 \end{displaymath}
 
@@ -151,7 +147,7 @@ We hypothesized that the feeding term will be linear in $ C_j $. The dependency 
 	Feeding_j = e g C_j \frac{V_j}{V_j+H}
 \end{equation}
 %TODO Rename feeding
-\todo[inline, color = yellow!25, caption = {Rename feeding}]{\textbf{Egbert}: Feeding is confusing as the sum of predation should be the sum of the feeding. Possible new name: CrossGrowth. \\ \textbf{Pablo}: being the sum up to assimilation constant maybe it is clearer to take the constant out of the equation.}
+\todo[inline, color = yellow!25, caption = {Rename feeding}]{\textbf{Egbert}: Feeding is confusing as the sum of predation should be the sum of the feeding. Possible new name: GrossGrowth (NetGrowth = GrossGrowth - Loss). \\ \textbf{Pablo}: being the sum up to assimilation constant maybe it is clearer to take the constant out of the equation.}
 
 $ e $ represents the assimilation efficiency of the predation. Thus, the effect of consumer $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all consumers in the prey species $ i $ as follows:
 
@@ -294,10 +290,10 @@ In the spirit of mathematical modelling, we chose the simplest realization requi
 We used the simplest predation network, that is, one with random prey preference for the predators. A possible continuation of this paper could be studying the effect of different types of predation (generalist, specialist, neutral) on the asymptotic dynamics.
 
 %TODO Chaos and predation
-\todo[inline, color=yellow!25, caption={Chaos and predation}]{\textbf{Egbert}: Add some discussion about this assumption.  It is clear that the chaos is created here so this deserves more attention. It is essential for chaos that the predators have a different preference and that the predation is rather efficient: in a two species case it predator-prey cycles should be possible. \textbf{Pablo}: These ideas are far from trivial. References will be required}
+\todo[inline, color=yellow!25, caption={Chaos and predation}]{\textbf{Egbert}: Add some discussion about this assumption.  It is clear that the chaos is created here so this deserves more attention. It is essential for chaos that the predators have a different preference and that the predation is rather efficient: in a two species case it predator-prey cycles should be possible. \\ \textbf{Pablo}: These ideas are far from trivial. References will be required \\ \textbf{Egbert}: Predation efficiency controls chaos (vanNes2004). The presence of chaos or cycles depends crucially on H and its heterogeneity.}
 
 %TODO Network architecture
-\todo[inline, color=yellow!25, caption={Network architecture}]{\textbf{Egbert}: You can also discuss network architectures of foodwebs (they seem to be modular) (see Thébault, E. and C. Fontaine. 2010. Stability of ecological communities and the architecture of mutualistic and trophic networks. Science 329:853-856.) \textbf{Pablo}: our model has a single, big cluster of competitors. How can we explain our choice?}
+\todo[inline, color=yellow!25, caption={Network architecture}]{\textbf{Egbert}: You can also discuss network architectures of foodwebs (they seem to be modular) (see Thébault, E. and C. Fontaine. 2010. Stability of ecological communities and the architecture of mutualistic and trophic networks. Science 329:853-856.) \\ \textbf{Pablo}: our model has a single, big cluster of competitors. How can we explain our choice? \\ \textbf{Egbert}: Self criticism, but we can explain our choice as focusing in one of those modules. \textit{We assume links everywhere (not realistic) but it is shown that most food webs are modular so we can regard...}}
 
 % Competition parameters
 The competition parameters were also drawn from probability distributions. It is known that the asymptotic behaviour of this kind of systems can be very sensitive to the parameters choice. In particular, introducing correlations between parameters can greatly modify the probabilities of chaotic attractors to be reached (see for instance \cite{Huisman2001}, in response to the letter \cite{Schippers2001}). In the present paper we didn't introduce any correlation, i.e., all our random parameters were drawn independently from the others. Studying the effect of different physiological scenarios (in the sense of \cite{Huisman2001}, that is, constrains between the parameters) on the probabilities of chaos could be a straightforward continuation to this paper.
@@ -305,15 +301,10 @@ The competition parameters were also drawn from probability distributions. It is
 % Role of symmetry
 It may be worth noting that the position of both the maxima we've found (i.e.: $ \epsilon = -1 $ and $ \epsilon = 0 $) have something in common: the community matrix $ A $ at those values of the parameter is very symmetric in both cases. It will be interesting to develop a similar method that, instead of varying neutrality, varies the less restrictive property of symmetry.
 %TODO Effects of symmetry
-\todo[inline, color=yellow!25, caption={Effects of symmetry}]{\textbf{Egbert}: Good chance that a reviewer says: nice these suggestions, but why do they not show it here? \\ \textbf{Pablo}: Remove or do?}
-
-% The parameter epsilon
-%TODO Biological interpretation of parameter
-Interestingly enough, a relatively small number of replicates suffices to generate a remarkably clear maximum in the probability of chaos for neutral competition. The position of this maximum is independent of the number of interacting species. This suggests that the parameter $ \epsilon $, originally motivated by numerical convenience, may have a biological interpretation by itself\todo[color = yellow!25, caption = Biological interpretation of parameter]{\textbf{Egbert}: This is not clear. \textbf{Pablo}: Remove?}.
+\todo[inline, color=blue!25, caption={Effects of symmetry}]{\textbf{Egbert}: Good chance that a reviewer says: nice these suggestions, but why do they not show it here? \\ \textbf{Pablo}: Remove or do? \\ \textbf{Egbert}: up to you. Maybe it is not so difficult to perform the same analysis imposing symmetry}
 
 % Chaos detection
-%TODO Chaotic transients
-Numerical detection of chaos has fundamental limitations, that can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long \todo[inline, color=yellow!25, caption = {Chaotic transients?}]{\textbf{Egbert}: chaotic? \\ \textbf{Pablo}: I would say only attractors can be chaotic, so that excludes transients. Maybe: \textit{"chaotic looking / complex / complicated transients"}} transients and genuine chaos. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
+Numerical detection of chaos has fundamental limitations, that can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long, complicated transients and genuine chaos. We think that our approach to chaos detection, despite being open to improvement, suffices to hold the biological conclusions.
 
 % Concluding remark
 The paradox of biodiversity is a tremendously complex scientific problem. With these model exercises we definitely do not claim to have solved it, but we show that predation in combination with neutral competition may increase the probability of chaos, and thereby increase the number of coexisting species.
@@ -333,6 +324,12 @@ The preliminary analysis of this model were performed using GRIND for Matlab (ht
 
 \section{Appendix}
 \label{sec:Appendix}
+
+\subsection{Generalized Rosenzweig-MacArthur model}
+\label{subsec:GeneralizedRosMacModel}
+
+%TODO Write appendix subsection
+\todo[inline, color = blue!25]{Write it}
 
 \subsection{Extra figures}
 \label{subsec:ExtraFigures}
