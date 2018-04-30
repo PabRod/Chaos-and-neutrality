@@ -187,7 +187,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 
 \begin{table}[H]
 	\begin{center}
-		\resizebox{\columnwidth}{!}{%
+		\resizebox{\columnwidth}{!}{
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			\textbf{Symbol} & \textbf{Interpretation} & \textbf{Value} & \textbf{Units} \\
@@ -311,11 +311,186 @@ The preliminary analysis of this model were performed using GRIND for Matlab (ht
 \section{Appendix}
 \label{sec:Appendix}
 
-\subsection{Generalized Rosenzweig-MacArthur model}
-\label{subsec:GeneralizedRosMacModel}
+\subsection{Generalized multispecies predation models}
+\label{subsec:GeneralizedModels}
 
-%TODO Write appendix subsection
-\todo[inline, color = gray!25, caption = {Explain generalized model}]{\textbf{Pablo}: Move it here from model description section}
+\subsubsection{General properties of predation models}
+\label{subsubsec:GeneralPropertiesOfPredation}
+
+Most predation models based on differential equations follow a structure like this:
+
+\begin{eqnarray}
+\label{eq:CommonStructure}
+	\begin{cases}
+	\dot{P} = Growth(P) - Predation(P,C)
+	\\ 
+	\dot{C} = -Loss(C) + GrossGrowth(P,C)
+	\end{cases}
+\end{eqnarray}
+
+where $P$ represents the biomass of the prey population, and $C$ the biomass of the consumer/predator population. The functional dependences have been explicitly written in order to remark the fact that the coupling of the system happens via the $Predation$ and $GrossGrowth$ terms.
+
+It is important to note that, in models like this, all deaths at the prey's level are due to predation. This can be understood as all deaths being \textit{invested} into consumer's growth. In order of this effect to be true, a restriction must be applied to the functional forms of $Predation$ and $CrossGrowth$:
+
+\begin{equation}
+\label{eq:InnerEnergyFlow}
+	GrossGrowth(P,C) = e \cdot Predation(P,C)
+\end{equation}
+
+where $e$ represents the efficiency of the energy transfer process. Equation \ref{eq:InnerEnergyFlow}, when plugged into \ref{eq:CommonStructure}, yields:
+
+\begin{equation}
+\label{eq:AllEnergyFlow}
+	e \dot P + \dot C = e \cdot Growth(P) - Loss(C)
+\end{equation}
+
+Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open system from the point of view of thermodynamics, with $Growth$ being the only source of the system, and $Loss$ the only sink (see figure \ref{fig:EnergyFlow}). All the energy exchange due to predation stays inside the system, so predation can be considered a closed subsystem.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[width=1\columnwidth]{energyflow.png}
+	\end{center}
+	\caption{Plot showing the energy flow for a two species and a multispecies system.}
+	\label{fig:EnergyFlow}
+\end{figure}
+
+We can generalize this basic structure to multispecies, two trophic levels systems. First, we'll go back to equation \ref{eq:CommonStructure} and just add more rows, being specially careful with the variables inside the functional relations:
+
+\begin{eqnarray}
+\label{eq:CommonStructureMulti}
+	\begin{cases}
+	\dot{P_i} = Growth_i(P) - Predation_i(P,C) & : i = 1..n_P
+	\\ 
+	\dot{C_j} = -Loss_j(C_j) + GrossGrowth_j(P,C_j) & : j = 1..n_C
+	\end{cases}
+\end{eqnarray}
+
+where now $i$ runs from $1$ to the number of prey $n_P$ and $j$ from $1$ to the number of consumers $n_C$. Here, we've used $P_i$ to denote the population of the prey labeled by $i$, and $P$ for the vector containing all prey populations. Notice that, while the $Growth$ term can involve competition (and thus, depends on the whole vector $P$), the $Loss$ term for species $j$ depends only in the population of that species (i.e.: $C_j$), regardless of the rest.
+
+Requiring once again our predation to be fully invested in consumer's growth, we find the following generalization of equation \ref{eq:InnerEnergyFlow}:
+
+\begin{equation}
+\label{eq:InnerEnergyFlowMulti}
+	\sum_{j = 1}^{n_C} GrossGrowth_j(P,C_j) = \sum_{i = 1}^{n_P} e_i \cdot Predation_i(P,C)
+\end{equation}
+
+Using \ref{eq:InnerEnergyFlowMulti} and \ref{eq:CommonStructureMulti}, it is easy to prove that the multispecies generalization of \ref{eq:AllEnergyFlow} is:
+
+\begin{equation}
+\label{eq:AllEnergyFlowMulti}
+	\sum_{i = 1}^{n_P} e_i \dot P_i + \sum_{j = 1}^{n_C} \dot C_j = \sum_{i = 1}^{n_P} e_i \cdot Growth_i(P) - \sum_{j = 1}^{n_C} Loss_j(C_j)
+\end{equation}
+
+The intuitive interpretation is, again, that the sinks and sources of energy in our systems are the total $Loss$ and $Growth$.
+
+It is difficult to overestimate the importance of restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlowMulti}). We need it to build realistic functional forms for the coupling terms. Being the coupled terms those related with predation, those terms are the very core of this models.
+
+\subsubsection{Lotka-Volterra equations}
+\label{subsubsec:LotkaVolterra}
+The most basic model of predation is the Lotka-Volterra system of equations:
+
+\begin{eqnarray}
+\label{eq:LotkaVolterra}
+	\begin{cases}
+	\dot{P} = r P - g P C
+	\\ 
+	\dot{C} = - l C + e g C P
+	\end{cases}
+\end{eqnarray}
+
+Where $r$ represents the growth rate of the prey, $g$ the grazing rate of the predator against the prey, $l$ the loss rate of the predator and $e$ the efficiency conversion factor.
+
+It is trivial to prove that the Lotka-Volterra model satisfies the requirements shown in subsection \ref{subsubsec:GeneralPropertiesOfPredation}. 
+
+\subsubsection{Multispecies Lotka-Volterra equations}
+\label{subsubsec:LotkaVolterraMulti}
+
+Lotka-Volterra equations can be generalized to a model with multiple species by noting that each prey will be affected by all consumers, and each consumer will be affected by all prey. In order to code the strength of this interactions, we introduce the matrix $S$, whose element $S_{ji}$ gives the strength of the coupling of consumer $j$ and prey $i$. As a consequence: for prey dynamics, this matrix is scanned row-wise, while for predators it is scanned column-wise. The generalized system looks like:
+
+\begin{eqnarray}
+\label{eq:LotkaVolterraMulti}
+	\begin{cases}
+	\dot{P_i} = r_i P_i - P_i \sum_{j = 1}^{n_C} g_j S_{ji} C_j & : i = 1..n_P
+	\\ 
+	\dot{C_j} = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
+	\end{cases}
+\end{eqnarray}
+
+The fulfillment of condition \ref{eq:InnerEnergyFlowMulti} is again easily proven.
+
+In this model, all terms can grow without boundaries. This is not only unrealistic, but also creates some problems from the sole point of view of mathematical stability.
+
+\subsubsection{Rosenzweig-MacArthur model}
+\label{subsubsec:Rosenzweig-MacArthur}
+The Rosenzweig-MacArthur predator-prey model improves the previous model by adding boundaries to the terms' dependency on the prey population. This is achieved by encapsulating $P$ inside saturating functions. In particular, the growth rate $r$ now depends on $P$, and the grazing rate $g$ in the coupling terms is now a function of $P$ (see equation \ref{eq:RosMac2levels} and compare it with \ref{eq:LotkaVolterra}).
+
+\begin{eqnarray}
+\label{eq:RosMac2levels}
+	\begin{cases}
+	\dot{P} = r(P) P - g(P) P C % = r P \left( 1 - \frac{P}{K} \right) - g C \frac{P}{P + H}
+	\\ 
+	\dot{C} = - l C + e g(P) C P % = - l C + e g C \frac{P}{P + H}
+	\end{cases}
+\end{eqnarray}
+
+Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If those both functions are chosen appropriately, we avoid unbounded effects. Typically a logistic growth form is chosen for $r(P)$, that is, $r(P) = r_0 \left(1 - \frac{P}{K} \right)$, and a Holling type II functional form for the grazing $g(P)$, that is, $g(P) = \frac{g_0}{P+H}$. After making this choices, our system takes its classical form:
+
+\begin{eqnarray}
+\label{eq:RosMac2classic}
+	\begin{cases}
+	\dot{P} =  r P \left( 1 - \frac{P}{K} \right) - g C \frac{P}{P + H}
+	\\ 
+	\dot{C} = - l C + e g C \frac{P}{P + H}
+	\end{cases}
+\end{eqnarray}
+
+\subsubsection{Multispecies Rosenzweig-MacArthur model}
+\label{subsubsec:Rosenzweig-MacArthurMulti}
+
+Noticing the similarities between equations \ref{eq:LotkaVolterra} and \ref{eq:RosMac2levels}, the latter can be generalized in the same fashion as we did to obtain \ref{eq:LotkaVolterraMulti}, yielding:
+
+\begin{eqnarray}
+\label{eq:RosMacMulti}
+	\begin{cases}
+	\dot{P_i} = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j & : i = 1..n_P
+	\\ 
+	\dot{C_j} = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
+	\end{cases}
+\end{eqnarray}
+
+Written like this, it is easy to see that the condition \ref{eq:InnerEnergyFlowMulti} is fulfilled. 
+
+Regarding the proper functional forms of $r_i(P)$ and $g_j(P)$, our growth term has to take into account both the inter and intraspecific competition. This can be easily modelled by choosing:
+
+\begin{equation}
+\label{eq:r}
+	r_i(P) = r_i \left( 1 - \sum_{k=1}^{n_P} A_{ik} P_k \right)
+\end{equation}
+
+We hypothesize that the grazing rates corresponding to predator $j$, that is, $g_j(P)$, follow a Holling type II functional response dependent on the total consumption of prey by predator $j$, that is: $V_j(P) \equiv \sum_{i=1}^{n_P} S_{ji} P_i$
+
+\begin{eqnarray}
+\label{eq:g}
+	g_j(P) = \frac{g_j}{V_j + H_j} = \frac{g_j}{\sum_{i=1}^{n_P} S_{ji} P_i + H_j}
+\end{eqnarray}
+
+\subsubsection{Summary}
+\label{subsubsec:SummaryPredation}
+
+\begin{table}[H]
+\label{tab:SummaryPredation}
+	\begin{center}
+		\resizebox{\columnwidth}{!}{
+			\begin{tabular}{|c|c|c|} \hline 
+				 & Lotka-Volterra & Rosenzweig-MacArthur \\ 
+				\hline 
+				Two species & eq. \ref{eq:LotkaVolterra} & eq. \ref{eq:RosMac2classic} \\ 
+				\hline 
+				Multispecies & eq. \ref{eq:LotkaVolterraMulti} & eq. \ref{eq:RosMacMulti}  \\
+			\hline  \end{tabular}}
+	\end{center}
+	\caption{Summary table with the different types of predation models.}
+\end{table}
 
 \subsection{Neutral competition and system degeneration}
 \label{subsec:NeutralCompetition}
@@ -416,6 +591,6 @@ Additionally, this result shows that we are actually working with a one-dimensio
 %TODO Create an online appendix with extra figures, different chaos tests, different random distributions
 \todo[inline, color = gray!25, caption={Online appendix}]{Decide how to split the information into main paper + appendix. \textbf{Egbert}: I think you need to make an appendix explaining the relation between Lyapunov and the other indices. Maybe some additional figures (if you have them?) In the results section you should refer to those extra results. }
 %TODO Past tense
-\todo[inline, color = gray!25, caption={Past tense}]{Use past tense along all the paper}
+\todo[inline, color = gray!25, caption={Past tense}]{Double check the use of past tense along all the paper}
 
 \end{document}
