@@ -10,7 +10,7 @@
 tex/*.pdf
 
 ## Figures
-*.png
+img/trash
 *.svg
 *.fig
 
