@@ -427,9 +427,9 @@ The Rosenzweig-MacArthur predator-prey model improves the previous model by addi
 \begin{eqnarray}
 \label{eq:RosMac2levels}
 	\begin{cases}
-	\dot{P} = r(P) P - g(P) P C % = r P \left( 1 - \frac{P}{K} \right) - g C \frac{P}{P + H}
+	\dot{P} = r(P) P - g(P) P C
 	\\ 
-	\dot{C} = - l C + e g(P) C P % = - l C + e g C \frac{P}{P + H}
+	\dot{C} = - l C + e g(P) C P
 	\end{cases}
 \end{eqnarray}
 
@@ -484,12 +484,12 @@ We hypothesize that the grazing rates corresponding to predator $j$, that is, $g
 			\begin{tabular}{|c|c|c|} \hline 
 				 & Lotka-Volterra & Rosenzweig-MacArthur \\ 
 				\hline 
-				Two species & eq. \ref{eq:LotkaVolterra} & eq. \ref{eq:RosMac2classic} \\ 
+				Two species & $	\begin{cases}\dot{P} = r P - g P C\\ \dot{C} = - l C + e g C P\end{cases}$ & $\begin{cases}\dot{P} = r(P) P - g(P) P C\\\dot{C} = - l C + e g(P) C P\end{cases}$ \\ 
 				\hline 
-				Multispecies & eq. \ref{eq:LotkaVolterraMulti} & eq. \ref{eq:RosMacMulti}  \\
+				Multispecies & $\begin{cases} \dot{P_i} = r_i P_i - P_i \sum_{j = 1}^{n_C} g_j S_{ji} C_j & : i = 1..n_P \\ \dot{C_j} = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C \end{cases}$ & $\begin{cases} \dot{P_i} = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j & : i = 1..n_P \\ \dot{C_j} = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C \end{cases}$  \\
 			\hline  \end{tabular}}
 	\end{center}
-	\caption{Summary table with the different types of predation models.}
+	\caption{Summary table with the different types of predation models studied. Written this way, the parallelisms are obvious. The functional forms of $r_i(P)$ and $g_j(P)$ are given in equations \ref{eq:r} and \ref{eq:g}}
 \end{table}
 
 \subsection{Neutral competition and system degeneration}
