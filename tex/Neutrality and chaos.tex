@@ -482,11 +482,11 @@ We hypothesize that the grazing rates corresponding to predator $j$, that is, $g
 	\begin{center}
 		\resizebox{\columnwidth}{!}{
 			\begin{tabular}{|c|c|c|} \hline 
-				 & Two species & Rosenzweig-MacArthur \\ 
+				 & Two species & Multispecies \\ 
 				\hline 
 				Lotka-Volterra & $\begin{cases}\dot{P} = r P - g P C\\ \dot{C} = - l C + e g C P\end{cases}$ & $\begin{cases} \dot{P_i} = r_i P_i - P_i \sum_{j = 1}^{n_C} g_j S_{ji} C_j \\ \dot{C_j} = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$ \\ 
 				\hline 
-				Multispecies & $\begin{cases}\dot{P} = r(P) P - g(P) P C\\\dot{C} = - l C + e g(P) C P\end{cases}$ & $\begin{cases} \dot{P_i} = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j \\ \dot{C_j} = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$  \\
+				Rosenzweig-MacArthur & $\begin{cases}\dot{P} = r(P) P - g(P) P C\\\dot{C} = - l C + e g(P) C P\end{cases}$ & $\begin{cases} \dot{P_i} = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j \\ \dot{C_j} = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$  \\
 			\hline  \end{tabular}}
 	\end{center}
 	\caption{Summary table with the different types of predation models studied. Written this way, the parallelisms are obvious. In multispecies models, the index $i$ runs from $1$ to $n_P$, and $j$ from $1$ to $n_C$. The functional forms of $r_i(P)$ and $g_j(P)$ are given in equations \ref{eq:r} and \ref{eq:g}}
