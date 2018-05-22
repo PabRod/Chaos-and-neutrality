@@ -68,10 +68,11 @@ The mystery comes into scene together with the competitive exclusion principle\c
 
 %% Brief discussion about the alternative hypotheses
 % Introduction and hypotheses based in non-autonomous systems
-Several hypotheses have been proposed to try to resolve the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches for species can be higher than expected at first sight due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes (such as seasonal factors). If the characteristic times of this environmental changes are fast enough, the ecosystem is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
+%TODO Not clear for ecologists
+Several hypotheses have been proposed to try to resolve the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches for species can be higher than expected at first sight due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes (such as seasonal factors). If the characteristic times of this environmental changes are fast enough \todo[caption = {Not clear for ecologists}]{Not clear for ecologists. Explain or remove}, the ecosystem is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
 
 % Introduction of chaotic dynamics
-After the discovery of deterministic chaos\cite{Lorenz1963}, it has been shown that non-equilibrium dynamics can also arise under constant environmental conditions\cite{May1974, Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise too in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
+After the discovery of deterministic chaos\cite{Lorenz1963}, it has been shown that unpredictable non-equilibrium dynamics can also arise under constant environmental conditions\cite{May1974, Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise too in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
 
 % Hypotheses based in spatial heterogeneity 
 All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible solution of the paradox \cite{Tilman1994}.
@@ -84,6 +85,9 @@ Most of the previously mentioned theories involve competition only, whereas in m
 
 \section{Methods}
 \label{sec:Methods}
+
+%TODO All in past tense
+\todo[inline]{All in past tense}
 
 \subsection{Model description}
 \label{subsec:Model}
@@ -231,12 +235,14 @@ This parameterization allows us to travel continuously from strong dominant intr
 \label{subsec:NumericalExperiment}
 Depending on the parameters and the initial conditions, the system described in equation \ref{eq:SystemUnderStudy} can give rise to three types of asymptotic behavior, each of them roughly corresponding to a different type of attractor (see figure \ref{fig:TimeSeries}). The first one, a stable point attractor, generates a constant species composition. Secondly, limit cycle (and limit tori) attractors give rise to periodically (or quasiperiodically) changing species composition. Lastly, we'll refer as chaotic to attractors not fitting in any of the previous categories.
 
-Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about intraspecific competition. In order to achieve this, we simulated several ecosystems with different initial conditions and relative predation intensities, but sharing the same competition parameter.
+%TODO Unclear
+%TODO What parameter is that?
+Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about intraspecific competition. In order to achieve this, we simulated several ecosystems with different initial conditions \todo[caption = {Unclear}]{did you run different initial conditions to find all attractors of a single drawn parameter set, or did you take both the initial conditons and the parameters at random for each run?} and predation coefficients, but drawn using the same competition parameter.
 
 Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ 2000 $ days is generated in order to get closer to the attractor. Simulating for $ 5000 $ more days, we obtain time series as the ones in figure \ref{fig:TimeSeries}. 
 
 %TODO point to appendix
-In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times for each competition parameter. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
+In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times for each competition parameter\todo[caption = {Several matrices per parameter}]{Several competition matrices are drawn here}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
 Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
@@ -274,12 +280,16 @@ Between both local maxima there is obviously a local minimum whose exact positio
 % Our claims
 The asymptotic dynamics of our model are affected by the strength of intraspecific competition compared to interspecific competition is. Interestingly, we find that competition closer to neutrality leads to chaotic behaviour. This suggests that in a system with predation, near-neutrality at the competition level may increase the probability of complex dynamics if the species are not equally prone to predation. Provided that the competitive exclusion principle rests on the assumption of equilibrium, near-neutrality reduces the chances of the principle to be applicable, improving the chance for a higher number of coexisting species if dynamics are chaotic \cite{Huisman1999}. Additionaly, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. Our model shows another local maximum for the probability of chaos for weak competition coupling. We consider this a reasonable result, as predation is known to be the main driver of chaos in this kind of models \cite{Scheffer2004}.
 
+%TODO Cite Beninca
+\todo[inline, caption = {Cite Beninca}]{Moreover in an experimental planktonic food web that was montored for 8 years, chaotic dynamics was shown (Beninca, et al. 2008, Nature)}
+
 %% Limitations
 % Why two levels?
 %TODO point to appendix here
 In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation and saturation in the simplest possible ways. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of a predator level, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total prey population (see Appendix for details). Using the Poincaré-Bendixson theorem, it can be proven that chaos autonomous systems with less than $3$ dimensions cannot exhibit chaos \cite{Strogatz1994}. 
 
 Even in the absence of neutral competition, it is known that the presence of chaos or cycles instead of fixed points depends crucially on predation and its heterogeneity \cite{Dakos2009b}. This predation effects can be interpreted as a type of response diversity \cite{Yachi1999}, so including them provides additional realism to the model.
+\todo[inline, caption = {Too short}]{Too short I think. Especially I am not sure that it is added realism as that will be dependent on the case. Maybe better to remove? Instead you could expand a bit on fist sentence; under conditions where there are no cycles expected, competition may lead to multiple alternative stable states}
 
 % Choice of interaction parameters: modularity
 For simplicity, both the competition and predation parameters were drawn from probability distributions. The interactions in our system can be interpreted as a weighted network with a high connectivity. In nature, trophic networks tend to show modular structure with various clusters \cite{Thebault2010}. Our simplified model could be interpreted as representing one of the densely connected modules.
@@ -315,6 +325,9 @@ This work was supported by funding from the European Union's \textit{Horizon 202
 
 \section{Online appendix}
 \label{sec:Appendix}
+
+%TODO Derivatives
+\todo[inline, caption = {Derivatives}]{For ecology journals use standard symbol}
 
 \subsection{Generalized multispecies predation models}
 \label{subsec:GeneralizedModels}
@@ -392,6 +405,9 @@ It is difficult to overestimate the importance of restriction \ref{eq:InnerEnerg
 
 \subsubsection{Lotka-Volterra equations}
 \label{subsubsec:LotkaVolterra}
+%TODO Go directly to RM model
+\todo[inline]{Go directly to RM model}
+
 The most basic model of predation is the Lotka-Volterra system of equations:
 
 \begin{eqnarray}
@@ -472,7 +488,13 @@ Regarding the proper functional forms of $r_i(P)$ and $g_j(P)$, our growth term 
 	r_i(P) = r_i \left( 1 - \sum_{k=1}^{n_P} A_{ik} P_k \right)
 \end{equation}
 
+%TODO Explain A
+\todo[inline]{Explain A}
+
 We hypothesize that the grazing rates corresponding to predator $j$, that is, $g_j(P)$, follow a Holling type II functional response dependent on the total consumption of prey by predator $j$, that is: $V_j(P) \equiv \sum_{i=1}^{n_P} S_{ji} P_i$
+
+%TODO Is V really needed?
+\todo[inline]{Is V really needed?}
 
 \begin{eqnarray}
 \label{eq:g}
@@ -500,7 +522,7 @@ We hypothesize that the grazing rates corresponding to predator $j$, that is, $g
 \subsection{Neutral competition and system degeneration}
 \label{subsec:NeutralCompetition}
 %TODO Check name
-\todo[inline, color = gray!25, caption = {Check name}]{\textbf{Pablo}: Check degeneration is the correct word}
+\todo[inline, color = gray!25, caption = {Check name}]{\textbf{Pablo}: Check degeneration is the correct word \\ \textbf{Egbert}: You could say that the mean field approximation (taking the average interaction for each species) becomes exact because there is no difference anymore?}
 If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of $ n_P $ equations like the following:
 
 \begin{eqnarray}
