@@ -68,8 +68,7 @@ The mystery comes into scene together with the competitive exclusion principle\c
 
 %% Brief discussion about the alternative hypotheses
 % Introduction and hypotheses based in non-autonomous systems
-%TODO Not clear for ecologists
-Several hypotheses have been proposed to try to resolve the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches for species can be higher than expected at first sight due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes (such as seasonal factors). If the characteristic times of this environmental changes are fast enough \todo[caption = {Not clear for ecologists}]{Not clear for ecologists. Explain or remove}, the ecosystem is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
+Several hypotheses have been proposed to try to resolve the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches for species can be higher than expected at first sight due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes (such as seasonal factors). If the characteristic times of this environmental changes are faster than the typical reaction times of the ecosystem, it is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
 
 % Introduction of chaotic dynamics
 After the discovery of deterministic chaos\cite{Lorenz1963}, it has been shown that unpredictable non-equilibrium dynamics can also arise under constant environmental conditions\cite{May1974, Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise too in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
@@ -233,16 +232,15 @@ This parameterization allows us to travel continuously from strong dominant intr
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
+
 Depending on the parameters and the initial conditions, the system described in equation \ref{eq:SystemUnderStudy} can give rise to three types of asymptotic behavior, each of them roughly corresponding to a different type of attractor (see figure \ref{fig:TimeSeries}). The first one, a stable point attractor, generates a constant species composition. Secondly, limit cycle (and limit tori) attractors give rise to periodically (or quasiperiodically) changing species composition. Lastly, we'll refer as chaotic to attractors not fitting in any of the previous categories.
 
-%TODO Unclear
-%TODO What parameter is that?
-Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about intraspecific competition. In order to achieve this, we simulated several ecosystems with different initial conditions \todo[caption = {Unclear}]{did you run different initial conditions to find all attractors of a single drawn parameter set, or did you take both the initial conditons and the parameters at random for each run?} and predation coefficients, but drawn using the same competition parameter.
+Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about intraspecific competition. In order to achieve this, we simulated several ecosystems with different initial conditions and predation coefficients $S_{ji}$, drawn using the same competition parameter $\epsilon$ (defined in section \ref{subsubsec:CompetitionParameter}).
 
-Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ 2000 $ days is generated in order to get closer to the attractor. Simulating for $ 5000 $ more days, we obtain time series as the ones in figure \ref{fig:TimeSeries}. 
+Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. Starting with random initial conditions (redrawn after every run), a first stabilizing run of $ 2000 $ days is generated in order to get closer to the attractor. Simulating for $ 5000 $ more days, we obtain time series as the ones in figure \ref{fig:TimeSeries}. 
 
 %TODO point to appendix
-In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times for each competition parameter\todo[caption = {Several matrices per parameter}]{Several competition matrices are drawn here}. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
+In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times per competition parameter, and thus, generating $ 200 $ different competition matrices per competition parameter value. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
 Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
@@ -348,7 +346,7 @@ Most predation models based on differential equations follow a structure like th
 
 where $P$ represents the biomass of the prey population, and $C$ the biomass of the consumer/predator population. The functional dependences have been explicitly written in order to remark the fact that the coupling of the system happens via the $Predation$ and $GrossGrowth$ terms.
 
-It is important to note that, in models like this, all deaths at the prey's level are due to predation. All deaths are \textit{invested} in consumer's growth.  Therefore the following relation must be true:
+It is important to note that, in models like this, all deaths at the prey's level are due to predation. All deaths caused by predation are invested in consumer's growth. Therefore the following relation must be true:
 
 \begin{equation}
 \label{eq:InnerEnergyFlow}
@@ -401,7 +399,7 @@ Using \ref{eq:InnerEnergyFlowMulti} and \ref{eq:CommonStructureMulti}, it is eas
 
 The intuitive interpretation is, again, that the sinks and sources of energy in our systems are the total $Loss$ and $Growth$.
 
-It is difficult to overestimate the importance of restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlowMulti}). We need it to build realistic functional forms for the coupling terms. As the coupled terms that are related to predation, those terms are the very core of this models.
+Restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlowMulti}) can be used to generalize realistic functional forms for the coupling terms. As the coupled terms that are related to predation, those terms are the very core of this models.
 
 \subsubsection{Lotka-Volterra equations}
 \label{subsubsec:LotkaVolterra}
@@ -454,7 +452,7 @@ The Rosenzweig-MacArthur predator-prey model improves the previous model by addi
 	\end{cases}
 \end{eqnarray}
 
-Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If those both functions are chosen appropriately, we avoid unbounded effects. Typically a logistic growth form is chosen for $r(P)$, that is, $r(P) = r_0 \left(1 - \frac{P}{K} \right)$, and a Holling type II functional form for the grazing $g(P)$, that is, $g(P) = \frac{g_0}{P+H}$. After making this choices, our system takes its classical form:
+Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If those both functions are chosen appropriately, we avoid unbounded growths. Typically a logistic growth form is chosen for $r(P)$, that is, $r(P) = r_0 \left(1 - \frac{P}{K} \right)$, and a Holling type II functional form for the grazing $g(P)$, that is, $g(P) = \frac{g_0}{P+H}$. After making this choices, our system takes its classical form:
 
 \begin{eqnarray}
 \label{eq:RosMac2classic}
@@ -488,17 +486,13 @@ Regarding the proper functional forms of $r_i(P)$ and $g_j(P)$, our growth term 
 	r_i(P) = r_i \left( 1 - \sum_{k=1}^{n_P} A_{ik} P_k \right)
 \end{equation}
 
-%TODO Explain A
-\todo[inline]{Explain A}
+where the matrix elements $A_{ik}$ account for the intensity of the competition caused by species $k$ on species $i$. Thus, non-diagonal elements account for interspecific competition, and diagonal ones for intraspecific competition.
 
-We hypothesize that the grazing rates corresponding to predator $j$, that is, $g_j(P)$, follow a Holling type II functional response dependent on the total consumption of prey by predator $j$, that is: $V_j(P) \equiv \sum_{i=1}^{n_P} S_{ji} P_i$
-
-%TODO Is V really needed?
-\todo[inline]{Is V really needed?}
+We hypothesize that the grazing rates corresponding to predator $j$, that is, $g_j(P)$, follow a Holling type II functional response dependent on the total consumption of prey by predator $j$:
 
 \begin{eqnarray}
 \label{eq:g}
-	g_j(P) = \frac{g_j}{V_j + H_j} = \frac{g_j}{\sum_{i=1}^{n_P} S_{ji} P_i + H_j}
+	g_j(P) = \frac{g_j}{\sum_{i=1}^{n_P} S_{ji} P_i + H_j}
 \end{eqnarray}
 
 \subsubsection{Summary}
@@ -527,14 +521,14 @@ If we drop everything but the competition part of our dynamics (see equation \re
 
 \begin{eqnarray}
 \label{eq:OnlyCompetition}
-\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right)
+\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) & : i = 1..n_P
 \end{eqnarray}
 
 In order to model a neutral competition, we should use the same competition coefficient for each interaction between species. That is, take $ A_{ik} = A $ for all $ i $ and $ k $. Equation \ref{eq:OnlyCompetition} then becomes:
 
 \begin{eqnarray}
 \label{eq:OnlyNeutralCompetition}
-\dot{P_i} = r P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right)
+\dot{P_i} = r P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) & : i = 1..n_P
 \end{eqnarray}
 
 From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium manifolds (see figure \ref{fig:Neutral}).
