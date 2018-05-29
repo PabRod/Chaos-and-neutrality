@@ -63,15 +63,16 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 % Introductory paragraph
 Fascination for biodiversity is one of the main motivations for studying ecology. Even very young children feel the joy of learning about different species, so no prior knowledge of biology seems to be required for being sensitive to the amazing variety of life. Scientific knowledge increases this sense of wonder even more as there is a big mystery: why are there so many species?
 
-% Introduction of the biodiversity paradox 
-The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, complete exclusion rarely occurs in nature\cite{Huston1979}. The huge biodiversity in rather homogeneous ecosystems such as pelagic environments is a remarkable counterexample\cite{Hutchinson1961}. This contradiction is known as the biodiversity paradox. The paradox can be rephrased as \textit{Why are there so many species if there are so few niches?}
+% Introduction of the biodiversity paradox
+%TODO Maybe a more mathematical definition?
+The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}\todo[color = gray!25]{Maybe a more mathematical definition?}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, complete exclusion rarely occurs in nature\cite{Huston1979}. The huge biodiversity in rather homogeneous ecosystems such as pelagic environments is a remarkable counterexample\cite{Hutchinson1961}. This contradiction is known as the biodiversity paradox. The paradox can be rephrased as \textit{Why are there so many species if there are so few niches?}
 
 %% Brief discussion about the alternative hypotheses
 % Introduction and hypotheses based in non-autonomous systems
-Several hypotheses have been proposed to try to resolve the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches for species can be higher than expected at first sight due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes (such as seasonal factors). If the characteristic times of this environmental changes are faster than the typical reaction times of the ecosystem, it is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
+Several hypotheses have been proposed to try to resolve the paradox. For instance, Hutchinson\cite{Hutchinson} suggests that the number of niches for species can be higher than expected at first sight due to a separation in time of competition. As an example he reports observations of two sympatric species of beetles competing for the same resource, but not simultaneously because of having different breeding seasons. In a later, influential paper\cite{Hutchinson1961}, Hutchinson proposes the possibility that more species can coexist due to external, time-dependent environmental changes (such as seasonal factors). If the characteristic times of this environmental changes are faster than the typical reaction times of the ecosystem, the latter is prevented to reach an equilibrium. A pioneering quantitative discussion about ecosystems subject to periodically driven external perturbations can be found in \cite{Huston1979} and, more recently, in \cite{Sakavara2018}.
 
 % Introduction of chaotic dynamics
-After the discovery of deterministic chaos\cite{Lorenz1963}, it has been shown that unpredictable non-equilibrium dynamics can also arise under constant environmental conditions\cite{May1974, Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, chaotic dynamics can arise too in seasonally changing environments in a food web (as, for instance the model with multiple predators studied in \cite{Dakos2009b}).
+It has been shown that unpredictable non-equilibrium dynamics can arise too even under constant environmental conditions\cite{May1974, Huisman1999}. More specifically, those ecosystems develop cyclic or chaotic dynamics instead of fixed points. Of course, cyclic or chaotic dynamics can arise too in seasonally changing environments (as, for instance the food web model with multiple predators studied in \cite{Dakos2009b}). The fact that chaos plays a role in ecosystem dynamics has been experimentally established \cite{Beninca2008}.
 
 % Hypotheses based in spatial heterogeneity 
 All the previous hypotheses refer to the time domain. Regarding the spatial dimension, the inhomogeneity of ecosystems, and the possibility of migration between them has been pointed out as another possible solution of the paradox \cite{Tilman1994}.
@@ -85,14 +86,8 @@ Most of the previously mentioned theories involve competition only, whereas in m
 \section{Methods}
 \label{sec:Methods}
 
-%TODO All in past tense
-\todo[inline]{All in past tense}
-
 \subsection{Model description}
 \label{subsec:Model}
-
-%TODO Write appendix subsection
-\todo[inline, color = gray!25, caption = {Move section}]{\textbf{Pablo}: Move most of this to the appendix}
 
 We focused our attention on food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network}). The consumers predate on the prey, and the prey populations compete among each other for a common source of resources. 
 
@@ -105,77 +100,32 @@ We focused our attention on food webs with two trophic levels, one of consumers 
 \end{figure}
 
 % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. Our model is composed of $ n_P $ prey species and $ n_C $ consumer species. $ P_i(t) $ was used for accounting the size of the population of prey $ i $ at time $ t $, and $ C_j(t) $ for the population of consumer $ j $. When it is not explicitly stated, $ i $  runs from $ 1 $ to $ n_P $, and $ j $ from $ 1 $ to $ n_C $. The prey compete directly among themselves, while the consumers compete indirectly by sharing the same food. The consumers eat all kind of prey, but find some of them more preferable than others. All these interactions are summarized in figure \ref{fig:Network}. The overall structure looks like:
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. 
 
-\begin{displaymath}
-\label{eq:EquationInPseudocode}
-	\begin{cases}
-	\frac{d}{dt} \left( Prey \right) = Growth  - Predation + Immigration \\
-	\frac{d}{dt} \left( Cons \right) = Feeding - Loss \\
-	\end{cases}
-\end{displaymath}
+Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow logistically under the influence of intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. Obviously, predation has a negative effect for prey and a positive one for predators. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially to extinction. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \cite{Scheffer2004}.
 
-%% Step-by-step description of each term
-The growth term is modelled as a multispecies logistic growth. The strength of the competition between species $ i $ and $ k $ is given by the community matrix element $ A_{ik} $. So, for prey $ i $, we have:
-
-\begin{equation}
-\label{eq:Growth-Competition}
-%\resizebox{.8 \columnwidth}{!}
-%{
-Growth_i  = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right)
-%}
-\end{equation}
-
-A secondary source for prey's growth in our model will be a small constant immigration term $ f $, representing immigration from neighboring areas. Additionally, the inclusion of this term avoids unrealistic long-stretched cycles with near extinctions \cite{Scheffer2004}.
-
-The predator preference for each prey species is given by the matrix $ S $. That is, the matrix element $ S_{ij} $ represents the relative proportion of prey $ i $ in consumer's $ j $ \textit{menu}. We define an auxiliary vector $ V $, whose elements $ V_j $ are calculated as a sum of the prey's populations weighted by the predator preference coefficients. Biologically, this represents the total composition of consumer $ j $'s menu:
-
-\begin{equation}
-\label{eq:MenuFunction}
-	V_j(P) \equiv \sum_{k=1}^{n_P} S_{jk} \cdot P_k
-\end{equation}
-
-We hypothesized that the feeding term will be linear in $ C_j $. The dependency on $V_j$ happens through a Holling type II functional response with half saturation constant $ H $ in order to account for consumer satiation\cite{Edelstein-Keshet}.
-
-\begin{equation}
-\label{eq:Feeding}
-	Feeding_j = e g C_j \frac{V_j}{V_j+H}
-\end{equation}
-%TODO Rename feeding
-\label{todo:hola}
-\todo[inline, color = gray!25, caption = {Rename feeding}]{\textbf{Egbert}: Feeding is confusing as the sum of predation should be the sum of the feeding. Possible new name: GrossGrowth (NetGrowth = GrossGrowth - Loss). \\ \textbf{Pablo}: being the sum up to assimilation constant maybe it is clearer to take the constant out of the equation. \\ \textbf{Pablo}: I'll do it after moving part of this section to the appendix.}
-
-$ e $ represents the assimilation efficiency of the predation. Thus, the effect of consumer $ j $ on all prey's populations is given by $ Feeding_j/e $. Knowing this, we can sum the effect of all consumers in the prey species $ i $ as follows:
-
-\begin{equation}
-\label{eq:Predation}
-	Predation_i = g \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k}\right) C_k F_{2}(V_j; H)
-\end{equation}
-
-Where the term inside the parentheses represents the relative proportion of prey species $ i $ in the menu of predator $ k $, and $F_{2}$ is a shorthand for the Holling type II functional form introduced before. It is interesting to note that the way the predation and feeding terms are defined satisfies the following property:
-
-\begin{equation}
-\label{eq:Balance}
-	\sum_{j=1}^{n_C} Feeding_j = e \sum_{i=1}^{n_P} Predation_i
-\end{equation}
-
-that is, all the deaths at the prey level are invested in the growth of consumers. We define the auxiliary function $ R_i $ as a summary of the effect of all consumers on prey $ i $:
-
-\begin{equation}
-\label{eq:PredationAux}
-	R_i(P,C) \equiv \sum_{k=1}^{n_C} \left(\frac{S_{ki}P_i}{V_k(P)}\right) C_k F_{2}(V_k(P); H) 
-\end{equation}
-
-Putting all together, the dynamical system reads:
+In mathematical notation, the system reads:
 
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
-	\begin{cases}
-	\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) - g R_i(P,C) + f
-	\\ 
-	\dot{C_j} = e g C_j F_{2}(V_j(P); H) - l C_j
+	\begin{cases} 
+	P_i'(t) =  r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} P_k \right) - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j + f & : i = 1..n_P
+	\\
+	C_j'(t) = - l C_j +  e g_j(P) C_j \sum_{i = 1}^{n_P} S_{ji} P_i & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
+
+with the auxiliary function $g_j(P)$ defined as:
+
+\begin{eqnarray}
+\label{eq:HollingGenerator}
+	g_j(P) = \frac{g}{\sum_{i=1}^{n_P} S_{ji} P_i + H}
+\end{eqnarray}
+
+The shape of this auxiliary function has been chosen to generalize the Holling type II saturation functional response (see, for instance, \cite{Edelstein-Keshet}) to a multispecies system when inserted into equation \ref{eq:SystemUnderStudy}.
+
+%TODO Call to Online appendix
+For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see Online Appendix.
 
 \begin{figure}
 	\begin{center}
@@ -220,15 +170,22 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 	\label{tab:Parameters}
 \end{table}
 
-\subsubsection{Competition parameter}
+\subsubsection{Competition matrix}
 \label{subsubsec:CompetitionParameter}
 
 %TODO change parameter name
-In order to control how far from neutral the competition is, we introduce the competition parameter $ \epsilon $. This dimensionless parameter allows us to vary continuously from interactions where intraspecific competition is stronger than interspecific (for $ \epsilon < 0 $) to the opposite case (for $ \epsilon > 0$). The border between both cases (i.e. $ \epsilon = 0 $), where neither the intra nor the interspecific competition is dominant, represents neutral competition (see figure \ref{fig:CompetitionParameter} in Appendix).
+Our main purpose is to analyze the effect of different degrees of heterogeneity in the matrix competition on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$ whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). In mathematical terms: the elements of our competition matrix $A$ were drawn from probability distributions whose shape depend on the value of $\epsilon$.
 
-This parameter was used to build a competition matrix whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$).
+%TODO Maybe send figure to appendix
+Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong dominant intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
 
-This parameterization allows us to travel continuously from strong dominant intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\columnwidth]{epsilon_all.png}
+	\end{center}
+	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the parameter $\epsilon$.}	
+	\label{fig:CompetitionParameter}
+\end{figure}
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
@@ -278,16 +235,10 @@ Between both local maxima there is obviously a local minimum whose exact positio
 % Our claims
 The asymptotic dynamics of our model are affected by the strength of intraspecific competition compared to interspecific competition is. Interestingly, we find that competition closer to neutrality leads to chaotic behaviour. This suggests that in a system with predation, near-neutrality at the competition level may increase the probability of complex dynamics if the species are not equally prone to predation. Provided that the competitive exclusion principle rests on the assumption of equilibrium, near-neutrality reduces the chances of the principle to be applicable, improving the chance for a higher number of coexisting species if dynamics are chaotic \cite{Huisman1999}. Additionaly, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. Our model shows another local maximum for the probability of chaos for weak competition coupling. We consider this a reasonable result, as predation is known to be the main driver of chaos in this kind of models \cite{Scheffer2004}.
 
-%TODO Cite Beninca
-\todo[inline, caption = {Cite Beninca}]{Moreover in an experimental planktonic food web that was montored for 8 years, chaotic dynamics was shown (Beninca, et al. 2008, Nature)}
-
 %% Limitations
 % Why two levels?
 %TODO point to appendix here
-In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation and saturation in the simplest possible ways. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of a predator level, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total prey population (see Appendix for details). Using the Poincaré-Bendixson theorem, it can be proven that chaos autonomous systems with less than $3$ dimensions cannot exhibit chaos \cite{Strogatz1994}. 
-
-Even in the absence of neutral competition, it is known that the presence of chaos or cycles instead of fixed points depends crucially on predation and its heterogeneity \cite{Dakos2009b}. This predation effects can be interpreted as a type of response diversity \cite{Yachi1999}, so including them provides additional realism to the model.
-\todo[inline, caption = {Too short}]{Too short I think. Especially I am not sure that it is added realism as that will be dependent on the case. Maybe better to remove? Instead you could expand a bit on fist sentence; under conditions where there are no cycles expected, competition may lead to multiple alternative stable states}
+In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation and saturation in the simplest possible ways. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of a predator level, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total prey population (see Appendix for details). Using the Poincaré-Bendixson theorem, it can be proven that autonomous systems with less than $3$ dimensions cannot exhibit chaos \cite{Strogatz1994}.
 
 % Choice of interaction parameters: modularity
 For simplicity, both the competition and predation parameters were drawn from probability distributions. The interactions in our system can be interpreted as a weighted network with a high connectivity. In nature, trophic networks tend to show modular structure with various clusters \cite{Thebault2010}. Our simplified model could be interpreted as representing one of the densely connected modules.
@@ -301,7 +252,7 @@ It is known that the asymptotic behaviour of this kind of systems can be very se
 %\todo[inline, color=blue!25, caption={Effects of symmetry}]{\textbf{Egbert}: Good chance that a reviewer says: nice these suggestions, but why do they not show it here? \\ \textbf{Pablo}: Remove or do? \\ \textbf{Egbert}: up to you. Maybe it is not so difficult to perform the same analysis imposing symmetry}
 
 % Chaos detection
-Due to the large number of simulations made, we had to rely on an automatic methods for detecting chaos. Automatic detection of chaos by numerical methods has fundamental limitations, especially for high dimensional systems like ours. Most of them can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long, complicated transients and genuine chaos. We think that our approach to chaos detection, despite being open to improvement, suffices to detect the overall patterns.
+Due to the large number of simulations made, we had to rely on automatic methods for detecting chaos. Automatic detection of chaos by numerical methods has fundamental limitations, especially for high dimensional systems like ours. Most of them can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long, complicated transients and genuine chaos. We think that our approach to chaos detection, despite being open to improvement, suffices to detect the overall patterns.
 
 % Concluding remark
 The paradox of biodiversity is a tremendously complex scientific problem. With these model exercises we definitely do not claim to have solved it, but we show that predation in combination with neutral competition may increase the probability of chaos, and thereby increase the number of coexisting species.
@@ -323,6 +274,8 @@ This work was supported by funding from the European Union's \textit{Horizon 202
 
 \section{Online appendix}
 \label{sec:Appendix}
+%TODO z1 test
+\todo[inline, color = gray!25]{Explain z1 test?}
 
 %TODO Derivatives
 \todo[inline, caption = {Derivatives}]{For ecology journals use standard symbol}
@@ -338,9 +291,9 @@ Most predation models based on differential equations follow a structure like th
 \begin{eqnarray}
 \label{eq:CommonStructure}
 	\begin{cases}
-	\dot{P} = Growth(P) - Predation(P,C)
+	P'(t) = Growth(P) - Predation(P,C)
 	\\ 
-	\dot{C} = -Loss(C) + GrossGrowth(P,C)
+	C'(t) = -Loss(C) + GrossGrowth(P,C)
 	\end{cases}
 \end{eqnarray}
 
@@ -357,7 +310,7 @@ where $e$ represents the efficiency of the energy transfer process. Equation \re
 
 \begin{equation}
 \label{eq:AllEnergyFlow}
-	e \dot P + \dot C = e \cdot Growth(P) - Loss(C)
+	e P'(t) + C'(t) = e \cdot Growth(P) - Loss(C)
 \end{equation}
 
 Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open system from the point of view of thermodynamics. Here $Growth$ is the only source of the system, and $Loss$ is the only sink (see figure \ref{fig:EnergyFlow}). All the energy exchange due to predation stays inside the system, so predation can be considered a closed subsystem.
@@ -375,9 +328,9 @@ We can generalize this basic structure to multispecies, two trophic levels syste
 \begin{eqnarray}
 \label{eq:CommonStructureMulti}
 	\begin{cases}
-	\dot{P_i} = Growth_i(P) - Predation_i(P,C) & : i = 1..n_P
+	P_i'(t) = Growth_i(P) - Predation_i(P,C) & : i = 1..n_P
 	\\ 
-	\dot{C_j} = -Loss_j(C_j) + GrossGrowth_j(P,C_j) & : j = 1..n_C
+	C_j'(t) = -Loss_j(C_j) + GrossGrowth_j(P,C_j) & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
 
@@ -394,7 +347,7 @@ Using \ref{eq:InnerEnergyFlowMulti} and \ref{eq:CommonStructureMulti}, it is eas
 
 \begin{equation}
 \label{eq:AllEnergyFlowMulti}
-	\sum_{i = 1}^{n_P} e_i \dot P_i + \sum_{j = 1}^{n_C} \dot C_j = \sum_{i = 1}^{n_P} e_i \cdot Growth_i(P) - \sum_{j = 1}^{n_C} Loss_j(C_j)
+	\sum_{i = 1}^{n_P} e_i P_i'(t) + \sum_{j = 1}^{n_C} C_j'(t) = \sum_{i = 1}^{n_P} e_i \cdot Growth_i(P) - \sum_{j = 1}^{n_C} Loss_j(C_j)
 \end{equation}
 
 The intuitive interpretation is, again, that the sinks and sources of energy in our systems are the total $Loss$ and $Growth$.
@@ -411,9 +364,9 @@ The most basic model of predation is the Lotka-Volterra system of equations:
 \begin{eqnarray}
 \label{eq:LotkaVolterra}
 	\begin{cases}
-	\dot{P} = r P - g P C
+	P'(t) = r P - g P C
 	\\ 
-	\dot{C} = - l C + e g C P
+	C'(t) = - l C + e g C P
 	\end{cases}
 \end{eqnarray}
 
@@ -429,9 +382,9 @@ Lotka-Volterra equations can be generalized to a model with multiple species by 
 \begin{eqnarray}
 \label{eq:LotkaVolterraMulti}
 	\begin{cases}
-	\dot{P_i} = r_i P_i - P_i \sum_{j = 1}^{n_C} g_j S_{ji} C_j & : i = 1..n_P
+	P_i'(t) = r_i P_i - P_i \sum_{j = 1}^{n_C} g_j S_{ji} C_j & : i = 1..n_P
 	\\ 
-	\dot{C_j} = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
+	C_j'(t) = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
 
@@ -446,20 +399,20 @@ The Rosenzweig-MacArthur predator-prey model improves the previous model by addi
 \begin{eqnarray}
 \label{eq:RosMac2levels}
 	\begin{cases}
-	\dot{P} = r(P) P - g(P) P C
+	P'(t) = r(P) P - g(P) P C
 	\\ 
-	\dot{C} = - l C + e g(P) C P
+	C'(t) = - l C + e g(P) C P
 	\end{cases}
 \end{eqnarray}
 
-Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If those both functions are chosen appropriately, we avoid unbounded growths. Typically a logistic growth form is chosen for $r(P)$, that is, $r(P) = r_0 \left(1 - \frac{P}{K} \right)$, and a Holling type II functional form for the grazing $g(P)$, that is, $g(P) = \frac{g_0}{P+H}$. After making this choices, our system takes its classical form:
+Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If those both functions are chosen appropriately, we avoid unbounded growths. Typically a logistic growth form is chosen for $r(P)$, that is, $r(P) = r_0 \left(1 - \frac{P}{K} \right)$, and a Holling type II functional form for the grazing $g(P)$, that is, $g(P) = \frac{g_0}{P+H}$ (see, for instance, \cite{Edelstein-Keshet}). After making this choices, our system takes its classical form:
 
 \begin{eqnarray}
 \label{eq:RosMac2classic}
 	\begin{cases}
-	\dot{P} =  r P \left( 1 - \frac{P}{K} \right) - g C \frac{P}{P + H}
+	P'(t) =  r P \left( 1 - \frac{P}{K} \right) - g C \frac{P}{P + H}
 	\\ 
-	\dot{C} = - l C + e g C \frac{P}{P + H}
+	C'(t) = - l C + e g C \frac{P}{P + H}
 	\end{cases}
 \end{eqnarray}
 
@@ -471,9 +424,9 @@ Noticing the similarities between equations \ref{eq:LotkaVolterra} and \ref{eq:R
 \begin{eqnarray}
 \label{eq:RosMacMulti}
 	\begin{cases}
-	\dot{P_i} = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j & : i = 1..n_P
+	P_i'(t) = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j & : i = 1..n_P
 	\\ 
-	\dot{C_j} = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
+	C_j'(t) = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
 
@@ -505,13 +458,16 @@ We hypothesize that the grazing rates corresponding to predator $j$, that is, $g
 			\begin{tabular}{|c|c|c|} \hline 
 				 & Two species & Multispecies \\ 
 				\hline 
-				Lotka-Volterra & $\begin{cases}\dot{P} = r P - g P C\\ \dot{C} = - l C + e g C P\end{cases}$ & $\begin{cases} \dot{P_i} = r_i P_i - P_i \sum_{j = 1}^{n_C} g_j S_{ji} C_j \\ \dot{C_j} = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$ \\ 
+				Lotka-Volterra & $\begin{cases}P'(t) = r P - g P C\\ C'(t) = - l C + e g C P\end{cases}$ & $\begin{cases} P_i'(t) = r_i P_i - P_i \sum_{j = 1}^{n_C} g_j S_{ji} C_j \\ C_j'(t) = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$ \\ 
 				\hline 
-				Rosenzweig-MacArthur & $\begin{cases}\dot{P} = r(P) P - g(P) P C\\\dot{C} = - l C + e g(P) C P\end{cases}$ & $\begin{cases} \dot{P_i} = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j \\ \dot{C_j} = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$  \\
+				Rosenzweig-MacArthur & $\begin{cases}P'(t) = r(P) P - g(P) P C\\C'(t) = - l C + e g(P) C P\end{cases}$ & $\begin{cases} P_i'(t) = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j \\ C_j'(t) = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$  \\
 			\hline  \end{tabular}}
 	\end{center}
 	\caption{Summary table with the different types of predation models studied. Written this way, the parallelisms are obvious. In multispecies models, the index $i$ runs from $1$ to $n_P$, and $j$ from $1$ to $n_C$. The functional forms of $r_i(P)$ and $g_j(P)$ are given in equations \ref{eq:r} and \ref{eq:g}}
 \end{table}
+
+\subsection{Melbourne-Gottwald z1 test}
+\label{subsec:z1test}
 
 \subsection{Neutral competition and system degeneration}
 \label{subsec:NeutralCompetition}
@@ -521,14 +477,14 @@ If we drop everything but the competition part of our dynamics (see equation \re
 
 \begin{eqnarray}
 \label{eq:OnlyCompetition}
-\dot{P_i} = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) & : i = 1..n_P
+P_i'(t) = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) & : i = 1..n_P
 \end{eqnarray}
 
 In order to model a neutral competition, we should use the same competition coefficient for each interaction between species. That is, take $ A_{ik} = A $ for all $ i $ and $ k $. Equation \ref{eq:OnlyCompetition} then becomes:
 
 \begin{eqnarray}
 \label{eq:OnlyNeutralCompetition}
-\dot{P_i} = r P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) & : i = 1..n_P
+P_i'(t) = r P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) & : i = 1..n_P
 \end{eqnarray}
 
 From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium manifolds (see figure \ref{fig:Neutral}).
@@ -552,7 +508,7 @@ In agreement with the biological intuition, manipulating \ref{eq:TotalPopulation
 
 \begin{eqnarray}
 \label{eq:TotalPopulationDynamics}
-	\dot T = \sum_{i=1}^{n_P} \dot P_i = r \sum_{i=1}^{n_P} P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) = r T (1 - \frac{A}{K} T)
+	 T'(t) = \sum_{i=1}^{n_P} P_i'(t) = r \sum_{i=1}^{n_P} P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) = r T (1 - \frac{A}{K} T)
 \end{eqnarray}
 
 Additionally, this result shows that we are actually working with a one-dimensional system, because the apparent $ n_P $ dimensions of our original problem are an artifact due to a wrong choice of state variables. In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of system degeneration.
@@ -560,17 +516,6 @@ Additionally, this result shows that we are actually working with a one-dimensio
 
 \subsection{Extra figures}
 \label{subsec:ExtraFigures}
-
-\subsubsection{Competition matrix}
-\label{subsubsec:CompetitionMatrix}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=1\columnwidth]{epsilon_all.png}
-	\end{center}
-	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the parameter $\epsilon$.}	
-	\label{fig:CompetitionParameter}
-\end{figure}
 
 \subsubsection{Flow chart}
 \label{subsubsec:FlowChart}
@@ -608,10 +553,5 @@ Additionally, this result shows that we are actually working with a one-dimensio
 
 %\listoftables
 %\listoffigures
-
-%TODO Create an online appendix with extra figures, different chaos tests, different random distributions
-\todo[inline, color = gray!25, caption={Online appendix}]{Decide how to split the information into main paper + appendix. \textbf{Egbert}: I think you need to make an appendix explaining the relation between Lyapunov and the other indices. Maybe some additional figures (if you have them?) In the results section you should refer to those extra results. }
-%TODO Past tense
-\todo[inline, color = gray!25, caption={Past tense}]{Double check the use of past tense along all the paper}
 
 \end{document}
