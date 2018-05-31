@@ -52,10 +52,12 @@ Neutral competition can be interpreted as a limit case between dominant intraspe
 \textit{Keywords}: population dynamics, coexistence, competition, neutral competition, biodiversity paradox, chaos.
 \end{abstract}
 
-%\clearpage
+\clearpage
+
 \tableofcontents
-\listoftodos[TODOs]
-%\clearpage
+%\listoftodos[TODOs]
+
+\clearpage
 
 \section{Background}
 \label{sec:Background} 
@@ -65,7 +67,7 @@ Fascination for biodiversity is one of the main motivations for studying ecology
 
 % Introduction of the biodiversity paradox
 %TODO Maybe a more mathematical definition?
-The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}\todo[color = gray!25]{Maybe a more mathematical definition?}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, complete exclusion rarely occurs in nature\cite{Huston1979}. The huge biodiversity in rather homogeneous ecosystems such as pelagic environments is a remarkable counterexample\cite{Hutchinson1961}. This contradiction is known as the biodiversity paradox. The paradox can be rephrased as \textit{Why are there so many species if there are so few niches?}
+The mystery comes into scene together with the competitive exclusion principle\cite{Hardin1960}, sometimes referred to as Gause's law. This principle, which some authors trace back to Charles Darwin's \textit{On the origin of the species}\cite{Darwin1859}, is one of the classical keystones of ecology. The principle states that \textit{"for each niche only one species will dominate in the long run, out-competing the rest"}. Most competition models satisfy this principle, and it has been observed experimentally under laboratory conditions. On the other hand, complete exclusion rarely occurs in nature\cite{Huston1979}. The huge biodiversity in rather homogeneous ecosystems such as pelagic environments is a remarkable counterexample\cite{Hutchinson1961}. This contradiction is known as the biodiversity paradox. The paradox can be rephrased as \textit{Why are there so many species if there are so few niches?}
 
 %% Brief discussion about the alternative hypotheses
 % Introduction and hypotheses based in non-autonomous systems
@@ -102,7 +104,7 @@ We focused our attention on food webs with two trophic levels, one of consumers 
 % Description of the dynamics
 The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. 
 
-Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow logistically under the influence of intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. Obviously, predation has a negative effect for prey and a positive one for predators. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially to extinction. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \cite{Scheffer2004}.
+Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow logistically under the influence of intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. Obviously, predation has a negative effect for prey and a positive one for predators. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \cite{Scheffer2004}.
 
 In mathematical notation, the system reads:
 
@@ -115,7 +117,7 @@ In mathematical notation, the system reads:
 	\end{cases}
 \end{eqnarray}
 
-with the auxiliary function $g_j(P)$ defined as:
+where $P_i(t)$ represents the biomass of prey $i$ at time $t$ and $C_j(t)$ the biomass of predator species $j$ at time $t$. The auxiliary function $g_j(P)$ is defined as:
 
 \begin{eqnarray}
 \label{eq:HollingGenerator}
@@ -124,14 +126,13 @@ with the auxiliary function $g_j(P)$ defined as:
 
 The shape of this auxiliary function has been chosen to generalize the Holling type II saturation functional response (see, for instance, \cite{Edelstein-Keshet}) to a multispecies system when inserted into equation \ref{eq:SystemUnderStudy}.
 
-%TODO Call to Online appendix
 For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see Online Appendix.
 
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{ts.png}
 	\end{center}
-	\caption{Our model generates time series of the population of each species. The time series can be classified in $3$ qualitative types depending on their asymptotic behavior: \textit{stable}, \textit{periodic} and \textit{chaotic}. In \textbf{figure A}, the system reaches a stable attractor after a transient time. In \textbf{figure B}, a periodic attractor, with an approximate period of 1000 days, is reached after the transient time. The system in \textbf{figure C} never reaches a stable nor a cyclic attractor, but a chaotic one.}
+	\caption{Our model generates time series of the population of each species. The time series can be classified in $3$ qualitative types depending on their asymptotic behavior: \textit{stable}, \textit{periodic} and \textit{chaotic}. In \textbf{panel A}, the system reaches a stable attractor after a transient time. In \textbf{panel B}, a periodic attractor, with an approximate period of 1000 days, is reached after the transient time. The system in \textbf{panel C} never reaches a stable nor a cyclic attractor, but a chaotic one.}
 	\label{fig:TimeSeries}
 \end{figure}
 
@@ -197,15 +198,15 @@ Our target is to estimate the probability of reaching one of such chaotic attrac
 Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. Starting with random initial conditions (redrawn after every run), a first stabilizing run of $ 2000 $ days is generated in order to get closer to the attractor. Simulating for $ 5000 $ more days, we obtain time series as the ones in figure \ref{fig:TimeSeries}. 
 
 %TODO point to appendix
-In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times per competition parameter, and thus, generating $ 200 $ different competition matrices per competition parameter value. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
+In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see Online Appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times per competition parameter, and thus, generating $ 200 $ different competition matrices per competition parameter value. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
 Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
-For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used\footnote{https://github.com/PabRod/Chaos-and-neutrality}. For further information see the Appendix. %TODO point to appendix
+For the sake of reproducibility, we provide a \textit{GitHub} link to the analysis scripts used\footnote{https://github.com/PabRod/Chaos-and-neutrality}.
 
 \section{Results}
 \label{sec:Results}
-Plotting the probability of chaos against the competition parameter (see figures \ref{fig:Results}), we observe a clear maximum around $ \epsilon = 0 $. The likelihood of chaotic behaviour for neutral competition at the prey's trophic level is thus higher than for dominant inter or intraspecific competition. This result remains true for systems with a different number of species (figures \ref{fig:Results} and \ref{fig:Contour}).
+Plotting the probability of chaos against the competition parameter (see figure \ref{fig:Results}), we observe a clear maximum around $ \epsilon = 0 $. The likelihood of chaotic behaviour for neutral competition at the prey's trophic level is thus higher than for dominant inter or intraspecific competition. This result remains true for systems with a different number of species (figures \ref{fig:Results} and \ref{fig:Contour}).
 
 The overall likelihood of chaos, which can be interpreted as the area under the curve in figure \ref{fig:Results}, increases with the size of the food web. This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor \cite{Strogatz1994}. We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point. Even in those higher dimensional cases, there is still a clear maximum at neutral competition.
 
@@ -237,8 +238,7 @@ The asymptotic dynamics of our model are affected by the strength of intraspecif
 
 %% Limitations
 % Why two levels?
-%TODO point to appendix here
-In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation and saturation in the simplest possible ways. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of a predator level, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total prey population (see Appendix for details). Using the Poincaré-Bendixson theorem, it can be proven that autonomous systems with less than $3$ dimensions cannot exhibit chaos \cite{Strogatz1994}.
+In the spirit of mathematical modelling, we chose the simplest realization required for the effects to be observed. We didn't use Allee effect, nor noise, and the functional form of each term has been chosen to account for satiation and saturation in the simplest possible ways. The choice of a two-level model may seem in contradiction with the pursue of simplicity, but actually it is a fundamental requirement for the effect under research to take place. In the absence of a predator level, chaos will never develop in a model with neutral competition. The reason for this is that if all interactions become equally strong, the differences among species at the same trophic level fade out. This makes labeling each species meaningless, and thus the prey-only system can be reduced just to one differential equation, that of the total prey population (see Online Appendix for details). Using the Poincaré-Bendixson theorem, it can be proven that autonomous systems with less than $3$ dimensions cannot exhibit chaos \cite{Strogatz1994}.
 
 % Choice of interaction parameters: modularity
 For simplicity, both the competition and predation parameters were drawn from probability distributions. The interactions in our system can be interpreted as a weighted network with a high connectivity. In nature, trophic networks tend to show modular structure with various clusters \cite{Thebault2010}. Our simplified model could be interpreted as representing one of the densely connected modules.
@@ -274,11 +274,6 @@ This work was supported by funding from the European Union's \textit{Horizon 202
 
 \section{Online appendix}
 \label{sec:Appendix}
-%TODO z1 test
-\todo[inline, color = gray!25]{Explain z1 test?}
-
-%TODO Derivatives
-\todo[inline, caption = {Derivatives}]{For ecology journals use standard symbol}
 
 \subsection{Generalized multispecies predation models}
 \label{subsec:GeneralizedModels}
@@ -356,8 +351,6 @@ Restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlo
 
 \subsubsection{Lotka-Volterra equations}
 \label{subsubsec:LotkaVolterra}
-%TODO Go directly to RM model
-\todo[inline]{Go directly to RM model}
 
 The most basic model of predation is the Lotka-Volterra system of equations:
 
@@ -555,14 +548,10 @@ With this picture in mind, it is easy to understand the kind of paths that diffe
 	\label{fig:z1Path}
 \end{figure}
 
-The case of an underlying chaotic time series is the only one that generates a path that doesn't stay inside a bounded domain around the starting point. The z1 test uses the mean square displacement as a measure of this diffusion.
-
-\todo[inline, color=gray!25]{\textbf{Pablo}: before continuing... do you like this (mostly graphical) approach?}
+The case of an underlying chaotic time series is the only one that generates a path that doesn't stay inside a bounded domain around the starting point. The z1 test uses the mean square displacement as a measure of this diffusion. The system is considered to be chaotic if the square displacement keeps growing for large times. If, on the contrary, it stays bounded, the test will consider the system not chaotic.
 
 \subsection{Neutral competition and system degeneration}
 \label{subsec:NeutralCompetition}
-%TODO Check name
-\todo[inline, color = gray!25, caption = {Check name}]{\textbf{Pablo}: Check degeneration is the correct word \\ \textbf{Egbert}: You could say that the mean field approximation (taking the average interaction for each species) becomes exact because there is no difference anymore?}
 If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of $ n_P $ equations like the following:
 
 \begin{eqnarray}
