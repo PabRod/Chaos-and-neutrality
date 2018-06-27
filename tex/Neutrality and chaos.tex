@@ -131,7 +131,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 		    \hline
 			$l$ & Loss rate & $0.15$ & $d^{-1}$\\
 			\hline
-		    $S$ & $ n_C \times n_P $ predator preference matrix & $S_{ij} \sim (0,1)$ & $1$\\
+		    $S$ & $ n_C \times n_P $ predator preference matrix & $S_{ij} \in (0,1)$ & $1$\\
 		    \hline
    		    $A$ & $ n_P \times n_P $ competition matrix & See section \ref{subsubsec:CompetitionParameter} & $1$\\
 		    \hline
@@ -144,7 +144,6 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 \subsubsection{Competition matrix}
 \label{subsubsec:CompetitionParameter}
 
-%TODO change parameter name
 Our main purpose is to analyze the effect of different degrees of heterogeneity in the matrix competition on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$ whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). In mathematical terms: the elements of our competition matrix $A$ were drawn from probability distributions whose shape depend on the value of $\epsilon$.
 
 %TODO Maybe send figure to appendix
@@ -246,7 +245,7 @@ The paradox of biodiversity is a tremendously complex scientific problem. With t
 
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
-The preliminary analysis of this model were performed using GRIND for Matlab (http://www.sparcs-center.org/grind). Additionally, we thank Tobias Oertel-Jäger, Sebastian Wieczorek, Jeroen Lamb, Martin Rasmussen, Jelle Lever, Moussa N'Dour and Sebastian Bathiany for their useful comments and suggestions. 
+The preliminary analysis of this model were performed using GRIND for Matlab (http://www.sparcs-center.org/grind). Additionally, we thank Tobias Oertel-Jäger, Sebastian Wieczorek, Jeroen Lamb, Martin Rasmussen, Cristina Sargent, Jelle Lever, Moussa N'Dour and Sebastian Bathiany for their useful comments and suggestions. 
 
 This work was supported by funding from the European Union's \textit{Horizon 2020} research and innovation programme for the \textit{ITN CRITICS} under Grant Agreement Number 643073.
 
@@ -513,11 +512,10 @@ Adding up the elements in table \ref{tab:Summands} as indicated by equation \ref
   	
 \end{tikzpicture}
 \end{center}
-\label{fig:Sum} %TODO
-\caption{Geometrical calculation of $z_1, z_2, z_3$ and  $z_4$ for $\phi_j = \left\lbrace 2, 1, 0.5, 0.25, ...\right\rbrace$ and $\theta = \frac{\pi}{6}$.}
+\caption{\label{fig:Sum} Geometrical calculation of $z_1, z_2, z_3$ and  $z_4$ for $\phi_j = \left\lbrace 2, 1, 0.5, 0.25, ...\right\rbrace$ and $\theta = \frac{\pi}{6}$.}
 \end{figure}
 
-With this picture in mind, it is easy to understand the kind of paths that different types of time series will give rise to (see figure \ref{fig:z1Path}). Constant time series generate cyclic paths (polygons) or pseudocyclic paths (polygons that doesn't close after a first round). Periodic or pseudoperiodic time series generate periodic or pseudoperiodic paths (note that equation \ref{eq:z1complex} resembles the numerical Fourier series of $\phi_k$, that should be periodic in $\theta$). Random time series generate brownian-motion-like paths. Provided that our system is deterministic, the apparent stochasticity of our observed time series is a strong indicator of chaos.
+With this picture in mind, it is easy to understand the kind of paths that different types of time series will give rise to (see figure \ref{fig:z1Path}). Constant time series generate cyclic paths (polygons) or pseudocyclic paths (polygons that do not close after a first round). Periodic or pseudoperiodic time series generate periodic or pseudoperiodic paths (note that summand in \ref{eq:z1complex} becomes then the product of two periodic/pseudoperiodic functions). Random time series generate brownian-motion-like paths. Provided that our system is deterministic, the apparent stochasticity of our observed time series is a strong indicator of chaos.
 
 \begin{figure}
 	\begin{center}
@@ -527,9 +525,9 @@ With this picture in mind, it is easy to understand the kind of paths that diffe
 	\label{fig:z1Path}
 \end{figure}
 
-The case of an underlying chaotic time series is the only one that generates a path that doesn't stay inside a bounded domain around the starting point. The z1 test uses the mean square displacement as a measure of this diffusion. The system is considered to be chaotic if the square displacement keeps growing for large times. If, on the contrary, it stays bounded, the test will consider the system not chaotic.
+The case of an underlying chaotic time series is the only one that generates a path that doesn't stay inside a bounded domain around the starting point. The z1 test uses the mean square displacement as a measure of this drift. The system is considered to be chaotic if the square displacement keeps growing for large times. If, on the contrary, it stays bounded, the test will consider the system not chaotic.
 
-\subsection{Neutral competition and system degeneration}
+\subsection{Neutral competition and system dimensionality}
 \label{subsec:NeutralCompetition}
 If we drop everything but the competition part of our dynamics (see equation \ref{eq:SystemUnderStudy}), we will find a system of $ n_P $ equations like the following:
 
@@ -545,13 +543,13 @@ In order to model a neutral competition, we should use the same competition coef
 P_i'(t) = r P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) & : i = 1..n_P
 \end{eqnarray}
 
-From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium manifolds (see figure \ref{fig:Neutral}).
+From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium hyperplanes (see figure \ref{fig:Neutral}).
 
 \begin{figure}[h]
 	\begin{center}
 		\includegraphics[width=0.9\columnwidth]{degenerate.png}
 	\end{center}
-	\caption{Example with $2$ prey under neutral competition. Both nullclines coincide point to point, giving rise to a higher dimensional equilibirium manifold (in this case, a straight line)}
+	\caption{Example with $2$ prey under neutral competition. Both nullclines coincide point to point, giving rise to a higher dimensional equilibirium hyperplane (in this case, a straight line)}
 	\label{fig:Neutral}
 \end{figure}
 
@@ -569,7 +567,7 @@ In agreement with the biological intuition, manipulating \ref{eq:TotalPopulation
 	 T'(t) = \sum_{i=1}^{n_P} P_i'(t) = r \sum_{i=1}^{n_P} P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) = r T (1 - \frac{A}{K} T)
 \end{eqnarray}
 
-Additionally, this result shows that we are actually working with a one-dimensional system, because the apparent $ n_P $ dimensions of our original problem are an artifact due to a wrong choice of state variables. In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of system degeneration.
+Additionally, this result shows that we are actually working with a one-dimensional system, because the apparent $ n_P $ dimensions of our original problem are an artifact due to a wrong choice of state variables. In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of decay in system dimensionality.
 
 
 \subsection{Extra figures}
