@@ -37,7 +37,7 @@
 Near-neutrality of competition has been proposed to facilitate coexistence of species because it slows down competitive exclusion, thus making it easier for equalizing mechanisms to maintain diverse communities. An unrelated line of work has shown that chaos can promote coexistence of many species in "super-saturated" communities. Here we link those previously unrelated findings demonstrating that near neutrality promotes the chances of chaotic dynamics driven by interactions with natural enemies. Our results suggest that near neutrality may promote biodiversity in two ways: through reducing the rates of competitive displacement and through promoting non-equilibrium dynamics.  
 
 \paragraph{}
-\textit{Keywords}: population dynamics, coexistence, competition, neutral competition, biodiversity paradox, chaos.
+\textit{Keywords}: coexistence, competition, neutral competition, biodiversity paradox, chaos.
 \end{abstract}
 
 \clearpage
@@ -72,7 +72,7 @@ We focused our attention on food webs with two trophic levels, one of consumers 
 \end{figure}
 
 % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species \cite{Scheffer2004}. 
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species (see \cite{Scheffer2004} and Online Appendix). 
 
 Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow logistically under the influence of intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. Obviously, predation has a negative effect for prey and a positive one for predators. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \cite{Scheffer2004}.
 
@@ -81,20 +81,20 @@ In mathematical notation, the system reads:
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
 	\begin{cases} 
-	P_i'(t) =  r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} P_k \right) - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j + f & : i = 1..n_P
+	P_i'(t) =  r_i(P) P_i  - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j + f & : i = 1..n_P
 	\\
 	C_j'(t) = - l C_j +  e g_j(P) C_j \sum_{i = 1}^{n_P} S_{ji} P_i & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
 
-where $P_i(t)$ represents the biomass of prey $i$ at time $t$ and $C_j(t)$ the biomass of predator species $j$ at time $t$. The auxiliary function $g_j(P)$ is defined as:
+where $P_i(t)$ represents the biomass of prey species $i$ at time $t$ and $C_j(t)$ the biomass of predator species $j$ at time $t$. The auxiliary functions $r_i(P)$ and $g_j(P)$ have been respectively chosen to generalize the logistic growth and the Holling type II saturation functional response \cite{Edelstein-Keshet} to a multispecies system when inserted into equation \ref{eq:SystemUnderStudy}. They are defined as:
 
 \begin{eqnarray}
 \label{eq:HollingGenerator}
+	r_i(P) = r \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} P_k \right)
+	\\
 	g_j(P) = \frac{g}{\sum_{i=1}^{n_P} S_{ji} P_i + H}
 \end{eqnarray}
-
-The shape of this auxiliary function has been chosen to generalize the Holling type II saturation functional response (see, for instance, \cite{Edelstein-Keshet}) to a multispecies system when inserted into equation \ref{eq:SystemUnderStudy}.
 
 For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see Online Appendix.
 
@@ -246,7 +246,7 @@ The paradox of biodiversity is a tremendously complex scientific problem. With t
 
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
-The preliminary analysis of this model were performed using GRIND for Matlab (http://www.sparcs-center.org/grind). Additionally, we thank prof. Sebastian Wieczorek, Jelle Lever, Moussa N'Dour and Sebastian Bathiany for their useful comments and suggestions. 
+The preliminary analysis of this model were performed using GRIND for Matlab (http://www.sparcs-center.org/grind). Additionally, we thank Tobias Oertel-Jäger, Sebastian Wieczorek, Jeroen Lamb, Martin Rasmussen, Jelle Lever, Moussa N'Dour and Sebastian Bathiany for their useful comments and suggestions. 
 
 This work was supported by funding from the European Union's \textit{Horizon 2020} research and innovation programme for the \textit{ITN CRITICS} under Grant Agreement Number 643073.
 
