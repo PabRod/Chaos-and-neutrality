@@ -125,8 +125,7 @@ for row = 1:nExperiments
         end
         
         %% Save results
-        % This file contains the time series and the results of the
-        % analysis
+        % This file contains the results of the analysis
         filename = char(strcat(results_folder, id, '.mat'));
         fprintf('\n Saving results.');
         save(filename, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb

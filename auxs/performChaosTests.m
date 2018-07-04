@@ -17,7 +17,7 @@ for j = 1:cols
         % Run different tests for chaos
         resultsArray{i,j}.chaosTests.lyapunov = isChaos(resultsArray{i,j}, 'lyapunov');
         resultsArray{i,j}.chaosTests.z1 = isChaos(resultsArray{i,j}, 'z1');
-        resultsArray{i,j}.chaosTests.z12 = isChaos(resultsArray{i,j}, 'z12');        
+        resultsArray{i,j}.chaosTests.z12 = isChaos(resultsArray{i,j}, 'z12');
         counter = counter + 1;
 
     end
