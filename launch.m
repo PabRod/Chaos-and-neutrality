@@ -5,7 +5,7 @@ clc;
 
 %% Experiment parameters
 % Experiments table location
-experiments_table_location = 'io/input_personal_fast.csv';
+experiments_table_location = 'io/input_test.csv';
 
 %% Perform each experiment
 tab = loadExperimentsTable(experiments_table_location);
