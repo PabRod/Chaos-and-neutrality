@@ -16,13 +16,6 @@ The csv file contains the following fields:
 
 # Example
 
-## Formatted
-
-|id|active|nPreys|nPreds|simTime|stabilTime|steps|lyapTime|lyapPert|reps|compPars|
-|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
-|Simulation1|true|8|6|1e3|5e3|2e3|100|1e-8|50|-1 0.05 0 0.2 1|
-|Simulation2|true|4|3|1e3|5e3|2e3|100|1e-8|75|-1 0.05 0 0.2 2|
-
 ## Plain text
 ```
 sep=;
@@ -30,6 +23,14 @@ id;active;nPreys;nPreds;simTime;stabilTime;steps;lyapTime;lyapPert;reps;compPars
 Simulation1;true;8;6;1e3;5e3;2e3;100;1e-8;50;-1 0.05 0 0.2 1
 Simulation2;true;6;-4;1e3;5e3;2e3;100;1e-8;75;-1 0.05 0 0.2 1
 ```
+
+## Formatted
+
+|     id      | active | nPreys | nPreds | simTime | stabilTime | steps | lyapTime | lyapPert | reps |    compPars     |
+|:-----------:|:------:|:------:|:------:|:-------:|:----------:|:-----:|:--------:|:--------:|:----:|:---------------:|
+| Simulation1 |  true  |   8    |   6    |   1e3   |    5e3     |  2e3  |   100    |   1e-8   |  50  | -1 0.05 0 0.2 1 |
+| Simulation2 |  true  |   4    |   3    |   1e3   |    5e3     |  2e3  |   100    |   1e-8   |  75  | -1 0.05 0 0.2 2 |
+
 Please note that the separators are:
 
 * **semicolon (;)** for new column
