@@ -20,6 +20,11 @@
 \usepackage[switch]{lineno}
 %\linenumbers
 
+% Simulation parameters used
+\newcommand{\numReps}{200} % Number of repetitions
+\newcommand{\stabilTime}{2000} % Stabilization time
+\newcommand{\simTime}{5000} % Simulation time
+
 \usepackage{authblk}
 \title{Neutral competition boosts chaos in food webs}
 \author[1]{Pablo Rodríguez-Sánchez \thanks{https://pabrod.github.io}} %TODO email or webpage?
@@ -144,7 +149,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 \subsubsection{Competition matrix}
 \label{subsubsec:CompetitionParameter}
 
-Our main purpose is to analyze the effect of different degrees of heterogeneity in the matrix competition on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$ whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). In mathematical terms: the elements of our competition matrix $A$ were drawn from probability distributions whose shape depend on the value of $\epsilon$.
+Our main purpose is to analyze the effect of different degrees of heterogeneity in the competition matrix on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$ whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). In mathematical terms: the elements of our competition matrix $A$ were drawn from probability distributions whose shape depend on the value of $\epsilon$.
 
 %TODO Maybe send figure to appendix
 Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong dominant intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
@@ -160,14 +165,17 @@ Defined this way, the parameter $\epsilon$ allows us to travel continuously from
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
 
-Depending on the parameters and the initial conditions, the system described in equation \ref{eq:SystemUnderStudy} can give rise to three types of asymptotic behavior, each of them roughly corresponding to a different type of attractor (see figure \ref{fig:TimeSeries}). The first one, a stable point attractor, generates a constant species composition. Secondly, limit cycle (and limit tori) attractors give rise to periodically (or quasiperiodically) changing species composition. Lastly, we'll refer as chaotic to attractors not fitting in any of the previous categories.
+\subsubsection{Time series generation}
+\label{subsubsec:TimeSerieSGeneration}
+Depending on the parameters and initial conditions, the system described in equation \ref{eq:SystemUnderStudy} can give rise to three types of qualitative behavior, each of them roughly corresponding to a different type of attractor (see figure \ref{fig:TimeSeries}). The first one, a stable point attractor, generates a constant species composition. Secondly, limit cycle (and limit tori) attractors give rise to periodically (or quasiperiodically) changing species composition. Lastly, we'll refer as chaotic to attractors that, while remaining bounded, do not fit in any of the previous categories.
 
-Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about intraspecific competition. In order to achieve this, we simulated several ecosystems with different initial conditions and predation coefficients $S_{ji}$, drawn using the same competition parameter $\epsilon$ (defined in section \ref{subsubsec:CompetitionParameter}).
+Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about competition. In order to achieve this, we swept among different values of the competition parameter $\epsilon$ (defined in section \ref{subsubsec:CompetitionParameter}), simulating a set of $\numReps$ ecosystems per competition parameter value. These ecosystems differ from each other on initial conditions, predation rates $S_{ji}$, and competition matrices, all of them drawn from probability distributions (see \ref{subsec:Parameterization}). Despite the competition matrices are not identical for a given $\epsilon$, they exhibit the same competition type.
 
-Numerical methods are used to integrate the equation \ref{eq:SystemUnderStudy}. Starting with random initial conditions (redrawn after every run), a first stabilizing run of $ 2000 $ days is generated in order to get closer to the attractor. Simulating for $ 5000 $ more days, we obtain time series as the ones in figure \ref{fig:TimeSeries}. 
+Numerical methods are used to integrate each realization of the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ \stabilTime $ days is generated in order to get closer to the attractor. Simulating for $ \simTime $ more days, we obtain time series as the ones in figure \ref{fig:TimeSeries}.
 
-%TODO point to appendix
-In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see Online Appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ 200 $ times per competition parameter, and thus, generating $ 200 $ different competition matrices per competition parameter value. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
+\subsubsection{Chaos detection}
+\label{subsubsec:ChaosDetection}
+In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald-Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection (see Online Appendix). Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions. We found the results of the Gottwald-Melbourne test most consistent with visual inspection. We called chaotic all those time series complicated enough to trigger the Gottwald-Melbourne test. Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}. Our numerical experiment was repeated $ \numReps $ times per competition parameter, and thus, generating $ \numReps $ different competition matrices per competition parameter value. The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behavior.
 
 Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
@@ -203,7 +211,7 @@ Between both local maxima there is obviously a local minimum whose exact positio
 \section{Discussion}
 \label{sec:Discussion}
 % Our claims
-The asymptotic dynamics of our model are affected by the strength of intraspecific competition compared to interspecific competition is. Interestingly, we find that competition closer to neutrality leads to chaotic behaviour. This suggests that in a system with predation, near-neutrality at the competition level may increase the probability of complex dynamics if the species are not equally prone to predation. Provided that the competitive exclusion principle rests on the assumption of equilibrium, near-neutrality reduces the chances of the principle to be applicable, improving the chance for a higher number of coexisting species if dynamics are chaotic \cite{Huisman1999}. Additionaly, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. Our model shows another local maximum for the probability of chaos for weak competition coupling. We consider this a reasonable result, as predation is known to be the main driver of chaos in this kind of models \cite{Scheffer2004}.
+The asymptotic dynamics of our model are affected by the strength of intraspecific competition compared to interspecific competition. Interestingly, we find that competition closer to neutrality leads to chaotic behaviour. This suggests that in a system with predation, near-neutrality at the competition level may increase the probability of complex dynamics if the species are not equally prone to predation. Provided that the competitive exclusion principle rests on the assumption of equilibrium, near-neutrality reduces the chances of the principle to be applicable, improving the chance for a higher number of coexisting species if dynamics are chaotic \cite{Huisman1999}. Additionaly, this observation suggests that the hypothesis of non-equilibrium and Hubbell's hypothesis of neutrality are not completely independent. Our model shows another local maximum for the probability of chaos for weak competition coupling. We consider this a reasonable result, as predation is known to be the main driver of chaos in this kind of models \cite{Scheffer2004}.
 
 %% Limitations
 % Why two levels?
