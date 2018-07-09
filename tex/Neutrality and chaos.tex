@@ -119,7 +119,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 			\hline
 			$r$ & Maximum growth rate & $0.50$ & $d^{-1}$ \\
 		    \hline
-			$K$ & Carrying capacity & $1.00$ & $ mg \ l^{-1} $ \\
+			$K$ & Carrying capacity & $10.00$ & $ mg \ l^{-1} $ \\
 			\hline
 			$g$ & Predation rate & $0.40$ & $d^{-1}$\\
 			\hline
@@ -129,7 +129,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 			\hline
 			$H$ & Half-saturation constant & $2.00$ & $ mg \ l^{-1} $\\
 		    \hline
-			$l$ & Loss rate & $0.15$ & $d^{-1}$\\
+			$l$ & Predator's loss rate & $0.15$ & $d^{-1}$\\
 			\hline
 		    $S$ & $ n_C \times n_P $ predator preference matrix & $S_{ij} \in (0,1)$ & $1$\\
 		    \hline
@@ -180,7 +180,7 @@ Plotting the probability of chaos against the competition parameter (see figure 
 The overall likelihood of chaos, which can be interpreted as the area under the curve in figure \ref{fig:Results}, increases with the size of the food web. This effect should not be surprising: the more dimensions the phase space has, the easier is to fulfill the requirements of the complex geometry of a chaotic attractor \cite{Strogatz1994}. We can understand this intuitively as increasing the available room for the trajectories to pack closer and closer without ever crossing each other nor collapsing to a point. Even in those higher dimensional cases, there is still a clear maximum at neutral competition.
 
 % Weak and strong interspecific competition
-There's another local maximum for $ \epsilon = -1 $. This means that weak competitive coupling, in our model, also promotes chaos.
+Another local maximum was observed around $ \epsilon = -1 $. This means that weak competitive coupling, in our model, also promotes chaos.
 
 Between both local maxima there is obviously a local minimum whose exact position differed between experiments.
 
