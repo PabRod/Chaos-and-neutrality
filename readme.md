@@ -20,8 +20,8 @@ The main purpose of the analysis is to classify each individual simulation as ch
 
 Please note that the typical run time in a standard personal computer is around 3 hours per set (that is, per active row in the input file).
 
-## input.csv
-The csv file contains the following fields:
+## Input
+The expected input is the file `/io/input.csv`. This csv file contains the following fields:
 
 * **id**: identification string. The name of the simulation.
 * **active**: the simulation is executed only if active is true. Otherwise, it is ignored.
@@ -45,6 +45,7 @@ The csv file contains the following fields:
 * **results_folder**: path where the analysis results will be stored.
 * **timeseries_folder**: path where the timeseries will be stored. The timeseries may require some Gb of disk space.
 
+
 ### Example
 
 #### Plain text
@@ -66,6 +67,21 @@ Please note that the separators are:
 
 * **semicolon (;)** for new column
 * **new line** for new row
+
+## Output
+The output is a set of _m_ files, one per numerical experiment. Its filename coincides with the field _id_ in the input file, that is, experiment with id _sim1_ will generate the file `/io/sim1.m`.
+
+It contains the variable _resultsArray_, a cell of structs. Each individual struct contains information about an individual simulation.
+
+The fields are:
+
+* **id**: identification string. The name of the simulation.
+* **dims**: the dimensions of the systems. In the form [number of predator species, number of prey species]
+* **stabilTime**: numerical stabilization time. Used to reach an attractor and minimize the effects of the initial conditions.
+* **competition_par**: the value of the competition parameter for the selected simulation.
+* **maxLyapunov**: the estimated maximum Lyapunov exponent for this simulation.
+* **chaosTests**: a struct containing booleans (true/false) for a couple of different tests of chaoticity.
+
 
 
   [Published]: http://url.com
