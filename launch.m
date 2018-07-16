@@ -97,9 +97,7 @@ for row = 1:nExperiments
                 results.timeseries.ys = y_out;
                 results.timeseries.ts = t_out;
                 
-                %% Perform tests for chaos
-                % results.maxLyapunov = lyapunovExp(@(t, y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, lyapPert.*ones(1, nPreys+nPreds), true);
-                                
+                %% Perform tests for chaos                 
                 [ts_lyap, ys_lyap_1] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, opts); %TODO: re-use previous run
                 [~, ys_lyap_2] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr + lyapPert.*ones(1, nPreys+nPreds), opts);
 

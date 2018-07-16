@@ -1,6 +1,6 @@
 function [probChaos_using_Lyaps, probChaos_using_z1, probChaos_using_z1_2, summary, binaryComparer] = computeProbabilities(resultsArrayLocation)
-%COMPUTEPROBABILITIES Summary of this function goes here
-%   Detailed explanation goes here
+%COMPUTEPROBABILITIES Returns the estimated probabilities of chaos using
+%different criterions
 
 %% Load results
 resultsArray = loadResults(resultsArrayLocation);

@@ -1,6 +1,15 @@
-function createFigures(resultsArrayLocation, prompt)
-%CREATEFIGURES Summary of this function goes here
-%   Detailed explanation goes here
+function createFigures(resultsArrayLocation, options)
+%CREATEFIGURES Creates some figures useful for exploratory analysis and
+%showing results
+%
+%   The possible options are:
+%   'maxLyaps': for plotting maximum Lyapunov exponents
+%   'maxLyapsFiltered': a combined plot of maximum Lyapunov exponents and
+%   other chaos tests
+%   'probabilities': probabilities of chaos using different measures
+%   'comparer': agreement comparer between the different tests for
+%   individual runs
+%   'summary': probability of chaos vs. competition parameter
 
 %% Load results
 resultsArray = loadResults(resultsArrayLocation);
@@ -9,7 +18,7 @@ resultsArray = loadResults(resultsArrayLocation);
 [nreps, npars] = size(resultsArray);
 N = nreps.*npars;
 
-switch prompt
+switch options
     
     case 'maxLyaps'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
