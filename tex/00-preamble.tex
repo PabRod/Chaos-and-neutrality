@@ -1,0 +1,39 @@
+\documentclass[a4paper, onecolumn, 10pt]{article}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{selinput}
+\SelectInputMappings{%
+  aacute={á},
+  ntilde={ñ},
+  Euro={€}
+}
+
+\usepackage{float} % For controlling figure positions
+\usepackage{amsthm, amsmath, amsfonts, amssymb}
+\usepackage{fancybox}
+\usepackage{color}
+\usepackage{cite}
+\usepackage{url}
+
+\usepackage{graphicx}
+\graphicspath{ {../img/} }
+
+\usepackage[draft, colorinlistoftodos]{todonotes} % Use disable instead of draft to hide todo notes
+
+\usepackage[switch]{lineno}
+%\linenumbers
+
+% Simulation parameters
+\newcommand{\numReps}{200} % Number of repetitions
+\newcommand{\stabilTime}{2000} % Stabilization time
+\newcommand{\simTime}{5000} % Simulation time
+
+\usepackage{authblk}
+\title{Neutral competition boosts chaos in food webs}
+\author[1]{Pablo Rodríguez-Sánchez \thanks{https://pabrod.github.io}}
+\author[1]{Egbert H. van Nes \thanks{egbert.vannes@wur.nl}}
+\author[1]{Marten Scheffer \thanks{marten.scheffer@wur.nl}}
+
+\affil[1]{Department of Aquatic Ecology, Wageningen University, The Netherlands}
