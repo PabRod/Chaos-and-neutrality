@@ -3,9 +3,14 @@
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{selinput}
+\SelectInputMappings{%
+  aacute={á},
+  ntilde={ñ},
+  Euro={?}
+}
 
 \usepackage{float} % For controlling figure positions
-%\usepackage{etoolbox} % For using conditionals
 \usepackage{amsthm, amsmath, amsfonts, amssymb}
 \usepackage{fancybox}
 \usepackage{color}
@@ -20,14 +25,14 @@
 \usepackage[switch]{lineno}
 %\linenumbers
 
-% Simulation parameters used
+% Simulation parameters
 \newcommand{\numReps}{200} % Number of repetitions
 \newcommand{\stabilTime}{2000} % Stabilization time
 \newcommand{\simTime}{5000} % Simulation time
 
 \usepackage{authblk}
 \title{Neutral competition boosts chaos in food webs}
-\author[1]{Pablo Rodríguez-Sánchez \thanks{https://pabrod.github.io}} %TODO email or webpage?
+\author[1]{Pablo Rodríguez-Sánchez \thanks{https://pabrod.github.io}}
 \author[1]{Egbert H. van Nes \thanks{egbert.vannes@wur.nl}}
 \author[1]{Marten Scheffer \thanks{marten.scheffer@wur.nl}}
 
@@ -143,7 +148,6 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 
 Our main purpose is to analyze the effect of different degrees of heterogeneity in the competition matrix on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$ whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). In mathematical terms: the elements of our competition matrix $A$ were drawn from probability distributions whose shape depend on the value of $\epsilon$.
 
-%TODO Maybe send figure to appendix
 Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong dominant intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
 
 \begin{figure}[H]
@@ -215,11 +219,6 @@ For simplicity, both the competition and predation parameters were drawn from pr
 % Choice of interaction parameters: randomness
 It is known that the asymptotic behaviour of this kind of systems can be very sensitive to the parameters choice. In particular, introducing correlations between parameters can greatly modify the probabilities of chaotic attractors to be reached (see for instance \cite{Huisman2001}, in response to the letter \cite{Schippers2001}). In the present paper we didn't introduce any correlation, i.e., all our random parameters were drawn independently from the others. Studying the effect of different physiological scenarios (in the sense of \cite{Huisman2001}, that is, constrains between the parameters) on the probabilities of chaos could be a continuation to this paper.
 
-% Role of symmetry
-%TODO Effects of symmetry, show or not mention
-%It may be worth noting that the position of both the maxima we've found (i.e.: $ \epsilon = -1 $ and $ \epsilon = 0 $) have something in common: the community matrix $ A $ at those values of the parameter is very symmetric in both cases. It will be interesting to develop a similar method that, instead of varying neutrality, varies the less restrictive property of symmetry.
-%\todo[inline, color=blue!25, caption={Effects of symmetry}]{\textbf{Egbert}: Good chance that a reviewer says: nice these suggestions, but why do they not show it here? \\ \textbf{Pablo}: Remove or do? \\ \textbf{Egbert}: up to you. Maybe it is not so difficult to perform the same analysis imposing symmetry}
-
 % Chaos detection
 Due to the large number of simulations made, we had to rely on automatic methods for detecting chaos. Automatic detection of chaos by numerical methods has fundamental limitations, especially for high dimensional systems like ours. Most of them can be boiled down to the fact that, in general, numerical methods cannot distinguish robustly between long, complicated transients and genuine chaos. We think that our approach to chaos detection, despite being open to improvement, suffices to detect the overall patterns.
 
@@ -234,21 +233,15 @@ Our results suggest a fundamentally new way in which near-neutrality may promote
 	\label{fig:GapInKnowledge}
 \end{figure}
 
-% Is chaos more resilient?
-%Additionally, we are implicitly assuming without a proof that chaotic ecosystems can have more species %than non-chaotic ones\todo{Stronger concluding remark required}.
-%\todo[inline, caption={This is well known in math}]{There are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnold's cat map.}
-%%TODO there are mathematical reasons for this to be true. Keywords: uniformly hyperbolic dynamical systems, Anosov maps, Arnond's cat map
-
-%%TODO A possible continuation of this research may be the setting of two indepedent ecosystems, one of them chaotic and the other one non-chaotic, and allow them to interact at some point of time (simulating an invasion), in order to assess how much of each of the original ecosystems survives to this traumatic event. This is a good idea, but I think testing for resilience is too far from this study to put it here. You could instead refer to the discussions about  Huismans paper (Schippers, P., A. M. Verschoor, M. Vos, and W. M. Mooij. 2001. Does "supersaturated coexistence" resolve the "paradox of the plankton"? Ecology letters 4:404-407. and Huismans reply) {Schippers2001}
-
 \section{Acknowledgements}
 \label{sec:Acknowledgements}
-The preliminary analysis of this model were performed using GRIND for Matlab (http://www.sparcs-center.org/grind). Additionally, we thank Tobias Oertel-Jäger, Sebastian Wieczorek, Jeroen Lamb, Martin Rasmussen, Cristina Sargent, Jelle Lever, Moussa N'Dour and Sebastian Bathiany for their useful comments and suggestions. 
+The preliminary analysis of this model were performed using GRIND for Matlab (http://www.sparcs-center.org/grind). Additionally, we thank Tobias Oertel-Jäger, Sebastian Wieczorek, Jeroen Lamb, Martin Rasmussen, Cristina Sargent, Jelle Lever, Moussa N'Dour, Iñaki Úcar, Mario Herrero and Sebastian Bathiany for their useful comments and suggestions. 
 
 This work was supported by funding from the European Union's \textit{Horizon 2020} research and innovation programme for the \textit{ITN CRITICS} under Grant Agreement Number 643073.
 
 \clearpage
 
+\appendix
 \section{Online appendix}
 \label{sec:Appendix}
 
@@ -287,7 +280,7 @@ where $e$ represents the efficiency of the energy transfer process. Equation \re
 
 Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open system from the point of view of thermodynamics. Here $Growth$ is the only source of the system, and $Loss$ is the only sink (see figure \ref{fig:EnergyFlow}). All the energy exchange due to predation stays inside the system, so predation can be considered a closed subsystem.
 
-\begin{figure}
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=0.25\columnwidth]{energyflow.png}
 	\end{center}
@@ -453,15 +446,6 @@ First, we have to use one of our time series of observations $\phi_k$ to build t
 	\end{cases}
 \end{eqnarray}
 
-%Using vector notation both equations can be given a more compact form:
-%
-%\begin{equation}
-%\label{eq:z1vec}
-%\vec p_n(\theta) = \sum_{k=1}^n \phi_k \hat u(k \theta)
-%\end{equation}
-%
-%where $\vec u(k \theta)$ is the unit vector pointing in the direction $k \theta$
-
 Using Euler's formula both equations can be given a more compact form:
 
 \begin{equation}
@@ -591,24 +575,6 @@ Additionally, this result shows that we are actually working with a one-dimensio
 	\caption{Flow chart describing the numerical experiment. The source code is available at \textit{https://github.com/PabRod/Chaos-and-neutrality}.}
 	\label{fig:FlowChart}
 \end{figure}
-
-%
-%\subsection{Detection of chaos}
-%\label{subsec:DetectionOfChaos}
-%Dynamical systems with chaotic attractors are extremely sensitive to initial conditions. Two trajectories whose initial conditions are slightly different will diverge exponentially if they lie in the basin of a chaotic attractor. The initial rate of divergence is quantified by the Lyapunov exponent \cite{Strogatz1994}.
-%
-%Our procedure for classifying the attractors as chaotic or non-chaotic was based in the analysis of Lyapunov exponents. More specifically, this is the procedure we've followed:
-%
-%\begin{enumerate}
-%	\item \label{GoToAttractor} Run the simulation for a sufficient time, in order to guarantee that a trajectory reached an attractor and the dynamics are asymptotic.
-%	\item \label{RunInAttractor} Use the last point of the run in step \ref{GoToAttractor} as a starting point for a second, shorter run on the attractor.
-%	\item \label{PerturbedTrajectory} Use again the last point of the run in step \ref{GoToAttractor} but, this time, adding a small disturbance to it.
-%	\item Compare the runs in steps \ref{RunInAttractor} and \ref{PerturbedTrajectory} to compute numerically the principal Lyapunov exponent.
-%	\begin{itemize}
-%		\item If it's positive, classify the attractor as chaotic.
-%		\item If it's negative, classify the attractor as non-chaotic.
-%	\end{itemize}
-%\end{enumerate}
 
 \clearpage
 
