@@ -297,7 +297,7 @@ Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open syst
 	\label{fig:EnergyFlow}
 \end{figure}
 
-We can generalize this basic structure to multispecies, two trophic levels systems. First, we'll go back to equation \ref{eq:CommonStructure} and just add more rows, while we are specially careful with the variables in the functional relations:
+We can generalize this basic structure to multispecies, two trophic levels systems. First, we'll go back to equation \ref{eq:CommonStructure} and just add more rows:
 
 \begin{eqnarray}
 \label{eq:CommonStructureMulti}
@@ -324,9 +324,9 @@ Using \ref{eq:InnerEnergyFlowMulti} and \ref{eq:CommonStructureMulti}, it is eas
 	\sum_{i = 1}^{n_P} e_i P_i'(t) + \sum_{j = 1}^{n_C} C_j'(t) = \sum_{i = 1}^{n_P} e_i \cdot Growth_i(P) - \sum_{j = 1}^{n_C} Loss_j(C_j)
 \end{equation}
 
-The intuitive interpretation is, again, that the sinks and sources of energy in our systems are the total $Loss$ and $Growth$.
+The intuitive interpretation is, again, that the only sinks and sources of energy in our systems are the total $Loss$ and $Growth$.
 
-Restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlowMulti}) can be used to generalize realistic functional forms for the coupling terms. As the coupled terms that are related to predation, those terms are the very core of this models.
+Restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlowMulti}) can be used to generalize realistic functional forms for the coupling terms. As the coupled terms that are related to predation, those terms are the very core of this models. %TODO
 
 \subsubsection{Lotka-Volterra equations}
 \label{subsubsec:LotkaVolterra}
@@ -349,7 +349,7 @@ It is trivial to prove that the Lotka-Volterra model satisfies the requirements 
 \subsubsection{Multispecies Lotka-Volterra equations}
 \label{subsubsec:LotkaVolterraMulti}
 
-Lotka-Volterra equations can be generalized to a model with multiple species by noting that each prey will be affected by all consumers, and each consumer will be affected by all prey. In order to code the strength of this interactions, we introduce the matrix $S$, whose element $S_{ji}$ gives the strength of the coupling of consumer $j$ and prey $i$. As a consequence: for prey dynamics, this matrix is scanned row-wise, while for predators it is scanned column-wise. The generalized system looks like:
+Lotka-Volterra equations can be generalized to a model with multiple species by noting that each prey will be affected by all consumers, and each consumer will be affected by all prey. In order to code the strength of this interactions, we introduce the matrix $S$, whose element $S_{ji}$ gives the strength of the coupling of consumer $j$ and prey $i$. As a consequence, for prey dynamics this matrix is scanned row-wise, while for predators it is scanned column-wise. The generalized system looks like:
 
 \begin{eqnarray}
 \label{eq:LotkaVolterraMulti}
@@ -366,7 +366,7 @@ In this model, all terms can grow without boundaries. This is not only unrealist
 
 \subsubsection{Rosenzweig-MacArthur model}
 \label{subsubsec:Rosenzweig-MacArthur}
-The Rosenzweig-MacArthur predator-prey model improves the previous model by adding boundaries to the terms' dependency on the prey population. This is achieved by encapsulating $P$ inside saturating functions. In particular, the growth rate $r$ now depends on $P$, and the grazing rate $g$ in the coupling terms is now a function of $P$ (see equation \ref{eq:RosMac2levels} and compare it with \ref{eq:LotkaVolterra}).
+The Rosenzweig-MacArthur predator-prey model improves the previous model by adding boundaries to the terms' dependency on the prey population. This is achieved by encapsulating $P$ inside saturating functions. In particular, the growth rate and the grazing rate $r$ now depend on $P$ (see equation \ref{eq:RosMac2levels} and compare it with \ref{eq:LotkaVolterra}).
 
 \begin{eqnarray}
 \label{eq:RosMac2levels}
@@ -435,7 +435,7 @@ We hypothesize that the grazing rates corresponding to predator $j$, that is, $g
 				Rosenzweig-MacArthur & $\begin{cases}P'(t) = r(P) P - g(P) P C\\C'(t) = - l C + e g(P) C P\end{cases}$ & $\begin{cases} P_i'(t) = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j \\ C_j'(t) = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$  \\
 			\hline  \end{tabular}}
 	\end{center}
-	\caption{Summary table with the different types of predation models studied. Written this way, the parallelisms are obvious. In multispecies models, the index $i$ runs from $1$ to $n_P$, and $j$ from $1$ to $n_C$. The functional forms of $r_i(P)$ and $g_j(P)$ are given in equations \ref{eq:r} and \ref{eq:g}}
+	\caption{Summary table with the different types of predation models studied. Written this way, the parallelisms are obvious. In multispecies models, the index $i$ runs from $1$ to $n_P$, and $j$ from $1$ to $n_C$. The functional forms of $r_i(P)$ and $g_j(P)$ are given in equations \ref{eq:r} and \ref{eq:g}. In the present paper we used the Rosenzweig-MacArthur multispecies model, that is, the one in the lower right corner.}
 \end{table}
 
 \subsection{Melbourne-Gottwald 0-1 test in a nutshell}
