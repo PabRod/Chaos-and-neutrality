@@ -82,10 +82,12 @@ The fields are:
 * **maxLyapunov**: the estimated maximum Lyapunov exponent for this simulation.
 * **chaosTests**: a struct containing booleans (true/false) for a couple of different tests of chaoticity.
 
-
+## Credits
+The function **z1test** was adapted, with permission of the author, from [GRIND for Matlab][grind].
 
   [Published]: http://url.com
   [Preprint]: http://arxiv.com
   [RosMac]: https://www.journals.uchicago.edu/doi/10.1086/282272
   [Lyapunov]: http://www.mathematica-journal.com/issue/v6i3/article/sandri/contents/63sandri.pdf
   [z1]: https://arxiv.org/pdf/0906.1418.pdf
+  [grind]: http://www.sparcs-center.org/grind

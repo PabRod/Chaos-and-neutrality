@@ -1,11 +1,11 @@
 %Z1TEST   Gottwald-Melbourne 0-1 test for chaos
-%  Simple and fast test to decide if a system is chaotic. Only one long time series 
+%  Simple and fast test to decide if a system is chaotic. Only one long time series
 %  is needed. The data should not be too densely sampled and not too spasely (ca 10 points
 %  per peak works well).
-%      
+%
 %  Citation:
 %
-%  Gottwald, G. A. and I. Melbourne. 2009. On the implementation of the 0-1 
+%  Gottwald, G. A. and I. Melbourne. 2009. On the implementation of the 0-1
 %    test for chaos. SIAM Journal on Applied Dynamical Systems 8:129-145.
 %    see  <a href="http://dx.doi.org/10.1137/080718851">http://dx.doi.org/10.1137/080718851</a> or
 %    <a href="https://arxiv.org/pdf/0906.1418.pdf">https://arxiv.org/pdf/0906.1418.pdf</a>
@@ -14,9 +14,9 @@
 %   Z1TEST(X) is the result of the 0-1 test applied to the vector X.
 %      Result is near to 0 for non-chaotic data and near 1 for chaotic data. By
 %      default the current model run is used as time series. If X is a matrix
-%      the column with the maximum average is used. 
+%      the column with the maximum average is used.
 %  RES=Z1TEST - save the results of the analysis to the structure RES:
-%    Fields: 
+%    Fields:
 %        N: number of used points
 %       k: median expansion factor (1= chaotic 0 = non-chaotic
 %      ks: k-values per iteration
@@ -25,12 +25,7 @@
 %       p, q: all p and q values for the transfomed dataseries.
 %    disp: text if k<0.2 'Not chaotic' else if k>0.9 'Chaotic' else 'Indecisive'.
 %
-%  
-%   See also stabil, lyapunov, nmaxima
-%
-%
-%   Reference page in Help browser:
-%      <a href="matlab:commands('z1test')">commands z1test</a>
+
 
 %   Copyright 2017 WUR
 %   Revision: 1.2.1 $ $Date: 09-Nov-2017 20:38:22 $
@@ -68,8 +63,8 @@ if nargin==0||numel(x)==1||ischar(x)
     end
     x=g_Y;
 end
-if size(x,1)==1 
-    x=transpose(x); 
+if size(x,1)==1
+    x=transpose(x);
 end
 if size(x,2)>1
     %if x is a matrix we take the column with the maximum avalue)
@@ -77,7 +72,7 @@ if size(x,2)>1
 end
 N=length(x);
 meanx=mean(x);
-%check if there is a fixed point 
+%check if there is a fixed point
 %the 0-1 test is often indicisive in fixed points
 if meanx>1E-6
     cv=std(x)/meanx;
@@ -94,7 +89,7 @@ if cv<1e-4
     return
 end
 %the test does not work if the points are too densely packed.
-%here we find local maxima and leave on average at most 10 points between maxima 
+%here we find local maxima and leave on average at most 10 points between maxima
 %but we keep minimal 10% of the points.
 %
 %get the maxima;
@@ -112,8 +107,8 @@ if nmaxima<N/n_between_max
     end
     N=length(x);
 end
- 
-%%%% The 1-0 test for chaos starts here
+
+%% The 1-0 test for chaos starts here
 niter=100;
 j=transpose(1:N);
 t=transpose(1:round(N/10));
@@ -140,7 +135,7 @@ if nargout==0
         fprintf('Chaotic (k=%g)\n',kmed);
     elseif kmed<0.1
         fprintf('Not chaotic (k=%g)\n',kmed);
-    else 
+    else
         fprintf('Indecisive (k=%g)\n',kmed);
     end
 else
@@ -157,5 +152,3 @@ else
         results.disp='Not chaotic';
     end
 end
-
-        
