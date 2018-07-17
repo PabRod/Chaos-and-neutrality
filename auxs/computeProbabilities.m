@@ -25,12 +25,12 @@ probChaos_using_z1_2  = sum(isChaos_z1_2, 1)./nreps;
 % Lyap true, z1 false : 10 = 2
 % Lyap true, z1 true  : 11 = 3
 
-binaryComparer = 2.*isChaos_Lyap + 1.*isChaos_z1_2;
+binaryComparer = 2.*isChaos_Lyap + 1.*isChaos_z1;
 votesForChaos = binaryComparer;
-votesForChaos(votesForChaos == 3) = 3;
+votesForChaos(votesForChaos == 3) = 3; % TODO: 3 should count as 2?
 summary = NaN(1, npars);
 for j = 1:npars
-    summary(j) = sum(votesForChaos(:, j))./(3*nreps); % TODO: 3 should count as 2?
+    summary(j) = sum(votesForChaos(:, j))./(3*nreps);
 end
 
 end
