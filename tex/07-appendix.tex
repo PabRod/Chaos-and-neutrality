@@ -56,7 +56,7 @@ We can generalize this basic structure to multispecies, two trophic levels syste
 	\end{cases}
 \end{eqnarray}
 
-where now $i$ runs from $1$ to the number of prey $n_P$ and $j$ from $1$ to the number of consumers $n_C$. Here, we've used $P_i$ to denote the population of the prey labeled by $i$, and $P$ for the vector containing all prey populations. Notice that, while the $Growth$ term can involve competition (and thus, depends on the whole vector $P$), the $Loss$ term for species $j$ depends only in the population of that species (i.e.: $C_j$), regardless of the rest.
+where now $i$ runs from $1$ to the number of prey $n_P$ and $j$ from $1$ to the number of consumers $n_C$. Here, we've used $P_i$ to denote the population of the prey labeled by $i$, and $P$ for the vector containing all prey populations. Notice that while the $Growth$ term can involve competition (and thus, depends on the whole vector $P$), the $Loss$ term for species $j$ depends only in the population of that species (i.e.: $C_j$), regardless of the rest.
 
 Requiring once again our predation to be fully invested in consumer's growth, we find the following generalization of equation \ref{eq:InnerEnergyFlow}:
 
@@ -340,7 +340,7 @@ Additionally, this result shows that we are actually working with a one-dimensio
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{results_all.png}
 	\end{center}
-	\caption{This figure summarizes the results of the whole set of simulations. The competition parameter $\epsilon$ is on the horizontal axis. The estimated probability of chaos is represented on the vertical one. Each panel corresponds to an ecosystem with a different number of interacting species. The exact number is shown in each box, as number of predators + number of prey.}
+	\caption{Summary of the results of the whole set of simulations. The competition parameter $\epsilon$ is on the horizontal axis. The estimated probability of chaos is represented on the vertical one. Each panel corresponds to an ecosystem with a different number of interacting species. The exact number is shown in each box, as number of predators + number of prey.}
 	\label{fig:AllProbabilities}
 \end{figure}
 

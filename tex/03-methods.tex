@@ -64,22 +64,22 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 		    \hline
 		\end{tabular}}
 	\end{center}
-	\caption{Values and meanings of the parameters used in our numerical experiment.}
+	\caption{Values and meanings of the parameters used in our numerical experiment. The elements of the predation matrix $S$ are drawn from a uniform probability distribution, bounded between $0$ and $1$.}
 	\label{tab:Parameters}
 \end{table}
 
 \subsubsection{Competition matrix}
 \label{subsubsec:CompetitionParameter}
 
-Our main purpose is to analyze the effect of different degrees of heterogeneity in the competition matrix on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$ whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). In mathematical terms: the elements of our competition matrix $A$ were drawn from probability distributions whose shape depend on the value of $\epsilon$.
+Our main purpose is to analyze the effect of different degrees of heterogeneity in the competition matrix on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$, whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$).
 
-Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong dominant intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
+Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{epsilon_all.png}
 	\end{center}
-	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the parameter $\epsilon$.}	
+	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the competition parameter $\epsilon$.}	
 	\label{fig:CompetitionParameter}
 \end{figure}
 
@@ -96,13 +96,13 @@ Depending on the parameters and initial conditions, a system like the one descri
 	\label{fig:TimeSeries}
 \end{figure}
 
-Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about competition. In order to achieve this, we swept among $\numEpsilons$ different values of the competition parameter $\epsilon$ (defined in section \ref{subsubsec:CompetitionParameter}). We simulated a set of $\numReps$ ecosystems per competition parameter value. This amounts to a total of $\numExps$ simulated ecosystems. These ecosystems differ from each other in initial conditions, predation rates $S_{ji}$, and competition matrices, all of them sampled from probability distributions (see \ref{subsec:Parameterization}). Ecosystems grouped by competition value $\epsilon$, despite not being identical, exhibit the same competition type (see \ref{subsubsec:CompetitionParameter}).
+Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about competition. In order to achieve this, we swept among $\numEpsilons$ different values of the competition parameter $\epsilon$ (defined in section \ref{subsubsec:CompetitionParameter}). We simulated a set of $\numReps$ ecosystems per competition parameter value. This amounts to a total of $\numExps$ simulated ecosystems. These ecosystems differ from each other in initial conditions, predation rates $S_{ji}$, and competition matrices, all of them sampled from probability distributions (see \ref{subsec:Parameterization}). Ecosystems grouped by competition parameter $\epsilon$, despite not being identical, exhibit the same competition type (see \ref{subsubsec:CompetitionParameter}).
 
 Numerical methods were used to integrate each realization of the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ \stabilTime $ days is executed in order to get closer to the attractor. Simulating for $ \simTime $ more days, we obtain trajectories in the vicinity of the attractor.
 
 We considered chaotic those time series that triggered the Gottwald - Melbourne test (see\cite{Gottwald2009} and Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
 
-The ratio of attractors found to be chaotic can be used to estimate the probability of ecosystems of a given degree of heterogeneity developing chaotic asymptotic behaviour.
+The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity.
 
 Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
