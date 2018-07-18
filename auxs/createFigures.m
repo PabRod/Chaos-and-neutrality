@@ -97,6 +97,19 @@ switch options
         ylabel('Probability');
         legend('Lyapunov', 'z1', 'z1 soft');
         
+    case 'z1'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        [~, ~, probChaos_using_z1_2, ~, ~] = computeProbabilities(resultsArray);
+        
+        %area(competition_pars, probChaos_using_z1_2, 'FaceColor', [254 127 127]./255);
+        area(competition_pars, probChaos_using_z1_2);
+        xlim([-.8,.8]);
+        ylim([0,1]);
+        text = sprintf('Probability of chaos \n Case: %s', resultsArray{1,1}.id);
+        title(text);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Probability of chaos');
+        
     case 'comparer'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         [~, ~, ~, ~, binaryComparer] = computeProbabilities(resultsArrayLocation);

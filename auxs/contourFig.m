@@ -1,6 +1,17 @@
 function contourFig(varargin)
-%CONTOURFIG Generates the contour plot of a whole batch of numerical
-%experiments
+%CONTOURFIG Generates the contour plot combining the results of
+%experiments executed with different numbers of species.
+%
+% Each per-number-of-species batch subset must have the same size.
+%
+% Usage:
+%
+% If all the output files (say, 2-3p.mat, 4-6p.mat, ..., 20-30p.mat) are in 
+% the same folder, and there is no other .mat file in the folder, execute
+% contourFig without arguments.
+%
+% To point to a particular set of files, include the filenames as argument:
+% contourFig({'2-3p.mat', '4-6p.mat', ..., '20-30p.mat'})
 
 %% Input control
 switch nargin
@@ -18,8 +29,15 @@ switch nargin
             files{i} = filesInfo(i).name;
         end
         
+        opts = 'all';
+        
     case 1 % Take specified files
         files = varargin{1};
+        opts = 'all';
+        
+    case 2 % Plot only specified contours
+        files = varargin{1};
+        opts = varargin{2};
         
     otherwise
         error('Wrong number of inputs');
@@ -47,36 +65,68 @@ end
 %% Plot
 levels = [.0, .1, .2, .3, .4, .5, .6, .7, .8, .9, .95, .975, 0.99, 1];
 
-subplot(2, 2, 1);
-[c, h] = contourf(competition_pars, nSpecies, usingLyaps, levels);
-title('Using max Lyapunov');
-xlim([-.8 .8]);
-clabel(c, h);
-xlabel('Competition parameter \epsilon');
-ylabel('Number of species (predators + prey)');
+switch opts
+    
+    case 'lyaps'
+        contourFigLyaps(competition_pars, nSpecies, usingLyaps, levels);
+        
+    case 'z1'
+        contourFigZ1(competition_pars, nSpecies, usingz1, levels);
+        
+    case 'z12'
+        contourFigZ1(competition_pars, nSpecies, usingz12, levels);
+        title('Using z1 soft');
+        
+    case 'summary'
+        contourFigSummary(competition_pars, nSpecies, summaries, levels);
+        
+    case 'all'
+        subplot(2, 2, 1);
+        contourFigLyaps(competition_pars, nSpecies, usingLyaps, levels);
+        
+        subplot(2, 2, 2);
+        contourFigZ1(competition_pars, nSpecies, usingz1, levels);
+        
+        subplot(2, 2, 3);
+        contourFigZ1(competition_pars, nSpecies, usingz12, levels);
+        title('Using z1 soft');
+        
+        subplot(2, 2, 4);
+        contourFigSummary(competition_pars, nSpecies, summaries, levels);
+        
+    otherwise
+        error();
+        
+end
 
-subplot(2, 2, 2);
-[c, h] = contourf(competition_pars, nSpecies, usingz1, levels);
-title('Using z1 hard');
-xlim([-.8 .8]);
-clabel(c, h);
-xlabel('Competition parameter \epsilon');
-ylabel('Number of species (predators + prey)');
+end
 
-subplot(2, 2, 3);
-[c, h] = contourf(competition_pars, nSpecies, usingz12, levels);
-title('Using z1 soft');
-xlim([-.8 .8]);
-clabel(c, h);
-xlabel('Competition parameter \epsilon');
-ylabel('Number of species (predators + prey)');
+function contourFigLyaps(competition_pars, nSpecies, usingLyaps, levels)
+%Auxiliary function
+        [c, h] = contourf(competition_pars, nSpecies, usingLyaps, levels);
+        title('Using max Lyapunov');
+        xlim([-.8 .8]);
+        clabel(c, h);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Number of species (predators + prey)');
+end
 
-subplot(2, 2, 4);
-[c, h] = contourf(competition_pars, nSpecies, summaries, levels);
-title('Using weighted summary');
-xlim([-.8 .8]);
-clabel(c, h);
-xlabel('Competition parameter \epsilon');
-ylabel('Number of species (predators + prey)');
+function contourFigZ1(competition_pars, nSpecies, usingz1, levels)
+%Auxiliary function
+        [c, h] = contourf(competition_pars, nSpecies, usingz1, levels);
+        title('Using z1 hard');
+        xlim([-.8 .8]);
+        clabel(c, h);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Number of species (predators + prey)');
+end
 
+function contourFigSummary(competition_pars, nSpecies, summaries, levels)
+%Auxiliary function
+        [c, h] = contourf(competition_pars, nSpecies, summaries, levels);
+        title('Using weighted summary');
+        xlim([-.8 .8]);
+        clabel(c, h);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Number of species (predators + prey)');
 end
