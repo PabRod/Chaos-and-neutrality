@@ -5,7 +5,7 @@ clc;
 
 %% Experiment parameters
 % Experiments table location
-experiments_table_location = 'io/input_test.csv';
+experiments_table_location = 'io/input.csv';
 
 %% Perform each experiment
 tab = loadExperimentsTable(experiments_table_location);
@@ -136,6 +136,8 @@ for row = 1:nExperiments
         createFigures(resultsArray, 'comparer');
         subplot(2, 1, 2);
         createFigures(resultsArray, 'summary');
+        
+        figs_for_paper;
         
         fprintf('\n Finished.');
         
