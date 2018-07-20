@@ -137,8 +137,6 @@ for row = 1:nExperiments
         subplot(2, 1, 2);
         createFigures(resultsArray, 'summary');
         
-        figs_for_paper;
-        
         fprintf('\n Finished.');
         
         %% Restore random seed
@@ -160,3 +158,6 @@ for row = 1:nExperiments
     fprintf('\n');
     
 end
+
+%% Create figures for the paper
+figs_for_paper;
