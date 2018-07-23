@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/118121654.svg)](https://zenodo.org/badge/latestdoi/118121654)
+
 # About
 This code is a supplementary material for the paper [_Neutral competition boosts chaos in food webs_][Preprint], by Pablo Rodríguez-Sánchez, Egbert H. van Nes and Marten Scheffer.
 
