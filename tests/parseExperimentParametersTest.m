@@ -6,7 +6,7 @@ tab = loadExperimentsTable('mockInput.csv');
 pars = parseExperimentParameters(tab, 1);
 
 assert(strcmp('first', pars.id));
-assert(pars.active);
+assert(~pars.active);
 assert(pars.nPreys == 6);
 assert(pars.nPreds == 4);
 assert(pars.r == 0.5);
