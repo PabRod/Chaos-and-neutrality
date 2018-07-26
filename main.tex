@@ -1,24 +1,44 @@
 \documentclass[a4paper, onecolumn, 10pt]{article}
 
 \input{./tex/00-preamble.tex}
+
+%% Override to comply with amnat guidelines
+\linespread{1.7}
 \linenumbers
+\modulolinenumbers[2]
 
 \begin{document}
 
 \maketitle
 
+%% Override to comply with amnat guidelines
+\bigskip
+\textit{Manuscript type}: article.
+
+\bigskip
+\textit{Keywords}: coexistence, competition, neutral competition, biodiversity paradox.
+
+\bigskip
+\textit{Manuscript elements}: 5 figures, 1 table, 1 online appendix (including 8 figures and 2 tables).
+
+%% Abstract
+\newpage
 \input{./tex/01-abstract.tex}
 
 %% Main body of the paper
+\newpage
 \input{./tex/02-background.tex}
 \input{./tex/03-methods.tex}
 \input{./tex/04-results.tex}
 \input{./tex/05-discussion.tex}
-\input{./tex/06-acknowledgements.tex}
+\input{./tex/06-acknowledgments.tex}
 
+%% Appendix
 \clearpage
+\input{./tex/07-appendix.tex}
 
 %% Bibliography
+\clearpage
 \bibliography{./bib/library}
 \bibliographystyle{vancouver}
 
