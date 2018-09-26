@@ -97,6 +97,15 @@ for row = 1:nExperiments
                 results.timeseries.ys = y_out;
                 results.timeseries.ts = t_out;
                 
+                %% Measure biodiversity
+                threshold = 1e-2;
+                [nPreySpeciesAlive, nPredSpeciesAlive] = countSpecies(results, threshold);
+                results.nPreySpeciesAlive = [mean(nPreySpeciesAlive), std(nPreySpeciesAlive)];
+                results.nPredSpeciesAlive = [mean(nPredSpeciesAlive), std(nPredSpeciesAlive)];
+                
+                nSpeciesAlive = nPreySpeciesAlive + nPredSpeciesAlive;
+                results.nSpeciesAlive = [mean(nSpeciesAlive), std(nSpeciesAlive)];
+                
                 %% Perform tests for chaos                 
                 [ts_lyap, ys_lyap_1] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, opts); %TODO: re-use previous run
                 [~, ys_lyap_2] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr + lyapPert.*ones(1, nPreys+nPreds), opts);
