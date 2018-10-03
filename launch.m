@@ -97,11 +97,24 @@ for row = 1:nExperiments
                 results.timeseries.ys = y_out;
                 results.timeseries.ts = t_out;
                 
+                %% Find a solution for competition only
+                stabilTime_c = 10*pars.K/pars.r;
+                y0_c = rand(1, nPreys) + 1;
+                [~, y_out_c] = ode45(@(t,y) Competition(t, y, pars), [0, stabilTime_c/2, stabilTime_c], y0_c, opts);
+                
+                tSpan_c = linspace(0, stabilTime_c, 20);
+                y_attr_c = y_out_c(end, :);
+                [t_out_c, y_out_c] = ode45(@(t,y) Competition(t, y, pars), tSpan_c, y_attr_c, opts);
+                
+                results.timeseries.ts_c = t_out_c;
+                results.timeseries.ys_c = y_out_c;
+                
                 %% Measure biodiversity
                 threshold = 1e-2;
-                [nPreySpeciesAlive, nPredSpeciesAlive] = countSpecies(results, threshold);
+                [nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c] = countSpecies(results, threshold);
                 results.nPreySpeciesAlive = [mean(nPreySpeciesAlive), std(nPreySpeciesAlive)];
                 results.nPredSpeciesAlive = [mean(nPredSpeciesAlive), std(nPredSpeciesAlive)];
+                results.nPreySpeciesAlive_c = [mean(nPreySpeciesAlive_c), std(nPreySpeciesAlive_c)];
                 
                 nSpeciesAlive = nPreySpeciesAlive + nPredSpeciesAlive;
                 results.nSpeciesAlive = [mean(nSpeciesAlive), std(nSpeciesAlive)];
@@ -145,6 +158,9 @@ for row = 1:nExperiments
         createFigures(resultsArray, 'comparer');
         subplot(2, 1, 2);
         createFigures(resultsArray, 'summary');
+        
+        figure;
+        createFigures(resultsArray, 'biodiversity');
         
         fprintf('\n Finished.');
         

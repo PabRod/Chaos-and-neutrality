@@ -63,6 +63,17 @@ switch prompt
             end
         end
         
+    case 'biodiversity'
+        output = NaN(nreps, npars, 3);
+        for i = 1:nreps
+            for j = 1:npars
+                output(i,j,1) = resultsArray{i, j}.nSpeciesAlive(1);
+                output(i,j,2) = resultsArray{i, j}.nPreySpeciesAlive(1);
+                output(i,j,3) = resultsArray{i, j}.nPredSpeciesAlive(1);
+                output(i,j,4) = resultsArray{i, j}.nPreySpeciesAlive_c(1);
+            end
+        end
+        
     otherwise
         error('Wrong prompt. Use: competition_par, maxLyapunov, z1, z12 or visual');
     

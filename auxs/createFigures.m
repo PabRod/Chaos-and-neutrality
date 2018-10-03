@@ -10,6 +10,7 @@ function createFigures(resultsArrayLocation, options)
 %   'comparer': agreement comparer between the different tests for
 %   individual runs
 %   'summary': probability of chaos vs. competition parameter
+%   'biodiversity': number of non-extinct species
 
 %% Load results
 resultsArray = loadResults(resultsArrayLocation);
@@ -139,4 +140,45 @@ switch options
         % axis equal;
         xlabel('Competition parameter');
         ylabel('Certainty of chaos');
+        
+    case 'biodiversity'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        biodiversity = resultsAsMatrix(resultsArray, 'biodiversity');
+        
+        biodiversity_tot = biodiversity(:, :, 1);
+        biodiversity_prey = biodiversity(:, :, 2);
+        biodiversity_pred = biodiversity(:, :, 3);
+        biodiversity_prey_c = biodiversity(:, :, 4);
+        
+        dimensions = resultsArray{1,1}.dims;
+        nPred = dimensions(1);
+        nPrey = dimensions(2);
+        
+        subplot(3, 1, 1);
+        plot(competition_pars, biodiversity_tot);
+        hold on;
+        plot(competition_pars, mean(biodiversity_tot), 'LineWidth', 4, 'Color', 'k');
+        plot(competition_pars, mean(biodiversity_tot) + [1;-1].*std(biodiversity_tot), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
+        ylim([0, nPred+nPrey]);
+        title('Total');
+        
+        subplot(3, 1, 2);
+        plot(competition_pars, biodiversity_prey);
+        hold on;
+        plot(competition_pars, mean(biodiversity_prey_c), 'LineWidth', 4, 'Color', 'g');
+        plot(competition_pars, mean(biodiversity_prey_c) + [1;-1].*std(biodiversity_prey_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
+        plot(competition_pars, mean(biodiversity_prey), 'LineWidth', 4, 'Color', 'k');
+        plot(competition_pars, mean(biodiversity_prey) + [1;-1].*std(biodiversity_prey), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
+%         ylim([0, nPrey]);
+        title('Prey');
+        ylabel('Average number of non extinct species');
+        
+        subplot(3, 1, 3);
+        plot(competition_pars, biodiversity_pred);
+        hold on;
+        plot(competition_pars, mean(biodiversity_pred), 'LineWidth', 4, 'Color', 'k');
+        plot(competition_pars, mean(biodiversity_pred) + [1;-1].*std(biodiversity_pred), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
+        ylim([0, nPred]);
+        title('Pred');
+        xlabel('Competition parameter');
 end
