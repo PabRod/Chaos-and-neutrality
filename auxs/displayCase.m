@@ -14,9 +14,9 @@ if numel(results) == 1
 else
     result = results{i,j};
 end
-info = genInfo(result);
+%info = genInfo(result);
 plot(result.timeseries.ts, result.timeseries.ys);
-title(info);
+%title(info);
 
 end
 

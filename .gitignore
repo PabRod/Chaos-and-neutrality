@@ -1,0 +1,4 @@
+*.asv
+*_personal*
+*.mat
+profiling/

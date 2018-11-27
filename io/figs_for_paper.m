@@ -104,3 +104,11 @@ contourFig(allFiles, 'z1');
 title('\fontsize{16} Using z1 hard');
 xlabel('');
 ylabel('');
+
+%% Biodiversities
+for i = 1:NAll
+    file = allFiles{i};
+    
+    figure;
+    createFigures(file, 'biodiversity');
+end

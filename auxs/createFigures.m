@@ -168,8 +168,12 @@ switch options
         plot(competition_pars, mean(biodiversity_prey_c), 'LineWidth', 4, 'Color', 'g');
         plot(competition_pars, mean(biodiversity_prey_c) + [1;-1].*std(biodiversity_prey_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
         plot(competition_pars, mean(biodiversity_prey), 'LineWidth', 4, 'Color', 'k');
-        plot(competition_pars, mean(biodiversity_prey) + [1;-1].*std(biodiversity_prey), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
-%         ylim([0, nPrey]);
+        plot(competition_pars, mean(biodiversity_prey) + [1;-1].*std(biodiversity_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
+        difference = -biodiversity_prey+biodiversity_prey_c;
+        plot(competition_pars, mean(difference), 'LineWidth', 4, 'Color', 'b');
+        plot(competition_pars, mean(difference) + [1;-1].*std(difference), 'LineWidth', 4, 'Color', 'b', 'LineStyle', '--');
+        
+        %         ylim([0, nPrey]);
         title('Prey');
         ylabel('Average number of non extinct species');
         
@@ -181,4 +185,5 @@ switch options
         ylim([0, nPred]);
         title('Pred');
         xlabel('Competition parameter');
+        
 end
