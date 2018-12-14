@@ -4,10 +4,10 @@
 \subsection{Model description}
 \label{subsec:Model}
 
-We focused our attention on food webs with two trophic levels, one of consumers and another of prey (see Online Appendix, section \ref{subsubsec:MultispeciesPPNetwork}). The consumers predate on the prey, and the prey populations compete among each other for a common source of resources.
+We focused our attention on food webs with two trophic levels, one of consumers and another of prey (see figure in the Online Appendix). The consumers predate on the prey, and the prey populations compete among each other for a common source of unlimited resources. 
 
 % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species (see \cite{Scheffer2004} and Online Appendix, section \ref{subsubsec:Rosenzweig-MacArthurMulti}).
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \cite{Rosenzweig1963} generalized to a higher number of species (see \cite{Scheffer2004} and Online Appendix). 
 
 Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow logistically under the influence of intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \cite{Scheffer2004}.
 
@@ -15,7 +15,7 @@ In mathematical notation, the system reads:
 
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
-	\begin{cases}
+	\begin{cases} 
 	P_i'(t) =  r_i(P) P_i  - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j + f & : i = 1..n_P
 	\\
 	C_j'(t) = - l C_j +  e g_j(P) C_j \sum_{i = 1}^{n_P} S_{ji} P_i & : j = 1..n_C
@@ -31,7 +31,7 @@ where $P_i(t)$ represents the biomass of prey species $i$ at time $t$ and $C_j(t
 	g_j(P) = \frac{g}{\sum_{i=1}^{n_P} S_{ji} P_i + H}
 \end{eqnarray}
 
-For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see section \ref{subsec:GeneralizedModels} of the Online Appendix.
+For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see Online Appendix.
 
 \subsection{Parameterization}
 \label{subsec:Parameterization}
@@ -79,7 +79,7 @@ Defined this way, the parameter $\epsilon$ allows us to travel continuously from
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{epsilon_all.png}
 	\end{center}
-	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the competition parameter $\epsilon$.}
+	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the competition parameter $\epsilon$.}	
 	\label{fig:CompetitionParameter}
 \end{figure}
 
@@ -100,7 +100,7 @@ Our target is to estimate the probability of reaching one of such chaotic attrac
 
 Numerical methods were used to integrate each realization of the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ \stabilTime $ days is executed in order to get closer to the attractor. Simulating for $ \simTime $ more days, we obtain trajectories in the vicinity of the attractor.
 
-We considered chaotic those time series that triggered the Gottwald - Melbourne test (see\cite{Gottwald2009} and section \ref{subsec:ChaosDetection} of the Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
+We considered chaotic those time series that triggered the Gottwald - Melbourne test (see\cite{Gottwald2009} and Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
 
 The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity.
 
