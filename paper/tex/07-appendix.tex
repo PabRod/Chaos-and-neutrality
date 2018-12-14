@@ -20,7 +20,7 @@ Rodríguez-Sánchez P, van Nes EH, Scheffer M. \textit{Neutral competition boost
 \label{subsubsec:GeneralPropertiesOfPredation}
 
 Most predation models based on differential equations follow a structure like this:
-
+%
 \begin{eqnarray}
 \label{eq:CommonStructure}
 	\begin{cases}
@@ -29,23 +29,23 @@ Most predation models based on differential equations follow a structure like th
 	C'(t) = -Loss(C) + GrossGrowth(P,C)
 	\end{cases}
 \end{eqnarray}
-
+%
 where $P$ represents the biomass of the prey population, and $C$ the biomass of the consumer/predator population. The functional dependencies have been explicitly written in order to remark the fact that the coupling of the system happens via the $Predation$ and $GrossGrowth$ terms.
 
 It is important to note that, in models like this, all deaths at the prey's level are due to predation. All deaths caused by predation are invested in consumer's growth. Therefore the following relation must be true:
-
+%
 \begin{equation}
 \label{eq:InnerEnergyFlow}
 	GrossGrowth(P,C) = e \cdot Predation(P,C)
 \end{equation}
-
+%
 where $e$ represents the efficiency of the energy transfer process. Equation \ref{eq:InnerEnergyFlow}, when plugged into \ref{eq:CommonStructure}, yields:
-
+%
 \begin{equation}
 \label{eq:AllEnergyFlow}
 	e P'(t) + C'(t) = e \cdot Growth(P) - Loss(C)
 \end{equation}
-
+%
 Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open system from the point of view of thermodynamics. Here $Growth$ is the only source of the system, and $Loss$ is the only sink (see figure \ref{fig:EnergyFlow}). All the energy exchange due to predation stays inside the system, so predation can be considered a closed subsystem.
 
 \begin{figure}[H]
@@ -57,7 +57,7 @@ Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open syst
 \end{figure}
 
 We can generalize this basic structure to multispecies, two trophic levels systems. First, we'll go back to equation \ref{eq:CommonStructure} and just add more rows:
-
+%
 \begin{eqnarray}
 \label{eq:CommonStructureMulti}
 	\begin{cases}
@@ -66,23 +66,23 @@ We can generalize this basic structure to multispecies, two trophic levels syste
 	C_j'(t) = -Loss_j(C_j) + GrossGrowth_j(P,C_j) & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
-
+%
 where now $i$ runs from $1$ to the number of prey $n_P$ and $j$ from $1$ to the number of consumers $n_C$. Here, we've used $P_i$ to denote the population of the prey labeled by $i$, and $P$ for the vector containing all prey populations. Notice that while the $Growth$ term can involve competition (and thus, depends on the whole vector $P$), the $Loss$ term for species $j$ depends only in the population of that species (i.e.: $C_j$), regardless of the rest.
 
 Requiring once again our predation to be fully invested in consumer's growth, we find the following generalization of equation \ref{eq:InnerEnergyFlow}:
-
+%
 \begin{equation}
 \label{eq:InnerEnergyFlowMulti}
 	\sum_{j = 1}^{n_C} GrossGrowth_j(P,C_j) = \sum_{i = 1}^{n_P} e_i \cdot Predation_i(P_i,C)
 \end{equation}
-
+%
 Using \ref{eq:InnerEnergyFlowMulti} and \ref{eq:CommonStructureMulti}, it is easy to prove that the multispecies generalization of \ref{eq:AllEnergyFlow} is:
-
+%
 \begin{equation}
 \label{eq:AllEnergyFlowMulti}
 	\sum_{i = 1}^{n_P} e_i P_i'(t) + \sum_{j = 1}^{n_C} C_j'(t) = \sum_{i = 1}^{n_P} e_i \cdot Growth_i(P) - \sum_{j = 1}^{n_C} Loss_j(C_j)
 \end{equation}
-
+%
 The intuitive interpretation is, again, that the only sinks and sources of energy in our systems are the total $Loss$ and $Growth$.
 
 Restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlowMulti}) can be used to generalize realistic functional forms for the coupling terms.
@@ -91,7 +91,7 @@ Restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlo
 \label{subsubsec:LotkaVolterra}
 
 The most basic model of predation is the Lotka-Volterra system of equations:
-
+%
 \begin{eqnarray}
 \label{eq:LotkaVolterra}
 	\begin{cases}
@@ -100,8 +100,8 @@ The most basic model of predation is the Lotka-Volterra system of equations:
 	C'(t) = - l C + e g C P
 	\end{cases}
 \end{eqnarray}
-
-Where $r$ represents the growth rate of the prey, $g$ the grazing rate of the predator against the prey, $l$ the loss rate of the predator and $e$ the efficiency conversion factor.
+%
+where $r$ represents the growth rate of the prey, $g$ the grazing rate of the predator against the prey, $l$ the loss rate of the predator and $e$ the efficiency conversion factor.
 
 It is trivial to prove that the Lotka-Volterra model satisfies the requirements shown in subsection \ref{subsubsec:GeneralPropertiesOfPredation}.
 
@@ -109,7 +109,7 @@ It is trivial to prove that the Lotka-Volterra model satisfies the requirements 
 \label{subsubsec:LotkaVolterraMulti}
 
 Lotka-Volterra equations can be generalized to a model with multiple species by noting that each prey will be affected by all consumers, and each consumer will be affected by all prey. In order to code the strength of this interactions, we introduce the matrix $S$, whose element $S_{ji}$ gives the strength of the coupling of consumer $j$ and prey $i$. As a consequence, for prey dynamics this matrix is scanned row-wise, while for predators it is scanned column-wise. The generalized system looks like:
-
+%
 \begin{eqnarray}
 \label{eq:LotkaVolterraMulti}
 	\begin{cases}
@@ -118,7 +118,7 @@ Lotka-Volterra equations can be generalized to a model with multiple species by 
 	C_j'(t) = - l_j C_j +  g_j e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
-
+%
 The fulfillment of condition \ref{eq:InnerEnergyFlowMulti} is again easily proven.
 
 In this model, all terms can grow without boundaries. This is not only unrealistic, but also creates some problems from the sole point of view of mathematical stability.
@@ -126,7 +126,7 @@ In this model, all terms can grow without boundaries. This is not only unrealist
 \subsubsection{Rosenzweig-MacArthur model}
 \label{subsubsec:Rosenzweig-MacArthur}
 The Rosenzweig-MacArthur predator-prey model improves the previous model by adding boundaries to the terms' dependency on the prey population. This is achieved by encapsulating $P$ inside saturating functions. In particular, the growth rate and the grazing rate $r$ now depend on $P$ (see equation \ref{eq:RosMac2levels} and compare it with \ref{eq:LotkaVolterra}).
-
+%
 \begin{eqnarray}
 \label{eq:RosMac2levels}
 	\begin{cases}
@@ -135,9 +135,9 @@ The Rosenzweig-MacArthur predator-prey model improves the previous model by addi
 	C'(t) = - l C + e g(P) C P
 	\end{cases}
 \end{eqnarray}
-
+%
 Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If both functions are chosen appropriately, we avoid unbounded growths. Typically, $r(P)$ and $g(P)$ are chosen so they generate a logistic growth and a Holling type II saturation response when plugged into \ref{eq:RosMac2levels}. In mathematical terms, this means choosing $r(P) = r_0 \left(1 - \frac{P}{K} \right)$ and $g(P) = \frac{g_0}{P+H}$ (for more information see, for instance, \cite{Edelstein-Keshet}). After making this choices, our system takes its classical form:
-
+%
 \begin{eqnarray}
 \label{eq:RosMac2classic}
 	\begin{cases}
@@ -146,12 +146,13 @@ Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independen
 	C'(t) = - l C + e g C \frac{P}{P + H}
 	\end{cases}
 \end{eqnarray}
+%
 
 \subsubsection{Multispecies Rosenzweig-MacArthur model}
 \label{subsubsec:Rosenzweig-MacArthurMulti}
 
 Noticing the similarities between equations \ref{eq:LotkaVolterra} and \ref{eq:RosMac2levels}, the latter can be generalized in the same fashion as we did to obtain \ref{eq:LotkaVolterraMulti}, yielding:
-
+%
 \begin{eqnarray}
 \label{eq:RosMacMulti}
 	\begin{cases}
@@ -160,24 +161,25 @@ Noticing the similarities between equations \ref{eq:LotkaVolterra} and \ref{eq:R
 	C_j'(t) = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i  & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
-
+%
 Written like this, it is easy to see that the condition \ref{eq:InnerEnergyFlowMulti} is fulfilled.
 
 Regarding the proper functional forms of $r_i(P)$ and $g_j(P)$, our growth term has to take into account both the inter and intraspecific competition. This can be easily modelled by choosing:
-
+%
 \begin{equation}
 \label{eq:r}
 	r_i(P) = r_i \left( 1 - \sum_{k=1}^{n_P} A_{ik} P_k \right)
 \end{equation}
-
+%
 where the matrix elements $A_{ik}$ account for the intensity of the competition caused by species $k$ on species $i$. Thus, non-diagonal elements account for interspecific competition, and diagonal ones for intraspecific competition.
 
 We hypothesize that the grazing rates corresponding to predator $j$, that is, $g_j(P)$, follow a Holling type II functional response dependent on the total consumption of prey by predator $j$:
-
+%
 \begin{eqnarray}
 \label{eq:g}
 	g_j(P) = \frac{g_j}{\sum_{i=1}^{n_P} S_{ji} P_i + H_j}
 \end{eqnarray}
+%
 
 \subsubsection{Summary}
 \label{subsubsec:SummaryPredation}
@@ -216,7 +218,7 @@ The 0-1 test for chaos is designed for distinguishing between regular and chaoti
 This short section is more a motivation than a rigorous proof. A minimal, intuitive approach to the method will be outlined. For a detailed, complete explanation please refer to \cite{Gottwald2009}.
 
 First, we have to use one of our time series of observations $\phi_k$ to build the functions:
-
+%
 \begin{eqnarray}
 \label{eq:z1}
 	\begin{cases}
@@ -225,14 +227,14 @@ First, we have to use one of our time series of observations $\phi_k$ to build t
 	q_n(\theta) = \sum_{k=1}^n \phi_k sin(k \theta)
 	\end{cases}
 \end{eqnarray}
-
+%
 Using Euler's formula both equations can be given a more compact form:
-
+%
 \begin{equation}
 \label{eq:z1complex}
 z_n(\theta) = p_n(\theta) + i q_n(\theta) = \sum_{k=1}^n \phi_k e^{i k \theta}
 \end{equation}
-
+%
 In the complex plane, $e^{i k \theta}$ represents a unit vector pointing in the direction $k \theta$. So each observation in our time series can be understood as the size of a step, being $k \theta$ its direction (see table \ref{tab:Summands}).
 
 \begin{table}[H]

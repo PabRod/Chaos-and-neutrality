@@ -12,7 +12,7 @@ The dynamics were modelled as a system of ordinary differential equations. We us
 Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow according to the Lotka-Volterra competition dynamics, under the influence of both intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \cite{Scheffer2004}.
 
 In mathematical notation, the system reads:
-
+%
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
 	\begin{cases} 
@@ -21,16 +21,16 @@ In mathematical notation, the system reads:
 	C_j'(t) = - l C_j +  e g_j(P) C_j \sum_{i = 1}^{n_P} S_{ji} P_i & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
-
+%
 where $P_i(t)$ represents the biomass of prey species $i$ at time $t$ and $C_j(t)$ the biomass of predator species $j$ at time $t$. The symbol $P$ is used as a shorthand for the vector $(P_1(t), P_2(t), ..., P_{n_P}(t))$. The auxiliary functions $r_i(P)$ and $g_j(P)$ have been respectively chosen to generalize the logistic growth and the Holling type II saturation functional response \cite{Edelstein-Keshet} to a multispecies system when inserted into equation \ref{eq:SystemUnderStudy}. They are defined as:
-
+%
 \begin{eqnarray}
 \label{eq:HollingGenerator}
 	r_i(P) = r \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} P_k \right)
 	\\
 	g_j(P) = \frac{g}{\sum_{i=1}^{n_P} S_{ji} P_i + H}
 \end{eqnarray}
-
+%
 For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see Online Appendix.
 
 \subsection{Parameterization}
