@@ -287,48 +287,6 @@ With this picture in mind, it is easy to understand the kind of paths that diffe
 
 The case of an underlying chaotic time series is the only one that generates a path that doesn't stay inside a bounded domain around the starting point. The z1 test uses the mean square displacement as a measure of this drift. The system is considered to be chaotic if the square displacement keeps growing for large times. If, on the contrary, it stays bounded, the test will consider the system not chaotic.
 
-\subsection{Neutral competition and system dimensionality}
-\label{subsec:NeutralCompetition}
-If we drop everything but the competition part of our dynamics (see equation \ref{eq:RosMacMulti}), we will find a system of $ n_P $ equations like the following:
-
-\begin{eqnarray}
-\label{eq:OnlyCompetition}
-P_i'(t) = r P_i \left( 1 - \frac{1}{K} \sum_{k=1}^{n_P} A_{ik} \cdot P_k \right) & : i = 1..n_P
-\end{eqnarray}
-
-In order to model a neutral competition, we should use the same competition coefficient for each interaction between species. That is, take $ A_{ik} = A $ for all $ i $ and $ k $. Equation \ref{eq:OnlyCompetition} then becomes:
-
-\begin{eqnarray}
-\label{eq:OnlyNeutralCompetition}
-P_i'(t) = r P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) & : i = 1..n_P
-\end{eqnarray}
-
-From equation \ref{eq:OnlyNeutralCompetition} we see that all species have exactly the same dynamical equation. This will make the nullclines to coincide at all points, so the equilibrium points will degenerate to equilibrium hyperplanes (see figure \ref{fig:Neutral}).
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[width=0.9\columnwidth]{degenerate.png}
-	\end{center}
-	\caption{Example with $2$ prey under neutral competition. Both nullclines coincide point to point, giving rise to a higher dimensional equilibirium hyperplane (in this case, a straight line)}
-	\label{fig:Neutral}
-\end{figure}
-
-This problem can be solved noticing that, in a competition-only system, the effect of neutrality is to fade out the differences between species. If this is the case, the labels $ i $ distinguishing them become meaningless. It is a natural idea to sum up all the biomasses of competing species into a new variable, that of total population of (now indistinguishable) species, defined by:
-
-\begin{eqnarray}
-\label{eq:TotalPopulation}
-	T(t) = \sum_{i=1}^{n_P} P_i(t)
-\end{eqnarray}
-
-In agreement with the biological intuition, manipulating \ref{eq:TotalPopulation} and \ref{eq:OnlyNeutralCompetition} it can be proved (see eq. \ref{eq:TotalPopulationDynamics}), that the total population biomass will follow the same differential equation as the individual species abundances (i.e., equation \ref{eq:OnlyNeutralCompetition}).
-
-\begin{eqnarray}
-\label{eq:TotalPopulationDynamics}
-	 T'(t) = \sum_{i=1}^{n_P} P_i'(t) = r \sum_{i=1}^{n_P} P_i \left( 1 - \frac{A}{K} \sum_{k=1}^{n_P} P_k \right) = r T (1 - \frac{A}{K} T)
-\end{eqnarray}
-
-Additionally, this result shows that we are actually working with a one-dimensional system. The apparent $ n_P $ dimensions of our original problem were an artifact due to a wrong choice of state variables. In our model, the predation interaction breaks this excess of symmetry, so we can still work with neutral competition as long as the predation is not neutral without facing problems of decay in system dimensionality.
-
 
 \subsection{Extra figures}
 \label{subsec:ExtraFigures}
