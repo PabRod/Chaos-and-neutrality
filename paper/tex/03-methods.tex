@@ -58,7 +58,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 		    \hline
 			$l$ & Predator's loss rate & $0.15$ & $d^{-1}$\\
 			\hline
-		    $S$ & $ n_C \times n_P $ predator preference matrix & $S_{ij} \in (0,1)$ & $1$\\
+		    $S$ & $ n_C \times n_P $ predator preference matrix & See section \ref{subsubsec:CompetitionParameter} & $1$\\
 		    \hline
    		    $A$ & $ n_P \times n_P $ competition matrix & See section \ref{subsubsec:CompetitionParameter} & $1$\\
 		    \hline
@@ -68,7 +68,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 	\label{tab:Parameters}
 \end{table}
 
-\subsubsection{Competition matrix}
+\subsubsection{Competition and predation matrices}
 \label{subsubsec:CompetitionParameter}
 
 Our main purpose is to analyze the effect of different competition strengths on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$, whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$).
@@ -82,6 +82,8 @@ Defined this way, the parameter $\epsilon$ allows us to travel continuously from
 	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the competition parameter $\epsilon$.}	
 	\label{fig:CompetitionParameter}
 \end{figure}
+
+Regarding the predation matrix $S$, we proceed as in \cite{Dakos2009b}. That is, we draw each of its coefficients from a uniform probability distribution bounded between $0$ and $1$.
 
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
