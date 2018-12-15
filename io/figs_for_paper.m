@@ -102,7 +102,7 @@ ylabel('\fontsize{16} Number of species (predators + prey)');
 subplot(3, 1, 3);
 contourFig(allFiles, 'z1');
 title('\fontsize{16} Using z1 hard');
-xlabel('');
+xlabel('Competition parameter \epsilon');
 ylabel('');
 
 %% Biodiversities

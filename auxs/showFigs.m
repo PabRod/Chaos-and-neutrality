@@ -12,18 +12,15 @@ files = {'2-3p.mat', '4-6p.mat', '6-9p.mat', '8-12p.mat', '10-15p.mat', '12-18p.
 
 
 %% Estimated probability of chaos
-for i = 1:numel(files)
-    resultsArray = loadResults(files{i});
-    figure('units', 'normalized', 'outerposition', [0 0 1 1]);
-    subplot(2, 1, 1);
-    createFigures(resultsArray, 'comparer');
-    subplot(2, 1, 2);
-    createFigures(resultsArray, 'summary');
-end
+% for i = 1:numel(files)
+%     resultsArray = loadResults(files{i});
+%     figure('units', 'normalized', 'outerposition', [0 0 1 1]);
+%     subplot(2, 1, 1);
+%     createFigures(resultsArray, 'comparer');
+%     subplot(2, 1, 2);
+%     createFigures(resultsArray, 'summary');
+% end
 
 %% Contour plot
 figure;
-contourFig(files);
-title('Probability of chaos');
-xlabel('Competition parameter');
-ylabel('Number of interacting species');
+contourFig(files, 'paper');
