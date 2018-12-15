@@ -136,7 +136,7 @@ The Rosenzweig-MacArthur predator-prey model improves the previous model by addi
 	\end{cases}
 \end{eqnarray}
 %
-Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If both functions are chosen appropriately, we avoid unbounded growths. Typically, $r(P)$ and $g(P)$ are chosen so they generate a logistic growth and a Holling type II saturation response when plugged into \ref{eq:RosMac2levels}. In mathematical terms, this means choosing $r(P) = r_0 \left(1 - \frac{P}{K} \right)$ and $g(P) = \frac{g_0}{P+H}$ (for more information see, for instance, \cite{Edelstein-Keshet}). After making this choices, our system takes its classical form:
+Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If both functions are chosen appropriately, we avoid unbounded growths. Typically, $r(P)$ and $g(P)$ are chosen so they generate a logistic growth and a Holling type II saturation response when plugged into \ref{eq:RosMac2levels}. In mathematical terms, this means choosing $r(P) = r_0 \left(1 - \frac{P}{K} \right)$ and $g(P) = \frac{g_0}{P+H}$ (for more information see, for instance, \citet{Edelstein-Keshet}). After making this choices, our system takes its classical form:
 %
 \begin{eqnarray}
 \label{eq:RosMac2classic}
@@ -201,7 +201,7 @@ We hypothesize that the grazing rates corresponding to predator $j$, that is, $g
 
 \subsection{Chaos detection}
 \label{subsec:ChaosDetection}
-In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation \cite{Strogatz1994}, Gottwald - Melbourne \textit{0-1} test \cite{Gottwald2009} and visual inspection. Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions (see figure \ref{fig:AllContours}). We found the Gottwald - Melbourne test to be the fastest and most reliable of all.
+In the exploratory phase of this research three parallel approaches to chaos detection were followed: Lyapunov exponents estimation  \citep{Strogatz1994}, Gottwald - Melbourne \textit{0-1} test \citep{Gottwald2009} and visual inspection. Despite differences in the exact probabilities, the three of them led us to the same qualitative conclusions (see figure \ref{fig:AllContours}). We found the Gottwald - Melbourne test to be the fastest and most reliable of all.
 
 \begin{figure}[H]
 	\begin{center}
@@ -215,7 +215,7 @@ In the exploratory phase of this research three parallel approaches to chaos det
 \label{subsubsec:z1test}
 The 0-1 test for chaos is designed for distinguishing between regular and chaotic dynamics in deterministic systems. It works directly with the observed time series, so a prior knowledge of the underlying dynamics is not required (as long as we know that they are deterministic).
 
-This short section is more a motivation than a rigorous proof. A minimal, intuitive approach to the method will be outlined. For a detailed, complete explanation please refer to \cite{Gottwald2009}.
+This short section is more a motivation than a rigorous proof. A minimal, intuitive approach to the method will be outlined. For a detailed, complete explanation please refer to \citet{Gottwald2009}.
 
 First, we have to use one of our time series of observations $\phi_k$ to build the functions:
 %
@@ -317,7 +317,7 @@ The case of an underlying chaotic time series is the only one that generates a p
 
 \subsubsection{Flow chart}
 \label{subsubsec:FlowChart}
-In the spirit of reproducible research we made available all the analysis code used to draw our conclusions. Any interested researcher can clone it from a \textit{GitHub} repository \cite{Rodriguez-Sanchez-code-neuchaos} and, executing a single script, reproduce all our simulations and figures. This figure shows schematically what this script does:
+In the spirit of reproducible research we made available all the analysis code used to draw our conclusions. Any interested researcher can clone it from a \textit{GitHub} repository \citep{Rodriguez-Sanchez-code-neuchaos} and, executing a single script, reproduce all our simulations and figures. This figure shows schematically what this script does:
 
 \begin{figure}[H]
 	\begin{center}
