@@ -94,6 +94,23 @@ switch opts
         subplot(2, 2, 4);
         contourFigSummary(competition_pars, nSpecies, summaries, levels);
         
+    case 'paper'
+        subplot(3, 1, 1);
+        contourFigLyaps(competition_pars, nSpecies, usingLyaps, levels);
+        xlabel('');
+        ylabel('');
+        
+        subplot(3, 1, 2);
+        contourFigZ1(competition_pars, nSpecies, usingz12, levels);
+        title('Using z1 soft');
+        xlabel('');
+        
+        subplot(3, 1, 3);
+        contourFigZ1(competition_pars, nSpecies, usingz1, levels);
+        title('Using z1 hard');
+        xlabel('Competition parameter \epsilon');
+        ylabel('');
+        
     otherwise
         error();
         
