@@ -16,9 +16,9 @@ In mathematical notation, the system reads:
 \begin{eqnarray}
 \label{eq:SystemUnderStudy}
 	\begin{cases}
-	P_i'(t) =  r_i(P) P_i  - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j + f & : i = 1..n_P
+	P_i'(t) =  r_i(P) P_i  - \sum_{j = 1}^{n_C} g_j(P) P_i S_{ji} C_j + f & : i = 1..n_P
 	\\
-	C_j'(t) = - l C_j +  e g_j(P) C_j \sum_{i = 1}^{n_P} S_{ji} P_i & : j = 1..n_C
+	C_j'(t) = - l C_j +  e \sum_{i = 1}^{n_P} g_j(P) P_i S_{ji} C_j  & : j = 1..n_C
 	\end{cases}
 \end{eqnarray}
 %
