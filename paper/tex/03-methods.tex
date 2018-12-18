@@ -9,7 +9,7 @@ We focused our attention on food webs with two trophic levels, one of consumers 
 % Description of the dynamics
 The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \citep{Rosenzweig1963} generalized to a higher number of species (see \citet{Scheffer2004} and section \ref{subsec:GeneralizedModels} in the Online Appendix).
 
-Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow according to the Lotka-Volterra competition dynamics, under the influence of both intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \citep{Scheffer2004}.
+Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations are under the influence of both intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \citep{Scheffer2004}.
 
 In mathematical notation, the system reads:
 %
@@ -71,9 +71,7 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 \subsubsection{Competition and predation matrices}
 \label{subsubsec:CompetitionParameter}
 
-Our main purpose is to analyze the effect of different competition strengths on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$, whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$).
-
-Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
+Our main purpose is to analyze the effect of different competition strengths on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$, whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
 
 \begin{figure}[H]
 	\begin{center}
@@ -88,7 +86,7 @@ Regarding the predation matrix $S$, we proceed as in \citet{Dakos2009b}. That is
 \subsection{Numerical experiment}
 \label{subsec:NumericalExperiment}
 
-Depending on the parameters and initial conditions, a system like the one described in equation \ref{eq:SystemUnderStudy} can give rise to three types of qualitative behaviour. Each of them roughly corresponds to a different type of attractor (see figure \ref{fig:TimeSeries}). The first one, a stable point attractor, generates a constant species composition. Secondly, limit cycle (and limit tori) attractors give rise to periodically (or quasiperiodically) changing species composition. Lastly, we'll refer as chaotic to attractors that, while remaining bounded, do not fit in any of the previous categories.
+Depending on the parameters and initial conditions, a system like the one described in equation \ref{eq:SystemUnderStudy} can give rise to three types of qualitative behaviour, each which roughly corresponds to a different type of attractor (see figure \ref{fig:TimeSeries}). The first one, a stable point attractor, generates a constant species composition. Secondly, limit cycle (and limit tori) attractors give rise to periodically (or quasiperiodically) changing species composition. Lastly, we'll refer as chaotic to attractors that, while remaining bounded, do not fit in any of the previous categories.
 
 \begin{figure}
 	\begin{center}
@@ -98,13 +96,11 @@ Depending on the parameters and initial conditions, a system like the one descri
 	\label{fig:TimeSeries}
 \end{figure}
 
-Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about competition. In order to achieve this, we swept among $\numEpsilons$ different values of the competition parameter $\epsilon$ (defined in section \ref{subsubsec:CompetitionParameter}). We simulated a set of $\numReps$ ecosystems per competition parameter value. This amounts to a total of $\numExps$ simulated ecosystems. These ecosystems differ from each other in initial conditions, predation rates $S_{ji}$, and competition matrices, all of them sampled from probability distributions (see \ref{subsec:Parameterization}). Ecosystems grouped by competition parameter $\epsilon$, despite not being identical, exhibit the same competition type (see \ref{subsubsec:CompetitionParameter}).
+Our target is to estimate the probability of reaching one of such chaotic attractors under different assumptions about competition. In order to achieve this, we swept among $\numEpsilons$ different values of the competition parameter $\epsilon$ (defined in section \ref{subsubsec:CompetitionParameter}). We simulated a set of $\numReps$ ecosystems per competition parameter value. This amounts to a total of $\numExps$ simulated ecosystems. These ecosystems differ from each other in initial conditions, predation rates $S_{ji}$, and competition matrices, all of them sampled from probability distributions (see \ref{subsubsec:CompetitionParameter}). Ecosystems grouped by competition parameter $\epsilon$, despite not being identical, exhibit the same competition type (see \ref{subsubsec:CompetitionParameter}).
 
 Numerical methods were used to integrate each realization of the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ \stabilTime $ days is executed in order to get closer to the attractor. Simulating for $ \simTime $ more days, we obtain trajectories in the vicinity of the attractor.
 
-We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and section \ref{subsec:ChaosDetection} in the Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
-
-The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity.
+The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity. We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and section \ref{subsec:ChaosDetection} in the Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
 
 Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
