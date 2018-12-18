@@ -4,10 +4,10 @@
 \subsection{Model description}
 \label{subsec:Model}
 
-We focused our attention on food webs with two trophic levels, one of consumers and another of prey (see figure in the Online Appendix). The consumers predate on the prey, and the prey populations compete among each other for a common source of unlimited resources.
+We focused our attention on food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network} in the Online Appendix). The consumers predate on the prey, and the prey populations compete among each other for a common source of unlimited resources.
 
 % Description of the dynamics
-The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model  \citep{Rosenzweig1963} generalized to a higher number of species (see \citet{Scheffer2004} and Online Appendix).
+The dynamics were modelled as a system of ordinary differential equations. We used the Rosenzweig-MacArthur predator-prey model \citep{Rosenzweig1963} generalized to a higher number of species (see \citet{Scheffer2004} and section \ref{subsec:GeneralizedModels} in the Online Appendix).
 
 Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations grow according to the Lotka-Volterra competition dynamics, under the influence of both intra and interspecific competition. The intensities of both these competitions are coded in the matrix $A$. The coupling of both groups happens via predation. The relative preference that predators show to each prey is coded in the matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic long-stretched cycles with near extinctions \citep{Scheffer2004}.
 
@@ -31,7 +31,7 @@ where $P_i(t)$ represents the biomass of prey species $i$ at time $t$ and $C_j(t
 	g_j(P) = \frac{g}{\sum_{i=1}^{n_P} S_{ji} P_i + H}
 \end{eqnarray}
 %
-For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see Online Appendix.
+For details about the parameters used, please refer to subsection \ref{subsec:Parameterization}. For a detailed derivation of equation \ref{eq:SystemUnderStudy}, see section \ref{subsec:GeneralizedModels} in the Online Appendix.
 
 \subsection{Parameterization}
 \label{subsec:Parameterization}
@@ -102,7 +102,7 @@ Our target is to estimate the probability of reaching one of such chaotic attrac
 
 Numerical methods were used to integrate each realization of the equation \ref{eq:SystemUnderStudy}. A first stabilizing run of $ \stabilTime $ days is executed in order to get closer to the attractor. Simulating for $ \simTime $ more days, we obtain trajectories in the vicinity of the attractor.
 
-We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
+We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and section \ref{subsec:ChaosDetection} in the Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
 
 The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity.
 
