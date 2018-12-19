@@ -1,5 +1,40 @@
+## Latex build files
+*.log
+*.aux
+*.bbl
+*.blg
+*.toc
+*.fls
+*.fdb_latexmk
+*.rej
+*.pdf
+
+## Figures
+img/trash
+*.svg
+*.fig
+
+## Matlab files
 *.asv
-*_personal*
 *.mat
-profiling/
+
+## Untracked notes
+notes/other
+*Working*
+
+## Manuscript
 paper/
+
+## Tagged versions
+tex/versions
+
+## Python temporary files
+img/code/__pycache__/
+img/code/.ipynb_checkpoints/
+
+## Other undesired extensions
+*.lnk
+*.dvi
+*.gz
+*_old*
+diff/

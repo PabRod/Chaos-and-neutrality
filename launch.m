@@ -109,16 +109,6 @@ for row = 1:nExperiments
                 results.timeseries.ts_c = t_out_c;
                 results.timeseries.ys_c = y_out_c;
                 
-                %% Measure biodiversity
-                threshold = 1e-2;
-                [nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c] = countSpecies(results, threshold);
-                results.nPreySpeciesAlive = [mean(nPreySpeciesAlive), std(nPreySpeciesAlive)];
-                results.nPredSpeciesAlive = [mean(nPredSpeciesAlive), std(nPredSpeciesAlive)];
-                results.nPreySpeciesAlive_c = [mean(nPreySpeciesAlive_c), std(nPreySpeciesAlive_c)];
-                
-                nSpeciesAlive = nPreySpeciesAlive + nPredSpeciesAlive;
-                results.nSpeciesAlive = [mean(nSpeciesAlive), std(nSpeciesAlive)];
-                
                 %% Perform tests for chaos                 
                 [ts_lyap, ys_lyap_1] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, opts); %TODO: re-use previous run
                 [~, ys_lyap_2] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr + lyapPert.*ones(1, nPreys+nPreds), opts);
@@ -134,12 +124,14 @@ for row = 1:nExperiments
         %% Analyze results
         fprintf('\n Analyzing.');
         resultsArray = performChaosTests(resultsArray);
+        resultsArray = measureBiodiversity(resultsArray, true);
         
         %% Remove the heavy parts
-        % The time series are very heavy. Here we remove them
+        % The time series are very heavy. Here we split the output
+        resultsArrayLight = resultsArray;
         for i = 1:size(resultsArray, 1)
             for j = 1:size(resultsArray, 2)
-                resultsArray{i,j} = rmfield(resultsArray{i,j}, {'timeseries', 'predMatrix', 'compMatrix'});
+                resultsArrayLight{i,j} = rmfield(resultsArrayLight{i,j}, {'timeseries', 'predMatrix', 'compMatrix'});
                 % TODO: keep matrices
             end
         end
@@ -147,8 +139,10 @@ for row = 1:nExperiments
         %% Save results
         % This file contains the results of the analysis
         filename = char(strcat(results_folder, id, '.mat'));
+        filename_ts = char(strcat(timeseries_folder, id, '_ts.mat'));
         fprintf('\n Saving results.');
-        save(filename, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
+        save(filename, 'resultsArrayLight', '-v7.3'); % v7.3 is required for files larger than 2 Gb
+        save(filename_ts, 'resultsArray', '-v7.3');
         
         %% Plot results
         fprintf('\n Creating figures.');
@@ -160,7 +154,10 @@ for row = 1:nExperiments
         createFigures(resultsArray, 'summary');
         
         figure;
-        createFigures(resultsArray, 'biodiversity');
+        createFigures(resultsArray, 'speciesCount');
+        
+        figure;
+        createFigures(resultsArray, 'evenness');
         
         fprintf('\n Finished.');
         
@@ -185,4 +182,4 @@ for row = 1:nExperiments
 end
 
 %% Create figures for the paper
-figs_for_paper;
+% figs_for_paper;
