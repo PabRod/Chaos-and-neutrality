@@ -204,7 +204,7 @@ switch options
         plot(competition_pars, mean(evs), 'LineWidth', 4, 'Color', 'k');
         plot(competition_pars, mean(evs) + [1;-1].*std(evs), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
         ylim([0 1]);
-        title('Evenness (total)');
+        title('Total');
         
         subplot(3, 1, 2);
         plot(competition_pars, evs_prey);
@@ -213,7 +213,7 @@ switch options
         plot(competition_pars, mean(evs_prey) + [1;-1].*std(evs_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
         ylim([0, 1]);
         title('Prey');
-        ylabel('Evenness (prey)');
+        ylabel('Evenness');
         
         subplot(3, 1, 3);
         plot(competition_pars, evs_pred);
@@ -221,7 +221,7 @@ switch options
         plot(competition_pars, mean(evs_pred), 'LineWidth', 4, 'Color', 'k');
         plot(competition_pars, mean(evs_pred) + [1;-1].*std(evs_pred), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
         ylim([0, 1]);
-        title('Evenness (pred)');
+        title('Pred');
         xlabel('Competition parameter');
         
 end
