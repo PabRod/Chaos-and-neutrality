@@ -109,16 +109,6 @@ for row = 1:nExperiments
                 results.timeseries.ts_c = t_out_c;
                 results.timeseries.ys_c = y_out_c;
                 
-                %% Measure biodiversity
-                threshold = 1e-2;
-                [nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c] = countSpecies(results, threshold);
-                results.nPreySpeciesAlive = [mean(nPreySpeciesAlive), std(nPreySpeciesAlive)];
-                results.nPredSpeciesAlive = [mean(nPredSpeciesAlive), std(nPredSpeciesAlive)];
-                results.nPreySpeciesAlive_c = [mean(nPreySpeciesAlive_c), std(nPreySpeciesAlive_c)];
-                
-                nSpeciesAlive = nPreySpeciesAlive + nPredSpeciesAlive;
-                results.nSpeciesAlive = [mean(nSpeciesAlive), std(nSpeciesAlive)];
-                
                 %% Perform tests for chaos                 
                 [ts_lyap, ys_lyap_1] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, opts); %TODO: re-use previous run
                 [~, ys_lyap_2] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr + lyapPert.*ones(1, nPreys+nPreds), opts);
@@ -134,6 +124,7 @@ for row = 1:nExperiments
         %% Analyze results
         fprintf('\n Analyzing.');
         resultsArray = performChaosTests(resultsArray);
+        resultsArray = measureBiodiversity(resultsArray, true);
         
         %% Remove the heavy parts
         % The time series are very heavy. Here we split the output
@@ -163,7 +154,10 @@ for row = 1:nExperiments
         createFigures(resultsArray, 'summary');
         
         figure;
-        createFigures(resultsArray, 'biodiversity');
+        createFigures(resultsArray, 'speciesCount');
+        
+        figure;
+        createFigures(resultsArray, 'evenness');
         
         fprintf('\n Finished.');
         
