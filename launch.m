@@ -137,11 +137,10 @@ for row = 1:nExperiments
         
         %% Remove the heavy parts
         % The time series are very heavy. Here we split the output
-        timeseries = cell(size(resultsArray,1), size(resultsArray, 2));
+        resultsArrayLight = resultsArray;
         for i = 1:size(resultsArray, 1)
             for j = 1:size(resultsArray, 2)
-                timeseries{i,j} = resultsArray{i,j}.timeseries;
-                resultsArray{i,j} = rmfield(resultsArray{i,j}, {'timeseries', 'predMatrix', 'compMatrix'});
+                resultsArrayLight{i,j} = rmfield(resultsArrayLight{i,j}, {'timeseries', 'predMatrix', 'compMatrix'});
                 % TODO: keep matrices
             end
         end
@@ -151,8 +150,8 @@ for row = 1:nExperiments
         filename = char(strcat(results_folder, id, '.mat'));
         filename_ts = char(strcat(timeseries_folder, id, '_ts.mat'));
         fprintf('\n Saving results.');
-        save(filename, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
-        save(filename_ts, 'timeseries', '-v7.3');
+        save(filename, 'resultsArrayLight', '-v7.3'); % v7.3 is required for files larger than 2 Gb
+        save(filename_ts, 'resultsArray', '-v7.3');
         
         %% Plot results
         fprintf('\n Creating figures.');
