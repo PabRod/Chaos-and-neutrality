@@ -23,9 +23,11 @@ for j = 1:cols
         
         evennessAll = evenness(resultsArray{i,j}, 'all', summarize);
         evennessPrey = evenness(resultsArray{i,j}, 'preyonly', summarize);
+        evennessPrey_c = evenness(resultsArray{i,j}, 'preyonly_c', summarize);
         evennessPred = evenness(resultsArray{i,j}, 'predonly', summarize);
         resultsArray{i,j}.biodiversity.evenness = evennessAll;
         resultsArray{i,j}.biodiversity.evennessPrey = evennessPrey;
+        resultsArray{i,j}.biodiversity.evennessPrey_c = evennessPrey_c;
         resultsArray{i,j}.biodiversity.evennessPred = evennessPred;
         
         counter = counter + 1;

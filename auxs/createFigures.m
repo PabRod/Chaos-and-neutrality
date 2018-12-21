@@ -169,7 +169,7 @@ switch options
         plot(competition_pars, mean(cnt_pred_c) + [1;-1].*std(cnt_pred_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
         plot(competition_pars, mean(cnt_prey), 'LineWidth', 4, 'Color', 'k');
         plot(competition_pars, mean(cnt_prey) + [1;-1].*std(cnt_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
-        difference = -cnt_prey+cnt_pred_c;
+        difference = cnt_pred_c - cnt_prey;
         plot(competition_pars, mean(difference), 'LineWidth', 4, 'Color', 'b');
         plot(competition_pars, mean(difference) + [1;-1].*std(difference), 'LineWidth', 4, 'Color', 'b', 'LineStyle', '--');
         
@@ -193,6 +193,7 @@ switch options
         evs = evenness(:, :, 1);
         evs_prey = evenness(:, :, 2);
         evs_pred = evenness(:, :, 3);
+        evs_prey_c = evenness(:, :, 4);
         
         dimensions = resultsArray{1,1}.dims;
         nPred = dimensions(1);
@@ -209,8 +210,13 @@ switch options
         subplot(3, 1, 2);
         plot(competition_pars, evs_prey);
         hold on;
+        plot(competition_pars, mean(evs_prey_c), 'LineWidth', 4, 'Color', 'g');
+        plot(competition_pars, mean(evs_prey_c) + [1;-1].*std(evs_prey_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
         plot(competition_pars, mean(evs_prey), 'LineWidth', 4, 'Color', 'k');
         plot(competition_pars, mean(evs_prey) + [1;-1].*std(evs_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
+        difference = evs_prey_c - evs_prey;
+        plot(competition_pars, mean(difference), 'LineWidth', 4, 'Color', 'b');
+        plot(competition_pars, mean(difference) + [1;-1].*std(difference), 'LineWidth', 4, 'Color', 'b', 'LineStyle', '--');
         ylim([0, 1]);
         title('Prey');
         ylabel('Evenness');

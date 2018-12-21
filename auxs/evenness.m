@@ -5,17 +5,20 @@ nPred = results.dims(1);
 nPrey = results.dims(2);
 
 switch mode
-    case 'all'
+    case 'all' % Count all species
         ys_subset = results.timeseries.ys;
         S = nPred + nPrey;
-    case 'predonly'
+    case 'predonly' % Count only prey species
         ys_subset = results.timeseries.ys(:, 1:nPrey);
         S = nPrey;
-    case 'preyonly'
+    case 'preyonly_c' % Count only prey species. Use simulation without predation
+        ys_subset = results.timeseries.ys_c(:, 1:nPrey);
+        S = nPrey;
+    case 'preyonly' % Count only perdator species
         ys_subset = results.timeseries.ys(:, nPrey+1:nPrey+nPred);
         S = nPred;
     otherwise
-        error('Supported modes are: all, preyonly, predonly');
+        error('Supported modes are: all, preyonly, preyonly_c and predonly');
 end
 
 ps = ys_subset./sum(ys_subset, 2); % Use relative weights
