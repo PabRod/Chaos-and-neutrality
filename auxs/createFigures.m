@@ -143,33 +143,33 @@ switch options
         
     case 'speciesCount'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
-        evenness = resultsAsMatrix(resultsArray, 'speciesCount');
+        count = resultsAsMatrix(resultsArray, 'speciesCount');
         
-        evs = evenness(:, :, 1);
-        evs_prey = evenness(:, :, 2);
-        evs_pred = evenness(:, :, 3);
-        count_prey_c = evenness(:, :, 4);
+        cnt_tot = count(:, :, 1);
+        cnt_prey = count(:, :, 2);
+        cnt_pred = count(:, :, 3);
+        cnt_pred_c = count(:, :, 4);
         
         dimensions = resultsArray{1,1}.dims;
         nPred = dimensions(1);
         nPrey = dimensions(2);
         
         subplot(3, 1, 1);
-        plot(competition_pars, evs);
+        plot(competition_pars, cnt_tot);
         hold on;
-        plot(competition_pars, mean(evs), 'LineWidth', 4, 'Color', 'k');
-        plot(competition_pars, mean(evs) + [1;-1].*std(evs), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
+        plot(competition_pars, mean(cnt_tot), 'LineWidth', 4, 'Color', 'k');
+        plot(competition_pars, mean(cnt_tot) + [1;-1].*std(cnt_tot), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
         ylim([0, nPred+nPrey]);
         title('Total');
         
         subplot(3, 1, 2);
-        plot(competition_pars, evs_prey);
+        plot(competition_pars, cnt_prey);
         hold on;
-        plot(competition_pars, mean(count_prey_c), 'LineWidth', 4, 'Color', 'g');
-        plot(competition_pars, mean(count_prey_c) + [1;-1].*std(count_prey_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
-        plot(competition_pars, mean(evs_prey), 'LineWidth', 4, 'Color', 'k');
-        plot(competition_pars, mean(evs_prey) + [1;-1].*std(evs_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
-        difference = -evs_prey+count_prey_c;
+        plot(competition_pars, mean(cnt_pred_c), 'LineWidth', 4, 'Color', 'g');
+        plot(competition_pars, mean(cnt_pred_c) + [1;-1].*std(cnt_pred_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
+        plot(competition_pars, mean(cnt_prey), 'LineWidth', 4, 'Color', 'k');
+        plot(competition_pars, mean(cnt_prey) + [1;-1].*std(cnt_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
+        difference = -cnt_prey+cnt_pred_c;
         plot(competition_pars, mean(difference), 'LineWidth', 4, 'Color', 'b');
         plot(competition_pars, mean(difference) + [1;-1].*std(difference), 'LineWidth', 4, 'Color', 'b', 'LineStyle', '--');
         
@@ -178,10 +178,10 @@ switch options
         ylabel('Average number of non extinct species');
         
         subplot(3, 1, 3);
-        plot(competition_pars, evs_pred);
+        plot(competition_pars, cnt_pred);
         hold on;
-        plot(competition_pars, mean(evs_pred), 'LineWidth', 4, 'Color', 'k');
-        plot(competition_pars, mean(evs_pred) + [1;-1].*std(evs_pred), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
+        plot(competition_pars, mean(cnt_pred), 'LineWidth', 4, 'Color', 'k');
+        plot(competition_pars, mean(cnt_pred) + [1;-1].*std(cnt_pred), 'LineWidth', 5, 'Color', 'k', 'LineStyle', '--');
         ylim([0, nPred]);
         title('Pred');
         xlabel('Competition parameter');
