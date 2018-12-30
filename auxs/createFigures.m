@@ -230,4 +230,7 @@ switch options
         title('Pred');
         xlabel('Competition parameter');
         
+    otherwise
+        error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness');
+        
 end

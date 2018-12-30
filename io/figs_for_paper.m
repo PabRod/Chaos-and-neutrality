@@ -110,5 +110,7 @@ for i = 1:NAll
     file = allFiles{i};
     
     figure;
-    createFigures(file, 'biodiversity');
+    createFigures(file, 'speciesCount');
+    figure;
+    createFigures(file, 'evenness');
 end
