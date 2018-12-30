@@ -148,7 +148,7 @@ switch options
         cnt_tot = count(:, :, 1);
         cnt_prey = count(:, :, 2);
         cnt_pred = count(:, :, 3);
-        cnt_pred_c = count(:, :, 4);
+        cnt_prey_c = count(:, :, 4);
         
         dimensions = resultsArray{1,1}.dims;
         nPred = dimensions(1);
@@ -165,11 +165,11 @@ switch options
         subplot(3, 1, 2);
         plot(competition_pars, cnt_prey);
         hold on;
-        plot(competition_pars, mean(cnt_pred_c), 'LineWidth', 4, 'Color', 'g');
-        plot(competition_pars, mean(cnt_pred_c) + [1;-1].*std(cnt_pred_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
+        plot(competition_pars, mean(cnt_prey_c), 'LineWidth', 4, 'Color', 'g');
+        plot(competition_pars, mean(cnt_prey_c) + [1;-1].*std(cnt_prey_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
         plot(competition_pars, mean(cnt_prey), 'LineWidth', 4, 'Color', 'k');
         plot(competition_pars, mean(cnt_prey) + [1;-1].*std(cnt_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
-        difference = cnt_pred_c - cnt_prey;
+        difference = cnt_prey_c - cnt_prey;
         plot(competition_pars, mean(difference), 'LineWidth', 4, 'Color', 'b');
         plot(competition_pars, mean(difference) + [1;-1].*std(difference), 'LineWidth', 4, 'Color', 'b', 'LineStyle', '--');
         
@@ -234,9 +234,9 @@ switch options
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         count = resultsAsMatrix(resultsArray, 'speciesCount');
         
-        cnt_pred = count(:, :, 3);
-        cnt_pred_c = count(:, :, 4);
-        difference = cnt_pred_c - cnt_pred;
+        cnt_prey = count(:, :, 2);
+        cnt_prey_c = count(:, :, 4);
+        difference = cnt_prey_c - cnt_prey;
         
         %area(competition_pars, probChaos_using_z1_2, 'FaceColor', [254 127 127]./255);
         area(competition_pars, mean(difference));

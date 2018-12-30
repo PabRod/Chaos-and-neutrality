@@ -105,7 +105,7 @@ title('\fontsize{16} Using z1 hard');
 xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('');
 
-%% Biodiversities
+%% Prey count
 figure;
 for i = NAll:-1:1
     file = allFiles{i};
