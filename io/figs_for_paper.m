@@ -106,11 +106,13 @@ xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('');
 
 %% Biodiversities
-for i = 1:NAll
+figure;
+for i = NAll:-1:1
     file = allFiles{i};
     
-    figure;
-    createFigures(file, 'speciesCount');
-    figure;
-    createFigures(file, 'evenness');
+    createFigures(file, 'preyCount'); hold on;
 end
+title('\fontsize{16} Biodiversity');
+xlabel('\fontsize{14} Competition parameter \epsilon');
+ylabel('\fontsize{14} (NPrey_{competition only} - NPrey)');
+legend(allTitles{NAll:-1:1});

@@ -230,6 +230,21 @@ switch options
         title('Pred');
         xlabel('Competition parameter');
         
+    case 'preyCount'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        count = resultsAsMatrix(resultsArray, 'speciesCount');
+        
+        cnt_pred = count(:, :, 3);
+        cnt_pred_c = count(:, :, 4);
+        difference = cnt_pred_c - cnt_pred;
+        
+        %area(competition_pars, probChaos_using_z1_2, 'FaceColor', [254 127 127]./255);
+        area(competition_pars, mean(difference));
+        text = sprintf('Prey count \n Case: %s', resultsArray{1,1}.id);
+        title(text);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Prey count');
+        
     otherwise
         error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness');
         
