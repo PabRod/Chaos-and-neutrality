@@ -245,7 +245,23 @@ switch options
         xlabel('Competition parameter \epsilon');
         ylabel('Prey count');
         
+    case 'preyEven'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        evs = resultsAsMatrix(resultsArray, 'evenness');
+        
+        evs_prey = evs(:, :, 2);
+        evs_prey_c = evs(:, :, 4);
+        
+        difference = evs_prey_c - evs_prey;
+        
+        %area(competition_pars, probChaos_using_z1_2, 'FaceColor', [254 127 127]./255);
+        area(competition_pars, mean(difference));
+        text = sprintf('Prey evenness \n Case: %s', resultsArray{1,1}.id);
+        title(text);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Prey evenness');
+        
     otherwise
-        error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness');
+        error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness, preyCount, preyEven');
         
 end
