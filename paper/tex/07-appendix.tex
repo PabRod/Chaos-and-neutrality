@@ -39,14 +39,14 @@ It is important to note that, in models like this, all deaths at the prey's leve
 	GrossGrowth(P,C) = e \cdot Predation(P,C)
 \end{equation}
 %
-where $e$ represents the efficiency of the energy transfer process. Equation \ref{eq:InnerEnergyFlow}, when plugged into \ref{eq:CommonStructure}, yields:
+where $e$ represents the efficiency of the energy transfer process. Equation \eqref{eq:InnerEnergyFlow}, when plugged into \eqref{eq:CommonStructure}, yields:
 %
 \begin{equation}
 \label{eq:AllEnergyFlow}
 	e P'(t) + C'(t) = e \cdot Growth(P) - Loss(C)
 \end{equation}
 %
-Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open system from the point of view of thermodynamics. Here $Growth$ is the only source of the system, and $Loss$ is the only sink (see figure \ref{fig:EnergyFlow}). All the energy exchange due to predation stays inside the system, so predation can be considered a closed subsystem.
+Equation \eqref{eq:AllEnergyFlow} allows us to think of our system as an open system from the point of view of thermodynamics. Here $Growth$ is the only source of the system, and $Loss$ is the only sink (see figure \ref{fig:EnergyFlow}). All the energy exchange due to predation stays inside the system, so predation can be considered a closed subsystem.
 
 \begin{figure}[H]
 	\begin{center}
@@ -56,7 +56,7 @@ Equation \ref{eq:AllEnergyFlow} allows us to think of our system as an open syst
 	\label{fig:EnergyFlow}
 \end{figure}
 
-We can generalize this basic structure to multispecies, two trophic levels systems. First, we'll go back to equation \ref{eq:CommonStructure} and just add more rows:
+We can generalize this basic structure to multispecies, two trophic levels systems. First, we'll go back to equation \eqref{eq:CommonStructure} and just add more rows:
 %
 \begin{eqnarray}
 \label{eq:CommonStructureMulti}
@@ -69,14 +69,14 @@ We can generalize this basic structure to multispecies, two trophic levels syste
 %
 where now $i$ runs from $1$ to the number of prey $n_P$ and $j$ from $1$ to the number of consumers $n_C$. Here, we've used $P_i$ to denote the population of the prey labeled by $i$, and $P$ for the vector containing all prey populations. Notice that while the $Growth$ term can involve competition (and thus, depends on the whole vector $P$), the $Loss$ term for species $j$ depends only in the population of that species (i.e.: $C_j$), regardless of the rest.
 
-Requiring once again our predation to be fully invested in consumer's growth, we find the following generalization of equation \ref{eq:InnerEnergyFlow}:
+Requiring once again our predation to be fully invested in consumer's growth, we find the following generalization of equation \eqref{eq:InnerEnergyFlow}:
 %
 \begin{equation}
 \label{eq:InnerEnergyFlowMulti}
 	\sum_{j = 1}^{n_C} GrossGrowth_j(P,C_j) = \sum_{i = 1}^{n_P} e_i \cdot Predation_i(P_i,C)
 \end{equation}
 %
-Using \ref{eq:InnerEnergyFlowMulti} and \ref{eq:CommonStructureMulti}, it is easy to prove that the multispecies generalization of \ref{eq:AllEnergyFlow} is:
+Using \eqref{eq:InnerEnergyFlowMulti} and \eqref{eq:CommonStructureMulti}, it is easy to prove that the multispecies generalization of \eqref{eq:AllEnergyFlow} is:
 %
 \begin{equation}
 \label{eq:AllEnergyFlowMulti}
@@ -85,7 +85,7 @@ Using \ref{eq:InnerEnergyFlowMulti} and \ref{eq:CommonStructureMulti}, it is eas
 %
 The intuitive interpretation is, again, that the only sinks and sources of energy in our systems are the total $Loss$ and $Growth$.
 
-Restriction \ref{eq:InnerEnergyFlowMulti} (or equivalently, \ref{eq:AllEnergyFlowMulti}) can be used to generalize realistic functional forms for the coupling terms.
+Restriction \eqref{eq:InnerEnergyFlowMulti} (or equivalently, \eqref{eq:AllEnergyFlowMulti}) can be used to generalize realistic functional forms for the coupling terms.
 
 \subsubsection{Lotka-Volterra equations}
 \label{subsubsec:LotkaVolterra}
@@ -119,13 +119,13 @@ Lotka-Volterra equations can be generalized to a model with multiple species by 
 	\end{cases}
 \end{eqnarray}
 %
-The fulfillment of condition \ref{eq:InnerEnergyFlowMulti} is again easily proven.
+The fulfillment of condition \eqref{eq:InnerEnergyFlowMulti} is again easily proven.
 
 In this model, all terms can grow without boundaries. This is not only unrealistic, but also creates some problems from the sole point of view of mathematical stability.
 
 \subsubsection{Rosenzweig-MacArthur model}
 \label{subsubsec:Rosenzweig-MacArthur}
-The Rosenzweig-MacArthur predator-prey model improves the previous model by adding boundaries to the terms' dependency on the prey population. This is achieved by encapsulating $P$ inside saturating functions. In particular, the growth rate and the grazing rate $r$ now depend on $P$ (see equation \ref{eq:RosMac2levels} and compare it with \ref{eq:LotkaVolterra}).
+The Rosenzweig-MacArthur predator-prey model improves the previous model by adding boundaries to the terms' dependency on the prey population. This is achieved by encapsulating $P$ inside saturating functions. In particular, the growth rate and the grazing rate $r$ now depend on $P$ (see equation \eqref{eq:RosMac2levels} and compare it with \eqref{eq:LotkaVolterra}).
 %
 \begin{eqnarray}
 \label{eq:RosMac2levels}
@@ -136,7 +136,7 @@ The Rosenzweig-MacArthur predator-prey model improves the previous model by addi
 	\end{cases}
 \end{eqnarray}
 %
-Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If both functions are chosen appropriately, we avoid unbounded growths. Typically, $r(P)$ and $g(P)$ are chosen so they generate a logistic growth and a Holling type II saturation response when plugged into \ref{eq:RosMac2levels}. In mathematical terms, this means choosing $r(P) = r_0 \left(1 - \frac{P}{K} \right)$ and $g(P) = \frac{g_0}{P+H}$ (for more information see, for instance, \citet{Edelstein-Keshet}). After making this choices, our system takes its classical form:
+Once again, condition \eqref{eq:InnerEnergyFlow} is trivially fulfilled independently of the functional form of $r(P)$ and $g(P)$. If both functions are chosen appropriately, we avoid unbounded growths. Typically, $r(P)$ and $g(P)$ are chosen so they generate a logistic growth and a Holling type II saturation response when plugged into \eqref{eq:RosMac2levels}. In mathematical terms, this means choosing $r(P) = r_0 \left(1 - \frac{P}{K} \right)$ and $g(P) = \frac{g_0}{P+H}$ (for more information see, for instance, \citet{Edelstein-Keshet}). After making this choices, our system takes its classical form:
 %
 \begin{eqnarray}
 \label{eq:RosMac2classic}
@@ -151,7 +151,7 @@ Once again, condition \ref{eq:InnerEnergyFlow} is trivially fulfilled independen
 \subsubsection{Multispecies Rosenzweig-MacArthur model}
 \label{subsubsec:Rosenzweig-MacArthurMulti}
 
-Noticing the similarities between equations \ref{eq:LotkaVolterra} and \ref{eq:RosMac2levels}, the latter can be generalized in the same fashion as we did to obtain \ref{eq:LotkaVolterraMulti}, yielding:
+Noticing the similarities between equations \eqref{eq:LotkaVolterra} and \eqref{eq:RosMac2levels}, the latter can be generalized in the same fashion as we did to obtain \eqref{eq:LotkaVolterraMulti}, yielding:
 %
 \begin{eqnarray}
 \label{eq:RosMacMulti}
@@ -162,7 +162,7 @@ Noticing the similarities between equations \ref{eq:LotkaVolterra} and \ref{eq:R
 	\end{cases}
 \end{eqnarray}
 %
-Written like this, it is easy to see that the condition \ref{eq:InnerEnergyFlowMulti} is fulfilled.
+Written like this, it is easy to see that the condition \eqref{eq:InnerEnergyFlowMulti} is fulfilled.
 
 Regarding the proper functional forms of $r_i(P)$ and $g_j(P)$, our growth term has to take into account both the inter and intraspecific competition. This can be easily modelled by choosing:
 %
@@ -196,7 +196,7 @@ We hypothesize that the grazing rates corresponding to predator $j$, that is, $g
 				Rosenzweig-MacArthur & $\begin{cases}P'(t) = r(P) P - g(P) P C\\C'(t) = - l C + e g(P) C P\end{cases}$ & $\begin{cases} P_i'(t) = r_i(P) P_i - P_i \sum_{j = 1}^{n_C} g_j(P) S_{ji} C_j \\ C_j'(t) = - l_j C_j +  g_j(P) e_j C_j \sum_{i = 1}^{n_P} S_{ji} P_i \end{cases}$  \\
 			\hline  \end{tabular}}
 	\end{center}
-	\caption{Summary table with the different types of predation models studied. Written this way, the parallelisms are obvious. In multispecies models, the index $i$ runs from $1$ to $n_P$, and $j$ from $1$ to $n_C$. The functional forms of $r_i(P)$ and $g_j(P)$ are given in equations \ref{eq:r} and \ref{eq:g}. In the present paper we used the Rosenzweig-MacArthur multispecies model, that is, the one in the lower right corner.}
+	\caption{Summary table with the different types of predation models studied. Written this way, the parallelisms are obvious. In multispecies models, the index $i$ runs from $1$ to $n_P$, and $j$ from $1$ to $n_C$. The functional forms of $r_i(P)$ and $g_j(P)$ are given in equations \eqref{eq:r} and \eqref{eq:g}. In the present paper we used the Rosenzweig-MacArthur multispecies model, that is, the one in the lower right corner.}
 \end{table}
 
 \subsection{Chaos detection}
@@ -253,10 +253,10 @@ $\phi_k e^{i k \theta}$ & \begin{tikzpicture} \draw[->, ultra thick, red,  arrow
 \hline
 \end{tabular}
 \end{center}
-\caption{\label{tab:Summands} Example showing a step by step geometrical construction of the elements inside the summation operator in equation \ref{eq:z1complex}. In this example we use a time series whose first elements are $\phi_j = \left\lbrace 2, 1, 0.5, 0.25, ...\right\rbrace$. The parameter $\theta$ has been set to $\frac{\pi}{6}$.}
+\caption{\label{tab:Summands} Example showing a step by step geometrical construction of the elements inside the summation operator in equation \eqref{eq:z1complex}. In this example we use a time series whose first elements are $\phi_j = \left\lbrace 2, 1, 0.5, 0.25, ...\right\rbrace$. The parameter $\theta$ has been set to $\frac{\pi}{6}$.}
 \end{table}
 
-Adding up the elements in table \ref{tab:Summands} as indicated by equation \ref{eq:z1complex} can be interpreted geometrically as vector addition, i.e., performing one "step" after another (see figure \ref{fig:Sum}).
+Adding up the elements in table \ref{tab:Summands} as indicated by equation \eqref{eq:z1complex} can be interpreted geometrically as vector addition, i.e., performing one "step" after another (see figure \ref{fig:Sum}).
 
 \begin{figure}[H]
 \begin{center}
@@ -279,7 +279,7 @@ Adding up the elements in table \ref{tab:Summands} as indicated by equation \ref
 \caption{\label{fig:Sum} Geometrical calculation of $z_1, z_2, z_3$ and  $z_4$ for $\phi_j = \left\lbrace 2, 1, 0.5, 0.25, ...\right\rbrace$ and $\theta = \frac{\pi}{6}$.}
 \end{figure}
 
-With this picture in mind, it is easy to understand the kind of paths that different types of time series will give rise to (see figure \ref{fig:z1Path}). Constant time series generate cyclic paths (polygons) or pseudocyclic paths (polygons that do not close after a first round). Periodic or pseudoperiodic time series generate periodic or pseudoperiodic paths (note that the summand in \ref{eq:z1complex} becomes then the product of two periodic/pseudoperiodic functions). Random time series generate brownian-motion-like paths. Provided that our system is deterministic, the apparent stochasticity of our observed time series is a strong indicator of chaos.
+With this picture in mind, it is easy to understand the kind of paths that different types of time series will give rise to (see figure \ref{fig:z1Path}). Constant time series generate cyclic paths (polygons) or pseudocyclic paths (polygons that do not close after a first round). Periodic or pseudoperiodic time series generate periodic or pseudoperiodic paths (note that the summand in \eqref{eq:z1complex} becomes then the product of two periodic/pseudoperiodic functions). Random time series generate brownian-motion-like paths. Provided that our system is deterministic, the apparent stochasticity of our observed time series is a strong indicator of chaos.
 
 \begin{figure}
 	\begin{center}
