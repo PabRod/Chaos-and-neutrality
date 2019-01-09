@@ -148,7 +148,7 @@ switch options
         cnt_tot = count(:, :, 1);
         cnt_prey = count(:, :, 2);
         cnt_pred = count(:, :, 3);
-        cnt_pred_c = count(:, :, 4);
+        cnt_prey_c = count(:, :, 4);
         
         dimensions = resultsArray{1,1}.dims;
         nPred = dimensions(1);
@@ -165,11 +165,11 @@ switch options
         subplot(3, 1, 2);
         plot(competition_pars, cnt_prey);
         hold on;
-        plot(competition_pars, mean(cnt_pred_c), 'LineWidth', 4, 'Color', 'g');
-        plot(competition_pars, mean(cnt_pred_c) + [1;-1].*std(cnt_pred_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
+        plot(competition_pars, mean(cnt_prey_c), 'LineWidth', 4, 'Color', 'g');
+        plot(competition_pars, mean(cnt_prey_c) + [1;-1].*std(cnt_prey_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
         plot(competition_pars, mean(cnt_prey), 'LineWidth', 4, 'Color', 'k');
         plot(competition_pars, mean(cnt_prey) + [1;-1].*std(cnt_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
-        difference = -cnt_prey+cnt_pred_c;
+        difference = cnt_prey_c - cnt_prey;
         plot(competition_pars, mean(difference), 'LineWidth', 4, 'Color', 'b');
         plot(competition_pars, mean(difference) + [1;-1].*std(difference), 'LineWidth', 4, 'Color', 'b', 'LineStyle', '--');
         
@@ -193,6 +193,7 @@ switch options
         evs = evenness(:, :, 1);
         evs_prey = evenness(:, :, 2);
         evs_pred = evenness(:, :, 3);
+        evs_prey_c = evenness(:, :, 4);
         
         dimensions = resultsArray{1,1}.dims;
         nPred = dimensions(1);
@@ -209,8 +210,13 @@ switch options
         subplot(3, 1, 2);
         plot(competition_pars, evs_prey);
         hold on;
+        plot(competition_pars, mean(evs_prey_c), 'LineWidth', 4, 'Color', 'g');
+        plot(competition_pars, mean(evs_prey_c) + [1;-1].*std(evs_prey_c), 'LineWidth', 4, 'Color', 'g', 'LineStyle', '--');
         plot(competition_pars, mean(evs_prey), 'LineWidth', 4, 'Color', 'k');
         plot(competition_pars, mean(evs_prey) + [1;-1].*std(evs_prey), 'LineWidth', 4, 'Color', 'k', 'LineStyle', '--');
+        difference = evs_prey_c - evs_prey;
+        plot(competition_pars, mean(difference), 'LineWidth', 4, 'Color', 'b');
+        plot(competition_pars, mean(difference) + [1;-1].*std(difference), 'LineWidth', 4, 'Color', 'b', 'LineStyle', '--');
         ylim([0, 1]);
         title('Prey');
         ylabel('Evenness');
@@ -223,5 +229,39 @@ switch options
         ylim([0, 1]);
         title('Pred');
         xlabel('Competition parameter');
+        
+    case 'preyCount'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        count = resultsAsMatrix(resultsArray, 'speciesCount');
+        
+        cnt_prey = count(:, :, 2);
+        cnt_prey_c = count(:, :, 4);
+        difference = cnt_prey_c - cnt_prey;
+        
+        %area(competition_pars, probChaos_using_z1_2, 'FaceColor', [254 127 127]./255);
+        area(competition_pars, mean(difference));
+        text = sprintf('Prey count \n Case: %s', resultsArray{1,1}.id);
+        title(text);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Prey count');
+        
+    case 'preyEven'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        evs = resultsAsMatrix(resultsArray, 'evenness');
+        
+        evs_prey = evs(:, :, 2);
+        evs_prey_c = evs(:, :, 4);
+        
+        difference = evs_prey_c - evs_prey;
+        
+        %area(competition_pars, probChaos_using_z1_2, 'FaceColor', [254 127 127]./255);
+        area(competition_pars, mean(difference));
+        text = sprintf('Prey evenness \n Case: %s', resultsArray{1,1}.id);
+        title(text);
+        xlabel('Competition parameter \epsilon');
+        ylabel('Prey evenness');
+        
+    otherwise
+        error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness, preyCount, preyEven');
         
 end

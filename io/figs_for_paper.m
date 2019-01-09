@@ -105,10 +105,30 @@ title('\fontsize{16} Using z1 hard');
 xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('');
 
-%% Biodiversities
-for i = 1:NAll
+%% Prey count
+figure;
+for i = NAll:-1:1
     file = allFiles{i};
     
-    figure;
-    createFigures(file, 'biodiversity');
+    createFigures(file, 'preyCount'); hold on;
 end
+title('\fontsize{16} Biodiversity');
+xlabel('\fontsize{14} Competition parameter \epsilon');
+ylabel('\fontsize{14} (NPrey_{competition only} - NPrey)');
+legend(allTitles{NAll:-1:1});
+
+%% Evenness
+figure;
+for i = NAll:-1:1
+    file = allFiles{i};
+    
+    subplot(10, 1, i);
+    createFigures(file, 'preyEven');
+    title('');
+    xlabel('');
+    ylabel('');
+end
+%title('\fontsize{16} Prey evenness');
+%xlabel('\fontsize{14} Competition parameter \epsilon');
+%ylabel('\fontsize{14} (Evenness_{competition only} - Evenness)');
+legend(allTitles{NAll:-1:1});

@@ -75,12 +75,13 @@ switch prompt
         end
         
     case 'evenness'
-        output = NaN(nreps, npars, 3);
+        output = NaN(nreps, npars, 4);
         for i = 1:nreps
             for j = 1:npars
                 output(i,j,1) = resultsArray{i, j}.biodiversity.evenness(1);
                 output(i,j,2) = resultsArray{i, j}.biodiversity.evennessPrey(1);
                 output(i,j,3) = resultsArray{i, j}.biodiversity.evennessPred(1);
+                output(i,j,4) = resultsArray{i, j}.biodiversity.evennessPrey_c(1);
             end
         end
         
