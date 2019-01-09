@@ -1,4 +1,5 @@
 %%
+close all;
 clear;
 clc;
 
@@ -45,6 +46,10 @@ for i = NSub:-1:1 % Bigger first
     title('');
 end
 legend(subTitles{3:-1:1});
+xlabel('\fontsize{14} Competition parameter \epsilon');
+ylabel('\fontsize{14} Probability of chaos');
+set(fig1, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig1, '..\paper\img\results.png');
 
 %% Main body: Contour plot
 fig2 = figure;
@@ -53,26 +58,29 @@ contourFig(allFiles, 'z12');
 title('\fontsize{16} Estimated probability of chaos');
 xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('\fontsize{14} Number of species (predators + prey)');
+set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig2, '..\paper\img\contour.png');
 
 %% Appendix: All slices
-fig3 = figure;
-for i = 1:NAll
-    file = allFiles{i};
-    
-    subplot(NAll, 1, i);
-    createFigures(file, 'z1');
-    
-    % Tweak aesthetics
-    title('');
-    xlabel('');
-    if i == 5
-        ylabel('Estimated probability of chaos');
-    else
-        ylabel('');
-    end
-    legend(allTitles{i});
-end
-xlabel('Competition parameter \epsilon');
+% fig3 = figure;
+% for i = 1:NAll
+%     file = allFiles{i};
+%     
+%     subplot(NAll, 1, i);
+%     createFigures(file, 'z1');
+%     
+%     % Tweak aesthetics
+%     title('');
+%     xlabel('');
+%     if i == 5
+%         ylabel('Estimated probability of chaos');
+%     else
+%         ylabel('');
+%     end
+%     legend(allTitles{i});
+% end
+% xlabel('Competition parameter \epsilon');
+% set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 
 %% Appendix: all slices 2
 fig4 = figure;
@@ -83,6 +91,10 @@ for i = NAll:-1:1 % Bigger first
     title('');
 end
 legend(allTitles{NAll:-1:1});
+xlabel('\fontsize{14} Competition parameter \epsilon');
+ylabel('\fontsize{14} Probability of chaos');
+set(fig4, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig4, '..\paper\img\results_all.png');
 
 %% Appendix: chaos detection comparer
 fig5 = figure;
@@ -104,9 +116,11 @@ contourFig(allFiles, 'z1');
 title('\fontsize{16} Using z1 hard');
 xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('');
+set(fig5, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.6, 0.99]);
+saveas(fig5, '..\paper\img\contours_all.png');
 
 %% Prey count
-figure;
+fig6 = figure;
 for i = NAll:-1:1
     file = allFiles{i};
     
@@ -116,6 +130,8 @@ title('\fontsize{16} Biodiversity');
 xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('\fontsize{14} (NPrey_{competition only} - NPrey)');
 legend(allTitles{NAll:-1:1});
+set(fig6, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig6, '..\paper\img\biodiversity.png');
 
 %% Evenness
 figure;
@@ -132,3 +148,4 @@ end
 %xlabel('\fontsize{14} Competition parameter \epsilon');
 %ylabel('\fontsize{14} (Evenness_{competition only} - Evenness)');
 legend(allTitles{NAll:-1:1});
+set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
