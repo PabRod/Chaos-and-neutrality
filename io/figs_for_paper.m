@@ -128,9 +128,10 @@ for i = NAll:-1:1
 end
 title('\fontsize{16} Biodiversity');
 xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} (NPrey_{competition only} - NPrey)');
+ylabel('\fontsize{14} (NPrey_{without predation} - NPrey)');
 legend(allTitles{NAll:-1:1});
 
+xlim([-0.8, 0.8]);
 ylim([0, 16]);
 set(fig6, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig6, '..\paper\img\biodiversity.png');
@@ -148,7 +149,7 @@ saveas(fig6, '..\paper\img\biodiversity.png');
 % end
 % %title('\fontsize{16} Prey evenness');
 % %xlabel('\fontsize{14} Competition parameter \epsilon');
-% %ylabel('\fontsize{14} (Evenness_{competition only} - Evenness)');
+% %ylabel('\fontsize{14} (Evenness_{without predation} - Evenness)');
 % legend(allTitles{NAll:-1:1});
 % set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 
@@ -174,7 +175,7 @@ for i = NAll:-1:1
 end
 title('');
 xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} (NPrey_{competition only} - NPrey)');
+ylabel('\fontsize{14} (NPrey_{without predation} - NPrey)');
 legend(allTitles{NAll:-1:1});
 
 xlim([-0.8, 0.8]);
