@@ -136,22 +136,22 @@ ylim([0, 16]);
 set(fig6, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig6, '..\paper\img\biodiversity.png');
 
-% %% Evenness
-% figure;
-% for i = NAll:-1:1
-%     file = allFiles{i};
-%     
-%     subplot(10, 1, i);
-%     createFigures(file, 'preyEven');
-%     title('');
-%     xlabel('');
-%     ylabel('');
-% end
-% %title('\fontsize{16} Prey evenness');
-% %xlabel('\fontsize{14} Competition parameter \epsilon');
-% %ylabel('\fontsize{14} (Evenness_{without predation} - Evenness)');
-% legend(allTitles{NAll:-1:1});
-% set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+%% Evenness
+figure;
+for i = NAll:-1:1
+    file = allFiles{i};
+    
+    subplot(10, 1, i);
+    createFigures(file, 'preyEven');
+    title('');
+    xlabel('');
+    ylabel('');
+end
+%title('\fontsize{16} Prey evenness');
+%xlabel('\fontsize{14} Competition parameter \epsilon');
+%ylabel('\fontsize{14} (Evenness_{without predation} - Evenness)');
+legend(allTitles{NAll:-1:1});
+set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 
 %% Combined plot
 fig7 = figure;
