@@ -285,6 +285,16 @@ switch options
         xlabel('For chaotic cases');
         ylabel('For non chaotic cases');
         
+    case 'biodvslyap'
+        resultsTable = resultsAsTable(resultsArray);
+        
+        maxLyaps = resultsTable.maxLyapunov;
+        biod = resultsTable.nPreySpeciesAlive(:, 1);
+        
+        scatter(maxLyaps, biod, '.');
+        xlabel('Maximum Lyapunov exponent');
+        ylabel('Prey biodiversity');
+        
     otherwise
         error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness, preyCount, preyEven');
         

@@ -192,3 +192,17 @@ for i = 1:numel(allFiles)
     title('Biodiversity');
     legend(allTitles{i});
 end
+
+set(fig8, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
+saveas(fig8, '..\paper\img\chaos_vs_regular.png');
+
+%% Biodiversity vs. max Lyap
+fig9 = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'biodvslyap');
+    title(allTitles{i});
+end
+
+set(fig9, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
+saveas(fig9, '..\paper\img\biod_vs_lyap.png');
