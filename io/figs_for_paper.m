@@ -183,3 +183,12 @@ ylim([0, 16]);
 
 set(fig7, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
 saveas(fig7, '..\paper\img\combined_panel.png');
+
+%% Chaos vs. non chaos
+fig8 = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'chaosvsregular');
+    title('Biodiversity');
+    legend(allTitles{i});
+end

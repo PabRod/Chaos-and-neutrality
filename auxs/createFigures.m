@@ -261,6 +261,30 @@ switch options
         xlabel('Competition parameter \epsilon');
         ylabel('Prey evenness');
         
+    case 'chaosvsregular'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        nprey = resultsArray{1,1}.dims(1);
+        resultsTable = resultsAsTable(resultsArray);
+        
+        biod_chaos = NaN(1, npars);
+        biod_regular = NaN(1, npars);
+        for i = 1:npars
+            % Filtering process
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            subset_chaos = subset(subset.z12 == true, :);
+            subset_regular = subset(subset.z12 == false, :);
+            
+            biod_chaos(i) = mean(subset_chaos.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
+            biod_regular(i) = mean(subset_regular.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
+        end
+        
+        scatter(biod_chaos, biod_regular, '.');
+        hold on;
+        plot([0 nprey], [0 nprey], '--', 'Color', 'k');
+        title('Biodiversity');
+        xlabel('For chaotic cases');
+        ylabel('For non chaotic cases');
+        
     otherwise
         error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness, preyCount, preyEven');
         
