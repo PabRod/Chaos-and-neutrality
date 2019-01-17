@@ -285,6 +285,24 @@ switch options
         xlabel('For chaotic cases');
         ylabel('For non chaotic cases');
         
+    case 'boxandwhisker'
+        resultsTable = resultsAsTable(resultsArray);
+        
+        subset_chaos = resultsTable(resultsTable.z12 == true, :);
+        subset_regular = resultsTable(resultsTable.z12 == false, :);
+            
+        biod_chaos = subset_chaos.nPreySpeciesAlive(:, 1); % Second column contains standard deviations
+        biod_regular = subset_regular.nPreySpeciesAlive(:, 1); % Second column contains standard deviations
+        
+        boxplot(resultsTable.nPreySpeciesAlive(:,1), resultsTable.z12);
+        hold on;
+        
+        scatter(1*ones(1, numel(biod_regular)), biod_regular, '.');
+        scatter(2*ones(1, numel(biod_chaos)), biod_chaos, '.');
+        
+        xlabel('Chaotic?');
+        ylabel('Prey biodiversity');
+        
     case 'biodvslyap'
         resultsTable = resultsAsTable(resultsArray);
         
