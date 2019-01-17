@@ -268,17 +268,24 @@ switch options
         
         biod_chaos = NaN(1, npars);
         biod_regular = NaN(1, npars);
+        ratio_chaos = NaN(1, npars);
         for i = 1:npars
             % Filtering process
             subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
             subset_chaos = subset(subset.z12 == true, :);
             subset_regular = subset(subset.z12 == false, :);
             
+            n_chaos = height(subset_chaos);
+            n_total = height(subset);
+            ratio_chaos(i) = n_chaos/n_total;
+            
             biod_chaos(i) = mean(subset_chaos.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
             biod_regular(i) = mean(subset_regular.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
         end
         
-        scatter(biod_chaos, biod_regular, '.');
+        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
+        scatter(biod_chaos, biod_regular, 200, c, '.');
+        colormap(jet);
         hold on;
         plot([0 nprey], [0 nprey], '--', 'Color', 'k');
         title('Biodiversity');
