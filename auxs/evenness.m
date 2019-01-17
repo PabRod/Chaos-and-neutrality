@@ -1,20 +1,20 @@
 function evs = evenness(results, mode, summary)
 
 % Measure the system
-nPred = results.dims(1);
-nPrey = results.dims(2);
+nPrey = results.dims(1);
+nPred = results.dims(2);
 
 switch mode
     case 'all' % Count all species
         ys_subset = results.timeseries.ys;
         S = nPred + nPrey;
-    case 'predonly' % Count only prey species
+    case 'preyonly' % Count only prey species
         ys_subset = results.timeseries.ys(:, 1:nPrey);
         S = nPrey;
     case 'preyonly_c' % Count only prey species. Use simulation without predation
         ys_subset = results.timeseries.ys_c(:, 1:nPrey);
         S = nPrey;
-    case 'preyonly' % Count only perdator species
+    case 'predonly' % Count only predator species
         ys_subset = results.timeseries.ys(:, nPrey+1:nPrey+nPred);
         S = nPred;
     otherwise

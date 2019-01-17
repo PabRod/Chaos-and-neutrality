@@ -136,22 +136,22 @@ ylim([0, 16]);
 set(fig6, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig6, '..\paper\img\biodiversity.png');
 
-% %% Evenness
-% figure;
-% for i = NAll:-1:1
-%     file = allFiles{i};
-%     
-%     subplot(10, 1, i);
-%     createFigures(file, 'preyEven');
-%     title('');
-%     xlabel('');
-%     ylabel('');
-% end
-% %title('\fontsize{16} Prey evenness');
-% %xlabel('\fontsize{14} Competition parameter \epsilon');
-% %ylabel('\fontsize{14} (Evenness_{without predation} - Evenness)');
-% legend(allTitles{NAll:-1:1});
-% set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+%% Evenness
+figure;
+for i = NAll:-1:1
+    file = allFiles{i};
+    
+    subplot(10, 1, i);
+    createFigures(file, 'preyEven');
+    title('');
+    xlabel('');
+    ylabel('');
+end
+%title('\fontsize{16} Prey evenness');
+%xlabel('\fontsize{14} Competition parameter \epsilon');
+%ylabel('\fontsize{14} (Evenness_{without predation} - Evenness)');
+legend(allTitles{NAll:-1:1});
+set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 
 %% Combined plot
 fig7 = figure;
@@ -183,3 +183,26 @@ ylim([0, 16]);
 
 set(fig7, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
 saveas(fig7, '..\paper\img\combined_panel.png');
+
+%% Chaos vs. non chaos
+fig8 = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'chaosvsregular');
+    title('Biodiversity');
+    legend(allTitles{i});
+end
+
+set(fig8, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
+saveas(fig8, '..\paper\img\chaos_vs_regular.png');
+
+%% Biodiversity vs. max Lyap
+fig9 = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'biodvslyap');
+    title(allTitles{i});
+end
+
+set(fig9, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
+saveas(fig9, '..\paper\img\biod_vs_lyap.png');
