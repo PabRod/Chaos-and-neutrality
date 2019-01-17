@@ -196,7 +196,7 @@ end
 set(fig8, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig8, '..\paper\img\chaos_vs_regular.png');
 
-%% Chaos vs. non chaos
+%% Box and whisker
 fig9 = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
@@ -217,3 +217,14 @@ end
 
 set(fig10, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig10, '..\paper\img\biod_vs_lyap.png');
+
+%% Split in 2
+fig11 = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'splitbychaos');
+    title(allTitles{i});
+end
+
+set(fig11, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig11, '..\paper\img\biod_vs_lyap.png');
