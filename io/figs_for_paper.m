@@ -184,28 +184,40 @@ ylim([0, 16]);
 set(fig7, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
 saveas(fig7, '..\paper\img\combined_panel.png');
 
-%% Chaos vs. non chaos
-fig8 = figure;
+%% Biodiversity: Chaos vs. non chaos
+fig_biodchaosvsregular = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
-    createFigures(allFiles{i}, 'chaosvsregular');
+    createFigures(allFiles{i}, 'biodchaosvsregular');
     title('Biodiversity');
     legend(allTitles{i});
 end
 
-set(fig8, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig8, '..\paper\img\chaos_vs_regular.png');
+set(fig_biodchaosvsregular, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_biodchaosvsregular, '..\paper\img\biod_chaos_vs_regular.png');
 
-%% Box and whisker
+%% Evenness: Chaos vs. non chaos
+fig_evenchaosvsregular = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'evenchaosvsregular');
+    title('Evenness');
+    legend(allTitles{i});
+end
+
+set(fig_evenchaosvsregular, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_evenchaosvsregular, '..\paper\img\even_chaos_vs_regular.png');
+
+%% Biodiversity: Box and whisker
 fig9 = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
-    createFigures(allFiles{i}, 'boxandwhisker');
+    createFigures(allFiles{i}, 'biodboxandwhisker');
     legend(allTitles{i});
 end
 
 set(fig9, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig9, '..\paper\img\box_and_whisker.png');
+saveas(fig9, '..\paper\img\biod_box_and_whisker.png');
 
 %% Biodiversity vs. max Lyap
 fig10 = figure;
@@ -218,13 +230,24 @@ end
 set(fig10, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig10, '..\paper\img\biod_vs_lyap.png');
 
-%% Split in 2
-fig11 = figure;
+%% Biodiversity: Split in 2
+fig_biodsplitbychaos = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
-    createFigures(allFiles{i}, 'splitbychaos');
+    createFigures(allFiles{i}, 'biodsplitbychaos');
     title(allTitles{i});
 end
 
-set(fig11, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig11, '..\paper\img\biod_vs_lyap.png');
+set(fig_biodsplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_biodsplitbychaos, '..\paper\img\biod_split_by_chaos.png');
+
+%% Evenness: Split in 2
+fig_evensplitbychaos = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'evensplitbychaos');
+    title(allTitles{i});
+end
+
+set(fig_evensplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_evensplitbychaos, '..\paper\img\even_split_by_chaos.png');

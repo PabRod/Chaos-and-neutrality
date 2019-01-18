@@ -10,7 +10,20 @@ function createFigures(resultsArrayLocation, options)
 %   'comparer': agreement comparer between the different tests for
 %   individual runs
 %   'summary': probability of chaos vs. competition parameter
-%   'biodiversity': number of non-extinct species
+%   'speciesCount': number of non-extinct species
+%   'evenness': species' evenness
+%   'preyCount': number of non-extinct prey species
+%   'preyEven': prey species'evenness
+%   'biodchaosvsregular': biodiversity comparer chaotic cases vs regular
+%   cases
+%   'evenchaosvsregular': evenness comparer chaotic cases vs regular
+%   cases
+%   'biodboxandwhisker': biodiversity box and whisker plot
+%   'biodvslyap': biodiversity vs max lyapunov exponent
+%   'biodsplitbychaos': biodiversity vs competition parameter, splitted by
+%   asymptotic dynamics (chaotic/regular)
+%   'evensplitbychaos': evenness vs competition parameter, splitted by
+%   asymptotic dynamics (chaotic/regular)
 
 %% Load results
 resultsArray = loadResults(resultsArrayLocation);
@@ -261,7 +274,7 @@ switch options
         xlabel('Competition parameter \epsilon');
         ylabel('Prey evenness');
         
-    case 'chaosvsregular'
+    case 'biodchaosvsregular'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         nprey = resultsArray{1,1}.dims(1);
         resultsTable = resultsAsTable(resultsArray);
@@ -292,7 +305,38 @@ switch options
         xlabel('For chaotic cases');
         ylabel('For non chaotic cases');
         
-    case 'boxandwhisker'
+    case 'evenchaosvsregular'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        nprey = resultsArray{1,1}.dims(1);
+        resultsTable = resultsAsTable(resultsArray);
+        
+        even_chaos = NaN(1, npars);
+        even_regular = NaN(1, npars);
+        ratio_chaos = NaN(1, npars);
+        for i = 1:npars
+            % Filtering process
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            subset_chaos = subset(subset.z12 == true, :);
+            subset_regular = subset(subset.z12 == false, :);
+            
+            n_chaos = height(subset_chaos);
+            n_total = height(subset);
+            ratio_chaos(i) = n_chaos/n_total;
+            
+            even_chaos(i) = mean(subset_chaos.evennessPrey(:, 1)); % Second column contains standard deviations
+            even_regular(i) = mean(subset_regular.evennessPrey(:, 1)); % Second column contains standard deviations
+        end
+        
+        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
+        scatter(even_chaos, even_regular, 200, c, '.');
+        colormap(jet);
+        hold on;
+        plot([0 1], [0 1], '--', 'Color', 'k');
+        title('Evenness');
+        xlabel('For chaotic cases');
+        ylabel('For non chaotic cases');
+        
+    case 'biodboxandwhisker'
         resultsTable = resultsAsTable(resultsArray);
         
         subset_chaos = resultsTable(resultsTable.z12 == true, :);
@@ -320,7 +364,7 @@ switch options
         xlabel('Maximum Lyapunov exponent');
         ylabel('Prey biodiversity');
         
-    case 'splitbychaos'
+    case 'biodsplitbychaos'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         nprey = resultsArray{1,1}.dims(1);
         resultsTable = resultsAsTable(resultsArray);
@@ -352,7 +396,38 @@ switch options
         xlabel('Competition parameter');
         ylabel('Biodiversity');
         
+    case 'evensplitbychaos'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        nprey = resultsArray{1,1}.dims(1);
+        resultsTable = resultsAsTable(resultsArray);
+        
+        even_chaos = NaN(1, npars);
+        even_regular = NaN(1, npars);
+        ratio_chaos = NaN(1, npars);
+        for i = 1:npars
+            % Filtering process
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            subset_chaos = subset(subset.z12 == true, :);
+            subset_regular = subset(subset.z12 == false, :);
+            
+            n_chaos = height(subset_chaos);
+            n_total = height(subset);
+            ratio_chaos(i) = n_chaos/n_total;
+            
+            even_chaos(i) = mean(subset_chaos.evennessPrey(:, 1)); % Second column contains standard deviations
+            even_regular(i) = mean(subset_regular.evennessPrey(:, 1)); % Second column contains standard deviations
+        end
+        
+        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
+        scatter(competition_pars, even_regular, [], c, 'filled');
+        hold on;
+        scatter(competition_pars, even_chaos, [], c);
+        colormap(jet);
+
+        xlabel('Competition parameter');
+        ylabel('Evenness');
+        
     otherwise
-        error('Wrong type of figure: accepted types are maxLyaps, maxLyapsFiltered, probabilities, z1, comparer, summary, speciesCount, evenness, preyCount, preyEven');
+        error('Wrong type of figure. See help createFigures for valid types');
         
 end
