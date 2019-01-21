@@ -251,3 +251,14 @@ end
 
 set(fig_evensplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig_evensplitbychaos, '..\paper\img\even_split_by_chaos.png');
+
+%% Biodiversity: Split in 2 diff
+fig_biodsplitbychaosdiff = figure;
+for i = 1:numel(allFiles)
+    subplot(2, 5, i);
+    createFigures(allFiles{i}, 'biodsplitbychaosdiff');
+    title(allTitles{i});
+end
+
+set(fig_biodsplitbychaosdiff, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_biodsplitbychaosdiff, '..\paper\img\biod_split_by_chaos_diff.png');
