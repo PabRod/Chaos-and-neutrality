@@ -29,103 +29,110 @@ for row = 1:nExperiments
         id = pars.id; % Experiment id
         results_folder = pars.results_folder; % Output folder for storing results
         timeseries_folder = pars.timeseries_folder; % Output folder for storing time series
+        filename_ts = char(strcat(timeseries_folder, id, '_ts.mat')); % Filename for the time series file
+        alreadySimulated = (exist(filename_ts, 'file') == 2); % If the time series file is present, we already simulated this case
         
-        % ---- Model info ----
-        nPreys = pars.nPreys; % Number of prey species
-        nPreds = pars.nPreds; % Number of predator species
-        
-        r = pars.r; % Prey growth ratio
-        K = pars.K; % Prey carrying capacity
-        g = pars.g; % Predation rate
-        f = pars.f; % Immigration rate
-        e = pars.e; % Assimilation efficiency
-        H = pars.H; % Half-saturation constant
-        l = pars.l; % Loss rate
-        compPars = pars.compPars; % Competition parameters to generate competition matrix (see paper)
-        
-        % ---- Simulation info ----
-        seed = pars.seed; % Random seed
-        runTime = pars.runTime; % Time length of the time series
-        stabilTime = pars.stabilTime; % Stabilization time (time to reach the attractor)
-        timeSteps = pars.timeSteps; % Time steps in the time series
-        lyapTime = pars.lyapTime; % Time used to estimate the maximum Lyapunov exponent
-        lyapPert = pars.lyapPert; % Initial perturbation used to estimate the maximum Lyapunov exponent
-        reps = pars.reps; % Number of repetitions of this experiment
-        
-        %% Set the random seed for the sake of reproducibility
-        rng(seed);
-        
-        %% Print information about current experiment
-        fprintf('\n \n Job: %s. \n Simulating.', id);
-        
-        %% Create the results object
-        % The results object stores all the information about the results
-        % of the current run
-        results.id = id;
-        results.dims = [nPreys, nPreds];
-        results.stabiltime = stabilTime;
-        
-        %% Iterate for different neutrality strengths
-        compSteps = numel(compPars);
-        resultsArray = cell(reps, compSteps);
-        for compStep = 1:compSteps % Iterate for different neutrality strengths
-            results.competition_par = compPars(compStep);
-            for rep = 1:reps
-                % Some of the parameters are randomly drawn. This allows us
-                % to run several times the "same" experiment, in order to
-                % perform statistical analysis afterwards.
-                
-                %% Set variable parameters
-                mode = 'moving_window';
-                window_width = 0.2;
-                pars.A = competitionMatrix(nPreys, compPars(compStep), mode, window_width);
-                pars.S = rand(nPreds, nPreys);
-                
-                results.predMatrix = pars.S;
-                results.compMatrix = pars.A;
-                
-                %% Reach the attractor
-                opts = odeset('RelTol', 5e-5, 'AbsTol', 1e-7);
-                y0 = rand(1, nPreds+nPreys) + 1;
-                [~, y_out] = ode45(@(t,y) RosMac(t, y, pars), [0, stabilTime/2, stabilTime], y0, opts);
-                
-                %% Find a solution inside the attractor
-                tSpan = linspace(0, runTime, timeSteps);
-                y_attr = y_out(end, :);
-                [t_out, y_out] = ode45(@(t,y) RosMac(t, y, pars), tSpan, y_attr, opts);
-                
-                results.timeseries.ys = y_out;
-                results.timeseries.ts = t_out;
-                
-                %% Find a solution for competition only
-                stabilTime_c = 10*pars.K/pars.r;
-                y0_c = rand(1, nPreys) + 1;
-                [~, y_out_c] = ode45(@(t,y) Competition(t, y, pars), [0, stabilTime_c/2, stabilTime_c], y0_c, opts);
-                
-                tSpan_c = linspace(0, stabilTime_c, 20);
-                y_attr_c = y_out_c(end, :);
-                [t_out_c, y_out_c] = ode45(@(t,y) Competition(t, y, pars), tSpan_c, y_attr_c, opts);
-                
-                results.timeseries.ts_c = t_out_c;
-                results.timeseries.ys_c = y_out_c;
-                
-                %% Perform tests for chaos                 
-                [ts_lyap, ys_lyap_1] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, opts); %TODO: re-use previous run
-                [~, ys_lyap_2] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr + lyapPert.*ones(1, nPreys+nPreds), opts);
-
-                [results.maxLyapunov, b, dist, nhorizon] = calclyap(ts_lyap, ys_lyap_1, ys_lyap_2);
-                
-                %% Store in array
-                resultsArray{rep, compStep} = results;
-                
+        if(~alreadySimulated) % If the time series file doesn't exist, simulate and create it
+            % ---- Model info ----
+            nPreys = pars.nPreys; % Number of prey species
+            nPreds = pars.nPreds; % Number of predator species
+            
+            r = pars.r; % Prey growth ratio
+            K = pars.K; % Prey carrying capacity
+            g = pars.g; % Predation rate
+            f = pars.f; % Immigration rate
+            e = pars.e; % Assimilation efficiency
+            H = pars.H; % Half-saturation constant
+            l = pars.l; % Loss rate
+            compPars = pars.compPars; % Competition parameters to generate competition matrix (see paper)
+            
+            % ---- Simulation info ----
+            seed = pars.seed; % Random seed
+            runTime = pars.runTime; % Time length of the time series
+            stabilTime = pars.stabilTime; % Stabilization time (time to reach the attractor)
+            timeSteps = pars.timeSteps; % Time steps in the time series
+            lyapTime = pars.lyapTime; % Time used to estimate the maximum Lyapunov exponent
+            lyapPert = pars.lyapPert; % Initial perturbation used to estimate the maximum Lyapunov exponent
+            reps = pars.reps; % Number of repetitions of this experiment
+            
+            %% Set the random seed for the sake of reproducibility
+            rng(seed);
+            
+            %% Print information about current experiment
+            fprintf('\n \n Job: %s. \n Simulating.', id);
+            
+            %% Create the results object
+            % The results object stores all the information about the results
+            % of the current run
+            results.id = id;
+            results.dims = [nPreys, nPreds];
+            results.stabiltime = stabilTime;
+            
+            %% Iterate for different neutrality strengths
+            compSteps = numel(compPars);
+            resultsArray = cell(reps, compSteps);
+            for compStep = 1:compSteps % Iterate for different neutrality strengths
+                results.competition_par = compPars(compStep);
+                for rep = 1:reps
+                    % Some of the parameters are randomly drawn. This allows us
+                    % to run several times the "same" experiment, in order to
+                    % perform statistical analysis afterwards.
+                    
+                    %% Set variable parameters
+                    mode = 'moving_window';
+                    window_width = 0.2;
+                    pars.A = competitionMatrix(nPreys, compPars(compStep), mode, window_width);
+                    pars.S = rand(nPreds, nPreys);
+                    
+                    results.predMatrix = pars.S;
+                    results.compMatrix = pars.A;
+                    
+                    %% Reach the attractor
+                    opts = odeset('RelTol', 5e-5, 'AbsTol', 1e-7);
+                    y0 = rand(1, nPreds+nPreys) + 1;
+                    [~, y_out] = ode45(@(t,y) RosMac(t, y, pars), [0, stabilTime/2, stabilTime], y0, opts);
+                    
+                    %% Find a solution inside the attractor
+                    tSpan = linspace(0, runTime, timeSteps);
+                    y_attr = y_out(end, :);
+                    [t_out, y_out] = ode45(@(t,y) RosMac(t, y, pars), tSpan, y_attr, opts);
+                    
+                    results.timeseries.ys = y_out;
+                    results.timeseries.ts = t_out;
+                    
+                    %% Find a solution for competition only
+                    stabilTime_c = 10*pars.K/pars.r;
+                    y0_c = rand(1, nPreys) + 1;
+                    [~, y_out_c] = ode45(@(t,y) Competition(t, y, pars), [0, stabilTime_c/2, stabilTime_c], y0_c, opts);
+                    
+                    tSpan_c = linspace(0, stabilTime_c, 20);
+                    y_attr_c = y_out_c(end, :);
+                    [t_out_c, y_out_c] = ode45(@(t,y) Competition(t, y, pars), tSpan_c, y_attr_c, opts);
+                    
+                    results.timeseries.ts_c = t_out_c;
+                    results.timeseries.ys_c = y_out_c;
+                    
+                    %% Perform tests for chaos
+                    [ts_lyap, ys_lyap_1] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr, opts); %TODO: re-use previous run
+                    [~, ys_lyap_2] = ode45(@(t,y) RosMac(t, y, pars), linspace(0, lyapTime, 150), y_attr + lyapPert.*ones(1, nPreys+nPreds), opts);
+                    
+                    [results.maxLyapunov, b, dist, nhorizon] = calclyap(ts_lyap, ys_lyap_1, ys_lyap_2);
+                    
+                    %% Store in array
+                    resultsArray{rep, compStep} = results;
+                    
+                end
             end
+        else % If the time series file already exists, just load it
+            fprintf('\n \n Job: %s. \n Loading previous run.', id);
+            load(filename_ts);
         end
         
         %% Save timeseries
-        fprintf('\n Saving timeseries.');
-        
-        filename_ts = char(strcat(timeseries_folder, id, '_ts.mat'));
-        save(filename_ts, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
+        if(~alreadySimulated)
+            fprintf('\n Saving timeseries.');
+            save(filename_ts, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
+        end
         
         %% Analyze results
         fprintf('\n Analyzing.');
