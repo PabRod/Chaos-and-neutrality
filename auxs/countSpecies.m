@@ -1,4 +1,4 @@
-function [ nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c, nSpeciesAlive] = countSpecies(result, threshold, summarize)
+function [nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c, nSpeciesAlive, nPreySpeciesAlive2] = countSpecies(result, threshold, summarize)
 %COUNTSPECIES Counts the number of alive species
 %   Returns a vector with the number of alive (non extinct) species, 
 %   classified as predator and prey species, at each time
@@ -20,6 +20,7 @@ ysPred = ys(:, nPrey+1:nPrey+nPred);
 
 %% Count the non extinct species
 nPreySpeciesAlive = sum(ysPrey' >= threshold);
+nPreySpeciesAlive2 = nPrey - sum(all(ysPrey <= threshold));
 nPredSpeciesAlive = sum(ysPred' >= threshold);
 nPreySpeciesAlive_c = sum(ys_c' >= threshold);
 nSpeciesAlive = nPreySpeciesAlive + nPredSpeciesAlive;
