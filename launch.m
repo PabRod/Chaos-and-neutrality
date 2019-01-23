@@ -121,6 +121,12 @@ for row = 1:nExperiments
             end
         end
         
+        %% Save timeseries
+        fprintf('\n Saving timeseries.');
+        
+        filename_ts = char(strcat(timeseries_folder, id, '_ts.mat'));
+        save(filename_ts, 'resultsArray', '-v7.3'); % v7.3 is required for files larger than 2 Gb
+        
         %% Analyze results
         fprintf('\n Analyzing.');
         resultsArray = performChaosTests(resultsArray);
@@ -138,11 +144,10 @@ for row = 1:nExperiments
         
         %% Save results
         % This file contains the results of the analysis
-        filename = char(strcat(results_folder, id, '.mat'));
-        filename_ts = char(strcat(timeseries_folder, id, '_ts.mat'));
         fprintf('\n Saving results.');
+        
+        filename = char(strcat(results_folder, id, '.mat'));
         save(filename, 'resultsArrayLight', '-v7.3'); % v7.3 is required for files larger than 2 Gb
-        save(filename_ts, 'resultsArray', '-v7.3');
         
         %% Plot results
         fprintf('\n Creating figures.');
