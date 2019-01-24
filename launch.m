@@ -157,21 +157,30 @@ for row = 1:nExperiments
         save(filename, 'resultsArrayLight', '-v7.3'); % v7.3 is required for files larger than 2 Gb
         
         %% Plot results
-        fprintf('\n Creating figures.');
+%         fprintf('\n Creating figures.');
+%         
+%         figure;
+%         subplot(2, 1, 1);
+%         createFigures(resultsArray, 'comparer');
+%         subplot(2, 1, 2);
+%         createFigures(resultsArray, 'summary');
+%         
+%         figure;
+%         createFigures(resultsArray, 'speciesCount');
+%         
+%         figure;
+%         createFigures(resultsArray, 'evenness');
+
+        figure; 
+        subplot(2, 1, 1); 
+        createFigures(resultsArrayLight, 'z12'); 
         
-        figure;
-        subplot(2, 1, 1);
-        createFigures(resultsArray, 'comparer');
-        subplot(2, 1, 2);
-        createFigures(resultsArray, 'summary');
+        subplot(3, 1, 3); 
+        createFigures(resultsArrayLight, 'biodsplitbychaos');
         
-        figure;
-        createFigures(resultsArray, 'speciesCount');
-        
-        figure;
-        createFigures(resultsArray, 'evenness');
-        
+        %%  Finish and clean memory
         fprintf('\n Finished.');
+        clear resultsArray resultsArrayLight;
         
         %% Restore random seed
         rng('shuffle');

@@ -10,6 +10,7 @@ function createFigures(resultsArrayLocation, options)
 %   'comparer': agreement comparer between the different tests for
 %   individual runs
 %   'summary': probability of chaos vs. competition parameter
+%   'z12': probability of chaos vs. competition parameter (using z test)
 %   'speciesCount': number of non-extinct species
 %   'evenness': species' evenness
 %   'preyCount': number of non-extinct prey species
@@ -156,6 +157,18 @@ switch options
         xlabel('Competition parameter');
         ylabel('Certainty of chaos');
         
+    case 'z12'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        [~, ~, usingz12, ~, ~] = computeProbabilities(resultsArrayLocation);
+        
+        area(competition_pars, usingz12, 'FaceColor', [254 127 127]./255);
+        ylim([0,1]);
+        text = sprintf('Case: %s', resultsArray{1,1}.id);
+        title(text);
+        % axis equal;
+        xlabel('Competition parameter');
+        ylabel('Certainty of chaos');
+        
     case 'speciesCount'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         count = resultsAsMatrix(resultsArray, 'speciesCount');
@@ -290,17 +303,10 @@ switch options
             subset_chaos = subset(subset.z12 == true, :);
             subset_regular = subset(subset.z12 == false, :);
             
-            n_chaos = height(subset_chaos);
-            n_total = height(subset);
-            ratio_chaos(i) = n_chaos/n_total;
-            
-            biod_chaos(i) = mean(subset_chaos.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
-            biod_regular(i) = mean(subset_regular.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
+            [biod_regular(i), biod_chaos(i), ratio_chaos(i)] = biodByChaos(subset_regular, subset_chaos, [0.05, 0.995]);
         end
         
-        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
-        scatter(biod_chaos, biod_regular, 200, c, '.');
-        colormap(jet);
+        scatter(biod_chaos, biod_regular, '.');
         hold on;
         plot([0 nprey], [0 nprey], '--', 'Color', 'k');
         title('Biodiversity');
@@ -329,7 +335,7 @@ switch options
             even_regular(i) = mean(subset_regular.evennessPrey(:, 1)); % Second column contains standard deviations
         end
         
-        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
+        c = (ratio_chaos > 0.05) & (ratio_chaos < 0.995);
         scatter(even_chaos, even_regular, 200, c, '.');
         colormap(jet);
         hold on;
@@ -339,19 +345,8 @@ switch options
         ylabel('For non chaotic cases');
         
     case 'biodboxandwhisker'
-        resultsTable = resultsAsTable(resultsArray);
-        
-        subset_chaos = resultsTable(resultsTable.z12 == true, :);
-        subset_regular = resultsTable(resultsTable.z12 == false, :);
-            
-        biod_chaos = subset_chaos.nPreySpeciesAlive(:, 1); % Second column contains standard deviations
-        biod_regular = subset_regular.nPreySpeciesAlive(:, 1); % Second column contains standard deviations
-        
-        boxplot(resultsTable.nPreySpeciesAlive(:,1), resultsTable.z12);
-        hold on;
-        
-        scatter(1*ones(1, numel(biod_regular)), biod_regular, '.');
-        scatter(2*ones(1, numel(biod_chaos)), biod_chaos, '.');
+        resultsTable = resultsAsTable(resultsArray);        
+        boxplot(resultsTable.nPreySpeciesAlive2(:,1), resultsTable.z12);
         
         xlabel('Chaotic?');
         ylabel('Prey biodiversity');
@@ -360,7 +355,7 @@ switch options
         resultsTable = resultsAsTable(resultsArray);
         
         maxLyaps = resultsTable.maxLyapunov;
-        biod = resultsTable.nPreySpeciesAlive(:, 1);
+        biod = resultsTable.nPreySpeciesAlive2(:, 1);
         
         scatter(maxLyaps, biod, '.');
         xlabel('Maximum Lyapunov exponent');
@@ -380,23 +375,18 @@ switch options
             subset_chaos = subset(subset.z12 == true, :);
             subset_regular = subset(subset.z12 == false, :);
             
-            n_chaos = height(subset_chaos);
-            n_total = height(subset);
-            ratio_chaos(i) = n_chaos/n_total;
-            
-            biod_chaos(i) = mean(subset_chaos.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
-            biod_regular(i) = mean(subset_regular.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
+            [biod_regular(i), biod_chaos(i), ratio_chaos(i)] = biodByChaos(subset_regular, subset_chaos, [0.00, 0.99999]);
         end
         
-        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
-        scatter(competition_pars, biod_regular, [], c, 'filled');
+        scatter(competition_pars, biod_regular, 'filled');
         hold on;
-        scatter(competition_pars, biod_chaos, [], c);
+        scatter(competition_pars, biod_chaos);
         colormap(jet);
 
         title('Biodiversity');
         xlabel('Competition parameter');
         ylabel('Biodiversity');
+        xlim([-1 1]);
         
     case 'biodsplitbychaosdiff'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
@@ -412,16 +402,10 @@ switch options
             subset_chaos = subset(subset.z12 == true, :);
             subset_regular = subset(subset.z12 == false, :);
             
-            n_chaos = height(subset_chaos);
-            n_total = height(subset);
-            ratio_chaos(i) = n_chaos/n_total;
-            
-            biod_chaos(i) = mean(subset_chaos.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
-            biod_regular(i) = mean(subset_regular.nPreySpeciesAlive(:, 1)); % Second column contains standard deviations
+            [biod_regular(i), biod_chaos(i), ratio_chaos(i)] = biodByChaos(subset_regular, subset_chaos, [0.05, 0.995]);
         end
         
-        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
-        scatter(competition_pars, biod_chaos - biod_regular, [], c, 'filled');
+        scatter(competition_pars, biod_chaos - biod_regular, 'filled');
         colormap(jet);
         hold on;
         plot([-1 1], [0 0], 'Color', 'k', 'LineStyle', '--');
@@ -429,7 +413,6 @@ switch options
         title('Biodiversity difference');
         xlabel('Competition parameter');
         ylabel('Biodiversity difference');
-        ylim([-1 1]);
         
     case 'evensplitbychaos'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
@@ -453,7 +436,7 @@ switch options
             even_regular(i) = mean(subset_regular.evennessPrey(:, 1)); % Second column contains standard deviations
         end
         
-        c = (ratio_chaos > 0.2) & (ratio_chaos < 0.8);
+        c = (ratio_chaos > 0.05) & (ratio_chaos < 0.995);
         scatter(competition_pars, even_regular, [], c, 'filled');
         hold on;
         scatter(competition_pars, even_chaos, [], c);
@@ -465,4 +448,31 @@ switch options
     otherwise
         error('Wrong type of figure. See help createFigures for valid types');
         
+end
+
+end
+
+function [biod_regular, biod_chaos, ratio_chaos] = biodByChaos(subset_regular, subset_chaos, thresholds)
+
+%% Set default threshold
+if nargin == 2
+    thresholds = [0, 1];
+end
+
+%% Count sizes
+n_chaos = height(subset_chaos);
+n_total = height(subset_regular) + height(subset_chaos);
+
+%% Filter out extremes
+temp_ratio = n_chaos/n_total;
+if (temp_ratio >= thresholds(1)) && (temp_ratio <= thresholds(2))
+    ratio_chaos = temp_ratio;
+    biod_chaos = mean(subset_chaos.nPreySpeciesAlive2(:, 1)); % Second column contains standard deviations
+    biod_regular = mean(subset_regular.nPreySpeciesAlive2(:, 1)); % Second column contains standard deviations
+else
+    ratio_chaos = NaN;
+    biod_chaos = NaN;
+    biod_regular = NaN;
+end
+
 end
