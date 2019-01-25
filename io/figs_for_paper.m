@@ -72,6 +72,7 @@ for i = 1:NAll
     
     subplot(2, 1, 2);
     createFigures(resultsArrayLight, 'biodsplitbychaos');
+    legend({'With regular dynamics', 'With chaotic dynamics', 'Weighted average'});
     
     set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
     
@@ -255,6 +256,7 @@ for i = 1:numel(allFiles)
     createFigures(allFiles{i}, 'biodsplitbychaos');
     title(allTitles{i});
 end
+legend({'With regular dynamics', 'With chaotic dynamics', 'Weighted average'}, 'Location', 'southeast');
 
 set(fig_biodsplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig_biodsplitbychaos, '..\paper\img\biod_split_by_chaos.png');
