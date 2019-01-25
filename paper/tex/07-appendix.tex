@@ -352,25 +352,6 @@ For each simulation, a biodiversity index was estimated as the number of prey sp
 	\label{fig:BiodBoxAndWhisker}
 \end{figure}
 
-\subsubsection{Evenness measurements}
-\label{subsubsec:EvennessFigs}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=1\columnwidth]{even_split_by_chaos.png}
-	\end{center}
-	\caption{Each set of simulated ecosystems was grouped by competition parameter $\epsilon$ and then classified as chaotic (empty points) or regular (filled points). The average prey evenness of these subgroups is plotted here vs. the competition parameter. Cases where the ratio chaotic-regular was outside the range 20 \% - 80 \% are marked in blue.}
-	\label{fig:EvenSplitByChaos}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=1\columnwidth]{even_chaos_vs_regular.png}
-	\end{center}
-	\caption{Each set of simulated ecosystems was grouped by competition parameter $\epsilon$ and then classified as chaotic or regular. The average prey evenness of the regular cases is plotted here vs. the average prey evenness of the chaotic cases. Cases where the ratio chaotic-regular was outside the range 20 \% - 80 \% are marked in blue.}
-	\label{fig:EvenChaosVsRegular}
-\end{figure}
-
 \subsubsection{Flow chart}
 \label{subsubsec:FlowChart}
 In the spirit of reproducible research we made available all the analysis code used to draw our conclusions. Any interested researcher can clone it from a \textit{GitHub} repository \citep{Rodriguez-Sanchez-code-neuchaos} and, executing a single script, reproduce all our simulations and figures. This figure shows schematically what this script does:
