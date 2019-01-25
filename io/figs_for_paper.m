@@ -26,13 +26,13 @@ allTitles = {'2 + 3 species', ...
     '18 + 27 species', ...
     '20 + 30 species'};
 
-subFiles = {'2-3p.mat', ...
-    '4-6p.mat', ...
-    '12-18p.mat'};
+subFiles = {'4-6p.mat', ...
+    '12-18p.mat', ...
+    '20-30p.mat'};
 
-subTitles = {'5 species', ...
-    '10 species', ...
-    '30 species'};
+subTitles = {'10 species', ...
+    '30 species', ...
+    '50 species'};
 
 NAll = numel(allFiles);
 NSub = numel(subFiles);
@@ -50,6 +50,25 @@ xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('\fontsize{14} Probability of chaos');
 set(fig1, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig1, '..\paper\img\results.png');
+
+%% Main body: biodiversities
+fig_biod = figure;
+for i = 1:NSub
+    file = subFiles{i};
+    
+    subplot(3, 1, i);
+    createFigures(file, 'biodsplitbychaos'); hold on;
+    xlabel('');
+    if(i == 2)
+        ylabel('\fontsize{14} Biodiversity');
+    else
+        ylabel('');
+    end
+    title(subTitles{i});
+end
+xlabel('\fontsize{14} Competition parameter \epsilon');
+set(fig_biod, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_biod, '..\paper\img\results_biod.png');
 
 %% Main body: Contour plot
 fig2 = figure;
@@ -104,15 +123,29 @@ end
 
 %% Appendix: all slices 2
 fig4 = figure;
+subplot(2, 1, 1);
 for i = NAll:-1:1 % Bigger first
     file = allFiles{i};
     
     createFigures(file, 'z1'); hold on;
     title('');
+    xlabel('');
 end
-legend(allTitles{NAll:-1:1});
-xlabel('\fontsize{14} Competition parameter \epsilon');
+title('\fontsize{16} Probability of chaos');
 ylabel('\fontsize{14} Probability of chaos');
+legend(allTitles{NAll:-1:1});
+
+subplot(2, 1, 2);
+for i = NAll:-1:1
+    file = allFiles{i};
+    
+    createFigures(file, 'preyCount'); hold on;
+end
+title('\fontsize{16} Biodiversity');
+xlabel('\fontsize{14} Competition parameter \epsilon');
+ylabel('\fontsize{14} NPrey');
+
+xlim([-0.8, 0.8]);
 set(fig4, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig4, '..\paper\img\results_all.png');
 
@@ -138,22 +171,6 @@ xlabel('\fontsize{14} Competition parameter \epsilon');
 ylabel('');
 set(fig5, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.6, 0.99]);
 saveas(fig5, '..\paper\img\contours_all.png');
-
-%% Prey count
-fig6 = figure;
-for i = NAll:-1:1
-    file = allFiles{i};
-    
-    createFigures(file, 'preyCount'); hold on;
-end
-title('\fontsize{16} Biodiversity');
-xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} NPrey');
-legend(allTitles{NAll:-1:1});
-
-xlim([-0.8, 0.8]);
-set(fig6, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig6, '..\paper\img\biodiversity.png');
 
 %% Evenness
 % figure;
