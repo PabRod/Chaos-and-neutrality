@@ -168,6 +168,7 @@ switch options
         % axis equal;
         xlabel('Competition parameter');
         ylabel('Certainty of chaos');
+        xlim([-1 1]);
         
     case 'speciesCount'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
@@ -377,16 +378,21 @@ switch options
             
             [biod_regular(i), biod_chaos(i), ratio_chaos(i)] = biodByChaos(subset_regular, subset_chaos, [0.00, 0.99999]);
         end
+        ratio_regular = 1 - ratio_chaos; % The ratio of regular cases is the complementary to the chaos cases
+        biod_average = ratio_regular.*biod_regular + ratio_chaos.*biod_chaos;
         
-        scatter(competition_pars, biod_regular, 'filled');
+        scatter(competition_pars, biod_regular, 100.*ratio_regular, 'k', 'filled');
         hold on;
-        scatter(competition_pars, biod_chaos);
+        scatter(competition_pars, biod_chaos, 100.*ratio_chaos, 'k');
+        plot(competition_pars, biod_average, 'Color', 'k', 'LineStyle', '--');
         colormap(jet);
 
         title('Biodiversity');
         xlabel('Competition parameter');
         ylabel('Biodiversity');
         xlim([-1 1]);
+        
+        legend({'With regular dynamics', 'With chaotic dynamics', 'Weighted average'});
         
     case 'biodsplitbychaosdiff'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');

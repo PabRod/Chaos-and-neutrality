@@ -175,7 +175,7 @@ for row = 1:nExperiments
         subplot(2, 1, 1); 
         createFigures(resultsArrayLight, 'z12'); 
         
-        subplot(3, 1, 3); 
+        subplot(2, 1, 2); 
         createFigures(resultsArrayLight, 'biodsplitbychaos');
         
         %%  Finish and clean memory

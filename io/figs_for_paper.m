@@ -61,6 +61,25 @@ ylabel('\fontsize{14} Number of species (predators + prey)');
 set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig2, '..\paper\img\contour.png');
 
+%% Main figures (individual)
+for i = 1:NAll
+    file = allFiles{i};
+    resultsArrayLight = loadResults(file);
+    
+    fig_conclusions_temp = figure;
+    subplot(2, 1, 1);
+    createFigures(resultsArrayLight, 'z12');
+    
+    subplot(2, 1, 2);
+    createFigures(resultsArrayLight, 'biodsplitbychaos');
+    
+    set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+    
+    name = resultsArrayLight{1,1}.id;
+    filename = char(strcat('..\paper\img\', name, '.png'));
+    saveas(fig_conclusions_temp, filename);
+end
+
 %% Appendix: All slices
 % fig3 = figure;
 % for i = 1:NAll
