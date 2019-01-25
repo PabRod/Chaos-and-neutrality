@@ -390,8 +390,6 @@ switch options
         ylabel('Biodiversity');
         xlim([-1 1]);
         
-        legend({'With regular dynamics', 'With chaotic dynamics', 'Weighted average'});
-        
     case 'biodsplitbychaosdiff'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         nprey = resultsArray{1,1}.dims(1);
