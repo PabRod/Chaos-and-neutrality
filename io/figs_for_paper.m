@@ -61,6 +61,25 @@ ylabel('\fontsize{14} Number of species (predators + prey)');
 set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig2, '..\paper\img\contour.png');
 
+%% Main figures (individual)
+for i = 1:NAll
+    file = allFiles{i};
+    resultsArrayLight = loadResults(file);
+    
+    fig_conclusions_temp = figure;
+    subplot(2, 1, 1);
+    createFigures(resultsArrayLight, 'z12');
+    
+    subplot(2, 1, 2);
+    createFigures(resultsArrayLight, 'biodsplitbychaos');
+    
+    set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+    
+    name = resultsArrayLight{1,1}.id;
+    filename = char(strcat('..\paper\img\', name, '.png'));
+    saveas(fig_conclusions_temp, filename);
+end
+
 %% Appendix: All slices
 % fig3 = figure;
 % for i = 1:NAll
@@ -128,61 +147,60 @@ for i = NAll:-1:1
 end
 title('\fontsize{16} Biodiversity');
 xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} (NPrey_{without predation} - NPrey)');
+ylabel('\fontsize{14} NPrey');
 legend(allTitles{NAll:-1:1});
 
 xlim([-0.8, 0.8]);
-ylim([0, 16]);
 set(fig6, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig6, '..\paper\img\biodiversity.png');
 
 %% Evenness
-figure;
-for i = NAll:-1:1
-    file = allFiles{i};
-    
-    subplot(10, 1, i);
-    createFigures(file, 'preyEven');
-    title('');
-    xlabel('');
-    ylabel('');
-end
-%title('\fontsize{16} Prey evenness');
-%xlabel('\fontsize{14} Competition parameter \epsilon');
-%ylabel('\fontsize{14} (Evenness_{without predation} - Evenness)');
-legend(allTitles{NAll:-1:1});
-set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% figure;
+% for i = NAll:-1:1
+%     file = allFiles{i};
+%     
+%     subplot(10, 1, i);
+%     createFigures(file, 'preyEven');
+%     title('');
+%     xlabel('');
+%     ylabel('');
+% end
+% %title('\fontsize{16} Prey evenness');
+% %xlabel('\fontsize{14} Competition parameter \epsilon');
+% %ylabel('\fontsize{14} (Evenness_{without predation} - Evenness)');
+% legend(allTitles{NAll:-1:1});
+% set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 
 %% Combined plot
-fig7 = figure;
-
-subplot(2, 1, 1);
-for i = NAll:-1:1 % Bigger first
-    file = allFiles{i};
-    
-    createFigures(file, 'z1'); hold on;
-    title('');
-end
-
-xlabel('');
-ylabel('\fontsize{14} Probability of chaos');
-
-subplot(2, 1, 2);
-for i = NAll:-1:1
-    file = allFiles{i};
-    
-    createFigures(file, 'preyCount'); hold on;
-end
-title('');
-xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} (NPrey_{without predation} - NPrey)');
-legend(allTitles{NAll:-1:1});
-
-xlim([-0.8, 0.8]);
-ylim([0, 16]);
-
-set(fig7, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
-saveas(fig7, '..\paper\img\combined_panel.png');
+% fig7 = figure;
+% 
+% subplot(2, 1, 1);
+% for i = NAll:-1:1 % Bigger first
+%     file = allFiles{i};
+%     
+%     createFigures(file, 'z1'); hold on;
+%     title('');
+% end
+% 
+% xlabel('');
+% ylabel('\fontsize{14} Probability of chaos');
+% 
+% subplot(2, 1, 2);
+% for i = NAll:-1:1
+%     file = allFiles{i};
+%     
+%     createFigures(file, 'preyCount'); hold on;
+% end
+% title('');
+% xlabel('\fontsize{14} Competition parameter \epsilon');
+% ylabel('\fontsize{14} (NPrey_{without predation} - NPrey)');
+% legend(allTitles{NAll:-1:1});
+% 
+% xlim([-0.8, 0.8]);
+% ylim([0, 16]);
+% 
+% set(fig7, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 0.8, 0.99]);
+% saveas(fig7, '..\paper\img\combined_panel.png');
 
 %% Biodiversity: Chaos vs. non chaos
 fig_biodchaosvsregular = figure;
@@ -197,38 +215,38 @@ set(fig_biodchaosvsregular, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1,
 saveas(fig_biodchaosvsregular, '..\paper\img\biod_chaos_vs_regular.png');
 
 %% Evenness: Chaos vs. non chaos
-fig_evenchaosvsregular = figure;
-for i = 1:numel(allFiles)
-    subplot(2, 5, i);
-    createFigures(allFiles{i}, 'evenchaosvsregular');
-    title('Evenness');
-    legend(allTitles{i});
-end
-
-set(fig_evenchaosvsregular, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_evenchaosvsregular, '..\paper\img\even_chaos_vs_regular.png');
+% fig_evenchaosvsregular = figure;
+% for i = 1:numel(allFiles)
+%     subplot(2, 5, i);
+%     createFigures(allFiles{i}, 'evenchaosvsregular');
+%     title('Evenness');
+%     legend(allTitles{i});
+% end
+% 
+% set(fig_evenchaosvsregular, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% saveas(fig_evenchaosvsregular, '..\paper\img\even_chaos_vs_regular.png');
 
 %% Biodiversity: Box and whisker
 fig9 = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
     createFigures(allFiles{i}, 'biodboxandwhisker');
-    legend(allTitles{i});
+    title(allTitles{i});
 end
 
 set(fig9, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig9, '..\paper\img\biod_box_and_whisker.png');
 
 %% Biodiversity vs. max Lyap
-fig10 = figure;
-for i = 1:numel(allFiles)
-    subplot(2, 5, i);
-    createFigures(allFiles{i}, 'biodvslyap');
-    title(allTitles{i});
-end
-
-set(fig10, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig10, '..\paper\img\biod_vs_lyap.png');
+% fig10 = figure;
+% for i = 1:numel(allFiles)
+%     subplot(2, 5, i);
+%     createFigures(allFiles{i}, 'biodvslyap');
+%     title(allTitles{i});
+% end
+% 
+% set(fig10, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% saveas(fig10, '..\paper\img\biod_vs_lyap.png');
 
 %% Biodiversity: Split in 2
 fig_biodsplitbychaos = figure;
@@ -242,15 +260,15 @@ set(fig_biodsplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0
 saveas(fig_biodsplitbychaos, '..\paper\img\biod_split_by_chaos.png');
 
 %% Evenness: Split in 2
-fig_evensplitbychaos = figure;
-for i = 1:numel(allFiles)
-    subplot(2, 5, i);
-    createFigures(allFiles{i}, 'evensplitbychaos');
-    title(allTitles{i});
-end
-
-set(fig_evensplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_evensplitbychaos, '..\paper\img\even_split_by_chaos.png');
+% fig_evensplitbychaos = figure;
+% for i = 1:numel(allFiles)
+%     subplot(2, 5, i);
+%     createFigures(allFiles{i}, 'evensplitbychaos');
+%     title(allTitles{i});
+% end
+% 
+% set(fig_evensplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% saveas(fig_evensplitbychaos, '..\paper\img\even_split_by_chaos.png');
 
 %% Biodiversity: Split in 2 diff
 fig_biodsplitbychaosdiff = figure;

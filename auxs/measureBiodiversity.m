@@ -15,11 +15,12 @@ for j = 1:cols
     competition_pars(j) = resultsArray{1,j}.competition_par;
     for i = 1:rows
         threshold = 1e-2;
-        [nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c, nSpeciesAlive] = countSpecies(resultsArray{i,j}, threshold, summarize);
+        [nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c, nSpeciesAlive, nPreySpeciesAlive2] = countSpecies(resultsArray{i,j}, threshold, summarize);
         resultsArray{i,j}.biodiversity.nPreySpeciesAlive = nPreySpeciesAlive;
         resultsArray{i,j}.biodiversity.nPredSpeciesAlive = nPredSpeciesAlive;
         resultsArray{i,j}.biodiversity.nPreySpeciesAlive_c = nPreySpeciesAlive_c;
         resultsArray{i,j}.biodiversity.nSpeciesAlive = nSpeciesAlive;
+        resultsArray{i,j}.biodiversity.nPreySpeciesAlive2 = nPreySpeciesAlive2;
         
         evennessAll = evenness(resultsArray{i,j}, 'all', summarize);
         evennessPrey = evenness(resultsArray{i,j}, 'preyonly', summarize);
