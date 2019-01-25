@@ -147,11 +147,10 @@ for i = NAll:-1:1
 end
 title('\fontsize{16} Biodiversity');
 xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} (NPrey_{without predation} - NPrey)');
+ylabel('\fontsize{14} NPrey');
 legend(allTitles{NAll:-1:1});
 
 xlim([-0.8, 0.8]);
-ylim([0, 16]);
 set(fig6, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig6, '..\paper\img\biodiversity.png');
 

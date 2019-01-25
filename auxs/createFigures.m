@@ -263,11 +263,9 @@ switch options
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         count = resultsAsMatrix(resultsArray, 'speciesCount');
         
-        cnt_prey = count(:, :, 2);
-        cnt_prey_c = count(:, :, 4);
-        difference = cnt_prey_c - cnt_prey;
+        cnt_prey2 = count(:, :, 5);
+        difference = cnt_prey2;
         
-        %area(competition_pars, probChaos_using_z1_2, 'FaceColor', [254 127 127]./255);
         area(competition_pars, mean(difference));
         text = sprintf('Prey count \n Case: %s', resultsArray{1,1}.id);
         title(text);

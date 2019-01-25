@@ -64,13 +64,14 @@ switch prompt
         end
         
     case 'speciesCount'
-        output = NaN(nreps, npars, 4);
+        output = NaN(nreps, npars, 5);
         for i = 1:nreps
             for j = 1:npars
                 output(i,j,1) = resultsArray{i, j}.biodiversity.nSpeciesAlive(1);
                 output(i,j,2) = resultsArray{i, j}.biodiversity.nPreySpeciesAlive(1);
                 output(i,j,3) = resultsArray{i, j}.biodiversity.nPredSpeciesAlive(1);
                 output(i,j,4) = resultsArray{i, j}.biodiversity.nPreySpeciesAlive_c(1);
+                output(i,j,5) = resultsArray{i, j}.biodiversity.nPreySpeciesAlive2;
             end
         end
         
