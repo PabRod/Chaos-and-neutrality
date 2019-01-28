@@ -101,8 +101,10 @@ Our target is to estimate the probability of reaching one of such chaotic attrac
 
 Numerical methods were used to integrate each realization of the equation \eqref{eq:SystemUnderStudy}. A first stabilizing run of $ \stabilTime $ days is executed in order to get closer to the attractor. Simulating for $ \simTime $ more days, we obtain trajectories in the vicinity of the attractor.
 
-The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity. We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and section \ref{subsec:ChaosDetection} in the Online Appendix). Using this approach, we classified each individual simulation as \textit{chaotic} or \textit{non-chaotic}.
+The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity. We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and section \ref{subsec:ChaosDetection} in the Online Appendix). Using this approach, we classified each individual simulation as \textit{regular} or \textit{chaotic}.
 
-Additionally, the experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
+Additionally, we used the simulated time series to estimate the number of extinct prey species when the attractor is reached. We considered extinct those species whose population density remained below a threshold of $\bioThreshold$ $mg$ $l^{-1}$ after the stabilization run. The number of non-extinct prey species was used as a biodiversity measure for each individual simulation.
+
+The numerical experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
 In the spirit of reproducible research, we made available the scripts used to obtain our conclusions and generate our figures \citep{Rodriguez-Sanchez-code-neuchaos}.
