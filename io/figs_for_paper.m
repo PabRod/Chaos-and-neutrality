@@ -26,13 +26,16 @@ allTitles = {'2 + 3 species', ...
     '18 + 27 species', ...
     '20 + 30 species'};
 
+bestFile = '10-15p.mat';
+bestTitle = '10 + 15 species';
+
 subFiles = {'4-6p.mat', ...
-    '12-18p.mat', ...
+    '10-15p.mat', ...
     '20-30p.mat'};
 
-subTitles = {'10 species', ...
-    '30 species', ...
-    '50 species'};
+subTitles = {'4 + 6 species', ...
+    '10 + 15 species', ...
+    '20 + 30 species'};
 
 NAll = numel(allFiles);
 NSub = numel(subFiles);
@@ -45,11 +48,71 @@ for i = NSub:-1:1 % Bigger first
     createFigures(file, 'z1'); hold on;
     title('');
 end
-legend(subTitles{3:-1:1});
-xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} Probability of chaos');
+lgd = legend(subTitles{3:-1:1});
+lgd.FontSize = 18;
+xlabel('\fontsize{18} Competition parameter \epsilon');
+ylabel('\fontsize{18} Probability of chaos');
 set(fig1, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig1, '..\paper\img\results.png');
+
+%% Best file
+fig_best = figure;
+
+resultsArrayLight = loadResults(bestFile);
+
+subplot(2, 3, [1, 2]);
+createFigures(resultsArrayLight, 'z12');
+title('A. Probability of chaos');
+xlim([-0.8, 0.8]);
+
+subplot(2, 3, [4, 5]);
+createFigures(resultsArrayLight, 'biodsplitbychaos');
+title('B. Detailed overview of biodiversity');
+lgd = legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'});
+xlim([-0.8, 0.8]);
+
+subplot(2, 3, [6]);
+createFigures(resultsArrayLight, 'biodboxandwhisker');
+title('C. Effect of chaos on biodiversity');
+
+set(fig_best, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_best, '..\paper\img\best.png');
+
+%% Best file 2
+fig_best2 = figure;
+
+resultsArrayLight = loadResults(bestFile);
+nPrey = resultsArrayLight{1,1}.dims(1);
+
+% Probability of chaos
+subplot(1, 4, [1,3]);
+createFigures(resultsArrayLight, 'z12');
+ylabel('Probability of chaos');
+
+% ... add a new axis to the right ...
+yyaxis right;
+ax = gca;
+ax.YColor = 'k';
+
+% ... containing biodiversity information
+createFigures(resultsArrayLight, 'biodsplitbychaos');
+xlim([-0.8, 0.8]);
+ylim([0, nPrey + 1]);
+xlabel('Competition parameter \epsilon');
+ylabel('');
+
+title('A. Effects of the competition parameter');
+legend({'Probability of chaos', 'Biodiversity: regular group', 'Biodiversity: chaotic group', 'Biodiversity: total'});
+
+% Last but not least, box and whisker
+subplot(1, 4, 4);
+createFigures(resultsArrayLight, 'biodboxandwhisker');
+title('B. Effects of chaos on biodiversity');
+ylim([0, nPrey + 1]);
+
+% Save
+set(fig_best2, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.75]);
+saveas(fig_best2, '..\paper\img\best2.png');
 
 %% Main body: biodiversities
 fig_biod = figure;
@@ -91,7 +154,7 @@ for i = 1:NAll
     
     subplot(2, 1, 2);
     createFigures(resultsArrayLight, 'biodsplitbychaos');
-    legend({'With regular dynamics', 'With chaotic dynamics', 'Weighted average'});
+    legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'});
     
     set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
     
@@ -143,7 +206,7 @@ for i = NAll:-1:1
 end
 title('\fontsize{16} Biodiversity');
 xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} NPrey');
+ylabel('\fontsize{14} Non-extinct prey species');
 
 xlim([-0.8, 0.8]);
 set(fig4, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
@@ -221,16 +284,16 @@ saveas(fig5, '..\paper\img\contours_all.png');
 % saveas(fig7, '..\paper\img\combined_panel.png');
 
 %% Biodiversity: Chaos vs. non chaos
-fig_biodchaosvsregular = figure;
-for i = 1:numel(allFiles)
-    subplot(2, 5, i);
-    createFigures(allFiles{i}, 'biodchaosvsregular');
-    title('Biodiversity');
-    legend(allTitles{i});
-end
-
-set(fig_biodchaosvsregular, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_biodchaosvsregular, '..\paper\img\biod_chaos_vs_regular.png');
+% fig_biodchaosvsregular = figure;
+% for i = 1:numel(allFiles)
+%     subplot(2, 5, i);
+%     createFigures(allFiles{i}, 'biodchaosvsregular');
+%     title('Biodiversity');
+%     legend(allTitles{i});
+% end
+% 
+% set(fig_biodchaosvsregular, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% saveas(fig_biodchaosvsregular, '..\paper\img\biod_chaos_vs_regular.png');
 
 %% Evenness: Chaos vs. non chaos
 % fig_evenchaosvsregular = figure;
@@ -273,7 +336,7 @@ for i = 1:numel(allFiles)
     createFigures(allFiles{i}, 'biodsplitbychaos');
     title(allTitles{i});
 end
-legend({'With regular dynamics', 'With chaotic dynamics', 'Weighted average'}, 'Location', 'southeast');
+legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'}, 'Location', 'southeast');
 
 set(fig_biodsplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig_biodsplitbychaos, '..\paper\img\biod_split_by_chaos.png');

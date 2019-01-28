@@ -347,7 +347,8 @@ switch options
         resultsTable = resultsAsTable(resultsArray);        
         boxplot(resultsTable.nPreySpeciesAlive2(:,1), resultsTable.z12);
         
-        xlabel('Chaotic?');
+        xlabel('Dynamics');
+        xticklabels({'Regular', 'Chaotic'})
         ylabel('Prey biodiversity');
         
     case 'biodvslyap'
