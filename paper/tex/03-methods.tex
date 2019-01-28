@@ -65,20 +65,20 @@ We parameterized our model as a freshwater plankton system based on Dakos' model
 		    \hline
 		\end{tabular}}
 	\end{center}
-	\caption{Values and meanings of the parameters used in our numerical experiment. The elements of the predation matrix $S$ are drawn from a uniform probability distribution, bounded between $0$ and $1$.}
+	\caption{Values and meanings of the parameters used in our numerical experiment. The elements of the predation ($S$) and competition ($A$) matrices are drawn from probability distributions described in subsection \ref{subsubsec:CompetitionParameter}.}
 	\label{tab:Parameters}
 \end{table}
 
 \subsubsection{Competition and predation matrices}
 \label{subsubsec:CompetitionParameter}
 
-Our main purpose is to analyze the effect of different competition strengths on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$, whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
+Our main purpose is to analyze the effect of different competition strengths on the long term dynamics exhibited. In order to simulate and quantify this heterogeneity, we introduce the competition parameter $ \epsilon $. This dimensionless parameter was used to build a competition matrix $A$, whose diagonal terms are identically $ 1 $, and whose non-diagonal terms are drawn from a uniform probability distribution centered at $ 1 + \epsilon $ and with a given width (here we chose $ w = 0.2$). Defined this way, the parameter $\epsilon$ allows us to travel continuously from strong intraspecific ($ \epsilon < 0$) to strong interspecific competition ($ \epsilon > 0$), meeting neutral competition near $\epsilon = 0$. For the rest of this paper, we will call \textit{neutral-on-average} those ecosystems with $ \epsilon = 0$ (see figure \ref{fig:CompetitionParameter}).
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{epsilon_all.png}
 	\end{center}
-	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This qualitative property of the competition matrices is controlled by the competition parameter $\epsilon$.}
+	\caption{The competition matrix on the left is a clear case of dominant intraspecific competition. The central one represents a case of neutral-on-average competition. The matrix in the right panel shows a case of dominant interspecific competition. The difference between them is the relative size of the non-diagonal elements respective of the diagonal ones. This property of the competition matrices is controlled by the competition parameter $\epsilon$.}
 	\label{fig:CompetitionParameter}
 \end{figure}
 
@@ -101,10 +101,10 @@ Our target is to estimate the probability of reaching one of such chaotic attrac
 
 Numerical methods were used to integrate each realization of the equation \eqref{eq:SystemUnderStudy}. A first stabilizing run of $ \stabilTime $ days is executed in order to get closer to the attractor. Simulating for $ \simTime $ more days, we obtain trajectories in the vicinity of the attractor.
 
-The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity. We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and section \ref{subsec:ChaosDetection} in the Online Appendix). Using this approach, we classified each individual simulation as \textit{regular} or \textit{chaotic}.
+We considered chaotic those time series that triggered the Gottwald - Melbourne test (see \citet{Gottwald2009} and section \ref{subsec:ChaosDetection} in the Online Appendix). Using this approach, we classified each individual simulation as \textit{regular} or \textit{chaotic}. The ratio of attractors found to be chaotic can be used to estimate the probability of a family of ecosystems to develop chaotic behaviour. Grouping those ecosystems by competition parameter $\epsilon$, we explored the relationship between the probability of chaos and the degree of heterogeneity.
 
 Additionally, we used the simulated time series to estimate the number of extinct prey species when the attractor is reached. We considered extinct those species whose population density remained below a threshold of $\bioThreshold$ $mg$ $l^{-1}$ after the stabilization run. The number of non-extinct prey species was used as a biodiversity measure for each individual simulation.
 
-The numerical experiment was repeated for food webs of different sizes. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
+The numerical experiment was repeated for food webs of different sizes, ranging from $5$ to $50$. In our simulations, we kept a ratio of 2:3 for the number of species at the consumer and the prey level.
 
 In the spirit of reproducible research, we made available the scripts used to obtain our conclusions and generate our figures \citep{Rodriguez-Sanchez-code-neuchaos}.
