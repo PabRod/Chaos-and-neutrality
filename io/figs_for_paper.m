@@ -81,34 +81,7 @@ saveas(fig_best, '..\paper\img\best.png');
 %% Best file 2
 fig_best2 = figure;
 
-resultsArrayLight = loadResults(bestFile);
-nPrey = resultsArrayLight{1,1}.dims(1);
-
-% Probability of chaos
-subplot(1, 4, [1,3]);
-createFigures(resultsArrayLight, 'z12');
-ylabel('Probability of chaos');
-
-% ... add a new axis to the right ...
-yyaxis right;
-ax = gca;
-ax.YColor = 'k';
-
-% ... containing biodiversity information
-createFigures(resultsArrayLight, 'biodsplitbychaos');
-xlim([-0.8, 0.8]);
-ylim([0, nPrey + 1]);
-xlabel('Competition parameter \epsilon');
-ylabel('');
-
-title('A. Effects of the competition parameter');
-legend({'Probability of chaos', 'Biodiversity: regular group', 'Biodiversity: chaotic group', 'Biodiversity: total'});
-
-% Last but not least, box and whisker
-subplot(1, 4, 4);
-createFigures(resultsArrayLight, 'biodboxandwhisker');
-title('B. Effects of chaos on biodiversity');
-ylim([0, nPrey + 1]);
+createFigures(resultsArrayLight, 'summarymerged');
 
 % Save
 set(fig_best2, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.75]);
@@ -149,14 +122,9 @@ for i = 1:NAll
     resultsArrayLight = loadResults(file);
     
     fig_conclusions_temp = figure;
-    subplot(2, 1, 1);
-    createFigures(resultsArrayLight, 'z12');
     
-    subplot(2, 1, 2);
-    createFigures(resultsArrayLight, 'biodsplitbychaos');
-    legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'});
-    
-    set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+    createFigures(resultsArrayLight, 'summarymerged');
+    set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.75]);
     
     name = resultsArrayLight{1,1}.id;
     filename = char(strcat('..\paper\img\', name, '.png'));

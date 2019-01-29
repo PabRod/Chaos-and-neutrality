@@ -351,6 +351,35 @@ switch options
         xticklabels({'Regular', 'Chaotic'})
         ylabel('Prey biodiversity');
         
+    case 'summarymerged'
+        nPrey = resultsArray{1,1}.dims(1);
+        
+        % Probability of chaos
+        subplot(1, 4, [1,3]);
+        createFigures(resultsArray, 'z12');
+        ylabel('Probability of chaos');
+        
+        % ... add a new axis to the right ...
+        yyaxis right;
+        ax = gca;
+        ax.YColor = 'k';
+        
+        % ... containing biodiversity information
+        createFigures(resultsArray, 'biodsplitbychaos');
+        xlim([-0.8, 0.8]);
+        ylim([0, nPrey + 1]);
+        xlabel('Competition parameter \epsilon');
+        ylabel('');
+        
+        title('A. Effects of the competition parameter');
+        legend({'Probability of chaos', 'Biodiversity: regular group', 'Biodiversity: chaotic group', 'Biodiversity: total'});
+        
+        % Last but not least, box and whisker
+        subplot(1, 4, 4);
+        createFigures(resultsArray, 'biodboxandwhisker');
+        title('B. Effects of chaos on biodiversity');
+        ylim([0, nPrey + 1]);
+        
     case 'biodvslyap'
         resultsTable = resultsAsTable(resultsArray);
         
