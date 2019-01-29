@@ -14,11 +14,25 @@ counter = 1;
 for j = 1:cols
     competition_pars(j) = resultsArray{1,j}.competition_par;
     for i = 1:rows
-        % Run different tests for chaos
-        resultsArray{i,j}.chaosTests.lyapunov = isChaos(resultsArray{i,j}, 'lyapunov');
-        resultsArray{i,j}.chaosTests.z1 = isChaos(resultsArray{i,j}, 'z1');
-        resultsArray{i,j}.chaosTests.z12 = isChaos(resultsArray{i,j}, 'z12');
-        resultsArray{i,j}.chaosTests.constant = isStable(resultsArray{i,j}.timeseries.ys);
+        % Check stability
+        ys = resultsArray{i,j}.timeseries.ys;
+        nsteps = size(ys, 1);
+        ys_subset = ys(round(2*nsteps/3):end ,:); % Use only the last 2/3 of the time series
+        stable = isStable(ys_subset);
+        resultsArray{i,j}.chaosTests.isstable = stable;
+        
+        if(stable)
+            % If is stable, it cannot be chaotic
+            resultsArray{i,j}.chaosTests.lyapunov = false;
+            resultsArray{i,j}.chaosTests.z1 = false;
+            resultsArray{i,j}.chaosTests.z12 = false;
+        else
+            % Run different tests for chaos
+            resultsArray{i,j}.chaosTests.lyapunov = isChaos(resultsArray{i,j}, 'lyapunov');
+            resultsArray{i,j}.chaosTests.z1 = isChaos(resultsArray{i,j}, 'z1');
+            resultsArray{i,j}.chaosTests.z12 = isChaos(resultsArray{i,j}, 'z12');
+        end
+        
         counter = counter + 1;
 
     end
