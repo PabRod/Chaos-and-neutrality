@@ -33,6 +33,8 @@ for j = 1:cols
             resultsArray{i,j}.chaosTests.z12 = isChaos(resultsArray{i,j}, 'z12');
         end
         
+        resultsArray{i,j}.chaosTests.dynamics = decideDynamics(resultsArray{i,j});
+        
         counter = counter + 1;
 
     end
@@ -41,4 +43,14 @@ end
 %% Update results
 updatedResults = resultsArray;
 
+end
+
+function dyn = decideDynamics(result)
+    if result.chaosTests.isstable
+        dyn = string('stable');
+    elseif result.chaosTests.z12
+        dyn = string('chaotic');
+    else
+        dyn = string('cyclic');
+    end
 end
