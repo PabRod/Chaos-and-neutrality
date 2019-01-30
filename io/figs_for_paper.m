@@ -179,7 +179,6 @@ end
 
 %% Appendix: all slices 2
 fig4 = figure;
-subplot(2, 1, 1);
 for i = NAll:-1:1 % Bigger first
     file = allFiles{i};
     
@@ -190,16 +189,6 @@ end
 title('\fontsize{16} Probability of chaos');
 ylabel('\fontsize{14} Probability of chaos');
 legend(allTitles{NAll:-1:1});
-
-subplot(2, 1, 2);
-for i = NAll:-1:1
-    file = allFiles{i};
-    
-    createFigures(file, 'preyCount'); hold on;
-end
-title('\fontsize{16} Biodiversity');
-xlabel('\fontsize{14} Competition parameter \epsilon');
-ylabel('\fontsize{14} Non-extinct prey species');
 
 xlim([-0.8, 0.8]);
 set(fig4, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
@@ -339,6 +328,7 @@ fig_biodsplitbydynamics = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
     createFigures(allFiles{i}, 'biodsplitbydynamics');
+    legend('off');
     title(allTitles{i});
 end
 legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'}, 'Location', 'southeast');
