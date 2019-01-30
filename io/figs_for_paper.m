@@ -26,8 +26,8 @@ allTitles = {'2 + 3 species', ...
     '18 + 27 species', ...
     '20 + 30 species'};
 
-bestFile = '10-15p.mat';
-bestTitle = '10 + 15 species';
+bestFile = '8-12p.mat';
+bestTitle = '8 + 12 species';
 
 subFiles = {'4-6p.mat', ...
     '10-15p.mat', ...
@@ -61,14 +61,13 @@ fig_best = figure;
 resultsArrayLight = loadResults(bestFile);
 
 subplot(2, 3, [1, 2]);
-createFigures(resultsArrayLight, 'z12');
+createFigures(resultsArrayLight, 'dynamics');
 title('A. Probability of chaos');
 xlim([-0.8, 0.8]);
 
 subplot(2, 3, [4, 5]);
-createFigures(resultsArrayLight, 'biodsplitbychaos');
+createFigures(resultsArrayLight, 'biodsplitbydynamics');
 title('B. Detailed overview of biodiversity');
-lgd = legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'});
 xlim([-0.8, 0.8]);
 
 subplot(2, 3, [6]);
@@ -80,6 +79,8 @@ saveas(fig_best, '..\paper\img\best.png');
 
 %% Best file 2
 fig_best2 = figure;
+
+resultsArrayLight = loadResults(bestFile);
 
 createFigures(resultsArrayLight, 'summarymerged');
 
@@ -298,16 +299,28 @@ saveas(fig9, '..\paper\img\biod_box_and_whisker.png');
 % saveas(fig10, '..\paper\img\biod_vs_lyap.png');
 
 %% Biodiversity: Split in 2
-fig_biodsplitbychaos = figure;
+% fig_biodsplitbychaos = figure;
+% for i = 1:numel(allFiles)
+%     subplot(2, 5, i);
+%     createFigures(allFiles{i}, 'biodsplitbychaos');
+%     title(allTitles{i});
+% end
+% legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'}, 'Location', 'southeast');
+% 
+% set(fig_biodsplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% saveas(fig_biodsplitbychaos, '..\paper\img\biod_split_by_chaos.png');
+
+%% Biodiversity: Split in 3
+fig_biodsplitbydynamics = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
-    createFigures(allFiles{i}, 'biodsplitbychaos');
+    createFigures(allFiles{i}, 'biodsplitbydynamics');
     title(allTitles{i});
 end
 legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'}, 'Location', 'southeast');
 
-set(fig_biodsplitbychaos, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_biodsplitbychaos, '..\paper\img\biod_split_by_chaos.png');
+set(fig_biodsplitbydynamics, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_biodsplitbydynamics, '..\paper\img\biod_split_by_dynamics.png');
 
 %% Evenness: Split in 2
 % fig_evensplitbychaos = figure;
@@ -321,12 +334,12 @@ saveas(fig_biodsplitbychaos, '..\paper\img\biod_split_by_chaos.png');
 % saveas(fig_evensplitbychaos, '..\paper\img\even_split_by_chaos.png');
 
 %% Biodiversity: Split in 2 diff
-fig_biodsplitbychaosdiff = figure;
-for i = 1:numel(allFiles)
-    subplot(2, 5, i);
-    createFigures(allFiles{i}, 'biodsplitbychaosdiff');
-    title(allTitles{i});
-end
-
-set(fig_biodsplitbychaosdiff, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_biodsplitbychaosdiff, '..\paper\img\biod_split_by_chaos_diff.png');
+% fig_biodsplitbychaosdiff = figure;
+% for i = 1:numel(allFiles)
+%     subplot(2, 5, i);
+%     createFigures(allFiles{i}, 'biodsplitbychaosdiff');
+%     title(allTitles{i});
+% end
+% 
+% set(fig_biodsplitbychaosdiff, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% saveas(fig_biodsplitbychaosdiff, '..\paper\img\biod_split_by_chaos_diff.png');
