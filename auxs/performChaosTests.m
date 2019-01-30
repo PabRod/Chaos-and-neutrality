@@ -47,10 +47,10 @@ end
 
 function dyn = decideDynamics(result)
     if result.chaosTests.isstable
-        dyn = string('stable');
+        dyn = "stable";
     elseif result.chaosTests.z12
-        dyn = string('chaotic');
+        dyn = "chaotic";
     else
-        dyn = string('cyclic');
+        dyn = "cyclic";
     end
 end
