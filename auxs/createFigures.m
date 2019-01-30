@@ -432,15 +432,15 @@ switch options
             subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
             n_reps = height(subset);
             
-            subset_stable = subset(subset.dynamics == "stable", :);
+            subset_stable = subset(subset.dynamics == string('stable'), :);
             n_stable = height(subset_stable);
             ratio_stable(i) = n_stable/n_reps;
             
-            subset_cyclic = subset(subset.dynamics == "cyclic", :);
+            subset_cyclic = subset(subset.dynamics == string('cyclic'), :);
             n_cyclic = height(subset_cyclic);
             ratio_cyclic(i) = n_cyclic/n_reps;
             
-            subset_chaotic = subset(subset.dynamics == "chaotic", :);
+            subset_chaotic = subset(subset.dynamics == string('chaotic'), :);
             n_chaotic = height(subset_chaotic);
             ratio_chaotic(i) = n_chaotic/n_reps;
             
@@ -473,17 +473,17 @@ switch options
             biod(i) = mean(subset.nPreySpeciesAlive2(:, 1));
             n_reps = height(subset);
             
-            subset_stable = subset(subset.dynamics == "stable", :);
+            subset_stable = subset(subset.dynamics == string('stable'), :);
             biod_stable(i) = mean(subset_stable.nPreySpeciesAlive2(:, 1));
             n_stable = height(subset_stable);
             ratio_stable(i) = n_stable/n_reps;
             
-            subset_cyclic = subset(subset.dynamics == "cyclic", :);
+            subset_cyclic = subset(subset.dynamics == string('cyclic'), :);
             biod_cyclic(i) = mean(subset_cyclic.nPreySpeciesAlive2(:, 1));
             n_cyclic = height(subset_cyclic);
             ratio_cyclic(i) = n_cyclic/n_reps;
             
-            subset_chaotic = subset(subset.dynamics == "chaotic", :);
+            subset_chaotic = subset(subset.dynamics == string('chaotic'), :);
             biod_chaotic(i) = mean(subset_chaotic.nPreySpeciesAlive2(:, 1));
             n_chaotic = height(subset_chaotic);
             ratio_chaotic(i) = n_chaotic/n_reps;
