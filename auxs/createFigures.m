@@ -345,10 +345,9 @@ switch options
         
     case 'biodboxandwhisker'
         resultsTable = resultsAsTable(resultsArray);        
-        boxplot(resultsTable.nPreySpeciesAlive2(:,1), resultsTable.z12);
+        boxplot(resultsTable.nPreySpeciesAlive2(:,1), resultsTable.dynamics);
         
         xlabel('Dynamics');
-        xticklabels({'Regular', 'Chaotic'})
         ylabel('Prey biodiversity');
         
     case 'summarymerged'
