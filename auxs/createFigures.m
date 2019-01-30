@@ -502,6 +502,146 @@ switch options
         ylabel('Biodiversity');
         xlim([-0.8 0.8]);
         
+    case 'biomasssplitbydynamics'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        resultsTable = resultsAsTable(resultsArray);
+        
+        biomass = NaN(1, npars); sd = NaN(1, npars);
+        biomass_stable = NaN(1, npars); ratio_stable = NaN(1, npars);
+        biomass_cyclic = NaN(1, npars); ratio_cyclic = NaN(1, npars);
+        biomass_chaotic = NaN(1, npars); ratio_chaotic = NaN(1, npars);
+        for i = 1:npars
+            % Filtering process
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            biomass(i) = mean(subset.preyBiomass(:, 1));
+            n_reps = height(subset);
+            
+            subset_stable = subset(subset.dynamics == string('stable'), :);
+            biomass_stable(i) = mean(subset_stable.preyBiomass(:, 1));
+            sd(i) = mean(subset_stable.preyBiomass(:, 2));
+            n_stable = height(subset_stable);
+            ratio_stable(i) = n_stable/n_reps;
+            
+            subset_cyclic = subset(subset.dynamics == string('cyclic'), :);
+            biomass_cyclic(i) = mean(subset_cyclic.preyBiomass(:, 1));
+            n_cyclic = height(subset_cyclic);
+            ratio_cyclic(i) = n_cyclic/n_reps;
+            
+            subset_chaotic = subset(subset.dynamics == string('chaotic'), :);
+            biomass_chaotic(i) = mean(subset_chaotic.preyBiomass(:, 1));
+            n_chaotic = height(subset_chaotic);
+            ratio_chaotic(i) = n_chaotic/n_reps;
+            
+        end
+        
+        scatter(competition_pars, biomass_stable, 100.*ratio_stable + 0.01, [0, 0.4470, 0.7410], 'filled');
+        hold on;
+        scatter(competition_pars, biomass_cyclic, 100.*ratio_cyclic  + 0.01, [0.8500, 0.3250, 0.0980], 'filled');
+        scatter(competition_pars, biomass_chaotic, 100.*ratio_chaotic  + 0.01, [0.9290, 0.6940, 0.1250], 'filled');
+        plot(competition_pars, biomass, 'Color', 'k', 'LineStyle', '--');
+        
+        errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', 'k');
+        
+        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total', 'SD'});
+        
+        title('Prey biomass');
+        xlabel('Competition parameter');
+        ylabel('Biomass');
+        xlim([-0.8 0.8]);
+        
+    case 'predbiomasssplitbydynamics'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        resultsTable = resultsAsTable(resultsArray);
+        
+        biomass = NaN(1, npars); sd = NaN(1, npars);
+        biomass_stable = NaN(1, npars); stable_sd = NaN(1, npars); ratio_stable = NaN(1, npars);
+        biomass_cyclic = NaN(1, npars); cyclic_sd = NaN(1, npars); ratio_cyclic = NaN(1, npars);
+        biomass_chaotic = NaN(1, npars); chaotic_sd = NaN(1, npars); ratio_chaotic = NaN(1, npars);
+        for i = 1:npars
+            % Filtering process
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            biomass(i) = mean(subset.predBiomass(:, 1));
+            sd(i) = mean(subset.predBiomass(:, 2));
+            n_reps = height(subset);
+            
+            subset_stable = subset(subset.dynamics == string('stable'), :);
+            biomass_stable(i) = mean(subset_stable.predBiomass(:, 1));
+            stable_sd(i) = mean(subset_stable.predBiomass(:, 2));
+            n_stable = height(subset_stable);
+            ratio_stable(i) = n_stable/n_reps;
+            
+            subset_cyclic = subset(subset.dynamics == string('cyclic'), :);
+            biomass_cyclic(i) = mean(subset_cyclic.predBiomass(:, 1));
+            cyclic_sd(i) = mean(subset_cyclic.predBiomass(:, 2));
+            n_cyclic = height(subset_cyclic);
+            ratio_cyclic(i) = n_cyclic/n_reps;
+            
+            subset_chaotic = subset(subset.dynamics == string('chaotic'), :);
+            biomass_chaotic(i) = mean(subset_chaotic.predBiomass(:, 1));
+            chaotic_sd(i) = mean(subset_chaotic.predBiomass(:, 2));
+            n_chaotic = height(subset_chaotic);
+            ratio_chaotic(i) = n_chaotic/n_reps;
+            
+        end
+        
+        scatter(competition_pars, biomass_stable, 100.*ratio_stable + 0.01, [0, 0.4470, 0.7410], 'filled');
+        hold on;
+        scatter(competition_pars, biomass_cyclic, 100.*ratio_cyclic  + 0.01, [0.8500, 0.3250, 0.0980], 'filled');
+        scatter(competition_pars, biomass_chaotic, 100.*ratio_chaotic  + 0.01, [0.9290, 0.6940, 0.1250], 'filled');
+        plot(competition_pars, biomass, 'Color', 'k', 'LineStyle', '--');
+        errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', 'k');
+        
+        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total', 'SD'});
+        
+        title('Predator biomass');
+        xlabel('Competition parameter');
+        ylabel('Biomass');
+        xlim([-0.8 0.8]);
+       
+    case 'predsplitbydynamics'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        resultsTable = resultsAsTable(resultsArray);
+        
+        biod = NaN(1, npars);
+        biod_stable = NaN(1, npars); ratio_stable = NaN(1, npars);
+        biod_cyclic = NaN(1, npars); ratio_cyclic = NaN(1, npars);
+        biod_chaotic = NaN(1, npars); ratio_chaotic = NaN(1, npars);
+        for i = 1:npars
+            % Filtering process
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            biod(i) = mean(subset.nPredSpeciesAlive2(:, 1));
+            n_reps = height(subset);
+            
+            subset_stable = subset(subset.dynamics == string('stable'), :);
+            biod_stable(i) = mean(subset_stable.nPredSpeciesAlive2(:, 1));
+            n_stable = height(subset_stable);
+            ratio_stable(i) = n_stable/n_reps;
+            
+            subset_cyclic = subset(subset.dynamics == string('cyclic'), :);
+            biod_cyclic(i) = mean(subset_cyclic.nPredSpeciesAlive2(:, 1));
+            n_cyclic = height(subset_cyclic);
+            ratio_cyclic(i) = n_cyclic/n_reps;
+            
+            subset_chaotic = subset(subset.dynamics == string('chaotic'), :);
+            biod_chaotic(i) = mean(subset_chaotic.nPredSpeciesAlive2(:, 1));
+            n_chaotic = height(subset_chaotic);
+            ratio_chaotic(i) = n_chaotic/n_reps;
+            
+        end
+        
+        scatter(competition_pars, biod_stable, 100.*ratio_stable + 0.01, [0, 0.4470, 0.7410], 'filled');
+        hold on;
+        scatter(competition_pars, biod_cyclic, 100.*ratio_cyclic  + 0.01, [0.8500, 0.3250, 0.0980], 'filled');
+        scatter(competition_pars, biod_chaotic, 100.*ratio_chaotic  + 0.01, [0.9290, 0.6940, 0.1250], 'filled');
+        plot(competition_pars, biod, 'Color', 'k', 'LineStyle', '--');
+        
+        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total'});
+        
+        title('Predator biodiversity');
+        xlabel('Competition parameter');
+        ylabel('Biodiversity');
+        xlim([-0.8 0.8]);
+        
     case 'biodsplitbychaosdiff'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         nprey = resultsArray{1,1}.dims(1);
