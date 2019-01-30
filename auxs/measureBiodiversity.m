@@ -4,7 +4,7 @@ function updatedResults = measureBiodiversity(resultsArrayLocation, summarize)
 %% Load results
 resultsArray = loadResults(resultsArrayLocation);
 
-%% Charachterize chaos using different tests
+%% Measure biodiversity using different criterions
 % Pre-allocate containers
 [rows, cols] = size(resultsArray);
 N = rows.*cols;
@@ -14,14 +14,31 @@ counter = 1;
 for j = 1:cols
     competition_pars(j) = resultsArray{1,j}.competition_par;
     for i = 1:rows
-        threshold = 1e-2;
-        [nPreySpeciesAlive, nPredSpeciesAlive, nPreySpeciesAlive_c, nSpeciesAlive, nPreySpeciesAlive2] = countSpecies(resultsArray{i,j}, threshold, summarize);
-        resultsArray{i,j}.biodiversity.nPreySpeciesAlive = nPreySpeciesAlive;
-        resultsArray{i,j}.biodiversity.nPredSpeciesAlive = nPredSpeciesAlive;
-        resultsArray{i,j}.biodiversity.nPreySpeciesAlive_c = nPreySpeciesAlive_c;
-        resultsArray{i,j}.biodiversity.nSpeciesAlive = nSpeciesAlive;
-        resultsArray{i,j}.biodiversity.nPreySpeciesAlive2 = nPreySpeciesAlive2;
+        % Extract and measure current result
+        result = resultsArray{i,j};
+        nPrey = result.dims(1);
+        nPred = result.dims(2);
         
+        % Extract time series
+        ys = result.timeseries.ys;
+        ysPrey = ys(:, 1:nPrey);
+        ysPred = ys(:, nPrey+1:nPrey+nPred);
+        
+        % Measure biodiversity
+        % Number of non extinct species
+        threshold = 1e-2;
+        resultsArray{i,j}.biodiversity.nPreySpeciesAlive2 = countNonExtinct(ysPrey, threshold);
+        resultsArray{i,j}.biodiversity.nPredSpeciesAlive2 = countNonExtinct(ysPred, threshold);
+        resultsArray{i,j}.biodiversity.nSpeciesAlive2 = resultsArray{i,j}.biodiversity.nPreySpeciesAlive2 + ...
+                                                        resultsArray{i,j}.biodiversity.nPredSpeciesAlive2;
+                                       
+        % Mean biomass
+        resultsArray{i,j}.biodiversity.preyBiomass = [sum(mean(ysPrey)), mean(std(ysPrey))];
+        resultsArray{i,j}.biodiversity.predBiomass = [sum(mean(ysPred)), mean(std(ysPrey))];
+        resultsArray{i,j}.biodiversity.biomass = resultsArray{i,j}.biodiversity.preyBiomass + ...
+                                                 resultsArray{i,j}.biodiversity.predBiomass;
+                      
+        % Evenness
         evennessAll = evenness(resultsArray{i,j}, 'all', summarize);
         evennessPrey = evenness(resultsArray{i,j}, 'preyonly', summarize);
         evennessPrey_c = evenness(resultsArray{i,j}, 'preyonly_c', summarize);
@@ -38,4 +55,9 @@ end
 %% Update results
 updatedResults = resultsArray;
 
+end
+
+function ns = countNonExtinct(ys, threshold)
+    nTot = size(ys, 2); % Time goes row-wise, specie goes column-wise
+    ns = nTot - sum(all(ys <= threshold));
 end

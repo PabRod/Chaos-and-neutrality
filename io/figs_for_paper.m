@@ -62,7 +62,7 @@ resultsArrayLight = loadResults(bestFile);
 
 subplot(2, 3, [1, 2]);
 createFigures(resultsArrayLight, 'dynamics');
-title('A. Probability of chaos');
+title('A. Long-term dynamics');
 xlim([-0.8, 0.8]);
 
 subplot(2, 3, [4, 5]);
