@@ -445,10 +445,10 @@ switch options
             
         end
        
-        plot(competition_pars, ratio_stable, 'LineWidth', 2);
+        area(competition_pars, ratio_chaotic + ratio_cyclic + ratio_stable);
         hold on;
-        plot(competition_pars, ratio_cyclic, 'LineWidth', 2);
-        plot(competition_pars, ratio_chaotic, 'LineWidth', 2);
+        area(competition_pars, ratio_chaotic + ratio_cyclic);
+        area(competition_pars, ratio_chaotic);
         
         legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics'});
         
