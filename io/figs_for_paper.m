@@ -65,7 +65,7 @@ saveas(fig_best, '..\paper\img\best.png');
 %% Best 2
 fig_best_2 = figure;
 
-% resultsArrayLight = loadResults(bestFile);
+resultsArrayLight = loadResults(bestFile);
 
 subplot(2, 2, 1);
 createFigures(resultsArrayLight, 'biodsplitbydynamics');
@@ -83,8 +83,8 @@ legend('off');
 subplot(2, 2, 4);
 createFigures(resultsArrayLight, 'predbiomasssplitbydynamics');
 
-set(fig_best, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_best, '..\paper\img\best2.png');
+set(fig_best_2, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_best_2, '..\paper\img\best2.png');
 
 %% Main body: slices
 fig1 = figure;
@@ -113,23 +113,23 @@ saveas(fig1, '..\paper\img\results.png');
 % saveas(fig_best2, '..\paper\img\best2.png');
 
 %% Main body: biodiversities
-fig_biod = figure;
-for i = 1:NSub
-    file = subFiles{i};
-    
-    subplot(3, 1, i);
-    createFigures(file, 'biodsplitbychaos'); hold on;
-    xlabel('');
-    if(i == 2)
-        ylabel('\fontsize{14} Biodiversity');
-    else
-        ylabel('');
-    end
-    title(subTitles{i});
-end
-xlabel('\fontsize{14} Competition parameter \epsilon');
-set(fig_biod, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_biod, '..\paper\img\results_biod.png');
+% fig_biod = figure;
+% for i = 1:NSub
+%     file = subFiles{i};
+%     
+%     subplot(3, 1, i);
+%     createFigures(file, 'biodsplitbychaos'); hold on;
+%     xlabel('');
+%     if(i == 2)
+%         ylabel('\fontsize{14} Biodiversity');
+%     else
+%         ylabel('');
+%     end
+%     title(subTitles{i});
+% end
+% xlabel('\fontsize{14} Competition parameter \epsilon');
+% set(fig_biod, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+% saveas(fig_biod, '..\paper\img\results_biod.png');
 
 %% Main body: Contour plot
 fig2 = figure;
@@ -142,19 +142,19 @@ set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig2, '..\paper\img\contour.png');
 
 %% Main figures (individual)
-for i = 1:NAll
-    file = allFiles{i};
-    resultsArrayLight = loadResults(file);
-    
-    fig_conclusions_temp = figure;
-    
-    createFigures(resultsArrayLight, 'summarymerged');
-    set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.75]);
-    
-    name = resultsArrayLight{1,1}.id;
-    filename = char(strcat('..\paper\img\', name, '.png'));
-    saveas(fig_conclusions_temp, filename);
-end
+% for i = 1:NAll
+%     file = allFiles{i};
+%     resultsArrayLight = loadResults(file);
+%     
+%     fig_conclusions_temp = figure;
+%     
+%     createFigures(resultsArrayLight, 'summarymerged');
+%     set(fig_conclusions_temp, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.75]);
+%     
+%     name = resultsArrayLight{1,1}.id;
+%     filename = char(strcat('..\paper\img\', name, '.png'));
+%     saveas(fig_conclusions_temp, filename);
+% end
 
 %% Appendix: All slices
 % fig3 = figure;

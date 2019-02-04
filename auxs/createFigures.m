@@ -344,8 +344,12 @@ switch options
         ylabel('For non chaotic cases');
         
     case 'biodboxandwhisker'
-        resultsTable = resultsAsTable(resultsArray);        
-        boxplot(resultsTable.nPreySpeciesAlive2(:,1), resultsTable.dynamics);
+        resultsTable = resultsAsTable(resultsArray);
+        resultsTable.aux = dynIntoNumber(resultsTable.dynamics);
+        boxplot(resultsTable.nPreySpeciesAlive2(:,1), resultsTable.aux, ... 
+                'Labels', {'stable', 'cyclic', 'chaotic'}, ...
+                'Colors', [stableCol; cyclicCol; chaoticCol], ...
+                'BoxStyle', 'filled');
         
         xlabel('Dynamics');
         ylabel('Prey biodiversity');
@@ -737,5 +741,17 @@ function [biod_stable, biod_cyclic, biod_chaos] = biodByDynamics(subsetStable, s
 biod_stable = mean(subsetStable.nPreySpeciesAlive2(:, 1)); % Second column contains standard deviations
 biod_cyclic = mean(subsetCyclic.nPreySpeciesAlive2(:, 1)); % Second column contains standard deviations
 biod_chaos = mean(subsetChaotic.nPreySpeciesAlive2(:, 1)); % Second column contains standard deviations
+
+end
+
+function num = dynIntoNumber(dyn)
+%DYNTONUMBER Translates the string containing the dynamics into a number
+%
+% For some reason, BOXPLOT doesn't allow to choose easily the order of the
+% boxes. This is a trick to force the order to be stable, cyclic, chaotic
+
+num = 0.*(dyn == string('stable')) + ...
+      1.*(dyn == string('cyclic')) + ...
+      2.*(dyn == string('chaotic'));
 
 end
