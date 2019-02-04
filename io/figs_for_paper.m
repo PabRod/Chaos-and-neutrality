@@ -55,9 +55,16 @@ createFigures(resultsArrayLight, 'biodsplitbydynamics');
 title('B. Detailed overview of prey biodiversity');
 xlim([-0.8, 0.8]);
 
-subplot(2, 3, [6]);
+subplot(2, 3, [3]);
 createFigures(resultsArrayLight, 'biodboxandwhisker');
 title('C. Effect of chaos on biodiversity');
+
+subplot(2, 3, [6]);
+createFigures(resultsArrayLight, 'biomass');
+hold on;
+createFigures(resultsArrayLight, 'predbiomass');
+title('D. Biomasses');
+legend({'Prey', 'Predators'});
 
 set(fig_best, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig_best, '..\paper\img\best.png');
@@ -85,6 +92,54 @@ createFigures(resultsArrayLight, 'predbiomasssplitbydynamics');
 
 set(fig_best_2, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig_best_2, '..\paper\img\best2.png');
+
+%% Best 3
+fig_best_3 = figure;
+
+resultsArrayLight = loadResults(bestFile);
+
+subplot(2, 2, 1);
+createFigures(resultsArrayLight, 'biodsplitbydynamics');
+title('Prey biodiversity');
+legend('off');
+
+subplot(2, 2, 2);
+createFigures(resultsArrayLight, 'biomass');
+legend('off');
+
+subplot(2, 2, 3);
+createFigures(resultsArrayLight, 'predsplitbydynamics');
+legend('off');
+
+subplot(2, 2, 4);
+createFigures(resultsArrayLight, 'predbiomass');
+
+set(fig_best_3, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_best_3, '..\paper\img\best3.png');
+
+%% Best 4
+fig_best_4 = figure;
+
+resultsArrayLight = loadResults(bestFile);
+
+subplot(3, 1, 1);
+createFigures(resultsArrayLight, 'biodsplitbydynamics');
+title('Prey biodiversity');
+legend('off');
+
+subplot(3, 1, 2);
+createFigures(resultsArrayLight, 'predsplitbydynamics');
+legend({'Group: stable', 'Group: cyclic', 'Group: chaotic', 'Total'});
+
+subplot(3, 1, 3);
+createFigures(resultsArrayLight, 'biomass');
+hold on;
+createFigures(resultsArrayLight, 'predbiomass');
+title('Biomasses');
+legend({'Prey', 'Predators'});
+
+set(fig_best_4, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_best_4, '..\paper\img\best3.png');
 
 %% Main body: slices
 fig1 = figure;

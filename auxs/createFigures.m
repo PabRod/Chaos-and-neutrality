@@ -38,6 +38,8 @@ N = nreps.*npars;
 %% Load aesthetic common settings
 
 % Colors
+preyCol = [50,205,50]./255; % For prey summaries
+predCol = 'r'; % For predator summaries
 stableCol = [0, 0.4470, 0.7410]; % For stable attractor cases
 cyclicCol = [0.8500, 0.3250, 0.0980]; % For cyclic attractor cases
 chaoticCol = [0.9290, 0.6940, 0.1250]; % For chaotic attractor cases
@@ -456,10 +458,10 @@ switch options
             
         end
        
-        area(competition_pars, ratio_chaotic + ratio_cyclic + ratio_stable);
+        area(competition_pars, ratio_chaotic + ratio_cyclic + ratio_stable, 'EdgeAlpha', 0);
         hold on;
-        area(competition_pars, ratio_chaotic + ratio_cyclic);
-        area(competition_pars, ratio_chaotic);
+        area(competition_pars, ratio_chaotic + ratio_cyclic, 'EdgeAlpha', 0);
+        area(competition_pars, ratio_chaotic, 'EdgeAlpha', 0);
         
         legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics'});
         
@@ -513,6 +515,28 @@ switch options
         ylabel('Biodiversity');
         xlim([-0.8 0.8]);
         
+    case 'biomass'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        resultsTable = resultsAsTable(resultsArray);
+        
+        biomass = NaN(1, npars); 
+        sd = NaN(1, npars);
+        for i = 1:npars
+            % Filtering process
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            biomass(i) = mean(subset.preyBiomass(:, 1));
+            sd(i) = mean(subset.preyBiomass(:, 2));
+        end
+        
+        plot(competition_pars, biomass, 'Color', preyCol, 'LineStyle', '--');
+        hold on;
+        errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', preyCol, 'HandleVisibility', 'off');
+        
+        title('Prey biomass');
+        xlabel('Competition parameter');
+        ylabel('Biomass');
+        xlim([-0.8 0.8]);
+        
     case 'biomasssplitbydynamics'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
         resultsTable = resultsAsTable(resultsArray);
@@ -556,6 +580,27 @@ switch options
         legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total', 'SD'});
         
         title('Prey biomass');
+        xlabel('Competition parameter');
+        ylabel('Biomass');
+        xlim([-0.8 0.8]);
+        
+    case 'predbiomass'
+        competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
+        resultsTable = resultsAsTable(resultsArray);
+        
+        biomass = NaN(1, npars); 
+        sd = NaN(1, npars);
+        for i = 1:npars
+            subset = resultsTable(resultsTable.competition_par == competition_pars(i), :);
+            biomass(i) = mean(subset.predBiomass(:, 1));
+            sd(i) = mean(subset.predBiomass(:, 2));            
+        end
+        
+        plot(competition_pars, biomass, 'Color', predCol, 'LineStyle', '--');
+        hold on;
+        errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', predCol, 'HandleVisibility', 'off');
+        
+        title('Predator biomass');
         xlabel('Competition parameter');
         ylabel('Biomass');
         xlim([-0.8 0.8]);
