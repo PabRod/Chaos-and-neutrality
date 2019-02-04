@@ -1,5 +1,5 @@
 sep=;
-id;active;nPreys;nPreds;r;K;g;f;e;H;l;simTime;stabilTime;steps;lyapTime;lyapPert;reps;compPars;seed;results_folder;timeseries_folder
-first;false;6;4;0.5;10;0.4;1e-5;0.6;2;0.15;1000;1000;3000;100;1e-8;50;-1 0.1 0 0.25 1;1;io/;io/
-second;false;5;3;0.5;10;0.4;1e-5;0.6;2;0.15;2000;2500;2000;150;0.01;3;-1 0.1 0 0.2 1;1;io/;io/ts/
-test_job;true;5;3;0.5;10;0.4;1e-5;0.6;2;0.15;1000;1000;1000;10;1e-8;3;-1 0.5 0 0.5 1;1;io/;io/
+id;active;nPreys;nPreds;r;K;g;f;e;H;l;width;simTime;stabilTime;steps;lyapTime;lyapPert;reps;compPars;seed;results_folder;timeseries_folder
+first;false;6;4;0.5;10;0.4;1e-5;0.6;2;0.15;0.2;1000;1000;3000;100;1e-8;50;-1 0.1 0 0.25 1;1;io/;io/
+second;false;5;3;0.5;10;0.4;1e-5;0.6;2;0.15;0.1;2000;2500;2000;150;0.01;3;-1 0.1 0 0.2 1;1;io/;io/ts/
+test_job;true;5;3;0.5;10;0.4;1e-5;0.6;2;0.15;0.2;1000;1000;1000;10;1e-8;3;-1 0.5 0 0.5 1;1;io/;io/

@@ -23,6 +23,7 @@ pars.f = table.f(row); % Immigration rate
 pars.e = table.e(row); % Assimilation efficiency
 pars.H = table.H(row); % Half-saturation constant
 pars.l = table.l(row); % Loss rate
+pars.width = table.width(row); % Width of the competition window
 pars.runTime = table.simTime(row); % Time length of the time series
 pars.stabilTime = table.stabilTime(row); % Stabilization time (time to reach the attractor)
 pars.timeSteps = table.steps(row); % Time steps in the time series

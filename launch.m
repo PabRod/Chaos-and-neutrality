@@ -80,7 +80,7 @@ for row = 1:nExperiments
                     
                     %% Set variable parameters
                     mode = 'moving_window';
-                    window_width = 0.2;
+                    window_width = pars.width;
                     pars.A = competitionMatrix(nPreys, compPars(compStep), mode, window_width);
                     pars.S = rand(nPreds, nPreys);
                     
