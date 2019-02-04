@@ -528,9 +528,14 @@ switch options
             sd(i) = mean(subset.preyBiomass(:, 2));
         end
         
-        plot(competition_pars, biomass, 'Color', preyCol, 'LineStyle', '--');
+        hi = biomass + sd;
+        lo = biomass - sd;
+        pat = patch([competition_pars, competition_pars(end:-1:1), competition_pars(1)], [lo, hi(end:-1:1), lo(1)], 'r');
         hold on;
-        errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', preyCol, 'HandleVisibility', 'off');
+        lin = line(competition_pars, biomass);
+        
+        set(pat, 'FaceColor', preyCol, 'faceAlpha', 0.5, 'EdgeColor', 'none');
+        set(lin, 'Color', preyCol, 'HandleVisibility', 'off');
         
         title('Prey biomass');
         xlabel('Competition parameter');
@@ -596,9 +601,15 @@ switch options
             sd(i) = mean(subset.predBiomass(:, 2));            
         end
         
-        plot(competition_pars, biomass, 'Color', predCol, 'LineStyle', '--');
+        hi = biomass + sd;
+        lo = biomass - sd;
+
+        pat = patch([competition_pars, competition_pars(end:-1:1), competition_pars(1)], [lo, hi(end:-1:1), lo(1)], 'r');
         hold on;
-        errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', predCol, 'HandleVisibility', 'off');
+        lin = line(competition_pars, biomass);
+        
+        set(pat, 'FaceColor', predCol, 'faceAlpha', 0.5, 'EdgeColor', 'none');
+        set(lin, 'Color', predCol, 'HandleVisibility', 'off');
         
         title('Predator biomass');
         xlabel('Competition parameter');
