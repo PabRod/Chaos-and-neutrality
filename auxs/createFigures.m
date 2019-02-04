@@ -35,6 +35,13 @@ resultsArray = loadResults(resultsArrayLocation);
 [nreps, npars] = size(resultsArray);
 N = nreps.*npars;
 
+%% Load aesthetic common settings
+
+% Colors
+stableCol = [0, 0.4470, 0.7410]; % For stable attractor cases
+cyclicCol = [0.8500, 0.3250, 0.0980]; % For cyclic attractor cases
+chaoticCol = [0.9290, 0.6940, 0.1250]; % For chaotic attractor cases
+
 switch options
     
     case 'maxLyaps'
@@ -493,10 +500,10 @@ switch options
             
         end
         
-        scatter(competition_pars, biod_stable, 100.*ratio_stable + 0.01, [0, 0.4470, 0.7410], 'filled');
+        scatter(competition_pars, biod_stable, 100.*ratio_stable + 0.01, stableCol, 'filled');
         hold on;
-        scatter(competition_pars, biod_cyclic, 100.*ratio_cyclic  + 0.01, [0.8500, 0.3250, 0.0980], 'filled');
-        scatter(competition_pars, biod_chaotic, 100.*ratio_chaotic  + 0.01, [0.9290, 0.6940, 0.1250], 'filled');
+        scatter(competition_pars, biod_cyclic, 100.*ratio_cyclic  + 0.01, cyclicCol, 'filled');
+        scatter(competition_pars, biod_chaotic, 100.*ratio_chaotic  + 0.01, chaoticCol, 'filled');
         plot(competition_pars, biod, 'Color', 'k', 'LineStyle', '--');
         
         legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total'});
@@ -538,10 +545,10 @@ switch options
             
         end
         
-        scatter(competition_pars, biomass_stable, 100.*ratio_stable + 0.01, [0, 0.4470, 0.7410], 'filled');
+        scatter(competition_pars, biomass_stable, 100.*ratio_stable + 0.01, stableCol, 'filled');
         hold on;
-        scatter(competition_pars, biomass_cyclic, 100.*ratio_cyclic  + 0.01, [0.8500, 0.3250, 0.0980], 'filled');
-        scatter(competition_pars, biomass_chaotic, 100.*ratio_chaotic  + 0.01, [0.9290, 0.6940, 0.1250], 'filled');
+        scatter(competition_pars, biomass_cyclic, 100.*ratio_cyclic  + 0.01, cyclicCol, 'filled');
+        scatter(competition_pars, biomass_chaotic, 100.*ratio_chaotic  + 0.01, chaoticCol, 'filled');
         plot(competition_pars, biomass, 'Color', 'k', 'LineStyle', '--');
         
         errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', 'k');
@@ -588,10 +595,10 @@ switch options
             
         end
         
-        scatter(competition_pars, biomass_stable, 100.*ratio_stable + 0.01, [0, 0.4470, 0.7410], 'filled');
+        scatter(competition_pars, biomass_stable, 100.*ratio_stable + 0.01, stableCol, 'filled');
         hold on;
-        scatter(competition_pars, biomass_cyclic, 100.*ratio_cyclic  + 0.01, [0.8500, 0.3250, 0.0980], 'filled');
-        scatter(competition_pars, biomass_chaotic, 100.*ratio_chaotic  + 0.01, [0.9290, 0.6940, 0.1250], 'filled');
+        scatter(competition_pars, biomass_cyclic, 100.*ratio_cyclic  + 0.01, cyclicCol, 'filled');
+        scatter(competition_pars, biomass_chaotic, 100.*ratio_chaotic  + 0.01, chaoticCol, 'filled');
         plot(competition_pars, biomass, 'Color', 'k', 'LineStyle', '--');
         errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', 'k');
         
@@ -633,10 +640,10 @@ switch options
             
         end
         
-        scatter(competition_pars, biod_stable, 100.*ratio_stable + 0.01, [0, 0.4470, 0.7410], 'filled');
+        scatter(competition_pars, biod_stable, 100.*ratio_stable + 0.01, stableCol, 'filled');
         hold on;
-        scatter(competition_pars, biod_cyclic, 100.*ratio_cyclic  + 0.01, [0.8500, 0.3250, 0.0980], 'filled');
-        scatter(competition_pars, biod_chaotic, 100.*ratio_chaotic  + 0.01, [0.9290, 0.6940, 0.1250], 'filled');
+        scatter(competition_pars, biod_cyclic, 100.*ratio_cyclic  + 0.01, cyclicCol, 'filled');
+        scatter(competition_pars, biod_chaotic, 100.*ratio_chaotic  + 0.01, chaoticCol, 'filled');
         plot(competition_pars, biod, 'Color', 'k', 'LineStyle', '--');
         
         legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total'});
