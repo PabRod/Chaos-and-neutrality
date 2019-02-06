@@ -359,8 +359,11 @@ switch options
                 'Labels', {'stable', 'cyclic', 'chaotic'}, ...
                 'Colors', [stableCol; cyclicCol; chaoticCol], ...
                 'BoxStyle', 'filled');
+            
+        bp = gca;
+        bp.XAxis.TickLabelInterpreter = 'latex';
         
-        xlabel('Dynamics');
+        xlabel('Dynamic regime');
         ylabel('Prey biodiversity');
         
     case 'summarymerged'
@@ -472,7 +475,6 @@ switch options
         
     case 'biodsplitbydynamics'
         competition_pars = resultsAsMatrix(resultsArray, 'competition_par');
-        nprey = resultsArray{1,1}.dims(1);
         resultsTable = resultsAsTable(resultsArray);
         
         biod = NaN(1, npars);
@@ -512,7 +514,7 @@ switch options
         
         title('Biodiversity');
         xlabel('Competition parameter');
-        ylabel('Biodiversity');
+        ylabel('Prey biodiversity');
         xlim([-0.8 0.8]);
         
     case 'biomass'
@@ -539,7 +541,7 @@ switch options
         
         title('Prey biomass');
         xlabel('Competition parameter');
-        ylabel('Biomass');
+        ylabel('Biomass (mg $l^{-1})$');
         xlim([-0.8 0.8]);
         
     case 'biomasssplitbydynamics'
@@ -613,7 +615,7 @@ switch options
         
         title('Predator biomass');
         xlabel('Competition parameter');
-        ylabel('Biomass');
+        ylabel('Biomass (mg $l^{-1})$');
         xlim([-0.8 0.8]);
         
     case 'predbiomasssplitbydynamics'
