@@ -40,6 +40,7 @@ The expected input is the file `/io/input.csv`. This csv file contains the follo
 * **e**: assimilation efficiency.
 * **H**: half-saturation constant (mg l^-1).
 * **l**: predator's loss rate (d^-1).
+* **width**: width of the competition window.
 * **simTime**: simulation time. Length of the time series in days.
 * **stabilTime**: numerical stabilization time. Used to reach an attractor and minimize the effects of the initial conditions.
 * **steps**: number of time steps. Length of the time series in steps.
@@ -56,22 +57,22 @@ The expected input is the file `/io/input.csv`. This csv file contains the follo
 
 #### Plain text
 ```
-id;active;nPreys;nPreds;r;K;g;f;e;H;l;simTime;stabilTime;steps;lyapTime;lyapPert;reps;compPars;seed;results_folder;timeseries_folder
-sim1;true;2;3;0.5;10;0.4;1e-5;0.6;2;0.15;5000;2000;5000;100;1e-8;200;-0.9 0.05 0 0.2 0.9;1;io/;io/
-sim2;true;4;6;0.5;10;0.4;1e-5;0.6;2;0.15;5000;2000;5000;100;1e-8;200;-0.9 0.05 0 0.2 0.9;1;io/;io/
+id;active;nPreys;nPreds;r;K;g;f;e;H;l;width;simTime;stabilTime;steps;lyapTime;lyapPert;reps;compPars;seed;results_folder;timeseries_folder
+sim1;true;2;3;0.5;10;0.4;1e-5;0.6;2;0.15;0.2;5000;2000;5000;100;1e-8;200;-0.9 0.05 0 0.2 0.9;1;io/;io/
+sim2;true;4;6;0.5;10;0.4;1e-5;0.6;2;0.15;0.2;5000;2000;5000;100;1e-8;200;-0.9 0.05 0 0.2 0.9;1;io/;io/
 ```
 
 #### Formatted
 
-| id   | active | nPreys | nPreds | r   | K  | g   | f    | e   | H | l    | simTime | stabilTime | steps | lyapTime | lyapPert | reps | compPars            | seed | results_folder | timeseries_folder |
-|:-----|:-------|:-------|:-------|:----|:---|:----|:-----|:----|:--|:-----|:--------|:-----------|:------|:---------|:---------|:-----|:--------------------|:-----|:---------------|:------------------|
-| sim1 | true   | 2      | 3      | 0.5 | 10 | 0.4 | 1e-5 | 0.6 | 2 | 0.15 | 5000    | 2000       | 5000  | 100      | 1e-8     | 200  | -0.9 0.05 0 0.2 0.9 | 1    | io/            | io/               |
-| sim2 | true   | 4      | 6      | 0.5 | 10 | 0.4 | 1e-5 | 0.6 | 2 | 0.15 | 5000    | 2000       | 5000  | 100      | 1e-8     | 200  | -0.9 0.05 0 0.2 0.9 | 1    | io/            | io/               |
+| id   | active | nPreys | nPreds | r   | K  | g   | f    | e   | H | l    | width | simTime | stabilTime | steps | lyapTime | lyapPert | reps | compPars            | seed | results_folder | timeseries_folder |
+|:-----|:-------|:-------|:-------|:----|:---|:----|:-----|:----|:--|:-----|:------|:--------|:-----------|:------|:---------|:---------|:-----|:--------------------|:-----|:---------------|:------------------|
+| sim1 | true   | 2      | 3      | 0.5 | 10 | 0.4 | 1e-5 | 0.6 | 2 | 0.15 | 0.2   | 5000    | 2000       | 5000  | 100      | 1e-8     | 200  | -0.9 0.05 0 0.2 0.9 | 1    | io/            | io/               |
+| sim2 | true   | 4      | 6      | 0.5 | 10 | 0.4 | 1e-5 | 0.6 | 2 | 0.15 | 0.2   | 5000    | 2000       | 5000  | 100      | 1e-8     | 200  | -0.9 0.05 0 0.2 0.9 | 1    | io/            | io/               |
 
 
 Please note that the separators are:
 
-* **semicolon (;)** for new column
+* **semicolon ( ; )** for new column
 * **new line** for new row
 
 ## Output

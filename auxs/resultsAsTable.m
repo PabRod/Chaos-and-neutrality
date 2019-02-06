@@ -12,6 +12,10 @@ resultsArray = loadResults(resultsArrayLocation);
 for i = 1:nreps*npars % Append rows
     array = resultsArray{i};
     
+    % Identify individual experiment
+    [row, col] = ind2sub([nreps, npars], i);
+    identifier = table(i, row, col);
+    
     % Flatten the inner structures
     chaosTests = struct2table(array.chaosTests);
     biodiversity = struct2table(array.biodiversity);
@@ -21,7 +25,7 @@ for i = 1:nreps*npars % Append rows
     array = rmfield(array, 'biodiversity');
     
     % Append lines to table
-    newline = [struct2table(array), chaosTests, biodiversity];
+    newline = [identifier, struct2table(array), chaosTests, biodiversity];
     if i == 1
         T = newline;
     else

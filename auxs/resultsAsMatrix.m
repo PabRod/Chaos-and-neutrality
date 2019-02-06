@@ -63,6 +63,22 @@ switch prompt
             end
         end
         
+    case 'preybiomass'
+        output = NaN(nreps, npars);
+        for i = 1:nreps
+            for j = 1:npars
+                output(i,j) = resultsArray{i, j}.biodiversity.preyBiomass(1);
+            end
+        end
+        
+    case 'predbiomass'
+        output = NaN(nreps, npars);
+        for i = 1:nreps
+            for j = 1:npars
+                output(i,j) = resultsArray{i, j}.biodiversity.predBiomass(1);
+            end
+        end
+        
     case 'speciesCount'
         output = NaN(nreps, npars, 5);
         for i = 1:nreps
