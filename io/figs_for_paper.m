@@ -48,7 +48,7 @@ xlim([-0.8, 0.8]);
 
 subplot(2, 3, [3]);
 createFigures(resultsArrayLight, 'biodboxandwhisker');
-title('B. Effect of chaos on biodiversity');
+title('B. Effect of dynamics on biodiversity');
 
 subplot(2, 3, [4, 5]);
 createFigures(resultsArrayLight, 'biodsplitbydynamics');

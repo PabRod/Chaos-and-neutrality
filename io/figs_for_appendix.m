@@ -46,7 +46,7 @@ set(0, 'DefaultLegendInterpreter', 'latex');
 set(0, 'DefaultAxesTickLabelInterpreter', 'latex');
 
 %% Appendix: all slices 2
-fig4 = figure;
+fig_all_slices = figure;
 for i = NAll:-1:1 % Bigger first
     file = allFiles{i};
     
@@ -60,8 +60,8 @@ lgd = legend(allTitles{NAll:-1:1});
 lgd.FontSize = 18;
 
 xlim([-0.8, 0.8]);
-set(fig4, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig4, '..\paper\img\results_all.png');
+set(fig_all_slices, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_all_slices, '..\paper\img\results_all.png');
 
 %% Appendix biodiversity split in 3
 fig_biodsplitbydynamics = figure;
@@ -91,7 +91,7 @@ set(fig_biodsplitbydynamics, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1
 saveas(fig_biodsplitbydynamics, '..\paper\img\biod_split_by_dynamics.png');
 
 %% Appendix: biodiversity box and whisker
-fig9 = figure;
+fig_box = figure;
 for i = 1:numel(allFiles)
     subplot(2, 5, i);
     createFigures(allFiles{i}, 'biodboxandwhisker');
@@ -111,8 +111,42 @@ for i = 1:numel(allFiles)
     end
 end
 
-set(fig9, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig9, '..\paper\img\biod_box_and_whisker.png');
+set(fig_box, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_box, '..\paper\img\biod_box_and_whisker.png');
+
+%% Appendix: biomass
+fig_biomass = figure;
+for i = 1:numel(allFiles)
+    file = allFiles{i};
+    
+    subplot(2, 5, i);
+    createFigures(file, 'biomass');
+    hold on;
+    createFigures(file, 'predbiomass');
+    title(allTitles{i});
+    
+    % Tweak aesthetics
+    if((i == 1) || (i == 6)) % Minimize use of ylabel
+        ylabel('Biomass');
+    else
+        ylabel('');
+    end
+    
+    if(i >= 6) % Minimize use of xlabel
+        xlabel('Competition parameter');
+    else
+        xlabel('');
+    end
+    
+    if(i == 10)
+        legend({'Prey', 'Predators'});
+    else
+        legend('off');
+    end
+end
+
+set(fig_biomass, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_biomass, '..\paper\img\biomass.png');
 
 %% Restore default settings
 set(0, 'DefaultTextInterpreter', 'default');
