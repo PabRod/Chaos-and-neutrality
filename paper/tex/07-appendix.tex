@@ -15,9 +15,9 @@ Rodríguez-Sánchez P, van Nes EH, Scheffer M. \textit{Neutral competition boost
 
 \newpage
 
-\subsection{Results for different food webs}
+\subsection{Results for food webs of different sizes}
 \label{subsec:GeneralResults}
-In the main body of the paper we focused our attention in a food webs consisting of $12$ prey and $8$ predator species. In this section we show the results of the same analysis for food webs of different sizes.
+In the main body of the paper we focused our attention in families of food webs consisting of $12$ prey and $8$ predator species. In this section we show the results of the same analysis for food webs of different sizes.
 
 \subsubsection{Probability of chaos grouped by number of species}
 \label{subsubsec:AllProbabilities}
@@ -66,29 +66,4 @@ For each simulation, a biodiversity index was estimated as the number of prey sp
 	\end{center}
 	\caption{Average biomasses grouped by trophic level vs. competition parameter. The width represents standard deviation.}
 	\label{fig:Biomass}
-\end{figure}
-
-\subsection{Extra figures}
-\label{subsec:ExtraFigures}
-
-\subsubsection{Multispecies predator-prey network}
-\label{subsubsec:MultispeciesPPNetwork}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.5\columnwidth]{net.png}
-	\end{center}
-	\caption{Example with $2$ consumers and $3$ prey. Each one of the red links represents a predation interaction (coded in the matrix of predator preference coefficients, $ S $). Each green link represents a competition interaction (coded in the matrix of competition coefficients, $ A $). The closed green loops are related with carrying capacity (diagonal elements of $ A $) interpreted here as intra-species competition.}
-	\label{fig:Network}
-\end{figure}
-
-\subsubsection{Flow chart}
-\label{subsubsec:FlowChart}
-In the spirit of reproducible research we made available all the analysis code used to draw our conclusions. Any interested researcher can clone it from a \textit{GitHub} repository \citep{Rodriguez-Sanchez-code-neuchaos} and, executing a single script, reproduce all our simulations and figures. This figure shows schematically what this script does:
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.8\columnwidth]{flow_chart.png}
-	\end{center}
-	\caption{Flow chart describing the numerical experiment. The source code is available at \textit{\texttt{https://doi.org/10.5281/zenodo.1319590}}.}
-	\label{fig:FlowChart}
 \end{figure}

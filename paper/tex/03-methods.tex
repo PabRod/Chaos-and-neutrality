@@ -4,7 +4,7 @@
 \subsection{Model description}
 \label{subsec:Model}
 
-We focused our attention on food webs with two trophic levels, one of consumers and another of prey (see figure \ref{fig:Network} in the Online Appendix). The consumers predate on the prey, and the prey populations are subject to implicit competition.
+We focused our attention on food webs with two trophic levels, one of consumers and another of prey. The consumers predate on the prey, and the prey populations are subject to implicit competition.
 
 % Description of the dynamics
 The dynamics were modelled using the Rosenzweig-MacArthur predator-prey model \citep{Rosenzweig1963}, generalized to a higher number of species (see \citet{Scheffer2004}). Our model contains $n_P$ prey species and $n_C$ predator species. The prey's populations are under the influence of both intra and interspecific competition, whose intensities are coded in the competition matrix $A$. The relative preference that predators show to each prey is coded in the predation matrix $S$. In the absence of prey, the predators' populations just decay exponentially. Prey immigration from neighboring areas has been added to the classical model in order to avoid unrealistic dynamics, such as heteroclinic orbits giving rise to long-stretched cycles with near extinctions \citep{Scheffer2004}. In mathematical notation, the system reads:
