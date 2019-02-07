@@ -13,27 +13,30 @@ This is the Online Appendix for the paper:
 Rodríguez-Sánchez P, van Nes EH, Scheffer M. \textit{Neutral competition boosts chaos in food webs}.
 \end{center}
 
-\subsection{Extra figures}
-\label{subsec:ExtraFigures}
+\newpage
 
-\subsubsection{Multispecies predator-prey network}
-\label{subsubsec:MultispeciesPPNetwork}
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[width=0.5\columnwidth]{net.png}
-	\end{center}
-	\caption{Example with $2$ consumers and $3$ prey. Each one of the red links represents a predation interaction (coded in the matrix of predator preference coefficients, $ S $). Each green link represents a competition interaction (coded in the matrix of competition coefficients, $ A $). The closed green loops are related with carrying capacity (diagonal elements of $ A $) interpreted here as intra-species competition.}
-	\label{fig:Network}
-\end{figure}
+\subsection{Results for different food webs}
+\label{subsec:GeneralResults}
+In the main body of the paper we focused our attention in a food webs consisting of $12$ prey and $8$ predator species. In this section we show the results of the same analysis for food webs of different sizes.
 
-\subsubsection{Probabilities grouped by number of species}
+\subsubsection{Probability of chaos grouped by number of species}
 \label{subsubsec:AllProbabilities}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=1\columnwidth]{results_all.png}
 	\end{center}
-	\caption{Summary of the results of the whole set of simulations. The competition parameter $\epsilon$ is on the horizontal axis. The estimated probability of chaos is represented on the vertical one. Each panel corresponds to an ecosystem with a different number of interacting species. The exact number is shown in each box, as number of predators + number of prey.}
+	\caption{Probabilities of chaos vs. competition parameter for the whole set of simulations. The competition parameter $\epsilon$ is on the horizontal axis. The estimated probability of chaos is represented on the vertical one. Each panel corresponds to an ecosystem with a different number of interacting species. The exact number is shown in each box, as number of predator + number of prey species.}
 	\label{fig:AllProbabilities}
+\end{figure}
+
+\subsubsection{Probability of each dynamical regime}
+\label{subsubsec:DynamicalRegimes}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=1\columnwidth]{ratios.png}
+	\end{center}
+	\caption{Ratio of each dynamical regime vs. competition parameter for the whole set of simulations. The competition parameter $\epsilon$ is on the horizontal axis. The system size is shown in each box, as number of predator + number of prey species.}
+	\label{fig:DynamicalRegimes}
 \end{figure}
 
 \subsubsection{Biodiversity measurements}
@@ -63,6 +66,19 @@ For each simulation, a biodiversity index was estimated as the number of prey sp
 	\end{center}
 	\caption{Average biomasses grouped by trophic level vs. competition parameter. The width represents standard deviation.}
 	\label{fig:Biomass}
+\end{figure}
+
+\subsection{Extra figures}
+\label{subsec:ExtraFigures}
+
+\subsubsection{Multispecies predator-prey network}
+\label{subsubsec:MultispeciesPPNetwork}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.5\columnwidth]{net.png}
+	\end{center}
+	\caption{Example with $2$ consumers and $3$ prey. Each one of the red links represents a predation interaction (coded in the matrix of predator preference coefficients, $ S $). Each green link represents a competition interaction (coded in the matrix of competition coefficients, $ A $). The closed green loops are related with carrying capacity (diagonal elements of $ A $) interpreted here as intra-species competition.}
+	\label{fig:Network}
 \end{figure}
 
 \subsubsection{Flow chart}
