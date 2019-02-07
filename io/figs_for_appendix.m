@@ -63,6 +63,39 @@ xlim([-0.8, 0.8]);
 set(fig_all_slices, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig_all_slices, '..\paper\img\results_all.png');
 
+%% Appendix: ratios
+fig_ratios = figure;
+for i = 1:numel(allFiles)
+    file = allFiles{i};
+    
+    subplot(2, 5, i);
+    createFigures(file, 'dynamics');
+    xlim([-0.8, 0.8]);
+    title(allTitles{i});
+    
+    % Tweak aesthetics
+    if((i == 1) || (i == 6)) % Minimize use of ylabel
+        ylabel('Ratio');
+    else
+        ylabel('');
+    end
+    
+    if(i >= 6) % Minimize use of xlabel
+        xlabel('Competition parameter');
+    else
+        xlabel('');
+    end
+    
+    if(i == 10)
+        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics'});
+    else
+        legend('off');
+    end
+end
+
+set(fig_ratios, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
+saveas(fig_ratios, '..\paper\img\ratios.png');
+
 %% Appendix biodiversity split in 3
 fig_biodsplitbydynamics = figure;
 for i = 1:numel(allFiles)
