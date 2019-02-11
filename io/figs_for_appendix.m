@@ -87,7 +87,7 @@ for i = 1:numel(allFiles)
     end
     
     if(i == 10)
-        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total'});
+        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total'}, 'Location', 'southeast');
     else
         legend('off');
     end
