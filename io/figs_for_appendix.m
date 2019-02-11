@@ -87,7 +87,7 @@ for i = 1:numel(allFiles)
     end
     
     if(i == 10)
-        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics'});
+        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total'});
     else
         legend('off');
     end
@@ -118,7 +118,7 @@ for i = 1:numel(allFiles)
     end
     
 end
-legend({'Group: regular dynamics', 'Group: chaotic dynamics', 'Total'}, 'Location', 'southeast');
+legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total'}, 'Location', 'southeast');
 
 set(fig_biodsplitbydynamics, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
 saveas(fig_biodsplitbydynamics, '..\paper\img\biod_split_by_dynamics.png');
