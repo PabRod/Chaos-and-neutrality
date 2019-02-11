@@ -584,7 +584,7 @@ switch options
         
         errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', 'k');
         
-        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total', 'SD'});
+        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total', 'SD'});
         
         title('Prey biomass');
         xlabel('Competition parameter');
@@ -660,7 +660,7 @@ switch options
         plot(competition_pars, biomass, 'Color', 'k', 'LineStyle', '--');
         errorbar(competition_pars, biomass, sd, 'LineStyle', 'none', 'Color', 'k');
         
-        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total', 'SD'});
+        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total', 'SD'});
         
         title('Predator biomass');
         xlabel('Competition parameter');
@@ -704,7 +704,7 @@ switch options
         scatter(competition_pars, biod_chaotic, 100.*ratio_chaotic  + 0.01, chaoticCol, 'filled');
         plot(competition_pars, biod, 'Color', 'k', 'LineStyle', '--');
         
-        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total'});
+        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total'});
         
         title('Predator biodiversity');
         xlabel('Competition parameter');
