@@ -466,7 +466,7 @@ switch options
         area(competition_pars, ratio_chaotic + ratio_cyclic, 'EdgeAlpha', 0);
         area(competition_pars, ratio_chaotic, 'EdgeAlpha', 0);
         
-        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics'});
+        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics'});
         
         title('Ratio of each dynamic regime');
         xlabel('Competition parameter');
@@ -510,7 +510,7 @@ switch options
         scatter(competition_pars, biod_chaotic, 100.*ratio_chaotic  + 0.01, chaoticCol, 'filled');
         plot(competition_pars, biod, 'Color', 'k', 'LineStyle', '--');
         
-        legend({'Group: stable dynamics', 'Group: cyclic dynamics', 'Group: chaotic dynamics', 'Total'});
+        legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total'});
         
         title('Biodiversity');
         xlabel('Competition parameter');
