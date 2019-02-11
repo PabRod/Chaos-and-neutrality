@@ -1,0 +1,113 @@
+2017-05-16
+Visit to Jena: 3-7 July
+	20 Jan 2018 - 10 Apr 2018
+	Summer school in Donosti cancelled
+	Buy Chaos and chance, by Arno Berger
+	
+Text scrapping in Twitter with R
+
+2017-05-09
+
+Structure:
+	Generate
+	Analyze
+	
+Questions:
+	Pipelining
+		Extract time series
+		Define model programatically
+			Silent mode
+			Create a batch of numerical experiments
+		
+	Re-run model from data
+	
+Other:
+	GitHub integration
+	
+Non-technical:
+	Summer school
+	
+Interesting case: i = 8, j = 1
+Expand time series and/or stabilization period
+
+Less priority: MatCont
+
+commands:
+	savepars
+	par('-v') % Parameters saved in full precision
+	run.params as commands
+	model('model', g_grind.model, 'commands', g_grind.commands)
+	
+	Try setdimension. May not work
+	
+2016-08-09
+
+commands:
+    Oscillators
+    edit lyapunov
+    edit calclyap
+    commands makemap
+    command makemap
+    help makemap
+    use lorenz
+    phas 3
+    poincaremap
+    poincaresect
+    model
+    Oscillators
+    help setdimension
+    cclear
+    model -c
+    Oscillators
+    help combfig
+    combfig % Figures docking and combination
+    combfig p 0
+    combfig [1 2 3 4]
+    combfig -p 0
+    combfig -r x
+    combfig -r y
+    combfig -p 0.05
+    combfig '__
+    combfig -??
+    combfig -?
+    combfig ??
+    updategrind
+    combfig ??
+    paranal ??
+    use lorenz
+    %-- 9-8-2016 12:28 --%
+    use lorenz
+    help paranal % Scripting with paranal
+    par
+    paranal ??
+    paranal par sigma steps 10 start 0 nend 20 writing 10
+    % paranal also accepts structures
+    paranal par sigm1a steps 10 start 0 nend 20 writing 10
+	
+2016-05-20
+
+Hypotheses:
+
+    We expect reducing H to make the system less chaotic
+
+Reads and insights:
+
+    Get some insights working with small models
+        Hopf bifurcation expected with 1P and 1p
+
+    Read Hubbell's book
+
+    Read about the paradox of enrichment in Marten's book on shallow lakes
+        Hopf and transcritical bifurcations controlled by carrying capacity
+
+    Look just at competition (no predators)
+
+Technical details:
+
+    Check coexistance in the long term
+    Find a way to count extinctions (remember there is an inflow term)
+    Measure inequality
+    Relate all it with chaos
+    Compute rand(n) once... or on each run?
+    Take a look at function nmaxima. cyclic + nonperiodic => chaos
+	

@@ -1,0 +1,16 @@
+
+
+Proper use of Lyapunov exponents
+	Distinguish cycle from chaos. Does it matter for the underlying problem?
+	Eliminate dependence with the run length
+	
+Scripting, specially in paranal
+
+Calling custom functions from GRIND
+
+Automatic frequency detection
+	Use of Poincaré maps
+
+Dimensionality as the most relevant (non)parameter
+
+Dataset (Dakos?)

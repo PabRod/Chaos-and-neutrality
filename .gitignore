@@ -7,7 +7,6 @@
 *.fls
 *.fdb_latexmk
 *.rej
-*.pdf
 
 ## Figures
 img/trash
@@ -35,3 +34,7 @@ img/code/.ipynb_checkpoints/
 *.gz
 *_old*
 diff/
+
+# Files
+main.pdf
+test.pdf
