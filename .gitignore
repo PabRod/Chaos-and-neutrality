@@ -38,3 +38,5 @@ diff/
 # Files
 main.pdf
 test.pdf
+paper/img/code/.ipynb_checkpoints/
+paper/img/code/__pycache__/
