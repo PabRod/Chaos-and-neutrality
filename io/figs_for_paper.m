@@ -3,6 +3,9 @@ close all;
 clear;
 clc;
 
+%% Figs folder
+figs_folder = '.\'; % '..\paper\img\';
+
 %%
 allFiles = {'2-3p.mat', ...
     '4-6p.mat', ...
@@ -63,7 +66,7 @@ title('D. Biomasses');
 legend({'Prey', 'Predators'});
 
 set(fig_best, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_best, '..\paper\img\best.png');
+saveas(fig_best, strcat(figs_folder, 'best.png'));
 
 %% Main body: Contour plot
 fig2 = figure;
@@ -73,7 +76,7 @@ title('Estimated probability of chaos', 'FontSize', 16);
 xlabel('Competition parameter', 'FontSize', 14);
 ylabel('Number of species (predators + prey)', 'FontSize', 14);
 set(gcf, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig2, '..\paper\img\contour.png');
+saveas(fig2,  strcat(figs_folder, 'contour.png'));
 
 %% Restore default settings
 set(0, 'DefaultTextInterpreter', 'default');

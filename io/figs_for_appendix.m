@@ -3,6 +3,9 @@ close all;
 clear;
 clc;
 
+%% Figs folder
+figs_folder = '.\'; % '..\paper\img\';
+
 %%
 allFiles = {'2-3p.mat', ...
     '4-6p.mat', ...
@@ -61,7 +64,7 @@ lgd.FontSize = 18;
 
 xlim([-0.8, 0.8]);
 set(fig_all_slices, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_all_slices, '..\paper\img\results_all.png');
+saveas(fig_all_slices, strcat(figs_folder, 'results_all.png'));
 
 %% Appendix: ratios
 fig_ratios = figure;
@@ -94,7 +97,7 @@ for i = 1:numel(allFiles)
 end
 
 set(fig_ratios, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_ratios, '..\paper\img\ratios.png');
+saveas(fig_ratios, strcat(figs_folder, 'ratios.png'));
 
 %% Appendix biodiversity split in 3
 fig_biodsplitbydynamics = figure;
@@ -121,7 +124,7 @@ end
 legend({'Stable dynamics', 'Cyclic dynamics', 'Chaotic dynamics', 'Total'}, 'Location', 'southeast');
 
 set(fig_biodsplitbydynamics, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_biodsplitbydynamics, '..\paper\img\biod_split_by_dynamics.png');
+saveas(fig_biodsplitbydynamics, strcat(figs_folder, 'biod_split_by_dynamics.png'));
 
 %% Appendix: biodiversity box and whisker
 fig_box = figure;
@@ -145,7 +148,7 @@ for i = 1:numel(allFiles)
 end
 
 set(fig_box, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_box, '..\paper\img\biod_box_and_whisker.png');
+saveas(fig_box, strcat(figs_folder, 'biod_box_and_whisker.png'));
 
 %% Appendix: biomass
 fig_biomass = figure;
@@ -179,7 +182,7 @@ for i = 1:numel(allFiles)
 end
 
 set(fig_biomass, 'Units', 'Normalized', 'OuterPosition', [0, 0.04, 1, 0.96]);
-saveas(fig_biomass, '..\paper\img\biomass.png');
+saveas(fig_biomass, strcat(figs_folder, 'biomass.png'));
 
 %% Restore default settings
 set(0, 'DefaultTextInterpreter', 'default');
