@@ -25,7 +25,7 @@ The main purpose of the analysis is to classify each individual simulation as ch
   1. (Optional). Browse to the `test` folder and execute `test_run.m` to test the integrity of the package (it takes around **20 seconds** in a standard personal computer). If you are familiar with the Matlab Unit testing engine, `runtests` can also be used here.
 3. Browse to the main folder, and execute `launch.m`. This will reproduce all data and figures used in the paper.
 
-Please note that the typical run time in a standard personal computer is around **1.2 days** (that is, roughly 3 hours per active row in the input file).
+Please note that the typical run time in a standard personal computer is around **1.2 days** (that is, roughly 3 hours per active row in the input file) and requires around **49 Gb** of disk space.
 
 If you want to re-use the code for your own simulations, please note that the parameters of the experiment(s) to be run are specified in  `/io/input.csv` (more information below).
 
