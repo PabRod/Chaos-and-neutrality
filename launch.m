@@ -155,22 +155,10 @@ for row = 1:nExperiments
         
         filename = char(strcat(results_folder, id, '.mat'));
         save(filename, 'resultsArrayLight', '-v7.3'); % v7.3 is required for files larger than 2 Gb
-        
-        %% Plot results
-%         fprintf('\n Creating figures.');
-%         
-%         figure;
-%         subplot(2, 1, 1);
-%         createFigures(resultsArray, 'comparer');
-%         subplot(2, 1, 2);
-%         createFigures(resultsArray, 'summary');
-%         
-%         figure;
-%         createFigures(resultsArray, 'speciesCount');
-%         
-%         figure;
-%         createFigures(resultsArray, 'evenness');
 
+        %% Show latest simulation results
+        close all;
+        
         figure; 
         subplot(2, 1, 1); 
         createFigures(resultsArrayLight, 'z12'); 
@@ -203,4 +191,8 @@ for row = 1:nExperiments
 end
 
 %% Create figures for the paper
-% figs_for_paper;
+cd('io/results/');
+
+figs_for_paper;
+
+figs_for_appendix;

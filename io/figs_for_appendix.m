@@ -1,5 +1,4 @@
 %%
-close all;
 clear;
 clc;
 
