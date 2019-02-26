@@ -5,6 +5,8 @@ This code is a supplementary material for the paper [_Neutral competition boosts
 
 When run with the default options, it reproduces from scratch all the results and figures shown in the paper.
 
+This software was developed and tested with _Matlab R2017b (9.3.0.713579) (win64)_.
+
 # Purpose
 This collection of scripts simulates and analyzes a set of modelled ecosystems. In particular, we are interested in the effects of different types of competition on the asymptotic dynamics exhibited. More information [here][Preprint].
 
@@ -18,7 +20,8 @@ The main purpose of the analysis is to classify each individual simulation as ch
 ![FlowChart](./figs/flow_chart.png "Flow chart")
 
 # Usage
-1. Add these folders and subfolders to Matlab's path.
+0. Download or clone all files
+1. Add all folders and subfolders to Matlab's path.
   1. (Optional). Browse to the `test` folder and execute `test_run.m` to test the integrity of the package (it takes around **20 seconds** in a standard personal computer). If you are familiar with the Matlab Unit testing engine, `runtests` can also be used here.
 3. Browse to the main folder, and execute `launch.m`. This will reproduce all data and figures used in the paper.
 
@@ -90,11 +93,13 @@ The fields are:
 * **chaosTests**: a struct containing booleans (true/false) for a couple of different tests of chaoticity.
 
 ## Credits
+- [Pablo Rodríguez-Sánchez][pabrod]
 - This work was supported by funding from the European Union’s Horizon
 2020 research and innovation programme for the [ITN CRITICS][Critics] under Grant Agreement Number 643073.
 
 - The function **z1test** was adapted, with permission of the author, from [GRIND for Matlab][grind].
 
+  [pabrod]: https://pabrod.github.io
   [Published]: http://url.com
   [Preprint]: https://arxiv.org/abs/1807.06901
   [RosMac]: https://www.journals.uchicago.edu/doi/10.1086/282272
